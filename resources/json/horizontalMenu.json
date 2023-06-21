@@ -2,7 +2,7 @@
   "menu": [
     {
       "url": "javascript:void(0)",
-      "i18n": "Dashboard",
+      "i18n": "Dashboard ff",
       "name": "Dashboard",
       "slug": "dashboard",
       "activate": "DashboardDropdown",
