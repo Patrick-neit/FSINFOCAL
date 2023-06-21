@@ -173,3 +173,14 @@ Route::get('/charts-sparklines', [ChartController::class, 'sparklines']);
 
 // locale route
 Route::get('lang/{locale}', [LanguageController::class, 'swap']);
+
+/* Rutas Alumos */
+Route::controller(AlumnoController::class)->group(function(){
+    Route::get('alumnos','index')->name('alumnnos.index');
+    Route::get('alumnos','create')->name('alumnos.create');
+    Route::get('alumnos','show')->name('alumnos.show');
+    Route::get('alumnos/{id}','edit')->name('alumnos.edit');
+    Route::post('alumnos/{id}','store')->name('alumnos.store');
+    Route::put('alumnos/{id}','update')->name('alumnos.update');
+    Route::delete('alumnos/{id}','destroy')->name('alumnos.destroy');
+});

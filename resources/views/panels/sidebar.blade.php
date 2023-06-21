@@ -38,8 +38,8 @@
     {{-- Foreach menu item starts --}}
     {{-- {{ dump(view()->getVars()) }} --}}
     @if(!empty($menuData[0]) && isset($menuData[0]))
-
-      @foreach ($menuData[0]->menu as $menu)
+    @dd($menuData[0])
+    @foreach ($menuData[0]->menu as $menu)
         @if(isset($menu->navheader))
         <li class="navigation-header">
           <a class="navigation-header-text">{{ $menu->navheader }}</a>

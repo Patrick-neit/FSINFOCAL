@@ -190,6 +190,7 @@
       <ul class="left hide-on-med-and-down" id="ul-horizontal-nav" data-menu="menu-navigation">
         {{-- Foreach menu item starts --}}
         @if(!empty($menuData[1]) && isset($menuData[1]))
+
           @foreach ($menuData[1]->menu as $menu)
             @php
             $custom_classes="";
