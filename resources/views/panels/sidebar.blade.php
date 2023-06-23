@@ -27,20 +27,19 @@
           @if(!empty ($configData['templateTitle']) && isset($configData['templateTitle']))
           {{$configData['templateTitle']}}
           @else
-          Materialize
+          INFOCAL S.A
           @endif
         </span>
       </a>
       <a class="navbar-toggler" href="javascript:void(0)"><i class="material-icons">radio_button_checked</i></a></h1>
   </div>
   @php
-
-      $dataconvertido =  array(
+  $dataconvertido =  array(
     "menu" => array(
         array(
             "url" => "javascript:void(0)",
             "i18n" => "Dashboard",
-            "name" => "Ejemplo",
+            "name" => "Dashboard",
             "slug" => "dashboard",
             "icon" => "dashboard",
             "class"=> "collapsible-header waves-effect waves-cyan",
@@ -59,6 +58,38 @@
                     "name" => "Ejemplo 2",
                     "slug" => "ecommerce"
                 ),
+            )
+        ),
+        array(
+        "navheader"=> "Modulo Alumnos",
+        "icon"=> "more_horiz"
+        ),
+        array(
+            "url" => "javascript:void(0)",
+            "i18n" => "Alumnos",
+            "name" => "Alumnos",
+            "icon" => "person_pin",
+            "slug" => "Alumnos",
+            "class"=> "collapsible-header waves-effect waves-cyan",
+            "submenu" => array(
+                array(
+                    "url" => route('alumnos.index'),
+                    "i18n" => "Alumnos Registrados",
+                    "name" => "Alumnos Registrados",
+                    "slug" => "alumnos"
+                ),
+                array(
+                    "url" => "alumnos.create",
+                    "i18n" => "Cards Advance",
+                    "name" => "Alumnos Matriculados",
+                    "slug" => "cards-advance"
+                ),
+                array(
+                    "url" => "alumnos.create",
+                    "i18n" => "Cards Extended",
+                    "name" => "Alumnos Inactivos",
+                    "slug" => "cards-extended"
+                )
             )
         ),
         array(
@@ -91,6 +122,8 @@
         ),
         )
     );
+
+
     $menuDataP =$dataconvertido;
   @endphp
   <ul class="sidenav sidenav-collapsible leftside-navigation collapsible sidenav-fixed menu-shadow" id="slide-out"

@@ -14,6 +14,7 @@ use App\Http\Controllers\CardController;
 use App\Http\Controllers\CssController;
 use App\Http\Controllers\BasicUiController;
 use App\Http\Controllers\AdvanceUiController;
+use App\Http\Controllers\AlumnoController;
 use App\Http\Controllers\ExtraComponentsController;
 use App\Http\Controllers\BasicTableController;
 use App\Http\Controllers\DataTableController;
@@ -38,7 +39,7 @@ Auth::routes(['verify' => true]);
 // Route::get('/', [DashboardController::class, 'dashboardModern'])->middleware('verified');
 Route::get('/', [DashboardController::class, 'dashboardModern']);
 
-Route::get('/ejemplo',[EjemploController::class, 'ejemplo']);
+
 
 
 Route::get('/modern', [DashboardController::class, 'dashboardModern']);
@@ -178,13 +179,15 @@ Route::get('/charts-sparklines', [ChartController::class, 'sparklines']);
 // locale route
 Route::get('lang/{locale}', [LanguageController::class, 'swap']);
 
+Route::get('/ejemplo',[EjemploController::class, 'ejemplo']);
+
 /* Rutas Alumos */
-Route::controller(AlumnoController::class)->group(function(){
-    Route::get('alumnos','index')->name('alumnnos.index');
-    Route::get('alumnos','create')->name('alumnos.create');
-    Route::get('alumnos','show')->name('alumnos.show');
-    Route::get('alumnos/{id}','edit')->name('alumnos.edit');
-    Route::post('alumnos/{id}','store')->name('alumnos.store');
-    Route::put('alumnos/{id}','update')->name('alumnos.update');
-    Route::delete('alumnos/{id}','destroy')->name('alumnos.destroy');
+Route::group(['middleware' => 'web'], function () {
+Route::get('/alumnos', [App\Http\Controllers\AlumnoController::class, 'index'])->name('alumnos.index');
+    Route::get('/alumnos/create', [App\Http\Controllers\AlumnoController::class, 'create'])->name('alumnos.create');
+    Route::post('/alumnos', [App\Http\Controllers\AlumnoController::class, 'store'])->name('alumnos.store');
+    Route::get('/alumnos/edit/{id}', [App\Http\Controllers\AlumnoController::class, 'edit'])->name('alumnos.edit');
+    Route::put('/alumnos/{id}', [App\Http\Controllers\AlumnoController::class, 'update'])->name('alumnos.update');
+    Route::delete('/alumnos/{id}', [\App\Http\Controllers\AlumnoController::class, 'destroy'])->name('alumnos.destroy');
+    Route::get('/alumnos/show/{id}', [App\Http\Controllers\AlumnoController::class, 'show'])->name('alumnos.show');
 });

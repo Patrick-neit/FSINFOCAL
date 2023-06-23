@@ -8,21 +8,17 @@ use Illuminate\Http\Request;
 class AlumnoController extends Controller
 {
     public function index(){
-          // Breadcrumbs
-        $breadcrumbs = [
-            ['link' => "modern", 'name' => "Home"], ['link' => "javascript:void(0)", 'name' => "Alumnos"], ['name' => "Alumno index"],
-        ];
-        //Pageheader set true for breadcrumbs
-        $pageConfigs = ['pageHeader' => true, 'isFabButton' => true];
-        return view('alumnos.index' , ['breadcrumbs' => $breadcrumbs], ['pageConfigs' => $pageConfigs]);
+
+        return view('alumnos.index');
     }
 
     public function create(){
+
         return view('alumnos.create');
     }
 
     public function store(Request $request){
-
+        dd($request);
         $alumno = new Alumno();
         $alumno->nombre = $request->nombre;
         $alumno->apellido = $request->apellido;
