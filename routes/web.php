@@ -188,6 +188,6 @@ Route::get('/alumnos', [App\Http\Controllers\AlumnoController::class, 'index'])-
     Route::post('/alumnos', [App\Http\Controllers\AlumnoController::class, 'store'])->name('alumnos.store');
     Route::get('/alumnos/edit/{id}', [App\Http\Controllers\AlumnoController::class, 'edit'])->name('alumnos.edit');
     Route::put('/alumnos/{id}', [App\Http\Controllers\AlumnoController::class, 'update'])->name('alumnos.update');
-    Route::delete('/alumnos/{id}', [\App\Http\Controllers\AlumnoController::class, 'destroy'])->name('alumnos.destroy');
     Route::get('/alumnos/show/{id}', [App\Http\Controllers\AlumnoController::class, 'show'])->name('alumnos.show');
+    Route::delete('/alumnos', [\App\Http\Controllers\AlumnoController::class, 'destroy'])->name('alumnos.destroy');
 });

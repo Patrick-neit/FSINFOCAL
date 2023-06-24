@@ -104,8 +104,9 @@
             </tr>
           </thead>
           <tbody>
+            @foreach ($alumnos as $alumno )
             <tr>
-              <td class="center-align contact-checkbox">
+                <td class="center-align contact-checkbox">
                 <label class="checkbox-label">
                   <input type="checkbox" name="foo" />
                   <span></span>
@@ -113,431 +114,20 @@
               </td>
               <td><span class="avatar-contact avatar-online"><img src="{{asset('images/avatar/avatar-1.png')}}"
                     alt="avatar"></span></td>
-              <td>John</td>
-              <td>john@domain.com</td>
-              <td>202-555-0119</td>
+              <td>{{$alumno->nombre}} - {{$alumno->apellido}}</td>
+              <td>{{$alumno->email}}</td>
+              <td>+591 {{$alumno->celular}}</td>
               <td><span class="favorite"><i class="material-icons"> star_border </i></span></td>
-              <td><span><i class="material-icons delete">delete_outline</i></span></td>
+              <td><span>
+                <a onclick="eliminar('{{$alumno->id}}')">
+                    <i class="material-icons delete">delete_outline</i>
+                </a>
+
+            </span></td>
             </tr>
-            <tr>
-              <td class="center-align contact-checkbox">
-                <label class="checkbox-label">
-                  <input type="checkbox" name="foo" />
-                  <span></span>
-                </label>
-              </td>
-              <td><span class="avatar-contact avatar-online"><img src="{{asset('images/avatar/avatar-2.png')}}"
-                    alt="avatar"></span></td>
-              <td>Rodolfo</td>
-              <td>rodo@domain.com</td>
-              <td>202-555-0125</td>
-              <td><span class="favorite"><i class="material-icons"> star_border </i></span></td>
-              <td><span><i class="material-icons delete">delete_outline</i></span></td>
-            </tr>
-            <tr>
-              <td class="center-align contact-checkbox">
-                <label class="checkbox-label">
-                  <input type="checkbox" name="foo" />
-                  <span></span>
-                </label>
-              </td>
-              <td><span class="avatar-contact avatar-online"><img src="{{asset('images/avatar/avatar-3.png')}}"
-                    alt="avatar"></span></td>
-              <td>Marco</td>
-              <td>marco@domain.com</td>
-              <td>202-555-0177</td>
-              <td><span class="favorite"><i class="material-icons"> star_border </i></span></td>
-              <td><span><i class="material-icons delete">delete_outline</i></span></td>
-            </tr>
-            <tr>
-              <td class="center-align contact-checkbox">
-                <label class="checkbox-label">
-                  <input type="checkbox" name="foo" />
-                  <span></span>
-                </label>
-              </td>
-              <td><span class="avatar-contact avatar-online"><img src="{{asset('images/avatar/avatar-4.png')}}"
-                    alt="avatar"></span></td>
-              <td>Joshua</td>
-              <td>jos@domain.com</td>
-              <td>202-555-0126</td>
-              <td><span class="favorite"><i class="material-icons amber-text"> star_border </i></span></td>
-              <td><span><i class="material-icons delete">delete_outline</i></span></td>
-            </tr>
-            <tr>
-              <td class="center-align contact-checkbox">
-                <label class="checkbox-label">
-                  <input type="checkbox" name="foo" />
-                  <span></span>
-                </label>
-              </td>
-              <td><span class="avatar-contact avatar-online"><img src="{{asset('images/avatar/avatar-4.png')}}"
-                    alt="avatar"></span></td>
-              <td>Gene</td>
-              <td>gene@domain.com</td>
-              <td>202-555-0130</td>
-              <td><span class="favorite"><i class="material-icons"> star_border </i></span></td>
-              <td><span><i class="material-icons delete">delete_outline</i></span></td>
-            </tr>
-            <tr>
-              <td class="center-align contact-checkbox">
-                <label class="checkbox-label">
-                  <input type="checkbox" name="foo" />
-                  <span></span>
-                </label>
-              </td>
-              <td><span class="avatar-contact avatar-online"><img src="{{asset('images/avatar/avatar-5.png')}}"
-                    alt="avatar"></span></td>
-              <td>Oscar</td>
-              <td>oscar@domain.com</td>
-              <td>+1-202-555-0119</td>
-              <td><span class="favorite"><i class="material-icons"> star_border </i></span></td>
-              <td><span><i class="material-icons delete">delete_outline</i></span></td>
-            </tr>
-            <tr>
-              <td class="center-align contact-checkbox">
-                <label class="checkbox-label">
-                  <input type="checkbox" name="foo" />
-                  <span></span>
-                </label>
-              </td>
-              <td><span class="avatar-contact avatar-online"><img src="{{asset('images/avatar/avatar-6.png')}}"
-                    alt="avatar"></span></td>
-              <td>William</td>
-              <td>will@domain.com</td>
-              <td>+1-202-555-0125</td>
-              <td><span class="favorite"><i class="material-icons amber-text"> star_border </i></span></td>
-              <td><span><i class="material-icons delete">delete_outline</i></span></td>
-            </tr>
-            <tr>
-              <td class="center-align contact-checkbox">
-                <label class="checkbox-label">
-                  <input type="checkbox" name="foo" />
-                  <span></span>
-                </label>
-              </td>
-              <td><span class="avatar-contact avatar-online"><img src="{{asset('images/avatar/avatar-7.png')}}"
-                    alt="avatar"></span></td>
-              <td>Dorian</td>
-              <td>dori@domain.com</td>
-              <td>202-555-0112</td>
-              <td><span class="favorite"><i class="material-icons"> star_border </i></span></td>
-              <td><span><i class="material-icons delete">delete_outline</i></span></td>
-            </tr>
-            <tr>
-              <td class="center-align contact-checkbox">
-                <label class="checkbox-label">
-                  <input type="checkbox" name="foo" />
-                  <span></span>
-                </label>
-              </td>
-              <td><span class="avatar-contact avatar-online"><img src="{{asset('images/avatar/avatar-8.png')}}"
-                    alt="avatar"></span></td>
-              <td>Lester</td>
-              <td>les@domain.com</td>
-              <td>+1-202-555-0177</td>
-              <td><span class="favorite"><i class="material-icons"> star_border </i></span></td>
-              <td><span><i class="material-icons delete">delete_outline</i></span></td>
-            </tr>
-            <tr>
-              <td class="center-align contact-checkbox">
-                <label class="checkbox-label">
-                  <input type="checkbox" name="foo" />
-                  <span></span>
-                </label>
-              </td>
-              <td><span class="avatar-contact avatar-online"><img src="{{asset('images/avatar/avatar-9.png')}}"
-                    alt="avatar"></span></td>
-              <td>Charles</td>
-              <td>name@domain.com</td>
-              <td>+1-202-555-0126</td>
-              <td><span class="favorite"><i class="material-icons"> star_border </i></span></td>
-              <td><span><i class="material-icons delete">delete_outline</i></span></td>
-            </tr>
-            <tr>
-              <td class="center-align contact-checkbox">
-                <label class="checkbox-label">
-                  <input type="checkbox" name="foo" />
-                  <span></span>
-                </label>
-              </td>
-              <td><span class="avatar-contact avatar-online"><img src="{{asset('images/avatar/avatar-1.png')}}"
-                    alt="avatar"></span></td>
-              <td>William</td>
-              <td>name@domain.com</td>
-              <td>+1-202-555-0130</td>
-              <td><span class="favorite"><i class="material-icons amber-text"> star_border </i></span></td>
-              <td><span><i class="material-icons delete">delete_outline</i></span></td>
-            </tr>
-            <tr>
-              <td class="center-align contact-checkbox">
-                <label class="checkbox-label">
-                  <input type="checkbox" name="foo" />
-                  <span></span>
-                </label>
-              </td>
-              <td><span class="avatar-contact avatar-online"><img src="{{asset('images/avatar/avatar-11.png')}}"
-                    alt="avatar"></span></td>
-              <td>John</td>
-              <td>name@domain.com</td>
-              <td>+1-202-555-0112</td>
-              <td><span class="favorite"><i class="material-icons"> star_border </i></span></td>
-              <td><span><i class="material-icons delete">delete_outline</i></span></td>
-            </tr>
-            <tr>
-              <td class="center-align contact-checkbox">
-                <label class="checkbox-label">
-                  <input type="checkbox" name="foo" />
-                  <span></span>
-                </label>
-              </td>
-              <td><span class="avatar-contact avatar-online"><img src="{{asset('images/avatar/avatar-12.png')}}"
-                    alt="avatar"></span></td>
-              <td>John</td>
-              <td>name@domain.com</td>
-              <td>+1-202-555-0112</td>
-              <td><span class="favorite"><i class="material-icons amber-text"> star_border </i></span></td>
-              <td><span><i class="material-icons delete">delete_outline</i></span></td>
-            </tr>
-            <tr>
-              <td class="center-align contact-checkbox">
-                <label class="checkbox-label">
-                  <input type="checkbox" name="foo" />
-                  <span></span>
-                </label>
-              </td>
-              <td><span class="avatar-contact avatar-online"><img src="{{asset('images/avatar/avatar-13.png')}}"
-                    alt="avatar"></span></td>
-              <td>John</td>
-              <td>name@domain.com</td>
-              <td>+1-202-555-0112</td>
-              <td><span class="favorite"><i class="material-icons"> star_border </i></span></td>
-              <td><span><i class="material-icons delete">delete_outline</i></span></td>
-            </tr>
-            <tr>
-              <td class="center-align contact-checkbox">
-                <label class="checkbox-label">
-                  <input type="checkbox" name="foo" />
-                  <span></span>
-                </label>
-              </td>
-              <td><span class="avatar-contact avatar-online"><img src="{{asset('images/avatar/avatar-14.png')}}"
-                    alt="avatar"></span></td>
-              <td>Jake</td>
-              <td>name@domain.com</td>
-              <td>+1-202-555-0112</td>
-              <td><span class="favorite"><i class="material-icons"> star_border </i></span></td>
-              <td><span><i class="material-icons delete">delete_outline</i></span></td>
-            </tr>
-            <tr>
-              <td class="center-align contact-checkbox">
-                <label class="checkbox-label">
-                  <input type="checkbox" name="foo" />
-                  <span></span>
-                </label>
-              </td>
-              <td><span class="avatar-contact avatar-online"><img src="{{asset('images/avatar/avatar-15.png')}}"
-                    alt="avatar"></span></td>
-              <td>Jake</td>
-              <td>name@domain.com</td>
-              <td>+1-202-555-0112</td>
-              <td><span class="favorite"><i class="material-icons"> star_border </i></span></td>
-              <td><span><i class="material-icons delete">delete_outline</i></span></td>
-            </tr>
-            <tr>
-              <td class="center-align contact-checkbox">
-                <label class="checkbox-label">
-                  <input type="checkbox" name="foo" />
-                  <span></span>
-                </label>
-              </td>
-              <td><span class="avatar-contact avatar-online"><img src="{{asset('images/avatar/avatar-16.png')}}"
-                    alt="avatar"></span></td>
-              <td>Heather</td>
-              <td>name@domain.com</td>
-              <td>+1-202-555-0112</td>
-              <td><span class="favorite"><i class="material-icons amber-text"> star_border </i></span></td>
-              <td><span><i class="material-icons delete">delete_outline</i></span></td>
-            </tr>
-            <tr>
-              <td class="center-align contact-checkbox">
-                <label class="checkbox-label">
-                  <input type="checkbox" name="foo" />
-                  <span></span>
-                </label>
-              </td>
-              <td><span class="avatar-contact avatar-online"><img src="{{asset('images/avatar/avatar-17.png')}}"
-                    alt="avatar"></span></td>
-              <td>Joanna</td>
-              <td>name@domain.com</td>
-              <td>+1-202-555-0112</td>
-              <td><span class="favorite"><i class="material-icons amber-text"> star_border </i></span></td>
-              <td><span><i class="material-icons delete">delete_outline</i></span></td>
-            </tr>
-            <tr>
-              <td class="center-align contact-checkbox">
-                <label class="checkbox-label">
-                  <input type="checkbox" name="foo" />
-                  <span></span>
-                </label>
-              <td><span class="avatar-contact avatar-online"><img src="{{asset('images/avatar/avatar-1.png')}}"
-                    alt="avatar"></span></td>
-              <td>Joanna</td>
-              <td>name@domain.com</td>
-              <td>+1-202-555-0112</td>
-              <td><span class="favorite"><i class="material-icons"> star_border </i></span></td>
-              <td><span><i class="material-icons delete">delete_outline</i></span></td>
-            </tr>
-            <tr>
-              <td class="center-align contact-checkbox">
-                <label class="checkbox-label">
-                  <input type="checkbox" name="foo" />
-                  <span></span>
-                </label>
-              </td>
-              <td><span class="avatar-contact avatar-online"><img src="{{asset('images/avatar/avatar-2.png')}}"
-                    alt="avatar"></span></td>
-              <td>Cassandra</td>
-              <td>name@domain.com</td>
-              <td>+1-202-555-0112</td>
-              <td><span class="favorite"><i class="material-icons"> star_border </i></span></td>
-              <td><span><i class="material-icons delete">delete_outline</i></span></td>
-            </tr>
-            <tr>
-              <td class="center-align contact-checkbox">
-                <label class="checkbox-label">
-                  <input type="checkbox" name="foo" />
-                  <span></span>
-                </label>
-              </td>
-              <td><span class="avatar-contact avatar-online"><img src="{{asset('images/avatar/avatar-3.png')}}"
-                    alt="avatar"></span></td>
-              <td>Dolores</td>
-              <td>name@domain.com</td>
-              <td>+1-202-555-0112</td>
-              <td><span class="favorite"><i class="material-icons"> star_border </i></span></td>
-              <td><span><i class="material-icons delete">delete_outline</i></span></td>
-            </tr>
-            <tr>
-              <td class="center-align contact-checkbox">
-                <label class="checkbox-label">
-                  <input type="checkbox" name="foo" />
-                  <span></span>
-                </label>
-              </td>
-              <td><span class="avatar-contact avatar-online"><img src="{{asset('images/avatar/avatar-4.png')}}"
-                    alt="avatar"></span></td>
-              <td>Susan</td>
-              <td>name@domain.com</td>
-              <td>+1-202-555-0112</td>
-              <td><span class="favorite"><i class="material-icons"> star_border </i></span></td>
-              <td><span><i class="material-icons delete">delete_outline</i></span></td>
-            </tr>
-            <tr>
-              <td class="center-align contact-checkbox">
-                <label class="checkbox-label">
-                  <input type="checkbox" name="foo" />
-                  <span></span>
-                </label>
-              </td>
-              <td><span class="avatar-contact avatar-online"><img src="{{asset('images/avatar/avatar-5.png')}}"
-                    alt="avatar"></span></td>
-              <td>Susan</td>
-              <td>name@domain.com</td>
-              <td>+1-202-555-0112</td>
-              <td><span class="favorite"><i class="material-icons"> star_border </i></span></td>
-              <td><span><i class="material-icons delete">delete_outline</i></span></td>
-            </tr>
-            <tr>
-              <td class="center-align contact-checkbox">
-                <label class="checkbox-label">
-                  <input type="checkbox" name="foo" />
-                  <span></span>
-                </label>
-              </td>
-              <td><span class="avatar-contact avatar-online"><img src="{{asset('images/avatar/avatar-6.png')}}"
-                    alt="avatar"></span></td>
-              <td>Kathleen</td>
-              <td>name@domain.com</td>
-              <td>+1-202-555-0112</td>
-              <td><span class="favorite"><i class="material-icons amber-text"> star_border </i></span></td>
-              <td><span><i class="material-icons delete">delete_outline</i></span></td>
-            </tr>
-            <tr>
-              <td class="center-align contact-checkbox">
-                <label class="checkbox-label">
-                  <input type="checkbox" name="foo" />
-                  <span></span>
-                </label>
-              </td>
-              <td><span class="avatar-contact avatar-online"><img src="{{asset('images/avatar/avatar-7.png')}}"
-                    alt="avatar"></span></td>
-              <td>Chief</td>
-              <td>name@domain.com</td>
-              <td>+1-202-555-0112</td>
-              <td><span class="favorite"><i class="material-icons"> star_border </i></span></td>
-              <td><span><i class="material-icons delete">delete_outline</i></span></td>
-            </tr>
-            <tr>
-              <td class="center-align contact-checkbox">
-                <label class="checkbox-label">
-                  <input type="checkbox" name="foo" />
-                  <span></span>
-                </label>
-              </td>
-              <td><span class="avatar-contact avatar-online"><img src="{{asset('images/avatar/avatar-8.png')}}"
-                    alt="avatar"></span></td>
-              <td>Walter</td>
-              <td>name@domain.com</td>
-              <td>+1-202-555-0112</td>
-              <td><span class="favorite"><i class="material-icons"> star_border </i></span></td>
-              <td><span><i class="material-icons delete">delete_outline</i></span></td>
-            </tr>
-            <tr>
-              <td class="center-align contact-checkbox">
-                <label class="checkbox-label">
-                  <input type="checkbox" name="foo" />
-                  <span></span>
-                </label>
-              </td>
-              <td><span class="avatar-contact avatar-online"><img src="{{asset('images/avatar/avatar-9.png')}}"
-                    alt="avatar"></span></td>
-              <td>Walter</td>
-              <td>name@domain.com</td>
-              <td>+1-202-555-0112</td>
-              <td><span class="favorite"><i class="material-icons amber-text"> star_border </i></span></td>
-              <td><span><i class="material-icons delete">delete_outline</i></span></td>
-            </tr>
-            <tr>
-              <td class="center-align contact-checkbox">
-                <label class="checkbox-label">
-                  <input type="checkbox" name="foo" />
-                  <span></span>
-                </label>
-              </td>
-              <td><span class="avatar-contact avatar-online"><img src="{{asset('images/avatar/avatar-10.png')}}"
-                    alt="avatar"></span></td>
-              <td>Kathleen</td>
-              <td>name@domain.com</td>
-              <td>+1-202-555-0112</td>
-              <td><span class="favorite"><i class="material-icons"> star_border </i></span></td>
-              <td><span><i class="material-icons delete">delete_outline</i></span></td>
-            </tr>
-            <tr>
-              <td class="center-align contact-checkbox">
-                <label class="checkbox-label">
-                  <input type="checkbox" name="foo" />
-                  <span></span>
-                </label>
-              </td>
-              <td><span class="avatar-contact avatar-online"><img src="{{asset('images/avatar/avatar-11.png')}}"
-                    alt="avatar"></span></td>
-              <td>Terry</td>
-              <td>name@domain.com</td>
-              <td>+1-202-555-0112</td>
-              <td><span class="favorite"><i class="material-icons"> star_border </i></span></td>
-              <td><span><i class="material-icons delete">delete_outline</i></span></td>
-            </tr>
+            @endforeach
+
+
           </tbody>
         </table>
       </div>
@@ -572,14 +162,14 @@
             <label for="last_name">Last Name</label>
           </div>
           <div class="input-field col s12">
-            <i class="material-icons prefix"> business </i>
-            <input id="company" type="text" class="validate">
-            <label for="company">Company</label>
+            <i class="material-icons prefix"> fiber_pin </i>
+            <input id="ci" type="text" class="validate">
+            <label for="company">CI</label>
           </div>
           <div class="input-field col s12">
-            <i class="material-icons prefix"> business_center </i>
-            <input id="business" type="text" class="validate">
-            <label for="business">Job Title</label>
+            <i class="material-icons prefix"> date_range </i>
+            <input  id="fecha_nacimiento" type="date" class="validate">
+            <label for="business">Birthday Place</label>
           </div>
         </div>
         <div class="row">
@@ -594,9 +184,9 @@
             <label for="phone">Phone</label>
           </div>
           <div class="input-field col s12">
-            <i class="material-icons prefix"> note </i>
-            <input id="notes" type="text" class="validate">
-            <label for="notes">Notes</label>
+            <i class="material-icons prefix"> add_location </i>
+            <input id="domicilio" type="text"  class="validate">
+            <label for="notes">Domicilio</label>
           </div>
         </div>
         <div class="card-action pl-0 pr-0 right-align">
@@ -625,5 +215,7 @@
 <script src="{{asset('js/scripts/app-contacts.js')}}"></script>
 <script>
     let ruta_guardar_alumno = "{{route('alumnos.store')}}";
+    let ruta_index_alumno   = "{{route('alumnos.index')}}";
+    let ruta_eliminar_alumno = "{{route('alumnos.destroy')}}";
 </script>
 @endsection

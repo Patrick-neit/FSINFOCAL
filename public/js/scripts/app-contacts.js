@@ -1,4 +1,5 @@
 
+
 const csrfToken = document.head.querySelector(
     "[name~=csrf-token][content]"
 ).content;
@@ -182,13 +183,17 @@ $(document).ready(function () {
     }
 });
 
+/* Registrar Alumno */
 let registrarAlumnoButton = document.getElementById('registrarAlumno');
-let first_name_alumno     = document.getElementById('first_name');
-let last_name_alumno      = document.getElementById('last_name');
-let email_alumno          = document.getElementById('email');
-let phone_alumno          = document.getElementById('phone');
+let first_name_alumno = document.getElementById('first_name');
+let last_name_alumno = document.getElementById('last_name');
+let ci_alumno = document.getElementById('ci');
+let email_alumno = document.getElementById('email');
+let phone_alumno = document.getElementById('phone');
+let fecha_nacimiento_alumno = document.getElementById('fecha_nacimiento');
+let domicilio_alumno = document.getElementById('domicilio');
 registrarAlumnoButton.addEventListener("click", function () {
-    console.log('entra');
+
     fetch(ruta_guardar_alumno, {
         method: "POST",
         headers: {
@@ -196,22 +201,72 @@ registrarAlumnoButton.addEventListener("click", function () {
             "X-CSRF-Token": csrfToken,
         },
         body: JSON.stringify({
-            first_name_alumno: first_name_alumno.value,
-            last_name_alumno: last_name_alumno.value,
-            email_alumno: email_alumno.value,
-            phone_alumno: phone_alumno.value,
+            first_name: first_name_alumno.value,
+            last_name: last_name_alumno.value,
+            ci_alumno: ci_alumno.value,
+            email: email_alumno.value,
+            phone: phone_alumno.value,
+            fecha_nacimiento_alumno: fecha_nacimiento_alumno.value,
+            domicilio_alumno: domicilio_alumno.value
+
         }),
     })
-    .then((data)=>{
-        return response.JSON();
-    })
-    .then((data)=>{
-        console.log(data);
-    })
-    .catch((error)=>{
-        console.log('error');
-    })
-})
+        .then(response => response.json())
+        .then(data => {
+            if (data.success == true) {
+                M.toast({
+                    html: 'Registrado con Exito!',
+                    classes: 'rounded', displayLength: 3000,
+                    completeCallback: function () {
+                        window.location.href = ruta_index_alumno
+                    }
+                })
+            } else {
+                M.toast({
+                    html: 'Algo salio Mal!',
+                    classes: 'rounded', displayLength: 3000, classes: 'blue lighten-1'
+                })
+            }
+
+        })
+        .catch(error => {
+            console.log('error');
+        });
+});
+
+/* Eliminar Alumno */
+function eliminar(e) {
+    console.log(e);
+    fetch(ruta_eliminar_alumno, {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-Token": csrfToken,
+        },
+        body: JSON.stringify({
+            alumno_id: e
+        })
+    }).then(response => response.json())
+            .then(data => {
+                if (data.success == true) {
+                    M.toast({
+                        html: data.response,
+                        classes: 'rounded', displayLength: 2000,
+                        completeCallback: function () {
+                            window.location.href = ruta_index_alumno
+                        }
+                    })
+                }
+            })
+            .catch(error => {
+                console.log('error');
+            })
+}
+
+
+
+
+
 
 
 // Sidenav

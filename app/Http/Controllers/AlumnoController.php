@@ -7,39 +7,49 @@ use Illuminate\Http\Request;
 
 class AlumnoController extends Controller
 {
-    public function index(){
-
-        return view('alumnos.index');
+    public function index()
+    {
+        $alumnos = Alumno::all();
+        return view('alumnos.index', compact('alumnos'));
     }
 
-    public function create(){
+    public function create()
+    {
 
         return view('alumnos.create');
     }
 
-    public function store(Request $request){
-        dd($request);
+    public function store(Request $request)
+    {
+
         $alumno = new Alumno();
-        $alumno->nombre = $request->nombre;
-        $alumno->apellido = $request->apellido;
-        $alumno->ci = $request->ci;
+        $alumno->nombre = $request->first_name;
+        $alumno->apellido = $request->last_name;
+        $alumno->ci = $request->ci_alumno;
         $alumno->lugar_nacimiento = $request->lugar_nacimiento;
-        $alumno->fecha_nacimiento = $request->fecha_nacimiento;
-        $alumno->domicilio = $request->domicilio;
-        $alumno->celular = $request->celular;
+        $alumno->fecha_nacimiento = $request->fecha_nacimiento_alumno;
+        $alumno->domicilio = $request->domicilio_alumno;
+        $alumno->celular = $request->phone;
         $alumno->sexo = $request->sexo;
         $alumno->email = $request->email;
         $alumno->beca = $request->beca;
         $alumno->save();
 
+        if ($alumno->save()) {
+            return response()->json([
+                'success' => true
+            ]);
+        }
     }
 
-    public function edit($id){
+    public function edit($id)
+    {
         $alumno = Alumno::find($id);
         return view('alumnos.edit', compact('alumno'));
     }
 
-    public function update(Request $request, $id){
+    public function update(Request $request, $id)
+    {
 
         $alumno = Alumno::find($id);
         $alumno->nombre = $request->nombre;
@@ -57,10 +67,37 @@ class AlumnoController extends Controller
         return redirect()->route('alumnos.index');
     }
 
-    public function destroy($id){
-        $alumno = Alumno::find($id);
-        $alumno->destroy();
+    public function destroy(Request $request)
+    {
+        $alumno = Alumno::find($request->alumno_id);
+        $alumno->delete();
 
+        if ($alumno->trashed()) {
+
+            return response()->json([
+                'success' => true,
+                'response' => 'Ha Sido Eliminado con Exito'
+            ]);
+
+        } else {
+
+            return response()->json([
+                'success' => true,
+                'response' => 'Something Went Wrong!'
+            ]);
+        }
         return redirect()->route('alumnos.index');
+    }
+
+    public function getDeleteStudents()
+    {
+        $students = Alumno::withTrashed()->get(); /* Students who has been eliminated and dont  */
+        $students = Alumno::onlyTrashed()->get(); /* Students who has been eliminated */
+        $students = Alumno::withTrashed()->restore(); /* Recover the registers who was been eliminated */
+        $students = Alumno::withTrashed()->forceDelete(); /* Delete a register permanently */
+        $student  = Alumno::where('id', 1)->withTrashed()->first();
+        if ($student->trashed()) {
+            return true; /* The register IS IN the trash basket */
+        }
     }
 }

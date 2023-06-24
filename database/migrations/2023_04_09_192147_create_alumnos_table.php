@@ -18,14 +18,15 @@ return new class extends Migration
             $table->string('nombre');
             $table->string('apellido');
             $table->integer('ci');
-            $table->string('lugar_nacimiento');
+            $table->string('lugar_nacimiento')->nullable();
             $table->date('fecha_nacimiento');
             $table->string('domicilio');
             $table->integer('celular');
-            $table->char('sexo');
+            $table->char('sexo')->nullable();
             $table->string('email');
-            $table->char('beca'); /* Parcial||Total */
+            $table->char('beca')->nullable(); /* Parcial||Total */
 
+            $table->softDeletes();
             $table->timestamps();
         });
     }
