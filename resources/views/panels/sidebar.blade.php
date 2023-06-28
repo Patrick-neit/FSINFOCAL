@@ -93,6 +93,102 @@
             )
         ),
         array(
+        "navheader"=> "Modulo Docentes",
+        "icon"=> "more_horiz"
+        ),
+        array(
+            "url" => "javascript:void(0)",
+            "i18n" => "Docentes",
+            "name" => "Docentes",
+            "icon" => "collections_bookmark",
+            "slug" => "Docentes",
+            "class"=> "collapsible-header waves-effect waves-cyan",
+            "submenu" => array(
+                array(
+                    "url" =>trim( parse_url(route('alumnos.index'), PHP_URL_PATH) ,'/'),
+                    "i18n" => "Alumnos Registrados",
+                    "name" => "Alumnos Registrados",
+                    "slug" => "alumnos"
+                ),
+                array(
+                    "url" => "alumnos.create",
+                    "i18n" => "Cards Advance",
+                    "name" => "Alumnos Matriculados",
+                    "slug" => "cards-advance"
+                ),
+                array(
+                    "url" => "alumnos.create",
+                    "i18n" => "Cards Extended",
+                    "name" => "Alumnos Inactivos",
+                    "slug" => "cards-extended"
+                )
+            )
+        ),
+        array(
+        "navheader"=> "Modulo Ventas",
+        "icon"=> "more_horiz"
+        ),
+        array(
+            "url" => "javascript:void(0)",
+            "i18n" => "Ventas",
+            "name" => "Ventas",
+            "icon" => "add_shopping_cart",
+            "slug" => "Ventas",
+            "class"=> "collapsible-header waves-effect waves-cyan",
+            "submenu" => array(
+                array(
+                    "url" =>trim( parse_url(route('alumnos.index'), PHP_URL_PATH) ,'/'),
+                    "i18n" => "Alumnos Registrados",
+                    "name" => "Alumnos Registrados",
+                    "slug" => "alumnos"
+                ),
+                array(
+                    "url" => "alumnos.create",
+                    "i18n" => "Cards Advance",
+                    "name" => "Alumnos Matriculados",
+                    "slug" => "cards-advance"
+                ),
+                array(
+                    "url" => "alumnos.create",
+                    "i18n" => "Cards Extended",
+                    "name" => "Alumnos Inactivos",
+                    "slug" => "cards-extended"
+                )
+            )
+        ),
+        array(
+        "navheader"=> "Modulo Reportes",
+        "icon"=> "more_horiz"
+        ),
+        array(
+            "url" => "javascript:void(0)",
+            "i18n" => "Reportes",
+            "name" => "Reportes",
+            "icon" => "markunread_mailbox",
+            "slug" => "Reportes",
+            "class"=> "collapsible-header waves-effect waves-cyan",
+            "submenu" => array(
+                array(
+                    "url" =>trim( parse_url(route('alumnos.index'), PHP_URL_PATH) ,'/'),
+                    "i18n" => "Alumnos Registrados",
+                    "name" => "Alumnos Registrados",
+                    "slug" => "alumnos"
+                ),
+                array(
+                    "url" => "alumnos.create",
+                    "i18n" => "Cards Advance",
+                    "name" => "Alumnos Matriculados",
+                    "slug" => "cards-advance"
+                ),
+                array(
+                    "url" => "alumnos.create",
+                    "i18n" => "Cards Extended",
+                    "name" => "Alumnos Inactivos",
+                    "slug" => "cards-extended"
+                )
+            )
+        ),
+        array(
             "url" => "javascript:void(0)",
             "i18n" => "Cards",
             "name" => "Cards",

@@ -183,11 +183,22 @@ Route::get('/ejemplo',[EjemploController::class, 'ejemplo']);
 
 /* Rutas Alumos */
 Route::group(['middleware' => 'web'], function () {
-Route::get('/alumnos', [App\Http\Controllers\AlumnoController::class, 'index'])->name('alumnos.index');
+    Route::get('/alumnos', [App\Http\Controllers\AlumnoController::class, 'index'])->name('alumnos.index');
     Route::get('/alumnos/create', [App\Http\Controllers\AlumnoController::class, 'create'])->name('alumnos.create');
     Route::post('/alumnos', [App\Http\Controllers\AlumnoController::class, 'store'])->name('alumnos.store');
     Route::get('/alumnos/edit/{id}', [App\Http\Controllers\AlumnoController::class, 'edit'])->name('alumnos.edit');
     Route::put('/alumnos/{id}', [App\Http\Controllers\AlumnoController::class, 'update'])->name('alumnos.update');
     Route::get('/alumnos/show/{id}', [App\Http\Controllers\AlumnoController::class, 'show'])->name('alumnos.show');
     Route::delete('/alumnos', [\App\Http\Controllers\AlumnoController::class, 'destroy'])->name('alumnos.destroy');
+});
+
+/* Rutas Docentes */
+Route::group(['middleware' => 'web'], function () {
+    Route::get('/docentes', [App\Http\Controllers\AlumnoController::class, 'index'])->name('docentes.index');
+    Route::get('/docentes/create', [App\Http\Controllers\AlumnoController::class, 'create'])->name('docentes.create');
+    Route::post('/docentes', [App\Http\Controllers\AlumnoController::class, 'store'])->name('docentes.store');
+    Route::get('/docentes/edit/{id}', [App\Http\Controllers\AlumnoController::class, 'edit'])->name('docentes.edit');
+    Route::put('/docentes/{id}', [App\Http\Controllers\AlumnoController::class, 'update'])->name('docentes.update');
+    Route::get('/docentes/show/{id}', [App\Http\Controllers\AlumnoController::class, 'show'])->name('docentes.show');
+    Route::delete('/docentes', [\App\Http\Controllers\AlumnoController::class, 'destroy'])->name('docentes.destroy');
 });

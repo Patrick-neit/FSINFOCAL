@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AlumnoStoreRequest;
 use App\Models\Alumno;
 use Illuminate\Http\Request;
 
@@ -10,7 +11,9 @@ class AlumnoController extends Controller
     public function index()
     {
         $alumnos = Alumno::all();
-        return view('alumnos.index', compact('alumnos'));
+        $alumnosTotales = Alumno::withTrashed()->count();
+        $alumnosInactivos= Alumno::onlyTrashed()->count();
+        return view('alumnos.index', compact('alumnos','alumnosTotales','alumnosInactivos'));
     }
 
     public function create()
@@ -19,27 +22,31 @@ class AlumnoController extends Controller
         return view('alumnos.create');
     }
 
-    public function store(Request $request)
+    public function store(AlumnoStoreRequest $request)
     {
+        try {
+            $alumno = new Alumno();
+            $alumno->nombre = $request->first_name;
+            $alumno->apellido = $request->last_name;
+            $alumno->ci = $request->ci_alumno;
+            $alumno->lugar_nacimiento = $request->lugar_nacimiento;
+            $alumno->fecha_nacimiento = $request->fecha_nacimiento_alumno;
+            $alumno->domicilio = $request->domicilio_alumno;
+            $alumno->celular = $request->phone;
+            $alumno->sexo = $request->sexo;
+            $alumno->email = $request->email;
+            $alumno->beca = $request->beca;
+            $alumno->save();
 
-        $alumno = new Alumno();
-        $alumno->nombre = $request->first_name;
-        $alumno->apellido = $request->last_name;
-        $alumno->ci = $request->ci_alumno;
-        $alumno->lugar_nacimiento = $request->lugar_nacimiento;
-        $alumno->fecha_nacimiento = $request->fecha_nacimiento_alumno;
-        $alumno->domicilio = $request->domicilio_alumno;
-        $alumno->celular = $request->phone;
-        $alumno->sexo = $request->sexo;
-        $alumno->email = $request->email;
-        $alumno->beca = $request->beca;
-        $alumno->save();
-
-        if ($alumno->save()) {
-            return response()->json([
-                'success' => true
-            ]);
+            if ($alumno->save()) {
+                return response()->json([
+                    'success' => true
+                ]);
+            }
+        } catch (\Throwable $th) {
+            return back()->withException($th);
         }
+
     }
 
     public function edit($id)

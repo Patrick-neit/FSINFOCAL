@@ -46,6 +46,7 @@ return array(
     'App\\Http\\Middleware\\TrustHosts' => $baseDir . '/app/Http/Middleware/TrustHosts.php',
     'App\\Http\\Middleware\\TrustProxies' => $baseDir . '/app/Http/Middleware/TrustProxies.php',
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',
+    'App\\Http\\Requests\\AlumnoStoreRequest' => $baseDir . '/app/Http/Requests/AlumnoStoreRequest.php',
     'App\\Models\\Alumno' => $baseDir . '/app/Models/Alumno.php',
     'App\\Models\\Curso' => $baseDir . '/app/Models/Curso.php',
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',
