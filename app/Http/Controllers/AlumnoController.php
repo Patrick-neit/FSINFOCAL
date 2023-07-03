@@ -22,6 +22,14 @@ class AlumnoController extends Controller
         return view('alumnos.create');
     }
 
+
+
+    public function registrar_alumnos(){
+        return view('alumnos.registrar');
+    }
+
+
+    
     public function store(AlumnoStoreRequest $request)
     {
         try {

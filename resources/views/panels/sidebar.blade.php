@@ -73,6 +73,12 @@
             "class"=> "collapsible-header waves-effect waves-cyan",
             "submenu" => array(
                 array(
+                    "url" =>trim( parse_url(route('alumnos.registrar_alumnos'), PHP_URL_PATH) ,'/'),
+                    "i18n" => "Registrar Alumnos",
+                    "name" => "Registrar Alumnos",
+                    "slug" => "alumnos"
+                ),
+                array(
                     "url" =>trim( parse_url(route('alumnos.index'), PHP_URL_PATH) ,'/'),
                     "i18n" => "Alumnos Registrados",
                     "name" => "Alumnos Registrados",
@@ -136,6 +142,7 @@
             "slug" => "Ventas",
             "class"=> "collapsible-header waves-effect waves-cyan",
             "submenu" => array(
+
                 array(
                     "url" =>trim( parse_url(route('alumnos.index'), PHP_URL_PATH) ,'/'),
                     "i18n" => "Alumnos Registrados",
