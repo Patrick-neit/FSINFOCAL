@@ -105,10 +105,10 @@
             "class"=> "collapsible-header waves-effect waves-cyan",
             "submenu" => array(
                 array(
-                    "url" =>trim( parse_url(route('alumnos.index'), PHP_URL_PATH) ,'/'),
-                    "i18n" => "Alumnos Registrados",
-                    "name" => "Alumnos Registrados",
-                    "slug" => "alumnos"
+                    "url" =>trim( parse_url(route('docentes.index'), PHP_URL_PATH) ,'/'),
+                    "i18n" => "Docentes Registrados",
+                    "name" => "Docentes Registrados",
+                    "slug" => "docentes"
                 ),
                 array(
                     "url" => "alumnos.create",

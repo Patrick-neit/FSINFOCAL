@@ -24,12 +24,12 @@ class AlumnoStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nombre'    => 'required|string',
-            'apellido'  => 'required|string',
-            'ci'        => 'required|string',
-            'fecha_nacimiento' => 'required|date',
-            'domicilio' => 'required|string',
-            'celular'   => 'required|integer|max:8',
+            'first_name'    => 'required|string',
+            'last_name'  => 'required|string',
+            'ci_alumno'        => 'required|string',
+            'fecha_nacimiento_alumno' => 'required|date',
+            'domicilio_alumno' => 'required|string',
+            'phone'   => 'required|string|max:8',
             'email'     => 'required|email',
 
         ];
@@ -38,13 +38,12 @@ class AlumnoStoreRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'nombre.required'   => 'Nombre es Requerido',
-            'apellido.required' => 'Apellido es Requerido',
-            'ci.required'       => 'C.I es Requerido',
-            'fecha_nacimiento.required' => 'Fecha Nacimiento es Requerido',
-            'domicilio.required' => 'Domicilio es Requerido',
-            'celular.requirerd' => 'Celular es Requerido',
-            'celular.integer'   => 'Celular no debe ser mayor A 8 Numeros',
+            'first_name.required'   => 'Nombre es Requerido',
+            'last_name.required' => 'Apellido es Requerido',
+            'ci_alumno.required'       => 'C.I es Requerido',
+            'fecha_nacimiento_alumno.required' => 'Fecha Nacimiento es Requerido',
+            'domicilio_alumno.required' => 'Domicilio es Requerido',
+            'phone.required' => 'Celular es Requerido',
             'email'             => 'Email es Requerido'
         ];
     }

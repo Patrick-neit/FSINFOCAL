@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DocenteStoreRequest;
 use App\Models\Docente;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class DocenteController extends Controller
 {
-    public function index(){
-
-        return view('docentes.index');
+    public function index()
+    {
+        $docentes = Docente::all();
+        return view('docentes.index', compact('docentes'));
     }
 
     public function create(){
@@ -17,19 +20,21 @@ class DocenteController extends Controller
         return view('docentes.create');
     }
 
-    public function store(Request $request){
-
+    public function store(DocenteStoreRequest $request)
+    {
         try {
+
+            $fechaIncorporacion = (new Carbon($request->fecha_incorporacion_docente))->toDateString();
             $docente = new Docente();
-            $docente->nombre_completo   = $request->nombre_completo;
-            $docente->matricula         = $request->matricula;
-            $docente->fecha_incorporacion = $request->fecha_incorporacion;
-            $docente->telefono          = $request->telefono;
+            $docente->nombre_completo   = $request->first_name;
+            $docente->matricula         = $request->matricula_docente;
+            $docente->fecha_incorporacion = $fechaIncorporacion;
+            $docente->telefono          = $request->phone_docente;
             $docente->direccion         = $request->direccion;
             $docente->estado            = $request->estado;
             $docente->save();
 
-            if ( $docente->save()) {
+            if ($docente->save()) {
                 return response()->json([
                     'success'=> true,
                     'response' => 'Registrado con Exito!'
@@ -40,10 +45,11 @@ class DocenteController extends Controller
                     'response' => 'Something went Wrong!'
                 ]);
             }
-        } catch (\Throwable $th) {
-            return back()->withErrors($th);
+        } catch (\Exception $e) {
+            return responseJson('Server Error',[
+                'message'=> $e->getMessage(),
+                'codde'=> $e->getCode(),
+            ],500);
         }
-
-
     }
 }

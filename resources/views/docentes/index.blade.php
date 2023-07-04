@@ -2,7 +2,7 @@
 @extends('layouts.contentLayoutMaster')
 
 {{-- page title --}}
-@section('title','Alumnos Registrados')
+@section('title','Docentes Registrados')
 
 {{-- vendor styles --}}
 @section('vendor-style')
@@ -34,7 +34,7 @@
     <div class="sidebar-content">
       <div class="sidebar-header">
         <div class="sidebar-details">
-          <h5 class="m-0 sidebar-title"><i class="material-icons app-header-icon text-top">perm_identity</i> Alumnos
+          <h5 class="m-0 sidebar-title"><i class="material-icons app-header-icon text-top">perm_identity</i> Docentes
           </h5>
           <div class="mt-10 pt-2">
             <p class="m-0 subtitle font-weight-700">Total number of contacts</p>
@@ -97,14 +97,14 @@
               </th>
               <th>User</th>
               <th>Full Name</th>
-              <th>Email</th>
               <th>Phone</th>
+              <th>Estado</th>
               <th>Favorite</th>
               <th>Delete</th>
             </tr>
           </thead>
           <tbody>
-            @foreach ($alumnos as $alumno )
+            @foreach ($docentes as $docente )
             <tr>
                 <td class="center-align contact-checkbox">
                 <label class="checkbox-label">
@@ -114,12 +114,12 @@
               </td>
               <td><span class="avatar-contact avatar-online"><img src="{{asset('images/avatar/avatar-1.png')}}"
                     alt="avatar"></span></td>
-              <td>{{$alumno->nombre}} - {{$alumno->apellido}}</td>
-              <td>{{$alumno->email}}</td>
-              <td>+591 {{$alumno->celular}}</td>
+              <td>{{$docente->nombre_completo}} </td>
+              <td>+591 {{$docente->telefono}}</td>
+              <td> {{$docente->estado}}</td>
               <td><span class="favorite"><i class="material-icons"> star_border </i></span></td>
               <td><span>
-                <a onclick="eliminar('{{$alumno->id}}')">
+                <a onclick="eliminar('{{$docente->id}}')">
                     <i class="material-icons delete">delete_outline</i>
                 </a>
 
@@ -141,7 +141,7 @@
   <div class="card quill-wrapper">
     <div class="card-content pt-0">
       <div class="card-header display-flex pb-2">
-        <h3 class="card-title contact-title-label">Registra Nuevo Alumno</h3>
+        <h3 class="card-title contact-title-label">Registra Nuevo Docente</h3>
         <div class="close close-icon">
           <i class="material-icons">close</i>
         </div>
@@ -153,23 +153,19 @@
         <div class="row">
           <div class="input-field col s12">
             <i class="material-icons prefix"> perm_identity </i>
-            <input id="first_name" type="text" name="nombre" class="validate">
-            <label for="first_name">First Name</label>
+            <input id="first_name" type="text" name="nombre" value="{{old('nombre')}}" class="validate">
+            <label for="first_name">Nombre Completo</label>
           </div>
-          <div class="input-field col s12">
-            <i class="material-icons prefix"> perm_identity </i>
-            <input id="last_name" type="text" name="apellido" class="validate">
-            <label for="last_name">Last Name</label>
-          </div>
+
           <div class="input-field col s12">
             <i class="material-icons prefix"> fiber_pin </i>
-            <input id="ci" type="text" class="validate">
-            <label for="company">CI</label>
+            <input id="matricula" type="text" class="validate">
+            <label for="company">Matricula</label>
           </div>
           <div class="input-field col s12">
             <i class="material-icons prefix"> date_range </i>
-            <input  id="fecha_nacimiento" type="date" class="validate">
-            <label for="business">Birthday Place</label>
+            <input  id="fecha_incorporacion" type="text" class="datepicker">
+            <label for="business">Fecha Incorporacion</label>
           </div>
         </div>
         <div class="row">
@@ -180,17 +176,26 @@
           </div>
           <div class="input-field col s12">
             <i class="material-icons prefix"> call </i>
-            <input id="phone" type="text" maxlength="8" name="celular" class="validate">
-            <label for="phone">Phone</label>
+            <input id="telefono" type="text" maxlength="8" name="celular" class="validate">
+            <label for="phone">Telefono</label>
           </div>
           <div class="input-field col s12">
             <i class="material-icons prefix"> add_location </i>
-            <input id="domicilio" type="text"  class="validate">
-            <label for="notes">Domicilio</label>
+            <input id="direccion" type="text"  class="validate">
+            <label for="notes">Direccion</label>
           </div>
+
+          <div class="input-field col s12">
+            <select id="estado">
+              <option value="" disabled selected>Choose your option</option>
+              <option value="A">Activo</option>
+              <option value="I">Inactivo </option>
+            </select>
+            <label> Selecciona Estado</label>
+        </div>
         </div>
         <div class="card-action pl-0 pr-0 right-align">
-            <button  id="registrarAlumno" class="btn-small waves-effect waves-light add-contact">
+            <button  id="registrarDocente" class="btn-small waves-effect waves-light add-contact">
                 <span>Registrar</span>
             </button>
             <button class="btn-small waves-effect waves-light update-contact display-none">
@@ -212,10 +217,10 @@
 
 {{-- page scripts --}}
 @section('page-script')
-<script src="{{asset('js/scripts/app-contacts.js')}}"></script>
+<script src="{{asset('js/scripts/docentes/index.js')}}"></script>
 <script>
-    let ruta_guardar_alumno = "{{route('alumnos.store')}}";
-    let ruta_index_alumno   = "{{route('alumnos.index')}}";
-    let ruta_eliminar_alumno = "{{route('alumnos.destroy')}}";
+    let ruta_guardar_docente = "{{route('docentes.store')}}";
+    let ruta_index_docente   = "{{route('docentes.index')}}";
+    let ruta_eliminar_docente = "{{route('docentes.destroy')}}";
 </script>
 @endsection

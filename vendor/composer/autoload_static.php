@@ -36,6 +36,7 @@ class ComposerStaticInit3ea74f8ba45b7ba0443bbe3ed7a8894a
         'ec07570ca5a812141189b1fa81503674' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Assert/Functions.php',
         '320163ac6b93aebe3dc25b60a0533d56' => __DIR__ . '/..' . '/spatie/laravel-ignition/src/helpers.php',
         '381c1f7485be5ec909ca0fe1ede4b928' => __DIR__ . '/../..' . '/app/Helpers/Helpers.php',
+        '77ea17918894fc829a84604fd53d73f6' => __DIR__ . '/../..' . '/app/http/Helper.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -561,6 +562,7 @@ class ComposerStaticInit3ea74f8ba45b7ba0443bbe3ed7a8894a
         'App\\Http\\Controllers\\CssController' => __DIR__ . '/../..' . '/app/Http/Controllers/CssController.php',
         'App\\Http\\Controllers\\DashboardController' => __DIR__ . '/../..' . '/app/Http/Controllers/DashboardController.php',
         'App\\Http\\Controllers\\DataTableController' => __DIR__ . '/../..' . '/app/Http/Controllers/DataTableController.php',
+        'App\\Http\\Controllers\\DocenteController' => __DIR__ . '/../..' . '/app/Http/Controllers/DocenteController.php',
         'App\\Http\\Controllers\\EjemploController' => __DIR__ . '/../..' . '/app/Http/Controllers/EjemploController.php',
         'App\\Http\\Controllers\\ExtraComponentsController' => __DIR__ . '/../..' . '/app/Http/Controllers/ExtraComponentsController.php',
         'App\\Http\\Controllers\\FormController' => __DIR__ . '/../..' . '/app/Http/Controllers/FormController.php',
@@ -570,6 +572,7 @@ class ComposerStaticInit3ea74f8ba45b7ba0443bbe3ed7a8894a
         'App\\Http\\Controllers\\PageController' => __DIR__ . '/../..' . '/app/Http/Controllers/PageController.php',
         'App\\Http\\Controllers\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserController.php',
         'App\\Http\\Controllers\\UserProfileController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserProfileController.php',
+        'App\\Http\\Controllers\\api\\PruebaTecnicaController' => __DIR__ . '/../..' . '/app/Http/Controllers/api/PruebaTecnicaController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
@@ -581,8 +584,11 @@ class ComposerStaticInit3ea74f8ba45b7ba0443bbe3ed7a8894a
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
         'App\\Http\\Requests\\AlumnoStoreRequest' => __DIR__ . '/../..' . '/app/Http/Requests/AlumnoStoreRequest.php',
+        'App\\Http\\Requests\\DocenteStoreRequest' => __DIR__ . '/../..' . '/app/Http/Requests/DocenteStoreRequest.php',
         'App\\Models\\Alumno' => __DIR__ . '/../..' . '/app/Models/Alumno.php',
+        'App\\Models\\AlumnoCurso' => __DIR__ . '/../..' . '/app/Models/AlumnoCurso.php',
         'App\\Models\\Curso' => __DIR__ . '/../..' . '/app/Models/Curso.php',
+        'App\\Models\\Docente' => __DIR__ . '/../..' . '/app/Models/Docente.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',

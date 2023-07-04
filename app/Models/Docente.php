@@ -10,7 +10,7 @@ class Docente extends Model
 {
     use HasFactory;
     use SoftDeletes;
-
+    public $timestamps = false;
     protected $table = 'docentes';
     protected $fillable = [
         'nombre_completo',
