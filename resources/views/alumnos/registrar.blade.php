@@ -19,16 +19,19 @@
         .custom-table th:nth-child(1),
         .custom-table td:nth-child(1) {
           width: 60%; /* Tamaño personalizado para la primera columna */
+          padding: 8px;
         }
 
         .custom-table th:nth-child(2),
         .custom-table td:nth-child(2) {
           width: 20%; /* Tamaño personalizado para la segunda columna */
+          padding: 8px;
         }
 
         .custom-table th:nth-child(3),
         .custom-table td:nth-child(3) {
           width: 20%; /* Tamaño personalizado para la tercera columna */
+          padding: 8px;
         }
 
         .black-text{
@@ -72,7 +75,7 @@
     </div>
 
     <div class="row">
-        <form class="col s12" action="" method="" id="formValidate" >
+        <form class="col s12" id="formValidate" onsubmit="return false" >
             <div id="tap-target" class="card card-tabs">
 
                 <div class="card-content margin-abajo">
@@ -105,7 +108,7 @@
                     <div class="row">
                         <div class="input-field col s3">
                             <select class="black-text  " id="periodos-v"  onchange="periodoCargado()"  >
-                                  <option value="" selected  class="black-text"  >Selecciona un periodo</option>
+                                  <option value="" selected disabled class="black-text"  >Selecciona un periodo</option>
                                   <option value="8" class="black-text" >Periodo VER</option>
                                   <option value="1" class="black-text" >Periodo I</option>
                                   <option value="2" class="black-text" >Periodo II</option>
@@ -119,8 +122,8 @@
                         </div>
                         <div class="input-field col s3"></div>
                         <div class="input-field col s3 bg-danger">
-                          <select class=""  id="turnos"  >
-                              <option value=""  selected>Selecciona un turno</option>
+                          <select class=""  id="turnos"  onchange="turnoCargado()" >
+                              <option value="" disabled  selected>Selecciona un turno</option>
                               <option value="1">Mañana</option>
                               <option value="2">Tarde</option>
                               <option value="3">Noche</option>
@@ -128,8 +131,8 @@
                           <label class="black-text">Turnos</label>
                         </div>
                         <div class="input-field col s3 bg-danger">
-                            <select class=""  id="materiasOfertadas"  >
-                                <option value=""   selected>Selecciona una materia</option>
+                            <select class=""  id="materiasOfertadas" onchange="cargarArticulo()" >
+                                <option value=""  disabled selected>Selecciona una materia</option>
                                 <option value="8">Programacion Web</option>
                                 <option value="1">Informatica 11</option>
                             </select>
@@ -152,15 +155,7 @@
                             </tr>
                           </thead>
                           <tbody class="black-text" id="contenidoAcademico" >
-                              <tr>
-                                <td>Alvin</td>
-                                <td>Eclair</td>
-                                <td>
-                                  <a class="btn red waves-effect waves-light border-round ">
-                                    <i class="material-icons left">delete</i>
-                                  </a>
-                                </td>
-                              </tr>
+                                <tr class="center-align"><td class="center-align" colspan="3">Sin articulos</td></tr>
                           </tbody>
                         </table>
                       </div>
@@ -168,7 +163,7 @@
                       <div class="input-field col s12">
                           <div class="row">
                                <div class="input-field col s3  ">
-                                  <select class=""  id="metodoPagos" required disabled>
+                                  <select class=""  id="metodoPagos" required>
                                       <option value="" disabled selected>Selecciona una opcion</option>
                                       <option value="1">Pago Efectivo</option>
                                       <option value="2">Saldo a favor</option>
@@ -180,7 +175,7 @@
                                   <label for="montoTotal" class="black-text">Totales</label>
                               </div>
                               <div class="input-field col s3">
-                                <input id="montoIngresado" type="number" class="validate" placeholder="0.00" required>
+                                <input id="montoIngresado" type="number" oninput="controlarTotal(event)" class="validate" placeholder="0.00" required>
                                 <label for="montoIngresado" class="black-text">Monto Ingresado</label>
                               </div>
                               <div class="input-field col s3">
@@ -191,7 +186,7 @@
                       </div>
 
                       <div class="input-field col s12 center-align">
-                          <button class="btn waves-effect waves-light green " type="submit" name="action">
+                          <button class="btn waves-effect waves-light " type="submit" onclick="realizarTransaccion()"   >
                                 Realizar Transferencia
                           </button>
                       </div>
@@ -215,10 +210,17 @@
 
     var componenteLista =  document.getElementById('listaEstudiantes');
     var componenteFiltrador = document.getElementById('filtrador');
+    var componenteTabla = document.getElementById('contenidoAcademico');
 
     var periodos =  document.getElementById('periodos-v');
     var turnos = document.getElementById('turnos');
     var materiasOfertadas = document.getElementById('materiasOfertadas');
+    var metodosPagos =  document.getElementById('metodoPagos');
+    var montoTotal = document.getElementById('montoTotal');
+    var montoIngresado = document.getElementById('montoIngresado');
+    var montoDevuelto = document.getElementById('montoDevuelto');
+
+    var lista_articulos_seleccionados = [];
 
     const personas =
     [
@@ -348,29 +350,24 @@
 
 </script>
 <script>
+
     document.addEventListener('DOMContentLoaded', function() {
+
         periodos.disabled = true;
-        var instance = M.FormSelect.getInstance(periodos);
-        instance.destroy();
         turnos.disabled = true;
+        materiasOfertadas.disabled = true;
+        metodosPagos.disabled = true;
+        var instance = M.FormSelect.getInstance(periodos);
         var instance_2 = M.FormSelect.getInstance(turnos);
+        var instance_3 = M.FormSelect.getInstance(materiasOfertadas);
+        var instance_4 = M.FormSelect.getInstance(metodosPagos);
+        /*         instance.destroy();
         instance_2.destroy();
+        instance_3.destroy(); */
     });
 
 </script>
 <script>
-
-    function renderizarListaEstudiantes(listaEstudiantes){
-        let contenido = '';
-        if( listaEstudiantes.length > 0  && (carnet.value.length>0 || nombres.value.length > 0 || apellidos.value.length>0) ){
-            listaEstudiantes.forEach(element => {
-                contenido+='<li class="collection-item seleccionable hover" onClick="seleccionarObjeto('+element.carnet.toString()+')" ><i class="material-icons">check</i>'+element.carnet +'  -  '+ element.nombres +'  '+ element.apellidos +'</li>';
-            });
-            componenteLista.innerHTML= contenido
-        }else{
-            componenteLista.innerHTML = '<li class="collection-item text-center">Sin resultados</li>';
-        }
-    }
 
     function eliminarClase(elemento,clase){
         elemento.classList.remove(clase);
@@ -385,6 +382,11 @@
         M.FormSelect.init(elemento);
     }
 
+    function desabilitarControl(elemento){
+        elemento.disabled = false;
+        M.FormSelect.init(elemento);
+    }
+
     function seleccionarObjeto(carnetParametro){
         let resultado = personas.find(persona => persona.carnet == carnetParametro);
         carnet.value = resultado.carnet.toString()
@@ -393,12 +395,111 @@
         agregarClase(componenteFiltrador,'hide')
         habilitarControl(periodos)
 
+        cargarPeriodos()
+    }
+
+    function cargarPeriodos(){
+        // fetch pàra obtener periodos o meses de la base de datos y cargarlo al select de periodos
     }
 
     function periodoCargado(){
+        let idPeriodo = periodos.value
+        // fetch pàra obtener los turnos de la base de datos y cargarlos al select de  turnos
         habilitarControl(turnos)
     }
 
-</script>
+    function turnoCargado(){
+        let idTurno = turnos.value
+        // fetch para obtener las materias en el turno seleccionado y cargarlo en el select de materias ofertadas
+        habilitarControl(materiasOfertadas)
+    }
 
+    var aux = 0;
+    function cargarArticulo(){
+        // cargar la opcion seleccionada en la tabla
+        lista_articulos_seleccionados.push({
+            id:aux,
+            articulo :'Ejemplo - '+aux,
+            precio :  Math.floor(Math.random() * 100) + 1 ,
+        })
+        aux+=1
+        // renderizar nueva lista
+        renderizarTabla(lista_articulos_seleccionados)
+        calcularTotales(lista_articulos_seleccionados)
+    }
+
+    function eliminarElemento(idArticulo){
+        var indice = lista_articulos_seleccionados.findIndex(function(articulo) {
+            return articulo.id == idArticulo;
+        });
+        if (indice !== -1) {
+            lista_articulos_seleccionados.splice(indice, 1);
+            renderizarTabla(lista_articulos_seleccionados)
+            calcularTotales(lista_articulos_seleccionados)
+        }
+    }
+
+    function calcularTotales(listaArticulos){
+        var total = listaArticulos.reduce(function(acumulador, producto) {
+            return acumulador + producto.precio;
+        }, 0);
+        habilitarControl(metodosPagos)
+        montoTotal.value = total;
+    }
+
+    function controlarTotal(e){
+        let total = Number(montoTotal.value);
+        let ingresado = Number(montoIngresado.value)
+        montoDevuelto.value = ( ingresado-total )+' bs.'
+    }
+
+</script>
+<script>
+
+    function renderizarListaEstudiantes(listaEstudiantes){
+        let contenido = '';
+        if( listaEstudiantes.length > 0  && (carnet.value.length>0 || nombres.value.length > 0 || apellidos.value.length>0) ){
+            listaEstudiantes.forEach(element => {
+                contenido+='<li class="collection-item seleccionable hover" onClick="seleccionarObjeto('+element.carnet.toString()+')" ><i class="material-icons">check</i>'+element.carnet +'  -  '+ element.nombres +'  '+ element.apellidos +'</li>';
+            });
+            componenteLista.innerHTML= contenido
+        }else{
+            componenteLista.innerHTML = '<li class="collection-item center-align">Sin resultados</li>';
+        }
+    }
+
+    function renderizarTabla(listaArticulos){
+        let contenido = '';
+        if( listaArticulos.length > 0  )
+        {
+            listaArticulos.forEach(element => {
+                contenido+='<tr>'+
+                            '<td>'+element.articulo+'</td>'+
+                            '<td>'+element.precio+' bs.</td>'+
+                            '<td>'+
+                                '<a class="btn red waves-effect waves-light border-round " onClick="eliminarElemento('+element.id+')" >'+
+                                '<i class="material-icons left">delete</i>'+
+                                '</a>'+
+                            '</td>'+
+                            '</tr>';
+            });
+            componenteTabla.innerHTML= contenido
+        }else{
+            componenteTabla.innerHTML = '<tr class="center-align"><td class="center-align" colspan="3">Sin articulos</td></tr>';
+        }
+    }
+
+    function realizarTransaccion(){
+        //event.preventDefault();
+        let total = Number(montoTotal.value);
+        let ingresado = Number(montoIngresado.value)
+        if( total != ingresado){
+            M.toast({html: 'X  El monto ingresado es menor al total.... Intente nuevamente!', classes: 'rounded red waves-light '});
+        }else{
+            M.toast({html: '!Transaccion realizada correctaemnte!', classes: 'rounded green waves-light '});
+        }
+        return false;
+    }
+
+</script>
 @endsection
