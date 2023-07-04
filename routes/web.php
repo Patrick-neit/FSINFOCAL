@@ -190,6 +190,14 @@ Route::group(['middleware' => 'web'], function () {
     Route::put('/alumnos/{id}', [App\Http\Controllers\AlumnoController::class, 'update'])->name('alumnos.update');
     Route::get('/alumnos/show/{id}', [App\Http\Controllers\AlumnoController::class, 'show'])->name('alumnos.show');
     Route::delete('/alumnos', [\App\Http\Controllers\AlumnoController::class, 'destroy'])->name('alumnos.destroy');
+
+
+
+
+});
+
+Route::group(['middleware'=>'web'],function(){
+    Route::get('/ventas/registrar', [\App\Http\Controllers\AlumnoController::class, 'registrar_alumnos'])->name('ventas.registrar_alumnos');
 });
 
 /* Rutas Docentes */

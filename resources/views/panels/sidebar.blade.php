@@ -142,6 +142,12 @@
                     "name" => "Alumnos Registrados",
                     "slug" => "alumnos"
                 ),
+                 array(
+                    "url" =>trim( parse_url(route('ventas.registrar_alumnos'), PHP_URL_PATH) ,'/'),
+                    "i18n" => "Registrar Ventas",
+                    "name" => "Registrar Ventas",
+                    "slug" => "ventas"
+                ),
                 array(
                     "url" => "alumnos.create",
                     "i18n" => "Cards Advance",
