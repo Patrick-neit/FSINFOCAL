@@ -238,17 +238,16 @@ registrarDocenteButton.addEventListener("click", function () {
         });
 });
 
-/* Eliminar Alumno */
+/* Eliminar Docente */
 function eliminar(e) {
-    console.log(e);
-    fetch(ruta_eliminar_alumno, {
+    fetch(ruta_eliminar_docente, {
         method: "DELETE",
         headers: {
             "Content-Type": "application/json",
             "X-CSRF-Token": csrfToken,
         },
         body: JSON.stringify({
-            alumno_id: e
+            docente_id: e
         })
     }).then(response => response.json())
             .then(data => {
@@ -257,13 +256,21 @@ function eliminar(e) {
                         html: data.response,
                         classes: 'rounded', displayLength: 2000,
                         completeCallback: function () {
-                            window.location.href = ruta_index_alumno
+                            window.location.href = ruta_index_docente
                         }
+                    })
+                }else{
+                    M.toast({
+                        html: data.response,
+                        classes: 'rounded', displayLength: 2000,
                     })
                 }
             })
             .catch(error => {
-                console.log('error');
+                M.toast({
+                    html:  error,
+                    classes: 'rounded', displayLength: 2000,
+                })
             })
 }
 

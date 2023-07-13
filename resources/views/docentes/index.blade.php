@@ -116,7 +116,13 @@
                     alt="avatar"></span></td>
               <td>{{$docente->nombre_completo}} </td>
               <td>+591 {{$docente->telefono}}</td>
-              <td> {{$docente->estado}}</td>
+              @if ($docente->estado == 'A')
+              <td><span class="chip lighten-5 green green-text">ACTIVO</span></td>
+              @elseif($docente->estado = 'I')
+              <td><span class="chip lighten-5 red red-text">INACTIVO</span></td>
+              @else
+              <td><span class="chip lighten-5 orange orange-text">SUSPENDIDO</span></td>
+              @endif
               <td><span class="favorite"><i class="material-icons"> star_border </i></span></td>
               <td><span>
                 <a onclick="eliminar('{{$docente->id}}')">

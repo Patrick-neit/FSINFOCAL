@@ -210,3 +210,40 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/docentes/show/{id}', [App\Http\Controllers\DocenteController::class, 'show'])->name('docentes.show');
     Route::delete('/docentes', [\App\Http\Controllers\DocenteController::class, 'destroy'])->name('docentes.destroy');
 });
+
+/* Rutas Empresas */
+Route::group(['middleware' => 'web'], function () {
+    Route::get('/empresas', [App\Http\Controllers\EmpresaController::class, 'index'])->name('empresas.index');
+    Route::get('/empresas/create', [App\Http\Controllers\EmpresaController::class, 'create'])->name('empresas.create');
+    Route::post('/empresas', [App\Http\Controllers\EmpresaController::class, 'store'])->name('empresas.store');
+    Route::get('/empresas/edit/{id}', [App\Http\Controllers\EmpresaController::class, 'edit'])->name('empresas.edit');
+    Route::put('/empresas/{id}', [App\Http\Controllers\EmpresaController::class, 'update'])->name('empresas.update');
+    Route::get('/empresas/show/{id}', [App\Http\Controllers\EmpresaController::class, 'show'])->name('empresas.show');
+    Route::delete('/empresas', [\App\Http\Controllers\EmpresaController::class, 'destroy'])->name('empresas.destroy');
+});
+
+/* Rutas Sucursales */
+Route::group(['middleware' => 'web'], function () {
+    Route::get('/sucursales', [App\Http\Controllers\SucursalController::class, 'index'])->name('sucursales.index');
+    Route::get('/sucursales/create', [App\Http\Controllers\SucursalController::class, 'create'])->name('sucursales.create');
+    Route::post('/sucursales', [App\Http\Controllers\SucursalController::class, 'store'])->name('sucursales.store');
+    Route::get('/sucursales/edit/{id}', [App\Http\Controllers\SucursalController::class, 'edit'])->name('sucursales.edit');
+    Route::put('/sucursales/{id}', [App\Http\Controllers\SucursalController::class, 'update'])->name('sucursales.update');
+    Route::get('/sucursales/show/{id}', [App\Http\Controllers\SucursalController::class, 'show'])->name('sucursales.show');
+    Route::delete('/sucursales', [\App\Http\Controllers\SucursalController::class, 'destroy'])->name('sucursales.destroy');
+});
+
+/* Rutas Configuracion Impuesto */
+Route::group(['middleware' => 'web'], function () {
+    Route::get('/configuraciones_impuestos', [App\Http\Controllers\ConfiguracionImpuestoController::class, 'index'])->name('configuraciones_impuestos.index');
+    Route::get('/configuraciones_impuestos/create', [App\Http\Controllers\ConfiguracionImpuestoController::class, 'create'])->name('configuraciones_impuestos.create');
+    Route::post('/configuraciones_impuestos', [App\Http\Controllers\ConfiguracionImpuestoController::class, 'store'])->name('configuraciones_impuestos.store');
+    Route::get('/configuraciones_impuestos/edit/{id}', [App\Http\Controllers\ConfiguracionImpuestoController::class, 'edit'])->name('configuraciones_impuestos.edit');
+    Route::put('/configuraciones_impuestos/{id}', [App\Http\Controllers\ConfiguracionImpuestoController::class, 'update'])->name('configuraciones_impuestos.update');
+    Route::get('/configuraciones_impuestos/show/{id}', [App\Http\Controllers\ConfiguracionImpuestoController::class, 'show'])->name('configuraciones_impuestos.show');
+    Route::delete('/configuraciones_impuestos', [\App\Http\Controllers\ConfiguracionImpuestoController::class, 'destroy'])->name('configuraciones_impuestos.destroy');
+});
+
+
+
+

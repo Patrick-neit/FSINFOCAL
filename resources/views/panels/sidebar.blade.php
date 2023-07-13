@@ -163,6 +163,55 @@
             )
         ),
         array(
+        "navheader"=> "Modulo Configuraciones",
+        "icon"=> "more_horiz"
+        ),
+        array(
+            "url" => "javascript:void(0)",
+            "i18n" => "Configuraciones",
+            "name" => "Configuraciones",
+            "icon" => "storage",
+            "slug" => "Configuraciones",
+            "class"=> "collapsible-header waves-effect waves-cyan",
+            "submenu" => array(
+                array(
+                    "url" =>trim( parse_url(route('configuraciones_impuestos.index'), PHP_URL_PATH) ,'/'),
+                    "i18n" => "Configuracion impuesto",
+                    "name" => "Configuracion impuesto",
+                    "slug" => "configuraciones"
+                ),
+
+            )
+        ),
+        array(
+        "navheader"=> "Modulo Empresa",
+        "icon"=> "more_horiz"
+        ),
+        array(
+            "url" => "javascript:void(0)",
+            "i18n" => "Empresas",
+            "name" => "Empresas",
+            "icon" => "business_center",
+            "slug" => "Empresas",
+            "class"=> "collapsible-header waves-effect waves-cyan",
+            "submenu" => array(
+                array(
+                    "url" =>trim(parse_url(route('empresas.index'), PHP_URL_PATH) ,'/'),
+                    "i18n" => "Empresas ",
+                    "name" => "Empresas ",
+                    "slug" => "empresas"
+                ),
+
+                array(
+                    "url" =>trim( parse_url(route('sucursales.index'), PHP_URL_PATH) ,'/'),
+                    "i18n" => "Sucursales ",
+                    "name" => "Sucursales ",
+                    "slug" => "sucursales"
+                ),
+
+            )
+        ),
+        array(
         "navheader"=> "Modulo Reportes",
         "icon"=> "more_horiz"
         ),
@@ -194,7 +243,7 @@
                 )
             )
         ),
-        array(
+       /*  array(
             "url" => "javascript:void(0)",
             "i18n" => "Cards",
             "name" => "Cards",
@@ -221,7 +270,7 @@
                     "slug" => "cards-extended"
                 )
             )
-        ),
+        ), */
         )
     );
 

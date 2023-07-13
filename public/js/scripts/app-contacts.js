@@ -256,10 +256,18 @@ function eliminar(e) {
                             window.location.href = ruta_index_alumno
                         }
                     })
+                }else{
+                    M.toast({
+                        html: data.response,
+                        classes: 'rounded', displayLength: 2000,
+                    })
                 }
             })
             .catch(error => {
-                console.log('error');
+                M.toast({
+                    html:  error,
+                    classes: 'rounded', displayLength: 2000,
+                })
             })
 }
 

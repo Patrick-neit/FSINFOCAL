@@ -52,4 +52,26 @@ class DocenteController extends Controller
             ],500);
         }
     }
+
+    public function destroy(Request $request)
+    {
+        $docente = Docente::find($request->docente_id);
+        $docente->delete();
+
+        if ($docente->trashed()) {
+
+            return response()->json([
+                'success' => true,
+                'response' => 'Ha Sido Eliminado con Exito'
+            ]);
+
+        } else {
+
+            return response()->json([
+                'success' => true,
+                'response' => 'Something Went Wrong!'
+            ]);
+        }
+        return redirect()->route('docentes.index');
+    }
 }
