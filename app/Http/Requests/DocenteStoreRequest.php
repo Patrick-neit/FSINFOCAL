@@ -24,10 +24,10 @@ class DocenteStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'first_name'          => 'required|string',
+            'first_name'         => 'required|string',
             'matricula_docente'  => 'required|string',
             'phone_docente'      => 'required|string|max:8',
-            'direccion'                => 'required|string',
+            'direccion'          => 'required|string',
             'estado'                   => 'required|string',
         ];
     }

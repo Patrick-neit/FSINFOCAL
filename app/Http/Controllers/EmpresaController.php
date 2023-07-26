@@ -23,12 +23,12 @@ class EmpresaController extends Controller
         try {
 
             $enterprise = new Empresa();
-            $enterprise->nombre_empresa = $request->nombre_empresa;
+            $enterprise->nombre_empresa  = $request->nombre_empresa;
             $enterprise->nro_nit_empresa = $request->nro_nit_empresa;
-            $enterprise->direccion = $request->direccion;
-            $enterprise->telefono = $request->telefono;
-            $enterprise->correo = $request->correo;
-            $enterprise->logo = $request->logo;
+            $enterprise->direccion       = $request->direccion;
+            $enterprise->telefono        = $request->telefono;
+            $enterprise->correo          = $request->correo;
+            $enterprise->logo            = $request->logo;
             $enterprise->representante_legal = $request->representante_legal;
             $enterprise->save();
 
