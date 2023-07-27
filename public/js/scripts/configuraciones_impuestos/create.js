@@ -124,6 +124,8 @@ const csrfToken = document.head.querySelector(
 
   let registrarConfiguracionImpuestoButton = document.getElementById('registrarConfiguracionImpuestoButton');
   let nombre_sistema         = document.getElementById('nombre_sistema');
+  let modalidad         = document.getElementById('modalidad');
+  let ambiente         = document.getElementById('ambiente');
   let codigo_sistema        = document.getElementById('codigo_sistema');
   let token_sistema                 = document.getElementById('token_sistema');
   let empresa_id               = document.getElementById('empresa_id');
@@ -139,6 +141,8 @@ const csrfToken = document.head.querySelector(
         },
         body: JSON.stringify({
             nombre_sistema: nombre_sistema.value,
+            modalidad: modalidad.value,
+            ambiente: ambiente.value,
             codigo_sistema: codigo_sistema.value,
             token_sistema : token_sistema.value,
             empresa_id: empresa_id.value,

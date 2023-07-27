@@ -10,7 +10,6 @@ class Alumno extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    public $timestamps = false;
     protected $table = 'alumnos';
 
     protected $fillable =

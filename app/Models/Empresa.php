@@ -30,4 +30,8 @@ class Empresa extends Model
     {
         return $this->hasMany(Sucursal::class);
     }
+
+    public function users(){
+        return $this->belongsToMany(User::class);
+    }
 }

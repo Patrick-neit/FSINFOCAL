@@ -91,6 +91,7 @@
                                     <th>id</th>
                                     <th>Nombre Sistema</th>
                                     <th>Fecha Registro</th>
+                                    <th>Ambiente</th>
                                     <th>Codigo Sistema</th>
                                     <th>Empresa Asociada</th>
                                     <th>edit</th>
@@ -105,6 +106,11 @@
                                         <td>{{ $taxConfiguration->id }}</td>
                                         <td><a href="{{ asset('page-users-view') }}">{{ $taxConfiguration->nombre_sistema }}</a></td>
                                         <td>{{ $taxConfiguration->created_at }}</td>
+                                        @if ($taxConfiguration->ambiente == 1)
+                                        <td><span class="chip lighten-5 green green-text">Produccion</span></td>
+                                        @else
+                                        <td><span class="chip lighten-5 red red-text">Pruebas</span></td>
+                                        @endif
                                         <td>{{ $taxConfiguration->codigo_sistema }}</td>
                                         <td> <span class="green-text">{{ $taxConfiguration->empresa->nombre_empresa }}</span>
                                             </span> </td>

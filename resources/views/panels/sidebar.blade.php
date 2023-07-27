@@ -175,6 +175,13 @@
             "class"=> "collapsible-header waves-effect waves-cyan",
             "submenu" => array(
                 array(
+                    "url" =>trim( parse_url(route('users.index'), PHP_URL_PATH) ,'/'),
+                    "i18n" => "Usuarios Sistema",
+                    "name" => "Usuarios Sistema",
+                    "slug" => "usuarios"
+                ),
+
+                array(
                     "url" =>trim( parse_url(route('configuraciones_impuestos.index'), PHP_URL_PATH) ,'/'),
                     "i18n" => "Configuracion impuesto",
                     "name" => "Configuracion impuesto",

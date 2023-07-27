@@ -25,6 +25,8 @@ class ConfiguracionImpuestoController extends Controller
 
             $taxesConfiguration = new ConfiguracionImpuesto();
             $taxesConfiguration->nombre_sistema = $request->nombre_sistema;
+            $taxesConfiguration->ambiente = $request->ambiente;
+            $taxesConfiguration->modalidad = $request->modalidad;
             $taxesConfiguration->codigo_sistema = $request->codigo_sistema;
             $taxesConfiguration->token_sistema = $request->token_sistema;
             $taxesConfiguration->empresa_id = $request->empresa_id;

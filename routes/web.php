@@ -191,9 +191,6 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/alumnos/show/{id}', [App\Http\Controllers\AlumnoController::class, 'show'])->name('alumnos.show');
     Route::delete('/alumnos', [\App\Http\Controllers\AlumnoController::class, 'destroy'])->name('alumnos.destroy');
 
-
-
-
 });
 
 Route::group(['middleware'=>'web'],function(){
@@ -242,6 +239,14 @@ Route::group(['middleware' => 'web'], function () {
     Route::put('/configuraciones_impuestos/{id}', [App\Http\Controllers\ConfiguracionImpuestoController::class, 'update'])->name('configuraciones_impuestos.update');
     Route::get('/configuraciones_impuestos/show/{id}', [App\Http\Controllers\ConfiguracionImpuestoController::class, 'show'])->name('configuraciones_impuestos.show');
     Route::delete('/configuraciones_impuestos', [\App\Http\Controllers\ConfiguracionImpuestoController::class, 'destroy'])->name('configuraciones_impuestos.destroy');
+});
+
+Route::group([
+    'prefix' => 'users',
+    'controller'=> UserController::class,
+], function(){
+    Route::get('index', 'index' )->name('users.index');
+    Route::get('asignarEmpresaUser', 'asignarEmpresaUser' )->name('users.asignarEmpresaUser');
 });
 
 

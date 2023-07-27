@@ -15,6 +15,8 @@ class ConfiguracionImpuesto extends Model
     protected $fillable =
     [
         'nombre_sistema',
+        'ambiente',
+        'modalidad',
         'codigo_sistema',
         'token_sistema',
         'empresa_id'

@@ -59,9 +59,8 @@
                                 <div class="col s12 m6">
                                     <div class="row">
                                         <div class="col s12 input-field">
-                                            <input id="nombre_sistema" name="nombre_sistema" type="text"
-                                                class="validate" value="{{ old('nombre_sistema') }}"
-                                                data-error=".errorTxt1" required>
+                                            <input id="nombre_sistema" name="nombre_sistema" type="text" class="validate"
+                                                value="{{ old('nombre_sistema') }}" data-error=".errorTxt1" required>
                                             <label for="nombre_sistema">Nombre Sistema</label>
                                             <small class="errorTxt1"></small>
                                         </div>
@@ -77,20 +76,47 @@
 
                                 <div class="col s12 m6">
                                     <div class="row">
-                                        <div class="col s12 input-field">
-                                            <textarea id="token_sistema" name="token_sistema" class="materialize-textarea"></textarea>
-                                                  <label for="token_sistema">Token Sistema</label>
-                                            <small class="errorTxt3"></small>
-                                        </div>
-                                        <div class="col s12 input-field">
-                                            <select name="empresa_id" id="empresa_id" class="form-select">
-                                                @foreach ($enterprises as $enterprise )
-                                                <option value="{{$enterprise->id}}">{{$enterprise->nombre_empresa}}</option>
-                                                @endforeach
+                                        <div class="input-field col s12">
+                                            <select id="modalidad">
+                                                <option value="" disabled selected>Choose your option</option>
+                                                <option value="1">Fuera Linea</option>
+                                                <option value="2">Linea</option>
                                             </select>
-                                            <label>Asociar Empresa</label>
+                                            <label> Selecciona Modalidad</label>
                                         </div>
 
+                                        <div class="input-field col s12">
+                                            <select id="ambiente">
+                                                <option value="" disabled selected>Choose your option</option>
+                                                <option value="1">Produccion </option>
+                                                <option value="2">Pruebas</option>
+                                            </select>
+                                            <label> Selecciona Ambiente</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col s12 m6">
+                                    <div class="row">
+                                        <div class="col s12 input-field">
+                                            <textarea id="token_sistema" name="token_sistema" class="materialize-textarea"></textarea>
+                                            <label for="token_sistema">Token Sistema</label>
+                                            <small class="errorTxt3"></small>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="col s12 m6">
+                                    <div class="col s12 input-field">
+                                        <select name="empresa_id" id="empresa_id" class="form-select">
+                                            @foreach ($enterprises as $enterprise)
+                                                <option value="{{ $enterprise->id }}">{{ $enterprise->nombre_empresa }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        <label>Asociar Empresa</label>
                                     </div>
                                 </div>
 
