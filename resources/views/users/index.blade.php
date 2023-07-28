@@ -99,7 +99,8 @@
               <th>Full Name</th>
               <th>Email</th>
               <th>Empresa Asignada</th>
-              <th>Favorite</th>
+
+              <th>Asignar Empresa</th>
               <th>Delete</th>
             </tr>
           </thead>
@@ -116,10 +117,14 @@
                     alt="avatar"></span></td>
               <td>{{$user->name}} </td>
               <td>{{$user->email}}</td>
-              <td><span class="chip lighten-5 orange orange-text">S/A</span></td>
+              <td><span class="chip lighten-5 orange orange-text">{{$user->empresas[0]->nombre_empresa}}</span></td>
 
+              <td><span>
+                <a href="{{route('users.asignarEmpresaUser',$user->id)}}">
+                    <i class="material-icons business_center">business_center</i>
+                </a>
 
-              <td><span class="favorite"><i class="material-icons"> star_border </i></span></td>
+            </span></td>
               <td><span>
                 <a onclick="eliminar('{{$user->id}}')">
                     <i class="material-icons delete">delete_outline</i>

@@ -132,7 +132,7 @@ const csrfToken = document.head.querySelector(
 
   registrarEmpresaButton.addEventListener("click", function(event){
     event.preventDefault();
-    fetch(ruta_guardar_empresa,{
+    fetch(ruta_obtener_cuis,{
         method: "POST",
         headers: {
             "Content-Type": "application/json",

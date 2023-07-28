@@ -51,4 +51,26 @@ class UserController extends Controller
 
         return view('users.asignarEmpresaUser', compact('user', 'empresas'));
     }
+
+    public function saveAsignarEmpresaUser(Request $request)
+    {
+        try {
+
+            $user = User::find($request->user_id);
+            $user->empresas()->sync($request->empresas);
+
+            $user->save();
+            if ($user->save()) {
+                return responseJson('Empresa Asignada Exitosamente', $user->empresas , 200);
+            }else{
+                return responseJson('Something went Wrong', $user->empresas,400);
+            }
+
+        } catch (\Exception $e) {
+            return responseJson('Server Error',[
+                'message'=> $e->getMessage(),
+                'code'=> $e->getCode(),
+            ],500);
+        }
+    }
 }

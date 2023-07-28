@@ -23,7 +23,13 @@ class Alumno extends Model
         'celular',
         'sexo',
         'email',
-        'beca'
+        'beca',
+        'empresa_id'
     ];
+
+    public function empresa()
+    {
+        return $this->belongsTo(Empresa::class);
+    }
 
 }

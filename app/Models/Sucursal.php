@@ -25,4 +25,9 @@ class Sucursal extends Model
     {
         return $this->belongsTo(Empresa::class);
     }
+
+    public function impuestos_cuis()
+    {
+        return $this->hasMany(ImpuestoCuis::class);
+    }
 }

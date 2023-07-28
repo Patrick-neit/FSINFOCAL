@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AlumnoStoreRequest;
 use App\Models\Alumno;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AlumnoController extends Controller
 {
@@ -29,7 +30,7 @@ class AlumnoController extends Controller
     }
 
 
-    
+
     public function store(AlumnoStoreRequest $request)
     {
         try {
@@ -44,6 +45,7 @@ class AlumnoController extends Controller
             $alumno->sexo = $request->sexo;
             $alumno->email = $request->email;
             $alumno->beca = $request->beca;
+            $alumno->empresa_id = Auth::user()->empresas[0]->id;
             $alumno->save();
 
             if ($alumno->save()) {

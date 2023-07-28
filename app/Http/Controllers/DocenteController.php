@@ -6,6 +6,7 @@ use App\Http\Requests\DocenteStoreRequest;
 use App\Models\Docente;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DocenteController extends Controller
 {
@@ -32,6 +33,7 @@ class DocenteController extends Controller
             $docente->telefono          = $request->phone_docente;
             $docente->direccion         = $request->direccion;
             $docente->estado            = $request->estado;
+            $docente->empresa_id        = Auth::user()->empresas[0]->id;
             $docente->save();
 
             if ($docente->save()) {

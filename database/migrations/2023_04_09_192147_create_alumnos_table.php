@@ -25,7 +25,7 @@ return new class extends Migration
             $table->char('sexo')->nullable();
             $table->string('email');
             $table->char('beca')->nullable(); /* Parcial||Total */
-
+            $table->unsignedBigInteger('empresa_id');
             $table->softDeletes();
             $table->timestamps();
         });

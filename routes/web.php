@@ -21,6 +21,7 @@ use App\Http\Controllers\DataTableController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\ChartController;
 use App\Http\Controllers\EjemploController;
+use App\Http\Controllers\ImpuestoCuisController;
 
 /*
 |--------------------------------------------------------------------------
@@ -246,8 +247,18 @@ Route::group([
     'controller'=> UserController::class,
 ], function(){
     Route::get('index', 'index' )->name('users.index');
-    Route::get('asignarEmpresaUser', 'asignarEmpresaUser' )->name('users.asignarEmpresaUser');
+    Route::get('asignarEmpresaUser/{id}', 'asignarEmpresaUser' )->name('users.asignarEmpresaUser');
+    Route::post('saveAsignarEmpresaUser', 'saveAsignarEmpresaUser')->name('users.saveAsignarEmpresaUser');
 });
+
+Route::group([
+    'prefix' => 'cuis',
+    'controller'=> ImpuestoCuisController::class,
+], function(){
+    Route::post('store', 'store')->name('cuis.store');
+});
+
+
 
 
 

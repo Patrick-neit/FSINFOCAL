@@ -34,4 +34,14 @@ class Empresa extends Model
     public function users(){
         return $this->belongsToMany(User::class);
     }
+
+    public function alumnos()
+    {
+        return $this->hasMany(Alumno::class);
+    }
+
+    public function docentes()
+    {
+        return $this->hasMany(Docente::class);
+    }
 }

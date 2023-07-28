@@ -17,6 +17,14 @@ class Docente extends Model
         'fecha_incorporacion',
         'telefono',
         'direccion',
-        'estado'
+        'estado',
+        'empresa_id'
     ];
+
+    public function empresa()
+    {
+        return $this->belongsTo(Empresa::class);
+    }
+
+
 }

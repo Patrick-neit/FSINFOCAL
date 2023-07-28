@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('telefono');
             $table->string('direccion');
             $table->char('estado')->comment('A=Activo|I=Inactivo|S=Suspendido');
+            $table->unsignedBigInteger('empresa_id');
             $table->softDeletes();
             $table->timestamps();
         });
