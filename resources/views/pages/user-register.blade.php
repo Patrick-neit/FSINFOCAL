@@ -23,8 +23,8 @@
       <div class="row margin">
         <div class="input-field col s12">
           <i class="material-icons prefix pt-2">person_outline</i>
-          <input id="username" type="text">
-          <label for="username" class="center-align">Username</label>
+          <input id="name" type="text">
+          <label for="name" class="center-align">Username</label>
         </div>
       </div>
       <div class="row margin">
@@ -50,7 +50,7 @@
       </div>
       <div class="row">
         <div class="input-field col s12">
-          <a href="{{asset('/')}}"
+          <a id="registrarUser"
             class="btn waves-effect waves-light border-round gradient-45deg-purple-deep-orange col s12">Register</a>
         </div>
       </div>
@@ -63,3 +63,14 @@
   </div>
 </div>
 @endsection
+
+{{-- page scripts --}}
+@section('page-script')
+<script src="{{asset('js/scripts/user_auth/userAuthentification.js')}}"></script>
+<script>
+    let ruta_registrar_user = "{{route('autentification.register')}}";
+    let ruta_index_login   = "{{route('autentification.userLogin')}}";
+
+</script>
+@endsection
+

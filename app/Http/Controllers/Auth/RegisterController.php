@@ -70,14 +70,4 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
     }
-
-    // Register
-    public function showRegistrationForm()
-    {
-        $pageConfigs = ['bodyCustomClass' => 'register-bg', 'isCustomizer' => false];
-
-        return view('/auth/register', [
-            'pageConfigs' => $pageConfigs
-        ]);
-    }
 }

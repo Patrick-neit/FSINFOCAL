@@ -13,8 +13,7 @@
 @section('content')
 <div id="login-page" class="row">
   <div class="col s12 m6 l4 z-depth-4 card-panel border-radius-6 login-card bg-opacity-8">
-    <form class="login-form" method="POST" action="{{ route('login') }}">
-      @csrf
+
       <div class="row">
         <div class="input-field col s12">
           <h5 class="ml-4">{{ __('Sign in') }}</h5>
@@ -58,7 +57,7 @@
       </div>
       <div class="row">
         <div class="input-field col s12">
-          <button type="submit" class="btn waves-effect waves-light border-round gradient-45deg-purple-deep-orange col s12">
+          <button id="loginUser" class="btn waves-effect waves-light border-round gradient-45deg-purple-deep-orange col s12">
             Login
           </button>
         </div>
@@ -73,7 +72,19 @@
           </p>
         </div>
       </div>
-    </form>
+
   </div>
 </div>
 @endsection
+
+{{-- page scripts --}}
+@section('page-script')
+<script src="{{asset('js/scripts/user_auth/userLoginAuthentification.js')}}"></script>
+<script>
+    let ruta_logear_user = "{{route('autentification.login')}}";
+    let ruta_index_dashboard   = "{{route('dashboard.dashboardModern')}}";
+
+</script>
+@endsection
+
+

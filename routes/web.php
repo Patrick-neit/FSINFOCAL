@@ -38,14 +38,34 @@ Auth::routes(['verify' => true]);
 
 // Dashboard Route
 // Route::get('/', [DashboardController::class, 'dashboardModern'])->middleware('verified');
-Route::get('/', [DashboardController::class, 'dashboardModern']);
+/* Route::get('/', [DashboardController::class, 'dashboardModern']); */
+// Authentication Route
+Route::get('/', [AuthenticationController::class, 'userLogin']);
+Route::get('/user-register', [AuthenticationController::class, 'userRegister']);
+Route::get('/user-forgot-password', [AuthenticationController::class, 'forgotPassword']);
+Route::get('/user-lock-screen', [AuthenticationController::class, 'lockScreen']);
+
+Route::group([
+    'prefix' => 'autentification',
+    'controller'=> AuthenticationController::class,
+], function(){
+    Route::post('login', 'login')->name('autentification.login');
+    Route::post('register', 'register')->name('autentification.register');
+    Route::get('userLogin', 'userLogin' )->name('autentification.userLogin'); //View
+});
+
+Route::group([
+    'prefix' => 'dashboard',
+    'controller'=> DashboardController::class,
+], function(){
+    Route::get('dashboardModern', 'dashboardModern')->name('dashboard.dashboardModern') ;
+    Route::get('dashboardEcommerce', 'dashboardEcommerce');
+    Route::get('dashboardAnalytics', 'dashboardAnalytics');
+});
 
 
 
 
-Route::get('/modern', [DashboardController::class, 'dashboardModern']);
-Route::get('/ecommerce', [DashboardController::class, 'dashboardEcommerce']);
-Route::get('/analytics', [DashboardController::class, 'dashboardAnalytics']);
 
 // Application Route
 Route::get('/app-email', [ApplicationController::class, 'emailApp']);
@@ -89,11 +109,7 @@ Route::get('/page-users-list', [UserController::class, 'usersList']);
 Route::get('/page-users-view', [UserController::class, 'usersView']);
 Route::get('/page-users-edit', [UserController::class, 'usersEdit']);
 
-// Authentication Route
-Route::get('/user-login', [AuthenticationController::class, 'userLogin']);
-Route::get('/user-register', [AuthenticationController::class, 'userRegister']);
-Route::get('/user-forgot-password', [AuthenticationController::class, 'forgotPassword']);
-Route::get('/user-lock-screen', [AuthenticationController::class, 'lockScreen']);
+
 
 // Misc Route
 Route::get('/page-404', [MiscController::class, 'page404']);
@@ -257,9 +273,5 @@ Route::group([
 ], function(){
     Route::post('store', 'store')->name('cuis.store');
 });
-
-
-
-
 
 

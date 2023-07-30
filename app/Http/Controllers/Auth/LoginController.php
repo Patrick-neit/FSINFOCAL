@@ -37,14 +37,4 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
-
-    // Login
-    public function showLoginForm()
-    {
-        $pageConfigs = ['bodyCustomClass' => 'login-bg', 'isCustomizer' => false];
-
-        return view('/auth/login', [
-            'pageConfigs' => $pageConfigs
-        ]);
-    }
 }
