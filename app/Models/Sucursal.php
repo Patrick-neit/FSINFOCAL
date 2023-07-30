@@ -30,4 +30,10 @@ class Sucursal extends Model
     {
         return $this->hasMany(ImpuestoCuis::class);
     }
+
+    public function puntos_ventas()
+    {
+        return $this->hasMany(PuntoVenta::class);
+    }
+
 }

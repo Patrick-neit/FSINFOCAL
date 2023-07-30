@@ -6,17 +6,18 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class ImpuestoCuis extends Model
+class ImpuestoCufd extends Model
 {
     use HasFactory;
     use SoftDeletes;
-
-    protected $table = 'impuestos_cuis';
+    protected $table = 'impuestos_cufds';
     protected $fillable =
     [
         'fecha_generado',
         'fecha_vencimiento',
-        'codigo_cuis',
+        'codigo_cufd',
+        'codigo_control',
+        'direccion',
         'estado',
         'sucursal_id',
         'empresa_id'
@@ -31,5 +32,6 @@ class ImpuestoCuis extends Model
     {
         return $this->belongsTo(Empresa::class);
     }
+
 
 }

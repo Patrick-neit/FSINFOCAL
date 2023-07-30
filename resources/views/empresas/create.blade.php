@@ -366,7 +366,6 @@
 <script src="{{asset('js/scripts/empresas/create.js')}}"></script>
 <script>
     let ruta_guardar_empresa = "{{route('empresas.store')}}";
-    let ruta_obtener_cuis = "{{route('cuis.store')}}";
     let ruta_index_empresa   = "{{route('empresas.index')}}";
     let ruta_eliminar_empresa = "{{route('empresas.destroy')}}";
 </script>

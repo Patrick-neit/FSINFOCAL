@@ -34,6 +34,7 @@ class AlumnoController extends Controller
     public function store(AlumnoStoreRequest $request)
     {
         try {
+
             $alumno = new Alumno();
             $alumno->nombre = $request->first_name;
             $alumno->apellido = $request->last_name;
@@ -53,8 +54,11 @@ class AlumnoController extends Controller
                     'success' => true
                 ]);
             }
-        } catch (\Throwable $th) {
-            return back()->withException($th);
+        } catch (\Exception $e) {
+            return responseJson('Server Error',[
+                'message'=> $e->getMessage(),
+                'code'=> $e->getCode(),
+            ],500);
         }
 
     }

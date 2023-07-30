@@ -197,8 +197,8 @@ let fecha_incorporacion_docente = document.getElementById('fecha_incorporacion')
 let phone_docente = document.getElementById('telefono');
 let direccion = document.getElementById('direccion');
 let estado = document.getElementById('estado');
-registrarDocenteButton.addEventListener("click", function () {
-
+registrarDocenteButton.addEventListener("click", function (event) {
+    event.preventDefault();
     fetch(ruta_guardar_docente, {
         method: "POST",
         headers: {

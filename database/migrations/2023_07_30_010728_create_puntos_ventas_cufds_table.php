@@ -13,15 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('impuestos_cuis', function (Blueprint $table) {
+        Schema::create('puntos_ventas_cufds', function (Blueprint $table) {
             $table->id();
-            $table->dateTime('fecha_generado');
-            $table->dateTime('fecha_vencimiento');
-            $table->string('codigo_cuis');
-            $table->char('estado');
-            $table->unsignedBigInteger('sucursal_id');
-            $table->unsignedBigInteger('empresa_id');
-            $table->softDeletes();
+            $table->unsignedBigInteger('cuis_id');
+            $table->unsignedBigInteger('cufd_id');
+            $table->unsignedBigInteger('punto_venta_id');
             $table->timestamps();
         });
     }
@@ -33,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('impuestos_cuis');
+        Schema::dropIfExists('puntos_ventas_cufds');
     }
 };

@@ -192,8 +192,8 @@ let email_alumno = document.getElementById('email');
 let phone_alumno = document.getElementById('phone');
 let fecha_nacimiento_alumno = document.getElementById('fecha_nacimiento');
 let domicilio_alumno = document.getElementById('domicilio');
-registrarAlumnoButton.addEventListener("click", function () {
-
+registrarAlumnoButton.addEventListener("click", function (event) {
+event.preventDefault();
     fetch(ruta_guardar_alumno, {
         method: "POST",
         headers: {

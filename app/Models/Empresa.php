@@ -31,6 +31,11 @@ class Empresa extends Model
         return $this->hasMany(Sucursal::class);
     }
 
+    public function impuestos_cuis()
+    {
+        return $this->hasMany(ImpuestoCuis::class);
+    }
+
     public function users(){
         return $this->belongsToMany(User::class);
     }
@@ -43,5 +48,15 @@ class Empresa extends Model
     public function docentes()
     {
         return $this->hasMany(Docente::class);
+    }
+
+    public function impuestos_cufds()
+    {
+        return $this->hasMany(ImpuestoCufd::class);
+    }
+
+    public function puntos_ventas()
+    {
+        return $this->hasMany(PuntoVenta::class);
     }
 }

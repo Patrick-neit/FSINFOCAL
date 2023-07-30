@@ -117,7 +117,11 @@
                     alt="avatar"></span></td>
               <td>{{$user->name}} </td>
               <td>{{$user->email}}</td>
+              @if (isset($user->empresas[0]) )
               <td><span class="chip lighten-5 orange orange-text">{{$user->empresas[0]->nombre_empresa}}</span></td>
+              @else
+              <td><span class="chip lighten-5 orange orange-text">S/A</span></td>
+              @endif
 
               <td><span>
                 <a href="{{route('users.asignarEmpresaUser',$user->id)}}">
