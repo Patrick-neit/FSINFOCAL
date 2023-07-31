@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\PuntoVenta;
 use App\Models\Sucursal;
-use App\Services\ImpuestoCuisService;
+use App\Models\PuntoVenta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Services\ImpuestoCuisService;
 
 class PuntoVentaController extends Controller
 {
@@ -26,13 +26,18 @@ class PuntoVentaController extends Controller
     public function store(Request $request)
     {
         try {
-            $codigoPuntoVenta = $request->tipo_punto_venta;
-            $resCuis = (new ImpuestoCuisService())->obtenerCuisImpuestos($codigoPuntoVenta);
+
+            $dataCuis = ([
+                'tipo_punto_venta' => $request->tipo_punto_venta,
+                'sucursal_id' => $request->sucursal_id,
+            ]);
+
+            $resCuis = (new ImpuestoCuisService())->obtenerCuisImpuestos($dataCuis);
 
         } catch (\Exception $e) {
             return responseJson('Server Error',[
                 'message'=> $e->getMessage(),
-                'codde'=> $e->getCode(),
+                'code'=> $e->getCode(),
             ],500);
         }
     }
