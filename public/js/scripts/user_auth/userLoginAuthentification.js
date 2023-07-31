@@ -42,7 +42,10 @@ $(document).ready(function () {
 
         })
         .catch(error => {
-            console.log(error);
+            M.toast({
+                html: data.content.message,
+                classes: 'rounded', displayLength: 3000, classes: 'blue lighten-1'
+            })
         });
 });
 });

@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Empresa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EmpresaController extends Controller
 {
     public function index()
     {
-        $empresas = Empresa::all();
+        $empresas = Empresa::where('id', Auth::user()->empresas[0]->id)->get();
         return view('empresas.index', compact('empresas'));
     }
 

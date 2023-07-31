@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\ConfiguracionImpuesto;
 use App\Models\Empresa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ConfiguracionImpuestoController extends Controller
 {
     public function index()
     {
-        $taxesConfigurations = ConfiguracionImpuesto::all();
+        $taxesConfigurations = ConfiguracionImpuesto::where('empresa_id', Auth::user()->empresas[0]->id)->get();
         return view('configuraciones_impuestos.index', compact('taxesConfigurations'));
     }
     public function create()

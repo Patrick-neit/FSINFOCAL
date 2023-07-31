@@ -5,25 +5,25 @@ namespace App\Http\Controllers;
 use App\Models\Empresa;
 use App\Models\Sucursal;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SucursalController extends Controller
 {
     public function index()
     {
-        $branches = Sucursal::all();
+        $branches = Sucursal::where('empresa_id', Auth::user()->empresas[0]->id)->get();
         return view('sucursales.index', compact('branches'));
     }
 
     public function create()
     {
-        $empresas = Empresa::all();
+        $empresas = Empresa::where('id', Auth::user()->empresas[0]->id)->get();
         return view('sucursales.create', compact('empresas'));
     }
 
     public function store(Request $request)
     {
         try {
-
             $branch = new Sucursal();
             $branch->nombre_sucursal = $request->nombre_sucursal;
             $branch->direccion = $request->direccion;

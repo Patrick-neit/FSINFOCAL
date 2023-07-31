@@ -215,6 +215,12 @@
                     "name" => "Sucursales ",
                     "slug" => "sucursales"
                 ),
+                array(
+                    "url" =>trim( parse_url(route('puntos_ventas.index'), PHP_URL_PATH) ,'/'),
+                    "i18n" => "Puntos Ventas ",
+                    "name" => "Puntos Ventas ",
+                    "slug" => "Puntos Ventas"
+                ),
 
             )
         ),

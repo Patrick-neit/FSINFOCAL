@@ -13,7 +13,7 @@ class ImpuestoCuisService{
         $this->config = new ImpuestoConfigService();
     }
 
-    public function obtenerCuisImpuestos()
+    public function obtenerCuisImpuestos($codigoPuntoVenta)
     {
 
         $response = Http::withToken($this->config->configService->token_sistema)

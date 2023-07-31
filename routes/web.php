@@ -22,6 +22,7 @@ use App\Http\Controllers\FormController;
 use App\Http\Controllers\ChartController;
 use App\Http\Controllers\EjemploController;
 use App\Http\Controllers\ImpuestoCuisController;
+use App\Http\Controllers\PuntoVentaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -268,10 +269,12 @@ Route::group([
 });
 
 Route::group([
-    'prefix' => 'cuis',
-    'controller'=> ImpuestoCuisController::class,
+    'prefix' => 'puntos_ventas',
+    'controller'=> PuntoVentaController::class,
 ], function(){
-    Route::post('store', 'store')->name('cuis.store');
+    Route::get('index', 'index')->name('puntos_ventas.index');
+    Route::get('create', 'create')->name('puntos_ventas.create');
+    Route::post('store', 'store')->name('puntos_ventas.store');
 });
 
 

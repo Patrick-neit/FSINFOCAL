@@ -11,7 +11,7 @@ class AlumnoController extends Controller
 {
     public function index()
     {
-        $alumnos = Alumno::all();
+        $alumnos = Alumno::where('empresa_id', Auth::user()->empresas[0]->id)->get();
         $alumnosTotales = Alumno::withTrashed()->count();
         $alumnosInactivos= Alumno::onlyTrashed()->count();
         return view('alumnos.index', compact('alumnos','alumnosTotales','alumnosInactivos'));

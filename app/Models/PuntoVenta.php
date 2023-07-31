@@ -14,6 +14,7 @@ class PuntoVenta extends Model
     protected $fillable =
     [
         'nombre_punto_venta',
+        'tipo_punto_venta',
         'codigo_punto_venta',
         'descripcion_punto_venta',
         'sucursal_id',

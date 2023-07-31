@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('puntos_ventas', function (Blueprint $table) {
             $table->id();
             $table->string('nombre_punto_venta');
+            $table->integer('tipo_punto_venta');
             $table->integer('codigo_punto_venta');
             $table->string('descripcion_punto_venta')->nullable();
             $table->unsignedBigInteger('sucursal_id');

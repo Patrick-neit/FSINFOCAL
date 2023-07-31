@@ -6,6 +6,7 @@ use App\Models\ConfiguracionImpuesto;
 use Illuminate\Support\Facades\Auth;
 
 class ImpuestoConfigService{
+
     public $configService;
 
     public function __construct()
