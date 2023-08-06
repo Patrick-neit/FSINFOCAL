@@ -35,7 +35,7 @@ $(document).ready(function () {
                 })
             } else {
                 M.toast({
-                    html: data.content.message,
+                    html: data.description,
                     classes: 'rounded', displayLength: 3000, classes: 'blue lighten-1'
                 })
             }
@@ -43,7 +43,7 @@ $(document).ready(function () {
         })
         .catch(error => {
             M.toast({
-                html: data.content.message,
+                html: data.description,
                 classes: 'rounded', displayLength: 3000, classes: 'blue lighten-1'
             })
         });

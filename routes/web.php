@@ -40,6 +40,7 @@ Auth::routes(['verify' => true]);
 // Dashboard Route
 // Route::get('/', [DashboardController::class, 'dashboardModern'])->middleware('verified');
 /* Route::get('/', [DashboardController::class, 'dashboardModern']); */
+
 // Authentication Route
 Route::get('/', [AuthenticationController::class, 'userLogin']);
 Route::get('/user-register', [AuthenticationController::class, 'userRegister']);

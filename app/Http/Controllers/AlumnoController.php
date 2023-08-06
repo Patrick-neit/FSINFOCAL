@@ -11,6 +11,7 @@ class AlumnoController extends Controller
 {
     public function index()
     {
+
         $alumnos = Alumno::where('empresa_id', Auth::user()->empresas[0]->id)->get();
         $alumnosTotales = Alumno::withTrashed()->count();
         $alumnosInactivos= Alumno::onlyTrashed()->count();
@@ -19,13 +20,13 @@ class AlumnoController extends Controller
 
     public function create()
     {
-
         return view('alumnos.create');
     }
 
 
 
-    public function registrar_alumnos(){
+    public function registrar_alumnos()
+    {
         return view('alumnos.registrar');
     }
 

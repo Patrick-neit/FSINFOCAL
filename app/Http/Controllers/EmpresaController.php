@@ -10,7 +10,8 @@ class EmpresaController extends Controller
 {
     public function index()
     {
-        $empresas = Empresa::where('id', Auth::user()->empresas[0]->id)->get();
+        /* $empresas = Empresa::where('id', Auth::user()->empresas[0]->id)->get(); */
+        $empresas = Empresa::all();
         return view('empresas.index', compact('empresas'));
     }
 

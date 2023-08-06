@@ -16,7 +16,8 @@ class DocenteController extends Controller
         return view('docentes.index', compact('docentes'));
     }
 
-    public function create(){
+    public function create()
+    {
 
         return view('docentes.create');
     }
@@ -24,7 +25,6 @@ class DocenteController extends Controller
     public function store(DocenteStoreRequest $request)
     {
         try {
-
             $fechaIncorporacion = (new Carbon($request->fecha_incorporacion_docente))->toDateString();
             $docente = new Docente();
             $docente->nombre_completo   = $request->first_name;
@@ -38,20 +38,20 @@ class DocenteController extends Controller
 
             if ($docente->save()) {
                 return response()->json([
-                    'success'=> true,
+                    'success' => true,
                     'response' => 'Registrado con Exito!'
                 ]);
-            }else{
+            } else {
                 return response()->json([
-                    'success'=> true,
+                    'success' => true,
                     'response' => 'Something went Wrong!'
                 ]);
             }
         } catch (\Exception $e) {
-            return responseJson('Server Error',[
-                'message'=> $e->getMessage(),
-                'codde'=> $e->getCode(),
-            ],500);
+            return responseJson('Server Error', [
+                'message' => $e->getMessage(),
+                'codde' => $e->getCode(),
+            ], 500);
         }
     }
 
@@ -66,7 +66,6 @@ class DocenteController extends Controller
                 'success' => true,
                 'response' => 'Ha Sido Eliminado con Exito'
             ]);
-
         } else {
 
             return response()->json([
