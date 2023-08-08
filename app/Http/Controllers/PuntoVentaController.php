@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Sucursal;
 use App\Models\PuntoVenta;
+use App\Models\PuntoVentaCufd;
 use App\Services\ImpuestoCufdService;
 use App\Services\ImpuestoCuisService;
 use Illuminate\Http\Request;
@@ -41,34 +42,47 @@ class PuntoVentaController extends Controller
                 'tipo_punto_venta' => $request->tipo_punto_venta,
                 'sucursal_id' => $request->sucursal_id,
             ]));
+            $sucursal = Sucursal::find($dataService->sucursal_id);
 
             $resCuis = $this->cuiService->obtenerCuisImpuestos($dataService);
             $resCodigoCuis = $resCuis->content->codigo;
             $resCufd = $this->cufdService->obtenerCufdImpuestos($dataService, $resCodigoCuis);
 
-            if ($resCuis->content->mensajesList->codigo != 980 || $resCufd->content->RespuestaCufd->transaccion != true) {
+            if ($resCuis->content->mensajesList[0]->codigo != 980 || $resCufd->content->RespuestaCufd->transaccion != true) {
                 return responseJson('Error al Consumir Servicio', $resCuis->content->mensajesList->descripcion, 500);
             }
             DB::beginTransaction();
             $registrarPuntoVenta = new PuntoVenta();
-            $registrarPuntoVenta->nombrePuntoVenta = $request->nombre_punto_venta;
+            $registrarPuntoVenta->nombre_punto_venta = $request->nombre_punto_venta;
             $registrarPuntoVenta->tipo_punto_venta = !isset($request->tipo_punto_venta) ? 0 : $request->tipo_punto_venta;
-            $registrarPuntoVenta->codigo_punto_venta = $request->codigo_punto_venta;
+            $registrarPuntoVenta->codigo_punto_venta = !isset($request->tipo_punto_venta) ? 0 : $request->tipo_punto_venta; //todo
             $registrarPuntoVenta->descripcion_punto_venta = $request->descripcion_punto_venta;
             $registrarPuntoVenta->sucursal_id = $request->sucursal_id;
             $registrarPuntoVenta->empresa_id = Auth::user()->empresas[0]->id;
             $registrarPuntoVenta->save();
 
+            $dataSincronizar = json_decode(json_encode([
+                'codigoSucursal' => $sucursal->codigo_sucursal,
+                'codigoPuntoVenta' => $registrarPuntoVenta->codigo_punto_venta,
+                'cuis'=> $resCodigoCuis
+            ]));
+
             $registrarCuis = (new ImpuestoCuisController())->store($resCuis, $dataService);
-            $registrarCufd = (new ImpuestoCufdController())->store($resCufd,$dataService);
+            $registrarCufd = (new ImpuestoCufdController())->store($resCufd, $dataService);
+            $sincronizarCatalogos = (new ImpuestoSincronizarController())->sincronizarCatalogosImpuestos($dataSincronizar);
+
+            $registrarPuntoVentaCufd = new PuntoVentaCufd();
+            $registrarPuntoVentaCufd->cuis_id = $registrarCuis;
+            $registrarPuntoVentaCufd->cufd_id = $registrarCufd;
+            $registrarPuntoVentaCufd->punto_venta_id = $registrarPuntoVenta->id;
+            $registrarPuntoVentaCufd->save();
+
             DB::commit();
-
-
-
-
-
-
-
+            if ($registrarPuntoVentaCufd->save()) {
+                return responseJson('Punto Venta Sincronizado Exitosamente', $registrarPuntoVenta, 200);
+            } else {
+                return responseJson('Error al Sincronizar Punto Venta ', $registrarPuntoVenta, 500);
+            }
         } catch (\Exception $e) {
             DB::rollback();
             return responseJson('Server Error', [

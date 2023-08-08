@@ -13,11 +13,13 @@ class ImpuestoCuisController extends Controller
     {
         $registrarCuis = new ImpuestoCuis();
         $registrarCuis->fecha_generado = Carbon::now()->toDateTimeString();
-        $registrarCuis->fecha_vencimiento = $resCuis->content->fechaVigencia->date;
+        $registrarCuis->fecha_vencimiento = (new Carbon($resCuis->content->fechaVigencia->date))->toDateTimeString() ;
         $registrarCuis->codigo_cuis = $resCuis->content->codigo;
         $registrarCuis->estado = 'V';
         $registrarCuis->sucursal_id = $dataService->sucursal_id;
         $registrarCuis->empresa_id = Auth::user()->empresas[0]->id;
         $registrarCuis->save();
+
+        return $registrarCuis->id;
     }
 }

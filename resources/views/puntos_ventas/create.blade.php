@@ -59,14 +59,16 @@
                                 <div class="col s12 m6">
                                     <div class="row">
                                         <div class="col s12 input-field">
-                                            <input id="nombre_punto_venta" name="nombre_punto_venta" type="text" class="validate"
-                                                value="{{ old('nombre_punto_venta') }}" data-error=".errorTxt1" required>
+                                            <input id="nombre_punto_venta" name="nombre_punto_venta" type="text"
+                                                class="validate" value="{{ old('nombre_punto_venta') }}"
+                                                data-error=".errorTxt1" required>
                                             <label for="nombre_punto_venta">Nombre Punto Venta</label>
                                             <small class="errorTxt1"></small>
                                         </div>
                                         <div class="col s12 input-field">
-                                            <input id="descripcion_punto_venta" name="descripcion_punto_venta" type="text" class="validate"
-                                                value="{{ old('descripcion_punto_venta') }}" data-error=".errorTxt2" required>
+                                            <input id="descripcion_punto_venta" name="descripcion_punto_venta"
+                                                type="text" class="validate" value="{{ old('descripcion_punto_venta') }}"
+                                                data-error=".errorTxt2" required>
                                             <label for="descripcion_punto_venta">Descripcion Punto Venta</label>
                                             <small class="errorTxt2"></small>
                                         </div>
@@ -85,11 +87,12 @@
                                     </div>
                                 </div>
 
+
                                 <div class="col s12 m6">
                                     <div class="col s12 input-field">
                                         <select name="sucursal_id" id="sucursal_id" class="form-select">
                                             @foreach ($sucursales as $sucursal)
-                                                <option value="{{ $sucursal->id }}">{{ $sucursal->nombre_sucursal}}
+                                                <option value="{{ $sucursal->id }}">{{ $sucursal->nombre_sucursal }}
                                                 </option>
                                             @endforeach
                                         </select>
@@ -98,10 +101,25 @@
                                 </div>
 
 
+                                {{-- LOADER --}}
+
+                                <div id="loadingIndicator" class="preloader-wrapper big active" style="display: none;">
+                                    <div class="spinner-layer spinner-blue">
+                                        <div class="circle-clipper left">
+                                            <div class="circle"></div>
+                                        </div>
+                                        <div class="gap-patch">
+                                            <div class="circle"></div>
+                                        </div>
+                                        <div class="circle-clipper right">
+                                            <div class="circle"></div>
+                                        </div>
+                                    </div>
+                                </div>
 
                                 <div class="col s12 display-flex justify-content-end mt-3">
                                     <button id="registrarPuntoVentaButton" class="btn indigo">
-                                        Save changes</button>
+                                        Sincronizar Punto Venta</button>
                                     <button type="button" class="btn btn-light">Cancel</button>
                                 </div>
                             </div>
