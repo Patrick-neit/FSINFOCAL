@@ -144,7 +144,6 @@ registrarPuntoVentaButton.addEventListener("click", function (event) {
             descripcion_punto_venta: descripcion_punto_venta.value,
             tipo_punto_venta: tipo_punto_venta.value,
             sucursal_id: sucursal_id.value,
-
         }),
 
     }).then(response => response.json())
