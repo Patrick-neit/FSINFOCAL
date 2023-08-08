@@ -13,7 +13,7 @@ class ImpuestoSincronizarService
         $this->config = new ImpuestoConfigService();
     }
 
-    function sincronizarFechaHora($dataSincronizar)
+    function sincronizarParametricaMotivoAnulacion($dataSincronizar)
     {
         $response = Http::withHeaders([
             'apikey' => $this->config->configService->token_sistema
@@ -24,11 +24,187 @@ class ImpuestoSincronizarService
                     'codigoAmbiente' => $this->config->configService->codigoAmbiente,
                     'codigoSistema' => $this->config->configService->codigoSistema,
                     'nit' => $this->config->configService->nit,
-                    'cuis'=> $dataSincronizar->cuis,
+                    'cuis' => $dataSincronizar->cuis,
                     'codigoModalidad' => $this->config->configService->codigoModalidad,
                     'codigoSucursal' =>  $dataSincronizar->codigoSucursal,
                     'codigoPuntoVenta' => $dataSincronizar->codigoPuntoVenta,
-                    'accion' => "sincronizarFechaHora"
+                    'accion' => "sincronizarParametricaMotivoAnulacion"
+                ]
+            );
+
+        return $response->object();
+    }
+
+    function sincronizarListaActividadesDocumentoSector($dataSincronizar)
+    {
+        $response = Http::withHeaders([
+            'apikey' => $this->config->configService->token_sistema
+        ])
+            ->post(
+                'https://catalogos.rda-consultores.com/api/sincronizar',
+                [
+                    'codigoAmbiente' => $this->config->configService->codigoAmbiente,
+                    'codigoSistema' => $this->config->configService->codigoSistema,
+                    'nit' => $this->config->configService->nit,
+                    'cuis' => $dataSincronizar->cuis,
+                    'codigoModalidad' => $this->config->configService->codigoModalidad,
+                    'codigoSucursal' =>  $dataSincronizar->codigoSucursal,
+                    'codigoPuntoVenta' => $dataSincronizar->codigoPuntoVenta,
+                    'accion' => "sincronizarListaActividadesDocumentoSector"
+                ]
+            );
+
+        return $response->object();
+    }
+
+    function sincronizarParametricaTipoDocumentoSector($dataSincronizar)
+    {
+        $response = Http::withHeaders([
+            'apikey' => $this->config->configService->token_sistema
+        ])
+            ->post(
+                'https://catalogos.rda-consultores.com/api/sincronizar',
+                [
+                    'codigoAmbiente' => $this->config->configService->codigoAmbiente,
+                    'codigoSistema' => $this->config->configService->codigoSistema,
+                    'nit' => $this->config->configService->nit,
+                    'cuis' => $dataSincronizar->cuis,
+                    'codigoModalidad' => $this->config->configService->codigoModalidad,
+                    'codigoSucursal' =>  $dataSincronizar->codigoSucursal,
+                    'codigoPuntoVenta' => $dataSincronizar->codigoPuntoVenta,
+                    'accion' => "sincronizarParametricaTipoDocumentoSector"
+                ]
+            );
+
+        return $response->object();
+    }
+
+    function sincronizarParametricaTiposFactura($dataSincronizar)
+    {
+        $response = Http::withHeaders([
+            'apikey' => $this->config->configService->token_sistema
+        ])
+            ->post(
+                'https://catalogos.rda-consultores.com/api/sincronizar',
+                [
+                    'codigoAmbiente' => $this->config->configService->codigoAmbiente,
+                    'codigoSistema' => $this->config->configService->codigoSistema,
+                    'nit' => $this->config->configService->nit,
+                    'cuis' => $dataSincronizar->cuis,
+                    'codigoModalidad' => $this->config->configService->codigoModalidad,
+                    'codigoSucursal' =>  $dataSincronizar->codigoSucursal,
+                    'codigoPuntoVenta' => $dataSincronizar->codigoPuntoVenta,
+                    'accion' => "sincronizarParametricaTiposFactura"
+                ]
+            );
+
+        return $response->object();
+    }
+
+    function sincronizarListaMensajesServicios($dataSincronizar)
+    {
+        $response = Http::withHeaders([
+            'apikey' => $this->config->configService->token_sistema
+        ])
+            ->post(
+                'https://catalogos.rda-consultores.com/api/sincronizar',
+                [
+                    'codigoAmbiente' => $this->config->configService->codigoAmbiente,
+                    'codigoSistema' => $this->config->configService->codigoSistema,
+                    'nit' => $this->config->configService->nit,
+                    'cuis' => $dataSincronizar->cuis,
+                    'codigoModalidad' => $this->config->configService->codigoModalidad,
+                    'codigoSucursal' =>  $dataSincronizar->codigoSucursal,
+                    'codigoPuntoVenta' => $dataSincronizar->codigoPuntoVenta,
+                    'accion' => "sincronizarListaMensajesServicios"
+                ]
+            );
+
+        return $response->object();
+    }
+
+    function sincronizarParametricaEventosSignificativos($dataSincronizar)
+    {
+        $response = Http::withHeaders([
+            'apikey' => $this->config->configService->token_sistema
+        ])
+            ->post(
+                'https://catalogos.rda-consultores.com/api/sincronizar',
+                [
+                    'codigoAmbiente' => $this->config->configService->codigoAmbiente,
+                    'codigoSistema' => $this->config->configService->codigoSistema,
+                    'nit' => $this->config->configService->nit,
+                    'cuis' => $dataSincronizar->cuis,
+                    'codigoModalidad' => $this->config->configService->codigoModalidad,
+                    'codigoSucursal' =>  $dataSincronizar->codigoSucursal,
+                    'codigoPuntoVenta' => $dataSincronizar->codigoPuntoVenta,
+                    'accion' => "sincronizarParametricaEventosSignificativos"
+                ]
+            );
+
+        return $response->object();
+    }
+
+    function sincronizarParametricaTipoPuntoVenta($dataSincronizar)
+    {
+        $response = Http::withHeaders([
+            'apikey' => $this->config->configService->token_sistema
+        ])
+            ->post(
+                'https://catalogos.rda-consultores.com/api/sincronizar',
+                [
+                    'codigoAmbiente' => $this->config->configService->codigoAmbiente,
+                    'codigoSistema' => $this->config->configService->codigoSistema,
+                    'nit' => $this->config->configService->nit,
+                    'cuis' => $dataSincronizar->cuis,
+                    'codigoModalidad' => $this->config->configService->codigoModalidad,
+                    'codigoSucursal' =>  $dataSincronizar->codigoSucursal,
+                    'codigoPuntoVenta' => $dataSincronizar->codigoPuntoVenta,
+                    'accion' => "sincronizarParametricaTipoPuntoVenta"
+                ]
+            );
+
+        return $response->object();
+    }
+
+    function sincronizarListaProductosServicios($dataSincronizar)
+    {
+        $response = Http::withHeaders([
+            'apikey' => $this->config->configService->token_sistema
+        ])
+            ->post(
+                'https://catalogos.rda-consultores.com/api/sincronizar',
+                [
+                    'codigoAmbiente' => $this->config->configService->codigoAmbiente,
+                    'codigoSistema' => $this->config->configService->codigoSistema,
+                    'nit' => $this->config->configService->nit,
+                    'cuis' => $dataSincronizar->cuis,
+                    'codigoModalidad' => $this->config->configService->codigoModalidad,
+                    'codigoSucursal' =>  $dataSincronizar->codigoSucursal,
+                    'codigoPuntoVenta' => $dataSincronizar->codigoPuntoVenta,
+                    'accion' => "sincronizarListaProductosServicios"
+                ]
+            );
+
+        return $response->object();
+    }
+
+    function sincronizarParametricaTipoMoneda($dataSincronizar)
+    {
+        $response = Http::withHeaders([
+            'apikey' => $this->config->configService->token_sistema
+        ])
+            ->post(
+                'https://catalogos.rda-consultores.com/api/sincronizar',
+                [
+                    'codigoAmbiente' => $this->config->configService->codigoAmbiente,
+                    'codigoSistema' => $this->config->configService->codigoSistema,
+                    'nit' => $this->config->configService->nit,
+                    'cuis' => $dataSincronizar->cuis,
+                    'codigoModalidad' => $this->config->configService->codigoModalidad,
+                    'codigoSucursal' =>  $dataSincronizar->codigoSucursal,
+                    'codigoPuntoVenta' => $dataSincronizar->codigoPuntoVenta,
+                    'accion' => "sincronizarParametricaTipoMoneda"
                 ]
             );
 
@@ -46,7 +222,7 @@ class ImpuestoSincronizarService
                     'codigoAmbiente' => $this->config->configService->codigoAmbiente,
                     'codigoSistema' => $this->config->configService->codigoSistema,
                     'nit' => $this->config->configService->nit,
-                    'cuis'=> $dataSincronizar->cuis,
+                    'cuis' => $dataSincronizar->cuis,
                     'codigoModalidad' => $this->config->configService->codigoModalidad,
                     'codigoSucursal' =>  $dataSincronizar->codigoSucursal,
                     'codigoPuntoVenta' => $dataSincronizar->codigoPuntoVenta,
@@ -68,7 +244,7 @@ class ImpuestoSincronizarService
                     'codigoAmbiente' => $this->config->configService->codigoAmbiente,
                     'codigoSistema' => $this->config->configService->codigoSistema,
                     'nit' => $this->config->configService->nit,
-                    'cuis'=> $dataSincronizar->cuis,
+                    'cuis' => $dataSincronizar->cuis,
                     'codigoModalidad' => $this->config->configService->codigoModalidad,
                     'codigoSucursal' =>  $dataSincronizar->codigoSucursal,
                     'codigoPuntoVenta' => $dataSincronizar->codigoPuntoVenta,
@@ -90,11 +266,144 @@ class ImpuestoSincronizarService
                     'codigoAmbiente' => $this->config->configService->codigoAmbiente,
                     'codigoSistema' => $this->config->configService->codigoSistema,
                     'nit' => $this->config->configService->nit,
-                    'cuis'=> $dataSincronizar->cuis,
+                    'cuis' => $dataSincronizar->cuis,
                     'codigoModalidad' => $this->config->configService->codigoModalidad,
                     'codigoSucursal' =>  $dataSincronizar->codigoSucursal,
                     'codigoPuntoVenta' => $dataSincronizar->codigoPuntoVenta,
                     'accion' => "sincronizarParametricaTipoDocumentoIdentidad"
+                ]
+            );
+
+        return $response->object();
+    }
+
+    function sincronizarListaLeyendasFactura($dataSincronizar)
+    {
+        $response = Http::withHeaders([
+            'apikey' => $this->config->configService->token_sistema
+        ])
+            ->post(
+                'https://catalogos.rda-consultores.com/api/sincronizar',
+                [
+                    'codigoAmbiente' => $this->config->configService->codigoAmbiente,
+                    'codigoSistema' => $this->config->configService->codigoSistema,
+                    'nit' => $this->config->configService->nit,
+                    'cuis' => $dataSincronizar->cuis,
+                    'codigoModalidad' => $this->config->configService->codigoModalidad,
+                    'codigoSucursal' =>  $dataSincronizar->codigoSucursal,
+                    'codigoPuntoVenta' => $dataSincronizar->codigoPuntoVenta,
+                    'accion' => "sincronizarListaLeyendasFactura"
+                ]
+            );
+
+        return $response->object();
+    }
+
+    function sincronizarParametricaTipoMetodoPago($dataSincronizar)
+    {
+        $response = Http::withHeaders([
+            'apikey' => $this->config->configService->token_sistema
+        ])
+            ->post(
+                'https://catalogos.rda-consultores.com/api/sincronizar',
+                [
+                    'codigoAmbiente' => $this->config->configService->codigoAmbiente,
+                    'codigoSistema' => $this->config->configService->codigoSistema,
+                    'nit' => $this->config->configService->nit,
+                    'cuis' => $dataSincronizar->cuis,
+                    'codigoModalidad' => $this->config->configService->codigoModalidad,
+                    'codigoSucursal' =>  $dataSincronizar->codigoSucursal,
+                    'codigoPuntoVenta' => $dataSincronizar->codigoPuntoVenta,
+                    'accion' => "sincronizarParametricaTipoMetodoPago"
+                ]
+            );
+
+        return $response->object();
+    }
+
+
+    function sincronizarParametricaUnidadMedida($dataSincronizar)
+    {
+        $response = Http::withHeaders([
+            'apikey' => $this->config->configService->token_sistema
+        ])
+            ->post(
+                'https://catalogos.rda-consultores.com/api/sincronizar',
+                [
+                    'codigoAmbiente' => $this->config->configService->codigoAmbiente,
+                    'codigoSistema' => $this->config->configService->codigoSistema,
+                    'nit' => $this->config->configService->nit,
+                    'cuis' => $dataSincronizar->cuis,
+                    'codigoModalidad' => $this->config->configService->codigoModalidad,
+                    'codigoSucursal' =>  $dataSincronizar->codigoSucursal,
+                    'codigoPuntoVenta' => $dataSincronizar->codigoPuntoVenta,
+                    'accion' => "sincronizarParametricaUnidadMedida"
+                ]
+            );
+
+        return $response->object();
+    }
+
+    function sincronizarParametricaPaisOrigen($dataSincronizar)
+    {
+        $response = Http::withHeaders([
+            'apikey' => $this->config->configService->token_sistema
+        ])
+            ->post(
+                'https://catalogos.rda-consultores.com/api/sincronizar',
+                [
+                    'codigoAmbiente' => $this->config->configService->codigoAmbiente,
+                    'codigoSistema' => $this->config->configService->codigoSistema,
+                    'nit' => $this->config->configService->nit,
+                    'cuis' => $dataSincronizar->cuis,
+                    'codigoModalidad' => $this->config->configService->codigoModalidad,
+                    'codigoSucursal' =>  $dataSincronizar->codigoSucursal,
+                    'codigoPuntoVenta' => $dataSincronizar->codigoPuntoVenta,
+                    'accion' => "sincronizarParametricaPaisOrigen"
+                ]
+            );
+
+        return $response->object();
+    }
+
+    function sincronizarFechaHora($dataSincronizar)
+    {
+        $response = Http::withHeaders([
+            'apikey' => $this->config->configService->token_sistema
+        ])
+            ->post(
+                'https://catalogos.rda-consultores.com/api/sincronizar',
+                [
+                    'codigoAmbiente' => $this->config->configService->codigoAmbiente,
+                    'codigoSistema' => $this->config->configService->codigoSistema,
+                    'nit' => $this->config->configService->nit,
+                    'cuis' => $dataSincronizar->cuis,
+                    'codigoModalidad' => $this->config->configService->codigoModalidad,
+                    'codigoSucursal' =>  $dataSincronizar->codigoSucursal,
+                    'codigoPuntoVenta' => $dataSincronizar->codigoPuntoVenta,
+                    'accion' => "sincronizarFechaHora"
+                ]
+            );
+
+        return $response->object();
+    }
+
+    function sincronizarParametricaTipoHabitacion($dataSincronizar)
+    {
+        $response = Http::withHeaders([
+            'apikey' => $this->config->configService->token_sistema
+        ])
+            ->post(
+                'https://catalogos.rda-consultores.com/api/sincronizar',
+                [
+                    'codigoAmbiente' => $this->config->configService->codigoAmbiente,
+                    'codigoSistema' => $this->config->configService->codigoSistema,
+                    'nit' => $this->config->configService->nit,
+                    'cuis' => $dataSincronizar->cuis,
+                    'codigoModalidad' => $this->config->configService->codigoModalidad,
+                    'codigoSucursal' =>  $dataSincronizar->codigoSucursal,
+                    'codigoPuntoVenta' => $dataSincronizar->codigoPuntoVenta,
+                    'accion' => "sincronizarParametricaTipoHabitacion"
                 ]
             );
 
