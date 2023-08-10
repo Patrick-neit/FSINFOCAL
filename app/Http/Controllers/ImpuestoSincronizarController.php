@@ -107,7 +107,7 @@ class ImpuestoSincronizarController extends Controller
 
     public function sincronizarCatalogosImpuestos($dataSincronizar)
     {
-        $this->storeParametricaMotivoAnulacion($dataSincronizar);
+        /* $this->storeParametricaMotivoAnulacion($dataSincronizar);
         $this->storeActividadesDocumentoSector($dataSincronizar);
         $this->storeParametricaTipoDocumentoSector($dataSincronizar);
         $this->storeParametricaTipoFactura($dataSincronizar);
@@ -122,7 +122,7 @@ class ImpuestoSincronizarController extends Controller
         $this->sincronizarListaLeyendasFactura($dataSincronizar);
         $this->storeParametricaTipoMetodoPago($dataSincronizar);
         $this->storeParametricaUnidadMedida($dataSincronizar);
-        $this->storeParametricaPaisOrigen($dataSincronizar);
+        $this->storeParametricaPaisOrigen($dataSincronizar); */
         $this->storeFechaHoraImpuesto($dataSincronizar);
         $this->storeParametricaTipoHabitacion($dataSincronizar);
 
