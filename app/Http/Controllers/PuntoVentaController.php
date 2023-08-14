@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ImpuestoTipoPuntoVenta;
 use App\Models\Sucursal;
 use App\Models\PuntoVenta;
 use App\Models\PuntoVentaCufd;
@@ -31,12 +32,35 @@ class PuntoVentaController extends Controller
     public function create()
     {
         $sucursales = Sucursal::where('empresa_id', Auth::user()->empresas[0]->id)->get();
-        return view('puntos_ventas.create', compact('sucursales'));
+        $tipoPuntosVentas = ImpuestoTipoPuntoVenta::all();
+        return view('puntos_ventas.create', compact('sucursales', 'tipoPuntosVentas'));
     }
 
     public function store(Request $request)
     {
         try {
+            $userID = Auth::user()->id;
+            $empresaID = Auth::user()->empresas[0]->id;
+            $verificarPuntoVenta = verificarSiPuntoVenta($userID,$empresaID);
+                if (!$verificarPuntoVenta) {
+                    $this->storePuntoVenta($request);
+                }else{
+                    return responseJson('Ya Existe PV A Personal Asociado' , $verificarPuntoVenta, 500 );
+                }
+
+        } catch (\Exception $e) {
+            return responseJson('Server Error', [
+                'message' => $e->getMessage(),
+                'code' => $e->getCode(),
+            ], 500);
+        }
+    }
+
+    public function storePuntoVenta($request)
+    {
+        try {
+            $userID = Auth::user()->id;
+            $empresaID = Auth::user()->empresas[0]->id;
 
             $dataService = json_decode(json_encode([
                 'tipo_punto_venta' => $request->tipo_punto_venta,
@@ -57,6 +81,7 @@ class PuntoVentaController extends Controller
             $registrarPuntoVenta->tipo_punto_venta = !isset($request->tipo_punto_venta) ? 0 : $request->tipo_punto_venta;
             $registrarPuntoVenta->codigo_punto_venta = !isset($request->tipo_punto_venta) ? 0 : $request->tipo_punto_venta; //todo
             $registrarPuntoVenta->descripcion_punto_venta = $request->descripcion_punto_venta;
+            $registrarPuntoVenta->user_id = $userID;
             $registrarPuntoVenta->sucursal_id = $request->sucursal_id;
             $registrarPuntoVenta->empresa_id = Auth::user()->empresas[0]->id;
             $registrarPuntoVenta->save();
@@ -64,12 +89,16 @@ class PuntoVentaController extends Controller
             $dataSincronizar = json_decode(json_encode([
                 'codigoSucursal' => $sucursal->codigo_sucursal,
                 'codigoPuntoVenta' => $registrarPuntoVenta->codigo_punto_venta,
-                'cuis'=> $resCodigoCuis
+                'cuis' => $resCodigoCuis
             ]));
 
             $registrarCuis = (new ImpuestoCuisController())->store($resCuis, $dataService);
             $registrarCufd = (new ImpuestoCufdController())->store($resCufd, $dataService);
-            $sincronizarCatalogos = (new ImpuestoSincronizarController())->sincronizarCatalogosImpuestos($dataSincronizar);
+
+            $verificarPuntoVenta = verificarSiPuntoVenta($userID,$empresaID);
+            if (!$verificarPuntoVenta) {
+                $sincronizarCatalogos = (new ImpuestoSincronizarController())->sincronizarCatalogosImpuestos($dataSincronizar);
+            }
 
             $registrarPuntoVentaCufd = new PuntoVentaCufd();
             $registrarPuntoVentaCufd->cuis_id = $registrarCuis;

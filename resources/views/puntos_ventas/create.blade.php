@@ -81,6 +81,9 @@
                                         <div class="input-field col s12">
                                             <select id="tipo_punto_venta">
                                                 <option value="" selected>Choose your option</option>
+                                                @foreach ($tipoPuntosVentas as  $puntoVenta)
+                                                <option value="{{ $puntoVenta->codigo_clasificador }}">{{ $puntoVenta->descripcion }}</option>
+                                                @endforeach
                                             </select>
                                             <label> Tipo Punto Venta</label>
                                         </div>

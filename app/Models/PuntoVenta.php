@@ -17,9 +17,15 @@ class PuntoVenta extends Model
         'tipo_punto_venta',
         'codigo_punto_venta',
         'descripcion_punto_venta',
+        'user_id',
         'sucursal_id',
         'empresa_id'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
      public function sucursal()
     {

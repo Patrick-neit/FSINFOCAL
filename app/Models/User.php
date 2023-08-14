@@ -45,4 +45,9 @@ class User extends Authenticatable
     public function empresas(){
         return $this->belongsToMany(Empresa::class);
     }
+
+    public function punto_venta()
+    {
+        return $this->hasOne(PuntoVenta::class);
+    }
 }

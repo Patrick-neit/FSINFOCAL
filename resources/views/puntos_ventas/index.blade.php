@@ -92,6 +92,7 @@
                                     <th>Fecha Sincronizacion</th>
                                     <th>Tipo Punto Venta</th>
                                     <th>Descripcion Punto Venta</th>
+                                    <th>Personal Asociado</th>
                                     <th>Sucursal Asociada</th>
                                     <th>edit</th>
                                     <th>view</th>
@@ -109,7 +110,8 @@
                                         <td>{{ $puntoVenta->codigo_punto_venta }}</td>
                                         <td> <span class="green-text">{{ $puntoVenta->descripcion_punto_venta }}</span>
                                             </span> </td>
-                                        <td>{{$puntoVenta->sucursal->nombre_sucursal}} </td>
+                                        <td>{{$puntoVenta->user->name}} </td>
+                                        <td> <span class="red-text">{{$puntoVenta->sucursal->nombre_sucursal}}</span>  </td>
                                         <td><a href="{{ asset('page-users-edit') }}"><i class="material-icons">edit</i></a>
                                         </td>
                                         <td><a href="{{ asset('page-users-view') }}"><i

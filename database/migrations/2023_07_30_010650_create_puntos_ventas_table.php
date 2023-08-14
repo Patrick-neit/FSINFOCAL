@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('tipo_punto_venta');
             $table->integer('codigo_punto_venta');
             $table->string('descripcion_punto_venta')->nullable();
+            $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('sucursal_id');
             $table->unsignedBigInteger('empresa_id');
             $table->softDeletes();

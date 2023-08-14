@@ -159,7 +159,7 @@ registrarPuntoVentaButton.addEventListener("click", function (event) {
                 })
             } else {
                 M.toast({
-                    html: data.content.message,
+                    html: data.description,
                     classes: 'rounded', displayLength: 3000, classes: 'blue lighten-1'
                 })
             }
