@@ -8,6 +8,7 @@ use App\Models\PuntoVenta;
 use App\Models\PuntoVentaCufd;
 use App\Services\ImpuestoCufdService;
 use App\Services\ImpuestoCuisService;
+use App\Services\ImpuestoRegistroPVService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -16,11 +17,13 @@ class PuntoVentaController extends Controller
 {
     public $cuiService;
     public $cufdService;
+    public $registrarPVImpuesto;
 
     public function __construct()
     {
         $this->cuiService = new ImpuestoCuisService();
         $this->cufdService = new ImpuestoCufdService();
+        $this->registrarPVImpuesto = new ImpuestoRegistroPVService();
     }
 
     public function index()
@@ -41,13 +44,17 @@ class PuntoVentaController extends Controller
         try {
             $userID = Auth::user()->id;
             $empresaID = Auth::user()->empresas[0]->id;
-            $verificarPuntoVenta = verificarSiPuntoVenta($userID,$empresaID);
-                if (!$verificarPuntoVenta) {
-                    $this->storePuntoVenta($request);
-                }else{
-                    return responseJson('Ya Existe PV A Personal Asociado' , $verificarPuntoVenta, 500 );
+            $verificarPuntoVenta = verificarSiPuntoVenta($userID, $empresaID);
+            /* if (!$verificarPuntoVenta) { */
+                $resPuntoVenta = $this->storePuntoVenta($request);
+                if ($resPuntoVenta) {
+                    return responseJson('Punto Venta Sincronizado Exitosamente', $resPuntoVenta, 200);
+                } else {
+                    return responseJson('Error al Sincronizar Punto Venta ', $resPuntoVenta, 500);
                 }
-
+            /* } else {
+                return responseJson('Ya Existe PV A Personal Asociado', $verificarPuntoVenta, 500);
+            } */
         } catch (\Exception $e) {
             return responseJson('Server Error', [
                 'message' => $e->getMessage(),
@@ -63,6 +70,8 @@ class PuntoVentaController extends Controller
             $empresaID = Auth::user()->empresas[0]->id;
 
             $dataService = json_decode(json_encode([
+                'nombre_punto_venta' => $request->nombre_punto_venta,
+                'descripcion_punto_venta' => $request->descripcion_punto_venta,
                 'tipo_punto_venta' => $request->tipo_punto_venta,
                 'sucursal_id' => $request->sucursal_id,
             ]));
@@ -75,6 +84,11 @@ class PuntoVentaController extends Controller
             if ($resCuis->content->mensajesList[0]->codigo != 980 || $resCufd->content->RespuestaCufd->transaccion != true) {
                 return responseJson('Error al Consumir Servicio', $resCuis->content->mensajesList->descripcion, 500);
             }
+            $resExistePV = verificarPuntoVentaSucursal0($userID,$empresaID);
+            if ($resExistePV) { //Si ya existe 1 PV creado
+                $resRegistroPVImpuesto = $this->registrarPVImpuesto->registrarPVImpuesto($dataService,$resCodigoCuis);
+            }
+
             DB::beginTransaction();
             $registrarPuntoVenta = new PuntoVenta();
             $registrarPuntoVenta->nombre_punto_venta = $request->nombre_punto_venta;
@@ -95,9 +109,9 @@ class PuntoVentaController extends Controller
             $registrarCuis = (new ImpuestoCuisController())->store($resCuis, $dataService);
             $registrarCufd = (new ImpuestoCufdController())->store($resCufd, $dataService);
 
-            $verificarPuntoVenta = verificarSiPuntoVenta($userID,$empresaID);
+            $verificarPuntoVenta = verificarSiPuntoVenta($userID, $empresaID);
             if (!$verificarPuntoVenta) {
-                $sincronizarCatalogos = (new ImpuestoSincronizarController())->sincronizarCatalogosImpuestos($dataSincronizar);
+            $sincronizarCatalogos = (new ImpuestoSincronizarController())->sincronizarCatalogosImpuestos($dataSincronizar);
             }
 
             $registrarPuntoVentaCufd = new PuntoVentaCufd();
@@ -107,11 +121,8 @@ class PuntoVentaController extends Controller
             $registrarPuntoVentaCufd->save();
 
             DB::commit();
-            if ($registrarPuntoVentaCufd->save()) {
-                return responseJson('Punto Venta Sincronizado Exitosamente', $registrarPuntoVenta, 200);
-            } else {
-                return responseJson('Error al Sincronizar Punto Venta ', $registrarPuntoVenta, 500);
-            }
+
+            return $registrarPuntoVentaCufd->save() ? true : false;
         } catch (\Exception $e) {
             DB::rollback();
             return responseJson('Server Error', [

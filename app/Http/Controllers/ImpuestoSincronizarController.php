@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\ImpuestoDocumentoIdentidad;
+use App\Models\ImpuestoDocumentoSector;
 use App\Models\ImpuestoEventoSignificativo;
 use App\Models\ImpuestoLeyendaFactura;
+use App\Models\ImpuestoListadoActividad;
 use App\Models\ImpuestoListadoPais;
 use App\Models\ImpuestoMensajeServicio;
 use App\Models\ImpuestoMetodoPago;
@@ -44,20 +46,32 @@ class ImpuestoSincronizarController extends Controller
         }
     }
 
-    public function storeActividadesDocumentoSector($dataSincronizar) //check
+    public function storeActividadesDocumentoSector($dataSincronizar)
     {
         $resActividadDocSector =  $this->sincronizar->sincronizarListaActividadesDocumentoSector($dataSincronizar);
+        $cantidadRegistrosBD = ImpuestoTipoDocumentoSector::count();
+        $cantidadActividadesDS = $resActividadDocSector->content->listaActividadesDocumentoSector;
+        $actividadesDocSectores = $resActividadDocSector->content->listaActividadesDocumentoSector;
+        if ($cantidadRegistrosBD < $cantidadActividadesDS) {
+            foreach ($actividadesDocSectores as $actividadDS) {
+                ImpuestoTipoDocumentoSector::create([
+                    'codigo_actividad' => $actividadDS->codigoActividad,
+                    'codigo_documento_sector' => $actividadDS->codigoDocumentoSector,
+                    'tipo_documento_sector' => $actividadDS->tipoDocumentoSector,
+                ]);
+            }
+        }
     }
 
     public function storeParametricaTipoDocumentoSector($dataSincronizar)
     {
         $resParametricaDocSector =  $this->sincronizar->sincronizarParametricaTipoDocumentoSector($dataSincronizar);
-        $cantidadRegistrosBD = ImpuestoTipoDocumentoSector::count();
+        $cantidadRegistrosBD = ImpuestoDocumentoSector::count();
         $cantidadTipoDocumentoSector = count($resParametricaDocSector->content->listaCodigos);
         $tiposDocumentosSectores = $resParametricaDocSector->content->listaCodigos;
         if ($cantidadRegistrosBD < $cantidadTipoDocumentoSector) {
             foreach ($tiposDocumentosSectores as $tipoDocumentoSector) {
-                ImpuestoTipoDocumentoSector::create([
+                ImpuestoDocumentoSector::create([
                     'codigo_clasificador' => $tipoDocumentoSector->codigoClasificador,
                     'descripcion' => $tipoDocumentoSector->descripcion
                 ]);
@@ -130,9 +144,21 @@ class ImpuestoSincronizarController extends Controller
         }
     }
 
-    public function storeListaProductosServicios($dataSincronizar) //check
+    public function storeListaProductosServicios($dataSincronizar)
     {
         $resProductoServicio =  $this->sincronizar->sincronizarListaProductosServicios($dataSincronizar);
+        $cantidadRegistrosBD = ImpuestoProductoServicio::count();
+        $cantidadProductosServicios = count($resProductoServicio->content->listaCodigos);
+        $productosServicios = $resProductoServicio->content->listaCodigos;
+        if ($cantidadRegistrosBD < $cantidadProductosServicios) {
+            foreach ($productosServicios as $productoServicio) {
+                ImpuestoProductoServicio::create([
+                    'codigo_actividad' => $productoServicio->codigoActividad,
+                    'codigo_producto' => $productoServicio->codigoProducto,
+                    'descripcion_producto' => $productoServicio->descripcionProducto
+                ]);
+            }
+        }
     }
 
     public function storeParametricaTipoMoneda($dataSincronizar)
@@ -151,9 +177,21 @@ class ImpuestoSincronizarController extends Controller
         }
     }
 
-    public function storeSincronizarActividades($dataSincronizar) //check
+    public function storeSincronizarActividades($dataSincronizar)
     {
         $resSincronizarActividades =  $this->sincronizar->sincronizarActividades($dataSincronizar);
+        $cantidadActividades = count($resSincronizarActividades->content->listaActividades);
+        $cantidadRegistrosBD = ImpuestoListadoActividad::count();
+        $actividades = $resSincronizarActividades->content->listaActividades;
+        if ($cantidadRegistrosBD < $cantidadActividades) {
+            foreach ($actividades as $actividad) {
+                ImpuestoListadoActividad::create([
+                    'codigo_caeb' => $actividad->codigoCaeb,
+                    'descripcion' => $actividad->descripcion,
+                    'tipo_actividad' => $actividad->tipoActividad
+                ]);
+            }
+        }
     }
 
     public function storeParametricaTipoEmision($dataSincronizar)
@@ -186,23 +224,22 @@ class ImpuestoSincronizarController extends Controller
                 ]);
             }
         }
-
     }
 
-    public function storeSincronizarListaLeyendasFactura($dataSincronizar) //check
+    public function storeSincronizarListaLeyendasFactura($dataSincronizar)
     {
-       /*  $resListaLeyendasFactura =  $this->sincronizar->sincronizarListaLeyendasFactura($dataSincronizar);
+        $resListaLeyendasFactura =  $this->sincronizar->sincronizarListaLeyendasFactura($dataSincronizar);
         $cantidadRegistrosBD = ImpuestoLeyendaFactura::count();
-        $cantidadLeyendasFacturas = count($resListaLeyendasFactura->content->listaCodigos);
-        $tiposLeyendasFacturas = $resListaLeyendasFactura->content->listaCodigos;
+        $cantidadLeyendasFacturas = count($resListaLeyendasFactura->content->listaLeyendas);
+        $tiposLeyendasFacturas = $resListaLeyendasFactura->content->listaLeyendas;
         if ($cantidadRegistrosBD < $cantidadLeyendasFacturas) {
             foreach ($tiposLeyendasFacturas as $leyendaFactura) {
                 ImpuestoLeyendaFactura::create([
-                    'codigo_clasificador' => $leyendaFactura->codigoClasificador,
-                    'descripcion' => $leyendaFactura->descripcion
+                    'codigo_actividad' => $leyendaFactura->codigoActividad,
+                    'descripcion_leyenda' => $leyendaFactura->descripcionLeyenda
                 ]);
             }
-        } */
+        }
     }
 
     public function storeParametricaTipoMetodoPago($dataSincronizar)
@@ -257,6 +294,7 @@ class ImpuestoSincronizarController extends Controller
     public function storeFechaHoraImpuesto($dataSincronizar) //check
     {
         $resFechaHora =  $this->sincronizar->sincronizarFechaHora($dataSincronizar);
+        return isset($resFechaHora->content->fechaHora) ? $resFechaHora->content->fechaHora : null;
     }
 
 
@@ -279,22 +317,22 @@ class ImpuestoSincronizarController extends Controller
     public function sincronizarCatalogosImpuestos($dataSincronizar)
     {
         $this->storeParametricaMotivoAnulacion($dataSincronizar);
-        /* $this->storeActividadesDocumentoSector($dataSincronizar);  no*/
+        $this->storeActividadesDocumentoSector($dataSincronizar);
         $this->storeParametricaTipoDocumentoSector($dataSincronizar);
         $this->storeParametricaTipoFactura($dataSincronizar);
         $this->storeListaMensajesServicio($dataSincronizar);
         $this->storeParametricaEventoSignificativo($dataSincronizar);
         $this->storeParametricaTipoPuntoVenta($dataSincronizar);
-        /* $this->storeListaProductosServicios($dataSincronizar);  no*/
+        $this->storeListaProductosServicios($dataSincronizar);
         $this->storeParametricaTipoMoneda($dataSincronizar);
-        /* $this->storeSincronizarActividades($dataSincronizar); no */
+        $this->storeSincronizarActividades($dataSincronizar);
         $this->storeParametricaTipoEmision($dataSincronizar);
         $this->storeParametricaTipoDocumentoIdentidad($dataSincronizar);
-        /* $this->storeSincronizarListaLeyendasFactura($dataSincronizar); no*/
+        $this->storeSincronizarListaLeyendasFactura($dataSincronizar);
         $this->storeParametricaTipoMetodoPago($dataSincronizar);
         $this->storeParametricaUnidadMedida($dataSincronizar);
         $this->storeParametricaPaisOrigen($dataSincronizar);
-        /* $this->storeFechaHoraImpuesto($dataSincronizar); no*/
+        $this->storeFechaHoraImpuesto($dataSincronizar);
         $this->storeParametricaTipoHabitacion($dataSincronizar);
 
         return responseJson('Catalogos Sincronizados!', $dataSincronizar, 200);

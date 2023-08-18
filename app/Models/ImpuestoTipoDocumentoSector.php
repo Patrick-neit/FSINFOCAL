@@ -11,7 +11,8 @@ class ImpuestoTipoDocumentoSector extends Model
     protected $table = 'impuestos_tipos_documentos_sectores';
     protected $fillable =
     [
-        'codigo_clasificador',
-        'descripcion'
+        'codigo_actividad',
+        'codigo_documento_sector',
+        'tipo_documento_sector'
     ];
 }
