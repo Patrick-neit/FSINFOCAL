@@ -21,7 +21,7 @@ class ImpuestoRegistroPVService
             'apikey' => $this->config->configService->token_sistema
         ])
             ->post(
-                'https://www.codigos.rda-consultores.com/api/codes/cufd',
+                'https://www.codigos.rda-consultores.com/api/codes/cufd', //? Cambiar EndPoints
                 [
                     'codigoAmbiente' => $this->config->configService->codigoAmbiente,
                     'codigoModalidad' => $this->config->configService->codigoModalidad,
