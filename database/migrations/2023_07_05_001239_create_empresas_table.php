@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('correo');
             $table->string('logo')->nullable();
             $table->string('representante_legal')->nullable();
+            $table->boolean('estado')->default(1);
             $table->softDeletes();
             $table->timestamps();
         });

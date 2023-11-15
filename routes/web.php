@@ -49,18 +49,18 @@ Route::get('/user-lock-screen', [AuthenticationController::class, 'lockScreen'])
 
 Route::group([
     'prefix' => 'autentification',
-    'controller'=> AuthenticationController::class,
-], function(){
+    'controller' => AuthenticationController::class,
+], function () {
     Route::post('login', 'login')->name('autentification.login');
     Route::post('register', 'register')->name('autentification.register');
-    Route::get('userLogin', 'userLogin' )->name('autentification.userLogin'); //View
+    Route::get('userLogin', 'userLogin')->name('autentification.userLogin'); //View
 });
 
 Route::group([
     'prefix' => 'dashboard',
-    'controller'=> DashboardController::class,
-], function(){
-    Route::get('dashboardModern', 'dashboardModern')->name('dashboard.dashboardModern') ;
+    'controller' => DashboardController::class,
+], function () {
+    Route::get('dashboardModern', 'dashboardModern')->name('dashboard.dashboardModern');
     Route::get('dashboardEcommerce', 'dashboardEcommerce');
     Route::get('dashboardAnalytics', 'dashboardAnalytics');
 });
@@ -198,7 +198,7 @@ Route::get('/charts-sparklines', [ChartController::class, 'sparklines']);
 // locale route
 Route::get('lang/{locale}', [LanguageController::class, 'swap']);
 
-Route::get('/ejemplo',[EjemploController::class, 'ejemplo']);
+Route::get('/ejemplo', [EjemploController::class, 'ejemplo']);
 
 /* Rutas Alumos */
 Route::group(['middleware' => 'web'], function () {
@@ -209,10 +209,9 @@ Route::group(['middleware' => 'web'], function () {
     Route::put('/alumnos/{id}', [App\Http\Controllers\AlumnoController::class, 'update'])->name('alumnos.update');
     Route::get('/alumnos/show/{id}', [App\Http\Controllers\AlumnoController::class, 'show'])->name('alumnos.show');
     Route::delete('/alumnos', [\App\Http\Controllers\AlumnoController::class, 'destroy'])->name('alumnos.destroy');
-
 });
 
-Route::group(['middleware'=>'web'],function(){
+Route::group(['middleware' => 'web'], function () {
     Route::get('/ventas/registrar', [\App\Http\Controllers\AlumnoController::class, 'registrar_alumnos'])->name('ventas.registrar_alumnos');
 });
 
@@ -262,20 +261,18 @@ Route::group(['middleware' => 'web'], function () {
 
 Route::group([
     'prefix' => 'users',
-    'controller'=> UserController::class,
-], function(){
-    Route::get('index', 'index' )->name('users.index');
-    Route::get('asignarEmpresaUser/{id}', 'asignarEmpresaUser' )->name('users.asignarEmpresaUser');
+    'controller' => UserController::class,
+], function () {
+    Route::get('index', 'index')->name('users.index');
+    Route::get('asignarEmpresaUser/{id}', 'asignarEmpresaUser')->name('users.asignarEmpresaUser');
     Route::post('saveAsignarEmpresaUser', 'saveAsignarEmpresaUser')->name('users.saveAsignarEmpresaUser');
 });
 
 Route::group([
     'prefix' => 'puntos_ventas',
-    'controller'=> PuntoVentaController::class,
-], function(){
+    'controller' => PuntoVentaController::class,
+], function () {
     Route::get('index', 'index')->name('puntos_ventas.index');
     Route::get('create', 'create')->name('puntos_ventas.create');
     Route::post('store', 'store')->name('puntos_ventas.store');
 });
-
-
