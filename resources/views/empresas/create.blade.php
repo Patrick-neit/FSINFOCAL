@@ -55,24 +55,26 @@
                     <!-- users edit account form start -->
                     <form>
                         <div class="row">
-
                             <div class="col s12 m6">
                                 <div class="row">
                                     <div class="col s12 input-field">
                                         <input id="nombre_empresa" name="nombre_empresa" type="text" class="validate"
-                                            value="{{old('nombre_empresa')}}" data-error=".errorTxt1" required>
+                                            value="@if (isset($empresa)){{ $empresa->nombre_empresa }}@else{{old('nombre_empresa')}}@endif"
+                                            data-error=".errorTxt1" required>
                                         <label for="nombre_empresa">Nombre Empresa</label>
                                         <small class="errorTxt1"></small>
                                     </div>
                                     <div class="col s12 input-field">
                                         <input id="nro_nit_empresa" name="nro_nit_empresa" type="text" class="validate"
-                                            value="{{old('nro_nit_empresa')}}" data-error=".errorTxt2" required>
+                                            value="@if(isset($empresa)){{ $empresa->nro_nit_empresa }}@else{{old('nro_nit_empresa')}}@endif"
+                                            data-error=".errorTxt2" required>
                                         <label for="nro_nit_empresa">NIT</label>
                                         <small class="errorTxt2"></small>
                                     </div>
                                     <div class="col s12 input-field">
                                         <input id="correo" name="correo" type="email" class="validate"
-                                            value="{{old('correo')}}" data-error=".errorTxt3" required>
+                                            value="@if(isset($empresa)){{ $empresa->correo }}@else{{old('correo')}}@endif"
+                                            data-error=".errorTxt3" required>
                                         <label for="correo">E-mail</label>
                                         <small class="errorTxt3"></small>
                                     </div>
@@ -83,26 +85,30 @@
                                 <div class="row">
                                     <div class="col s12 input-field">
                                         <input id="direccion" name="direccion" type="text" class="validate"
-                                            value="{{old('direccion')}}" data-error=".errorTxt1" required>
+                                            value="@if(isset($empresa)){{ $empresa->direccion}}@else{{old('direccion')}}@endif"
+                                            data-error=".errorTxt1" required>
                                         <label for="direccion">Direccion</label>
                                         <small class="errorTxt1"></small>
                                     </div>
                                     <div class="col s12 input-field">
                                         <input id="telefono" name="telefono" type="number" class="validate"
-                                            value="{{old('telefono')}}" data-error=".errorTxt2" required>
+                                            value="@if(isset($empresa)){{ $empresa->telefono }}@else{{old('telefono')}}@endif"
+                                            data-error=".errorTxt2" required>
                                         <label for="telefono">Telefono</label>
                                         <small class="errorTxt2"></small>
                                     </div>
                                     <div class="col s12 input-field">
                                         <input id="representante_legal" name="representante_legal" type="text"
-                                            class="validate" value="{{old('representante_legal')}}"
+                                            class="validate"
+                                            value="@if(isset($empresa)) {{$empresa->representante_legal}} @else{{old('representante_legal')}}@endif"
                                             data-error=".errorTxt3" required>
                                         <label for="representante_legal">Representante - Legal</label>
                                         <small class="errorTxt3"></small>
                                     </div>
                                 </div>
                             </div>
-
+                            <input type="hidden" id="id_empresa" name="id"
+                                value="@if(isset($empresa)){{ $empresa->id }}@endif">
                             <div class="col s12 m12">
                                 <div class="row">
                                     {{-- <div class="col s12 input-field">
@@ -114,12 +120,18 @@
                                     </div> --}}
 
                                     <div class="col s12 input-field">
-                                        <select>
-                                            <option>Active</option>
-                                            <option>Banned</option>
-                                            <option>Close</option>
+                                        <select class="form-control" name="estado" id="estado">
+                                            <option @if (isset($empresa)) @if ($empresa->estado == 1)
+                                                selected
+                                                @endif
+                                                @endif value="1">Activo</option>
+                                            <option @if (isset($empresa)) @if ($empresa->estado == 0)
+                                                selected
+                                                @endif
+                                                @endif
+                                                value="0">Inactivo</option>
                                         </select>
-                                        <label>Status</label>
+                                        <label>Estado</label>
                                     </div>
 
                                 </div>

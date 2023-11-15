@@ -20,10 +20,18 @@ class EmpresaController extends Controller
         return view('empresas.create');
     }
 
+    public function edit($id)
+    {
+        $empresa = Empresa::find($id);
+        return view('empresas.create', compact('empresa'));
+    }
+
     public function store(Request $request)
     {
         try {
-
+            if (!empty($request->id_empresa)) {
+                return $this->update($request);
+            }
             $enterprise = new Empresa();
             $enterprise->nombre_empresa  = $request->nombre_empresa;
             $enterprise->nro_nit_empresa = $request->nro_nit_empresa;
@@ -35,16 +43,40 @@ class EmpresaController extends Controller
             $enterprise->save();
 
             if ($enterprise->save()) {
-                return responseJson('Registrado Exitosamente', $enterprise,200);
-            }else{
-                return responseJson('Something went Wrong', $enterprise,400);
+                return responseJson('Registrado Exitosamente', $enterprise, 200);
+            } else {
+                return responseJson('Something went Wrong', $enterprise, 400);
             }
-
         } catch (\Exception $e) {
-            return responseJson('Server Error',[
-                'message'=> $e->getMessage(),
-                'code'=> $e->getCode(),
-            ],500);
+            return responseJson('Server Error', [
+                'message' => $e->getMessage(),
+                'code' => $e->getCode(),
+            ], 500);
+        }
+    }
+
+    public function update(Request $request)
+    {
+        try {
+            $enterprise = Empresa::find($request->id_empresa);
+            $enterprise->nombre_empresa  = $request->nombre_empresa;
+            $enterprise->nro_nit_empresa = $request->nro_nit_empresa;
+            $enterprise->direccion       = $request->direccion;
+            $enterprise->telefono        = $request->telefono;
+            $enterprise->correo          = $request->correo;
+            $enterprise->logo            = $request->logo;
+            $enterprise->representante_legal = $request->representante_legal;
+            $enterprise->save();
+            if ($enterprise->save()) {
+                return responseJson('Actualizado Exitosamente', $enterprise, 200);
+            } else {
+                return responseJson('Something went Wrong', $enterprise, 400);
+            }
+        } catch (\Exception $e) {
+            return responseJson('Server Error', [
+                'message' => $e->getMessage(),
+                'code' => $e->getCode(),
+            ], 500);
         }
     }
 
@@ -54,16 +86,14 @@ class EmpresaController extends Controller
             $enterprise = Empresa::find($request->empresa_id);
             $enterprise->delete();
 
-            if($enterprise->trashed()){
-                return responseJson('Eliminado Exitosamente', $enterprise,200);
+            if ($enterprise->trashed()) {
+                return responseJson('Eliminado Exitosamente', $enterprise, 200);
             }
-
         } catch (\Exception $e) {
-            return responseJson('Server Error',[
-                'message'=> $e->getMessage(),
-                'code'=> $e->getCode(),
-            ],500);
+            return responseJson('Server Error', [
+                'message' => $e->getMessage(),
+                'code' => $e->getCode(),
+            ], 500);
         }
-
     }
 }

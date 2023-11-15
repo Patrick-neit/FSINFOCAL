@@ -109,7 +109,7 @@
                                 <td>+ 591 {{ $empresa->telefono }}</td>
                                 <td>{{ $empresa->representante_legal }}</td>
                                 <td class="text-center">
-                                    <a href="{{ asset('page-users-edit') }}">
+                                    <a href="{{ route('empresas.edit', $empresa->id)}}">
                                         <i class="material-icons">edit</i>
                                     </a>
                                     <span><a onclick="eliminar('{{ $empresa->id }}')"><i
