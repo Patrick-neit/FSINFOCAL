@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Empresa extends Model
@@ -21,7 +22,7 @@ class Empresa extends Model
         'representante_legal'
     ];
 
-    public function configuracion_impuesto ()
+    public function configuracion_impuesto()
     {
         return $this->hasOne(ConfiguracionImpuesto::class);
     }
@@ -36,7 +37,8 @@ class Empresa extends Model
         return $this->hasMany(ImpuestoCuis::class);
     }
 
-    public function users(){
+    public function users()
+    {
         return $this->belongsToMany(User::class);
     }
 
@@ -58,5 +60,10 @@ class Empresa extends Model
     public function puntos_ventas()
     {
         return $this->hasMany(PuntoVenta::class);
+    }
+
+    public function binacle(): MorphMany
+    {
+        return $this->morphMany(Binnacle::class, 'binnacleable');
     }
 }
