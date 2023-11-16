@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    public function store(Request $request)
+    {
+        dd($request->all());
+    }
     public function usersList()
     {
         $breadcrumbs = [
@@ -69,7 +73,6 @@ class UserController extends Controller
             } else {
                 return responseJson('Something went Wrong', $user->empresas, 400);
             }
-
         } catch (\Exception $e) {
             return responseJson('Server Error', [
                 'message' => $e->getMessage(),
