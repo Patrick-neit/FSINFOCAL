@@ -17,10 +17,14 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('avatar');
+            $table->string('rol')->nullable(); //esto era antes departamento
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->boolean('estado')->default(1);
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

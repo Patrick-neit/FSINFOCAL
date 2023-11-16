@@ -553,6 +553,8 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Binnacle> $binacle
+ * @property-read int|null $binacle_count
  * @property-read \App\Models\Empresa|null $empresa
  * @property-read \App\Models\Sucursal|null $sucursal
  * @property-read \App\Models\User|null $user
