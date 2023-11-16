@@ -46,4 +46,11 @@ class StoreConfImpRequest extends FormRequest
             'estado' => 'required|integer',
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'empresa_id.unique' => 'Ya existe una configuración para esta empresa.',
+        ];
+    }
 }

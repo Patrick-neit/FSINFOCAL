@@ -177,7 +177,7 @@ registrarConfiguracionImpuestoButton.addEventListener(
                     });
                 } else {
                     M.toast({
-                        html: data.description,
+                        html: data.content.empresa_id[0],
                         classes: "rounded",
                         displayLength: 3000,
                         classes: "blue lighten-1",
