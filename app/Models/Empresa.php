@@ -19,7 +19,7 @@ class Empresa extends Model
         'telefono',
         'correo',
         'logo',
-        'representante_legal'
+        'representante_legal',
     ];
 
     public function configuracion_impuesto()

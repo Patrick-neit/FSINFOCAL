@@ -16,12 +16,12 @@ return new class extends Migration
         Schema::create('configuraciones_impuestos', function (Blueprint $table) {
             $table->id();
             $table->string('nombre_sistema');
-            $table->boolean('ambiente')->comment('1:Produccion|2:Pruebas') ;
+            $table->boolean('ambiente')->comment('1:Produccion|2:Pruebas');
             $table->boolean('modalidad')->comment('1:Linea|2:OffLinea');
-
             $table->text('codigo_sistema');
             $table->text('token_sistema');
             $table->unsignedBigInteger('empresa_id');
+            $table->boolean('estado')->default(1);
             $table->softDeletes();
             $table->timestamps();
         });

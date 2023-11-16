@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ConfiguracionImpuesto extends Model
@@ -19,11 +20,17 @@ class ConfiguracionImpuesto extends Model
         'modalidad',
         'codigo_sistema',
         'token_sistema',
-        'empresa_id'
+        'empresa_id',
+        'estado'
     ];
 
     public function empresa()
     {
         return $this->belongsTo(Empresa::class);
+    }
+
+    public function binacle(): MorphMany
+    {
+        return $this->morphMany(Binnacle::class, 'binnacleable');
     }
 }
