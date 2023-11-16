@@ -8,11 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class ImpuestoProductoServicio extends Model
 {
     use HasFactory;
+
     protected $table = 'impuestos_productos_servicios';
+
     protected $fillable =
     [
         'codigo_actividad',
         'codigo_producto',
-        'descripcion_producto'
+        'descripcion_producto',
     ];
 }

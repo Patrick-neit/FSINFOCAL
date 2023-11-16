@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class ImpuestoFechaHora extends Model
 {
     use HasFactory;
+
     protected $table = 'impuestos_fechas_horas';
+
     protected $fillable =
     [
         'fecha_hora',

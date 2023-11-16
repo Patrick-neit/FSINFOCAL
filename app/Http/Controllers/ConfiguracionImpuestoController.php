@@ -13,11 +13,14 @@ class ConfiguracionImpuestoController extends Controller
     public function index()
     {
         $taxesConfigurations = ConfiguracionImpuesto::where('empresa_id', Auth::user()->empresas[0]->id)->get();
+
         return view('configuraciones_impuestos.index', compact('taxesConfigurations'));
     }
+
     public function create()
     {
         $enterprises = Empresa::all();
+
         return view('configuraciones_impuestos.create', compact('enterprises'));
     }
 
@@ -25,13 +28,14 @@ class ConfiguracionImpuestoController extends Controller
     {
         $conf = ConfiguracionImpuesto::find($id);
         $enterprises = Empresa::all();
+
         return view('configuraciones_impuestos.create', compact('conf', 'enterprises'));
     }
 
     public function store(StoreConfImpRequest $request)
     {
         try {
-            if (!empty($request->id_conf)) {
+            if (! empty($request->id_conf)) {
                 return $this->update($request);
             }
             $taxesConfiguration = new ConfiguracionImpuesto();

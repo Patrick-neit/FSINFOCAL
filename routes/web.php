@@ -1,28 +1,26 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\LanguageController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\ApplicationController;
-use App\Http\Controllers\UserProfileController;
-use App\Http\Controllers\PageController;
-use App\Http\Controllers\MediaController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\AuthenticationController;
-use App\Http\Controllers\MiscController;
-use App\Http\Controllers\CardController;
-use App\Http\Controllers\CssController;
-use App\Http\Controllers\BasicUiController;
 use App\Http\Controllers\AdvanceUiController;
-use App\Http\Controllers\AlumnoController;
-use App\Http\Controllers\ExtraComponentsController;
+use App\Http\Controllers\ApplicationController;
+use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\BasicTableController;
-use App\Http\Controllers\DataTableController;
-use App\Http\Controllers\FormController;
+use App\Http\Controllers\BasicUiController;
+use App\Http\Controllers\CardController;
 use App\Http\Controllers\ChartController;
+use App\Http\Controllers\CssController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DataTableController;
 use App\Http\Controllers\EjemploController;
-use App\Http\Controllers\ImpuestoCuisController;
+use App\Http\Controllers\ExtraComponentsController;
+use App\Http\Controllers\FormController;
+use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\MediaController;
+use App\Http\Controllers\MiscController;
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\PuntoVentaController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserProfileController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -65,10 +63,6 @@ Route::group([
     Route::get('dashboardAnalytics', 'dashboardAnalytics');
 });
 
-
-
-
-
 // Application Route
 Route::get('/app-email', [ApplicationController::class, 'emailApp']);
 Route::get('/app-email/content', [ApplicationController::class, 'emailContentApp']);
@@ -110,8 +104,6 @@ Route::get('/media-hover-effects', [MediaController::class, 'hoverEffect']);
 Route::get('/page-users-list', [UserController::class, 'usersList']);
 Route::get('/page-users-view', [UserController::class, 'usersView']);
 Route::get('/page-users-edit', [UserController::class, 'usersEdit']);
-
-
 
 // Misc Route
 Route::get('/page-404', [MiscController::class, 'page404']);
@@ -193,7 +185,6 @@ Route::get('/form-wizard', [FormController::class, 'formWizard']);
 Route::get('/charts-chartjs', [ChartController::class, 'chartJs']);
 Route::get('/charts-chartist', [ChartController::class, 'chartist']);
 Route::get('/charts-sparklines', [ChartController::class, 'sparklines']);
-
 
 // locale route
 Route::get('lang/{locale}', [LanguageController::class, 'swap']);

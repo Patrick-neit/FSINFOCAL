@@ -8,10 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class ImpuestoUnidadMedida extends Model
 {
     use HasFactory;
+
     protected $table = 'impuestos_unidades_medidas';
+
     protected $fillable =
     [
         'codigo_clasificador',
-        'descripcion'
+        'descripcion',
     ];
 }

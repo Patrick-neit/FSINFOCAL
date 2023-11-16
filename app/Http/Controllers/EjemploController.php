@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class EjemploController extends Controller
@@ -30,7 +29,6 @@ class EjemploController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -63,7 +61,6 @@ class EjemploController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -83,7 +80,8 @@ class EjemploController extends Controller
         //
     }
 
-    public function ejemplo(){
-        return view('ejemplos.index' );
+    public function ejemplo()
+    {
+        return view('ejemplos.index');
     }
 }

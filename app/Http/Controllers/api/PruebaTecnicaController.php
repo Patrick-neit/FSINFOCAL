@@ -25,7 +25,7 @@ class PruebaTecnicaController extends Controller
             return responseJson('Server Error', [
                 'message' => $e->getMessage(),
                 'code' => $e->getCode(),
-                'string' => $e->__toString()
+                'string' => $e->__toString(),
             ], 500);
         }
     }
@@ -33,21 +33,20 @@ class PruebaTecnicaController extends Controller
     public function storeTeacher(Request $request)
     {
         try {
-            $teacher =  new Docente();
+            $teacher = new Docente();
             $teacher->nombre = $request->nombre;
             $teacher->matricula = $request->matricula;
             $teacher->save();
 
-            return  responseJson('Saved Object', $teacher, 200);
+            return responseJson('Saved Object', $teacher, 200);
         } catch (\Exception $e) {
             return responseJson('Server Error', [
                 'message' => $e->getMessage(),
                 'code' => $e->getCode(),
-                'string' => $e->__toString()
+                'string' => $e->__toString(),
             ], 500);
         }
     }
-
 
     public function storeCourse(Request $request)
     {
@@ -57,12 +56,13 @@ class PruebaTecnicaController extends Controller
             $course->fecha_fin = $request->fecha_fin;
             $course->costo = $request->costo;
             $course->save();
+
             return responseJson('Saved Object', $course, 200);
         } catch (\Exception $e) {
             return responseJson('Server Error', [
                 'message' => $e->getMessage(),
                 'code' => $e->getCode(),
-                'string' => $e->__toString()
+                'string' => $e->__toString(),
             ], 500);
         }
     }
@@ -74,7 +74,7 @@ class PruebaTecnicaController extends Controller
             $curso_id = $request->curso_id;
             foreach ($request->alumnos_cursos as $listado) {
 
-                $detailCourse =  new AlumnoCurso();
+                $detailCourse = new AlumnoCurso();
                 $detailCourse->alumno_id = $listado['alumno_id'];
                 $detailCourse->docente_id = $listado['docente_id'];
                 $detailCourse->curso_id = $curso_id;
@@ -86,7 +86,7 @@ class PruebaTecnicaController extends Controller
             return responseJson('Server Error', [
                 'message' => $e->getMessage(),
                 'code' => $e->getCode(),
-                'string' => $e->__toString()
+                'string' => $e->__toString(),
             ], 500);
         }
     }

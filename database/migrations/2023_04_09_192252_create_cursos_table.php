@@ -19,7 +19,7 @@ return new class extends Migration
             $table->char('turno'); /* Mañana||Tarde||Noche */
             $table->date('fecha_inicio');
             $table->date('fecha_fin');
-            $table->double('costo',18,4);
+            $table->double('costo', 18, 4);
 
             $table->timestamps();
         });

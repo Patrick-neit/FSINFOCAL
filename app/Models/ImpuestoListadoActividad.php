@@ -8,11 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class ImpuestoListadoActividad extends Model
 {
     use HasFactory;
+
     protected $table = 'impuestos_listados_actividades';
+
     protected $fillable =
     [
         'codigo_caeb',
         'descripcion',
-        'tipo_actividad'
+        'tipo_actividad',
     ];
 }

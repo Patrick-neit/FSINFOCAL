@@ -13,10 +13,10 @@ class ImpuestoSincronizarService
         $this->config = new ImpuestoConfigService();
     }
 
-    function sincronizarParametricaMotivoAnulacion($dataSincronizar)
+    public function sincronizarParametricaMotivoAnulacion($dataSincronizar)
     {
         $response = Http::withHeaders([
-            'apikey' => $this->config->configService->token_sistema
+            'apikey' => $this->config->configService->token_sistema,
         ])
             ->post(
                 'https://catalogos.rda-consultores.com/api/sincronizar',
@@ -26,19 +26,19 @@ class ImpuestoSincronizarService
                     'nit' => $this->config->configService->nit,
                     'cuis' => $dataSincronizar->cuis,
                     'codigoModalidad' => $this->config->configService->codigoModalidad,
-                    'codigoSucursal' =>  $dataSincronizar->codigoSucursal,
+                    'codigoSucursal' => $dataSincronizar->codigoSucursal,
                     'codigoPuntoVenta' => $dataSincronizar->codigoPuntoVenta,
-                    'accion' => "sincronizarParametricaMotivoAnulacion"
+                    'accion' => 'sincronizarParametricaMotivoAnulacion',
                 ]
             );
 
         return $response->object();
     }
 
-    function sincronizarListaActividadesDocumentoSector($dataSincronizar)
+    public function sincronizarListaActividadesDocumentoSector($dataSincronizar)
     {
         $response = Http::withHeaders([
-            'apikey' => $this->config->configService->token_sistema
+            'apikey' => $this->config->configService->token_sistema,
         ])
             ->post(
                 'https://catalogos.rda-consultores.com/api/sincronizar',
@@ -48,19 +48,19 @@ class ImpuestoSincronizarService
                     'nit' => $this->config->configService->nit,
                     'cuis' => $dataSincronizar->cuis,
                     'codigoModalidad' => $this->config->configService->codigoModalidad,
-                    'codigoSucursal' =>  $dataSincronizar->codigoSucursal,
+                    'codigoSucursal' => $dataSincronizar->codigoSucursal,
                     'codigoPuntoVenta' => $dataSincronizar->codigoPuntoVenta,
-                    'accion' => "sincronizarListaActividadesDocumentoSector"
+                    'accion' => 'sincronizarListaActividadesDocumentoSector',
                 ]
             );
 
         return $response->object();
     }
 
-    function sincronizarParametricaTipoDocumentoSector($dataSincronizar)
+    public function sincronizarParametricaTipoDocumentoSector($dataSincronizar)
     {
         $response = Http::withHeaders([
-            'apikey' => $this->config->configService->token_sistema
+            'apikey' => $this->config->configService->token_sistema,
         ])
             ->post(
                 'https://catalogos.rda-consultores.com/api/sincronizar',
@@ -70,19 +70,19 @@ class ImpuestoSincronizarService
                     'nit' => $this->config->configService->nit,
                     'cuis' => $dataSincronizar->cuis,
                     'codigoModalidad' => $this->config->configService->codigoModalidad,
-                    'codigoSucursal' =>  $dataSincronizar->codigoSucursal,
+                    'codigoSucursal' => $dataSincronizar->codigoSucursal,
                     'codigoPuntoVenta' => $dataSincronizar->codigoPuntoVenta,
-                    'accion' => "sincronizarParametricaTipoDocumentoSector"
+                    'accion' => 'sincronizarParametricaTipoDocumentoSector',
                 ]
             );
 
         return $response->object();
     }
 
-    function sincronizarParametricaTiposFactura($dataSincronizar)
+    public function sincronizarParametricaTiposFactura($dataSincronizar)
     {
         $response = Http::withHeaders([
-            'apikey' => $this->config->configService->token_sistema
+            'apikey' => $this->config->configService->token_sistema,
         ])
             ->post(
                 'https://catalogos.rda-consultores.com/api/sincronizar',
@@ -92,19 +92,19 @@ class ImpuestoSincronizarService
                     'nit' => $this->config->configService->nit,
                     'cuis' => $dataSincronizar->cuis,
                     'codigoModalidad' => $this->config->configService->codigoModalidad,
-                    'codigoSucursal' =>  $dataSincronizar->codigoSucursal,
+                    'codigoSucursal' => $dataSincronizar->codigoSucursal,
                     'codigoPuntoVenta' => $dataSincronizar->codigoPuntoVenta,
-                    'accion' => "sincronizarParametricaTiposFactura"
+                    'accion' => 'sincronizarParametricaTiposFactura',
                 ]
             );
 
         return $response->object();
     }
 
-    function sincronizarListaMensajesServicios($dataSincronizar)
+    public function sincronizarListaMensajesServicios($dataSincronizar)
     {
         $response = Http::withHeaders([
-            'apikey' => $this->config->configService->token_sistema
+            'apikey' => $this->config->configService->token_sistema,
         ])
             ->post(
                 'https://catalogos.rda-consultores.com/api/sincronizar',
@@ -114,19 +114,19 @@ class ImpuestoSincronizarService
                     'nit' => $this->config->configService->nit,
                     'cuis' => $dataSincronizar->cuis,
                     'codigoModalidad' => $this->config->configService->codigoModalidad,
-                    'codigoSucursal' =>  $dataSincronizar->codigoSucursal,
+                    'codigoSucursal' => $dataSincronizar->codigoSucursal,
                     'codigoPuntoVenta' => $dataSincronizar->codigoPuntoVenta,
-                    'accion' => "sincronizarListaMensajesServicios"
+                    'accion' => 'sincronizarListaMensajesServicios',
                 ]
             );
 
         return $response->object();
     }
 
-    function sincronizarParametricaEventosSignificativos($dataSincronizar)
+    public function sincronizarParametricaEventosSignificativos($dataSincronizar)
     {
         $response = Http::withHeaders([
-            'apikey' => $this->config->configService->token_sistema
+            'apikey' => $this->config->configService->token_sistema,
         ])
             ->post(
                 'https://catalogos.rda-consultores.com/api/sincronizar',
@@ -136,19 +136,19 @@ class ImpuestoSincronizarService
                     'nit' => $this->config->configService->nit,
                     'cuis' => $dataSincronizar->cuis,
                     'codigoModalidad' => $this->config->configService->codigoModalidad,
-                    'codigoSucursal' =>  $dataSincronizar->codigoSucursal,
+                    'codigoSucursal' => $dataSincronizar->codigoSucursal,
                     'codigoPuntoVenta' => $dataSincronizar->codigoPuntoVenta,
-                    'accion' => "sincronizarParametricaEventosSignificativos"
+                    'accion' => 'sincronizarParametricaEventosSignificativos',
                 ]
             );
 
         return $response->object();
     }
 
-    function sincronizarParametricaTipoPuntoVenta($dataSincronizar)
+    public function sincronizarParametricaTipoPuntoVenta($dataSincronizar)
     {
         $response = Http::withHeaders([
-            'apikey' => $this->config->configService->token_sistema
+            'apikey' => $this->config->configService->token_sistema,
         ])
             ->post(
                 'https://catalogos.rda-consultores.com/api/sincronizar',
@@ -158,19 +158,19 @@ class ImpuestoSincronizarService
                     'nit' => $this->config->configService->nit,
                     'cuis' => $dataSincronizar->cuis,
                     'codigoModalidad' => $this->config->configService->codigoModalidad,
-                    'codigoSucursal' =>  $dataSincronizar->codigoSucursal,
+                    'codigoSucursal' => $dataSincronizar->codigoSucursal,
                     'codigoPuntoVenta' => $dataSincronizar->codigoPuntoVenta,
-                    'accion' => "sincronizarParametricaTipoPuntoVenta"
+                    'accion' => 'sincronizarParametricaTipoPuntoVenta',
                 ]
             );
 
         return $response->object();
     }
 
-    function sincronizarListaProductosServicios($dataSincronizar)
+    public function sincronizarListaProductosServicios($dataSincronizar)
     {
         $response = Http::withHeaders([
-            'apikey' => $this->config->configService->token_sistema
+            'apikey' => $this->config->configService->token_sistema,
         ])
             ->post(
                 'https://catalogos.rda-consultores.com/api/sincronizar',
@@ -180,19 +180,19 @@ class ImpuestoSincronizarService
                     'nit' => $this->config->configService->nit,
                     'cuis' => $dataSincronizar->cuis,
                     'codigoModalidad' => $this->config->configService->codigoModalidad,
-                    'codigoSucursal' =>  $dataSincronizar->codigoSucursal,
+                    'codigoSucursal' => $dataSincronizar->codigoSucursal,
                     'codigoPuntoVenta' => $dataSincronizar->codigoPuntoVenta,
-                    'accion' => "sincronizarListaProductosServicios"
+                    'accion' => 'sincronizarListaProductosServicios',
                 ]
             );
 
         return $response->object();
     }
 
-    function sincronizarParametricaTipoMoneda($dataSincronizar)
+    public function sincronizarParametricaTipoMoneda($dataSincronizar)
     {
         $response = Http::withHeaders([
-            'apikey' => $this->config->configService->token_sistema
+            'apikey' => $this->config->configService->token_sistema,
         ])
             ->post(
                 'https://catalogos.rda-consultores.com/api/sincronizar',
@@ -202,19 +202,19 @@ class ImpuestoSincronizarService
                     'nit' => $this->config->configService->nit,
                     'cuis' => $dataSincronizar->cuis,
                     'codigoModalidad' => $this->config->configService->codigoModalidad,
-                    'codigoSucursal' =>  $dataSincronizar->codigoSucursal,
+                    'codigoSucursal' => $dataSincronizar->codigoSucursal,
                     'codigoPuntoVenta' => $dataSincronizar->codigoPuntoVenta,
-                    'accion' => "sincronizarParametricaTipoMoneda"
+                    'accion' => 'sincronizarParametricaTipoMoneda',
                 ]
             );
 
         return $response->object();
     }
 
-    function sincronizarActividades($dataSincronizar)
+    public function sincronizarActividades($dataSincronizar)
     {
         $response = Http::withHeaders([
-            'apikey' => $this->config->configService->token_sistema
+            'apikey' => $this->config->configService->token_sistema,
         ])
             ->post(
                 'https://catalogos.rda-consultores.com/api/sincronizar',
@@ -224,19 +224,19 @@ class ImpuestoSincronizarService
                     'nit' => $this->config->configService->nit,
                     'cuis' => $dataSincronizar->cuis,
                     'codigoModalidad' => $this->config->configService->codigoModalidad,
-                    'codigoSucursal' =>  $dataSincronizar->codigoSucursal,
+                    'codigoSucursal' => $dataSincronizar->codigoSucursal,
                     'codigoPuntoVenta' => $dataSincronizar->codigoPuntoVenta,
-                    'accion' => "sincronizarActividades"
+                    'accion' => 'sincronizarActividades',
                 ]
             );
 
         return $response->object();
     }
 
-    function sincronizarParametricaTipoEmision($dataSincronizar)
+    public function sincronizarParametricaTipoEmision($dataSincronizar)
     {
         $response = Http::withHeaders([
-            'apikey' => $this->config->configService->token_sistema
+            'apikey' => $this->config->configService->token_sistema,
         ])
             ->post(
                 'https://catalogos.rda-consultores.com/api/sincronizar',
@@ -246,19 +246,19 @@ class ImpuestoSincronizarService
                     'nit' => $this->config->configService->nit,
                     'cuis' => $dataSincronizar->cuis,
                     'codigoModalidad' => $this->config->configService->codigoModalidad,
-                    'codigoSucursal' =>  $dataSincronizar->codigoSucursal,
+                    'codigoSucursal' => $dataSincronizar->codigoSucursal,
                     'codigoPuntoVenta' => $dataSincronizar->codigoPuntoVenta,
-                    'accion' => "sincronizarParametricaTipoEmision"
+                    'accion' => 'sincronizarParametricaTipoEmision',
                 ]
             );
 
         return $response->object();
     }
 
-    function sincronizarParametricaTipoDocumentoIdentidad($dataSincronizar)
+    public function sincronizarParametricaTipoDocumentoIdentidad($dataSincronizar)
     {
         $response = Http::withHeaders([
-            'apikey' => $this->config->configService->token_sistema
+            'apikey' => $this->config->configService->token_sistema,
         ])
             ->post(
                 'https://catalogos.rda-consultores.com/api/sincronizar',
@@ -268,19 +268,19 @@ class ImpuestoSincronizarService
                     'nit' => $this->config->configService->nit,
                     'cuis' => $dataSincronizar->cuis,
                     'codigoModalidad' => $this->config->configService->codigoModalidad,
-                    'codigoSucursal' =>  $dataSincronizar->codigoSucursal,
+                    'codigoSucursal' => $dataSincronizar->codigoSucursal,
                     'codigoPuntoVenta' => $dataSincronizar->codigoPuntoVenta,
-                    'accion' => "sincronizarParametricaTipoDocumentoIdentidad"
+                    'accion' => 'sincronizarParametricaTipoDocumentoIdentidad',
                 ]
             );
 
         return $response->object();
     }
 
-    function sincronizarListaLeyendasFactura($dataSincronizar)
+    public function sincronizarListaLeyendasFactura($dataSincronizar)
     {
         $response = Http::withHeaders([
-            'apikey' => $this->config->configService->token_sistema
+            'apikey' => $this->config->configService->token_sistema,
         ])
             ->post(
                 'https://catalogos.rda-consultores.com/api/sincronizar',
@@ -290,19 +290,19 @@ class ImpuestoSincronizarService
                     'nit' => $this->config->configService->nit,
                     'cuis' => $dataSincronizar->cuis,
                     'codigoModalidad' => $this->config->configService->codigoModalidad,
-                    'codigoSucursal' =>  $dataSincronizar->codigoSucursal,
+                    'codigoSucursal' => $dataSincronizar->codigoSucursal,
                     'codigoPuntoVenta' => $dataSincronizar->codigoPuntoVenta,
-                    'accion' => "sincronizarListaLeyendasFactura"
+                    'accion' => 'sincronizarListaLeyendasFactura',
                 ]
             );
 
         return $response->object();
     }
 
-    function sincronizarParametricaTipoMetodoPago($dataSincronizar)
+    public function sincronizarParametricaTipoMetodoPago($dataSincronizar)
     {
         $response = Http::withHeaders([
-            'apikey' => $this->config->configService->token_sistema
+            'apikey' => $this->config->configService->token_sistema,
         ])
             ->post(
                 'https://catalogos.rda-consultores.com/api/sincronizar',
@@ -312,20 +312,19 @@ class ImpuestoSincronizarService
                     'nit' => $this->config->configService->nit,
                     'cuis' => $dataSincronizar->cuis,
                     'codigoModalidad' => $this->config->configService->codigoModalidad,
-                    'codigoSucursal' =>  $dataSincronizar->codigoSucursal,
+                    'codigoSucursal' => $dataSincronizar->codigoSucursal,
                     'codigoPuntoVenta' => $dataSincronizar->codigoPuntoVenta,
-                    'accion' => "sincronizarParametricaTipoMetodoPago"
+                    'accion' => 'sincronizarParametricaTipoMetodoPago',
                 ]
             );
 
         return $response->object();
     }
 
-
-    function sincronizarParametricaUnidadMedida($dataSincronizar)
+    public function sincronizarParametricaUnidadMedida($dataSincronizar)
     {
         $response = Http::withHeaders([
-            'apikey' => $this->config->configService->token_sistema
+            'apikey' => $this->config->configService->token_sistema,
         ])
             ->post(
                 'https://catalogos.rda-consultores.com/api/sincronizar',
@@ -335,19 +334,19 @@ class ImpuestoSincronizarService
                     'nit' => $this->config->configService->nit,
                     'cuis' => $dataSincronizar->cuis,
                     'codigoModalidad' => $this->config->configService->codigoModalidad,
-                    'codigoSucursal' =>  $dataSincronizar->codigoSucursal,
+                    'codigoSucursal' => $dataSincronizar->codigoSucursal,
                     'codigoPuntoVenta' => $dataSincronizar->codigoPuntoVenta,
-                    'accion' => "sincronizarParametricaUnidadMedida"
+                    'accion' => 'sincronizarParametricaUnidadMedida',
                 ]
             );
 
         return $response->object();
     }
 
-    function sincronizarParametricaPaisOrigen($dataSincronizar)
+    public function sincronizarParametricaPaisOrigen($dataSincronizar)
     {
         $response = Http::withHeaders([
-            'apikey' => $this->config->configService->token_sistema
+            'apikey' => $this->config->configService->token_sistema,
         ])
             ->post(
                 'https://catalogos.rda-consultores.com/api/sincronizar',
@@ -357,19 +356,19 @@ class ImpuestoSincronizarService
                     'nit' => $this->config->configService->nit,
                     'cuis' => $dataSincronizar->cuis,
                     'codigoModalidad' => $this->config->configService->codigoModalidad,
-                    'codigoSucursal' =>  $dataSincronizar->codigoSucursal,
+                    'codigoSucursal' => $dataSincronizar->codigoSucursal,
                     'codigoPuntoVenta' => $dataSincronizar->codigoPuntoVenta,
-                    'accion' => "sincronizarParametricaPaisOrigen"
+                    'accion' => 'sincronizarParametricaPaisOrigen',
                 ]
             );
 
         return $response->object();
     }
 
-    function sincronizarFechaHora($dataSincronizar)
+    public function sincronizarFechaHora($dataSincronizar)
     {
         $response = Http::withHeaders([
-            'apikey' => $this->config->configService->token_sistema
+            'apikey' => $this->config->configService->token_sistema,
         ])
             ->post(
                 'https://catalogos.rda-consultores.com/api/sincronizar',
@@ -379,19 +378,19 @@ class ImpuestoSincronizarService
                     'nit' => $this->config->configService->nit,
                     'cuis' => $dataSincronizar->cuis,
                     'codigoModalidad' => $this->config->configService->codigoModalidad,
-                    'codigoSucursal' =>  $dataSincronizar->codigoSucursal,
+                    'codigoSucursal' => $dataSincronizar->codigoSucursal,
                     'codigoPuntoVenta' => $dataSincronizar->codigoPuntoVenta,
-                    'accion' => "sincronizarFechaHora"
+                    'accion' => 'sincronizarFechaHora',
                 ]
             );
 
         return $response->object();
     }
 
-    function sincronizarParametricaTipoHabitacion($dataSincronizar)
+    public function sincronizarParametricaTipoHabitacion($dataSincronizar)
     {
         $response = Http::withHeaders([
-            'apikey' => $this->config->configService->token_sistema
+            'apikey' => $this->config->configService->token_sistema,
         ])
             ->post(
                 'https://catalogos.rda-consultores.com/api/sincronizar',
@@ -401,9 +400,9 @@ class ImpuestoSincronizarService
                     'nit' => $this->config->configService->nit,
                     'cuis' => $dataSincronizar->cuis,
                     'codigoModalidad' => $this->config->configService->codigoModalidad,
-                    'codigoSucursal' =>  $dataSincronizar->codigoSucursal,
+                    'codigoSucursal' => $dataSincronizar->codigoSucursal,
                     'codigoPuntoVenta' => $dataSincronizar->codigoPuntoVenta,
-                    'accion' => "sincronizarParametricaTipoHabitacion"
+                    'accion' => 'sincronizarParametricaTipoHabitacion',
                 ]
             );
 

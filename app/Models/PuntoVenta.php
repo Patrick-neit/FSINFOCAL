@@ -4,13 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class PuntoVenta extends Model
 {
     use HasFactory;
     use SoftDeletes;
+
     protected $table = 'puntos_ventas';
+
     protected $fillable =
     [
         'nombre_punto_venta',
@@ -19,7 +22,7 @@ class PuntoVenta extends Model
         'descripcion_punto_venta',
         'user_id',
         'sucursal_id',
-        'empresa_id'
+        'empresa_id',
     ];
 
     public function user()
@@ -27,7 +30,7 @@ class PuntoVenta extends Model
         return $this->belongsTo(User::class);
     }
 
-     public function sucursal()
+    public function sucursal()
     {
         return $this->belongsTo(Sucursal::class);
     }
@@ -37,5 +40,8 @@ class PuntoVenta extends Model
         return $this->belongsTo(Empresa::class);
     }
 
-
+    public function binacle(): MorphMany
+    {
+        return $this->morphMany(Binnacle::class, 'binnacleable');
+    }
 }

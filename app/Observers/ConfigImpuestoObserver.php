@@ -9,7 +9,6 @@ class ConfigImpuestoObserver
     /**
      * Handle the ConfiguracionImpuesto "created" event.
      *
-     * @param  \App\Models\ConfiguracionImpuesto  $configuracionImpuesto
      * @return void
      */
     public function created(ConfiguracionImpuesto $configuracionImpuesto)
@@ -20,7 +19,6 @@ class ConfigImpuestoObserver
     /**
      * Handle the ConfiguracionImpuesto "updated" event.
      *
-     * @param  \App\Models\ConfiguracionImpuesto  $configuracionImpuesto
      * @return void
      */
     public function updated(ConfiguracionImpuesto $configuracionImpuesto)
@@ -31,7 +29,6 @@ class ConfigImpuestoObserver
     /**
      * Handle the ConfiguracionImpuesto "deleted" event.
      *
-     * @param  \App\Models\ConfiguracionImpuesto  $configuracionImpuesto
      * @return void
      */
     public function deleted(ConfiguracionImpuesto $configuracionImpuesto)
@@ -42,7 +39,6 @@ class ConfigImpuestoObserver
     /**
      * Handle the ConfiguracionImpuesto "restored" event.
      *
-     * @param  \App\Models\ConfiguracionImpuesto  $configuracionImpuesto
      * @return void
      */
     public function restored(ConfiguracionImpuesto $configuracionImpuesto)
@@ -53,7 +49,6 @@ class ConfigImpuestoObserver
     /**
      * Handle the ConfiguracionImpuesto "force deleted" event.
      *
-     * @param  \App\Models\ConfiguracionImpuesto  $configuracionImpuesto
      * @return void
      */
     public function forceDeleted(ConfiguracionImpuesto $configuracionImpuesto)

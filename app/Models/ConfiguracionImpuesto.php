@@ -13,6 +13,7 @@ class ConfiguracionImpuesto extends Model
     use SoftDeletes;
 
     protected $table = 'configuraciones_impuestos';
+
     protected $fillable =
     [
         'nombre_sistema',
@@ -21,7 +22,7 @@ class ConfiguracionImpuesto extends Model
         'codigo_sistema',
         'token_sistema',
         'empresa_id',
-        'estado'
+        'estado',
     ];
 
     public function empresa()

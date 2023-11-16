@@ -13,6 +13,7 @@ class DocenteController extends Controller
     public function index()
     {
         $docentes = Docente::where('empresa_id', Auth::user()->empresas[0]->id)->get();
+
         return view('docentes.index', compact('docentes'));
     }
 
@@ -27,24 +28,24 @@ class DocenteController extends Controller
         try {
             $fechaIncorporacion = (new Carbon($request->fecha_incorporacion_docente))->toDateString();
             $docente = new Docente();
-            $docente->nombre_completo   = $request->first_name;
-            $docente->matricula         = $request->matricula_docente;
+            $docente->nombre_completo = $request->first_name;
+            $docente->matricula = $request->matricula_docente;
             $docente->fecha_incorporacion = $fechaIncorporacion;
-            $docente->telefono          = $request->phone_docente;
-            $docente->direccion         = $request->direccion;
-            $docente->estado            = $request->estado;
-            $docente->empresa_id        = Auth::user()->empresas[0]->id;
+            $docente->telefono = $request->phone_docente;
+            $docente->direccion = $request->direccion;
+            $docente->estado = $request->estado;
+            $docente->empresa_id = Auth::user()->empresas[0]->id;
             $docente->save();
 
             if ($docente->save()) {
                 return response()->json([
                     'success' => true,
-                    'response' => 'Registrado con Exito!'
+                    'response' => 'Registrado con Exito!',
                 ]);
             } else {
                 return response()->json([
                     'success' => true,
-                    'response' => 'Something went Wrong!'
+                    'response' => 'Something went Wrong!',
                 ]);
             }
         } catch (\Exception $e) {
@@ -64,15 +65,16 @@ class DocenteController extends Controller
 
             return response()->json([
                 'success' => true,
-                'response' => 'Ha Sido Eliminado con Exito'
+                'response' => 'Ha Sido Eliminado con Exito',
             ]);
         } else {
 
             return response()->json([
                 'success' => true,
-                'response' => 'Something Went Wrong!'
+                'response' => 'Something Went Wrong!',
             ]);
         }
+
         return redirect()->route('docentes.index');
     }
 }

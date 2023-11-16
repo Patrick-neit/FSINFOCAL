@@ -10,7 +10,9 @@ class Docente extends Model
 {
     use HasFactory;
     use SoftDeletes;
+
     protected $table = 'docentes';
+
     protected $fillable = [
         'nombre_completo',
         'matricula',
@@ -18,13 +20,11 @@ class Docente extends Model
         'telefono',
         'direccion',
         'estado',
-        'empresa_id'
+        'empresa_id',
     ];
 
     public function empresa()
     {
         return $this->belongsTo(Empresa::class);
     }
-
-
 }

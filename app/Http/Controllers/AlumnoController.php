@@ -14,8 +14,9 @@ class AlumnoController extends Controller
 
         $alumnos = Alumno::where('empresa_id', Auth::user()->empresas[0]->id)->get();
         $alumnosTotales = Alumno::withTrashed()->count();
-        $alumnosInactivos= Alumno::onlyTrashed()->count();
-        return view('alumnos.index', compact('alumnos','alumnosTotales','alumnosInactivos'));
+        $alumnosInactivos = Alumno::onlyTrashed()->count();
+
+        return view('alumnos.index', compact('alumnos', 'alumnosTotales', 'alumnosInactivos'));
     }
 
     public function create()
@@ -23,14 +24,10 @@ class AlumnoController extends Controller
         return view('alumnos.create');
     }
 
-
-
     public function registrar_alumnos()
     {
         return view('alumnos.registrar');
     }
-
-
 
     public function store(AlumnoStoreRequest $request)
     {
@@ -52,14 +49,14 @@ class AlumnoController extends Controller
 
             if ($alumno->save()) {
                 return response()->json([
-                    'success' => true
+                    'success' => true,
                 ]);
             }
         } catch (\Exception $e) {
-            return responseJson('Server Error',[
-                'message'=> $e->getMessage(),
-                'code'=> $e->getCode(),
-            ],500);
+            return responseJson('Server Error', [
+                'message' => $e->getMessage(),
+                'code' => $e->getCode(),
+            ], 500);
         }
 
     }
@@ -67,6 +64,7 @@ class AlumnoController extends Controller
     public function edit($id)
     {
         $alumno = Alumno::find($id);
+
         return view('alumnos.edit', compact('alumno'));
     }
 
@@ -98,16 +96,17 @@ class AlumnoController extends Controller
 
             return response()->json([
                 'success' => true,
-                'response' => 'Ha Sido Eliminado con Exito'
+                'response' => 'Ha Sido Eliminado con Exito',
             ]);
 
         } else {
 
             return response()->json([
                 'success' => true,
-                'response' => 'Something Went Wrong!'
+                'response' => 'Something Went Wrong!',
             ]);
         }
+
         return redirect()->route('alumnos.index');
     }
 
@@ -117,7 +116,7 @@ class AlumnoController extends Controller
         $students = Alumno::onlyTrashed()->get(); /* Students who has been eliminated */
         $students = Alumno::withTrashed()->restore(); /* Recover the registers who was been eliminated */
         $students = Alumno::withTrashed()->forceDelete(); /* Delete a register permanently */
-        $student  = Alumno::where('id', 1)->withTrashed()->first();
+        $student = Alumno::where('id', 1)->withTrashed()->first();
         if ($student->trashed()) {
             return true; /* The register IS IN the trash basket */
         }

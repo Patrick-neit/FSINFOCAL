@@ -1,4 +1,5 @@
 <?php
+
 // custom.php file returd default configuration setting of layouts
 return [
     'custom' => [

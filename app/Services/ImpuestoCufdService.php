@@ -14,11 +14,11 @@ class ImpuestoCufdService
         $this->config = new ImpuestoConfigService();
     }
 
-    function obtenerCufdImpuestos($dataService,$resCodigoCuis)
+    public function obtenerCufdImpuestos($dataService, $resCodigoCuis)
     {
         $sucursal = Sucursal::find($dataService->sucursal_id);
         $response = Http::withHeaders([
-            'apikey' => $this->config->configService->token_sistema
+            'apikey' => $this->config->configService->token_sistema,
         ])
             ->post(
                 'https://www.codigos.rda-consultores.com/api/codes/cufd',
@@ -28,8 +28,8 @@ class ImpuestoCufdService
                     'nit' => $this->config->configService->nit,
                     'codigoModalidad' => $this->config->configService->codigoModalidad,
                     'cuis' => $resCodigoCuis,
-                    'codigoSucursal' =>  $sucursal->codigo_sucursal,
-                    'codigoPuntoVenta' => !isset($dataService->tipo_punto_venta) ? 0 : $dataService->tipo_punto_venta
+                    'codigoSucursal' => $sucursal->codigo_sucursal,
+                    'codigoPuntoVenta' => ! isset($dataService->tipo_punto_venta) ? 0 : $dataService->tipo_punto_venta,
                 ]
             );
 

@@ -41,7 +41,7 @@ class StoreConfImpRequest extends FormRequest
                 'required',
                 Rule::unique('configuraciones_impuestos')->where(function ($query) {
                     return $query->where('id', auth()->user()->empresas[0]->id);
-                })
+                }),
             ],
             'estado' => 'required|integer',
         ];

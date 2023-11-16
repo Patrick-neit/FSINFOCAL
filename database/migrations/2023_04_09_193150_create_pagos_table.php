@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('banco')->nullable();
             $table->integer('nro_cuenta')->nullable();
             $table->integer('nro_comprobante')->nullable();
-            $table->decimal('total',18,4)->nullable();
+            $table->decimal('total', 18, 4)->nullable();
             $table->double('monto_pago');
 
             $table->unsignedBigInteger('alumno_id');

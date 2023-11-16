@@ -8,10 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class ImpuestoEventoSignificativo extends Model
 {
     use HasFactory;
+
     protected $table = 'impuestos_eventos_significativos';
+
     protected $fillable =
     [
         'codigo_clasificador',
-        'descripcion'
+        'descripcion',
     ];
 }

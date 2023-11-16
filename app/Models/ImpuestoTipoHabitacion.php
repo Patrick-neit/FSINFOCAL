@@ -8,10 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class ImpuestoTipoHabitacion extends Model
 {
     use HasFactory;
+
     protected $table = 'impuestos_tipos_habitaciones';
+
     protected $fillable =
     [
         'codigo_clasificador',
-        'descripcion'
+        'descripcion',
     ];
 }

@@ -10,6 +10,7 @@ class Alumno extends Model
 {
     use HasFactory;
     use SoftDeletes;
+
     protected $table = 'alumnos';
 
     protected $fillable =
@@ -24,12 +25,11 @@ class Alumno extends Model
         'sexo',
         'email',
         'beca',
-        'empresa_id'
+        'empresa_id',
     ];
 
     public function empresa()
     {
         return $this->belongsTo(Empresa::class);
     }
-
 }

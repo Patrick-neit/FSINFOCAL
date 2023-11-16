@@ -10,7 +10,6 @@ class EmpresaObserver
     /**
      * Handle the Empresa "created" event.
      *
-     * @param  \App\Models\Empresa  $empresa
      * @return void
      */
     public function created(Empresa $empresa)
@@ -30,7 +29,6 @@ class EmpresaObserver
     /**
      * Handle the Empresa "updated" event.
      *
-     * @param  \App\Models\Empresa  $empresa
      * @return void
      */
     public function updated(Empresa $empresa)
@@ -48,7 +46,6 @@ class EmpresaObserver
     /**
      * Handle the Empresa "deleted" event.
      *
-     * @param  \App\Models\Empresa  $empresa
      * @return void
      */
     public function deleted(Empresa $empresa)
@@ -66,7 +63,6 @@ class EmpresaObserver
     /**
      * Handle the Empresa "restored" event.
      *
-     * @param  \App\Models\Empresa  $empresa
      * @return void
      */
     public function restored(Empresa $empresa)
@@ -77,7 +73,6 @@ class EmpresaObserver
     /**
      * Handle the Empresa "force deleted" event.
      *
-     * @param  \App\Models\Empresa  $empresa
      * @return void
      */
     public function forceDeleted(Empresa $empresa)

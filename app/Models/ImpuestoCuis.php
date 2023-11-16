@@ -12,6 +12,7 @@ class ImpuestoCuis extends Model
     use SoftDeletes;
 
     protected $table = 'impuestos_cuis';
+
     protected $fillable =
     [
         'fecha_generado',
@@ -19,7 +20,7 @@ class ImpuestoCuis extends Model
         'codigo_cuis',
         'estado',
         'sucursal_id',
-        'empresa_id'
+        'empresa_id',
     ];
 
     public function sucursal()
@@ -31,5 +32,4 @@ class ImpuestoCuis extends Model
     {
         return $this->belongsTo(Empresa::class);
     }
-
 }

@@ -26,8 +26,3 @@ Route::post('/pruebas_tecnicas/storeTeacher', [PruebaTecnicaController::class, '
 Route::post('/pruebas_tecnicas/storeCourse', [PruebaTecnicaController::class, 'storeCourse']);
 
 Route::post('/pruebas_tecnicas/storeDetailCourse', [PruebaTecnicaController::class, 'storeDetailCourse']);
-
-
-
-
-

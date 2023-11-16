@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\PuntoVenta;
 use App\Models\Binnacle;
+use App\Models\PuntoVenta;
 
 function responseJson($description, $content, $status)
 {
@@ -15,6 +15,7 @@ function responseJson($description, $content, $status)
 function verificarSiPuntoVenta($userID, $empresaID)
 {
     $puntoVentaUsuario = PuntoVenta::where('user_id', $userID)->where('empresa_id', $empresaID)->first();
+
     return isset($puntoVentaUsuario) ? true : false;
 }
 

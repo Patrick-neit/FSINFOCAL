@@ -12,12 +12,14 @@ class SucursalController extends Controller
     public function index()
     {
         $branches = Sucursal::where('empresa_id', Auth::user()->empresas[0]->id)->get();
+
         return view('sucursales.index', compact('branches'));
     }
 
     public function create()
     {
         $empresas = Empresa::where('id', Auth::user()->empresas[0]->id)->get();
+
         return view('sucursales.create', compact('empresas'));
     }
 
@@ -32,16 +34,16 @@ class SucursalController extends Controller
             $branch->empresa_id = $request->empresa_id;
             $branch->save();
             if ($branch->save()) {
-                return responseJson('Registrado Exitosamente', $branch,200);
+                return responseJson('Registrado Exitosamente', $branch, 200);
 
-            }else{
-                return responseJson('Something went Wrong', $branch,400);
+            } else {
+                return responseJson('Something went Wrong', $branch, 400);
             }
         } catch (\Exception $e) {
-            return responseJson('Server Error',[
-                'message'=> $e->getMessage(),
-                'code'=> $e->getCode(),
-            ],500);
+            return responseJson('Server Error', [
+                'message' => $e->getMessage(),
+                'code' => $e->getCode(),
+            ], 500);
         }
     }
 
@@ -53,13 +55,13 @@ class SucursalController extends Controller
             $branch->delete();
 
             if ($branch->trashed()) {
-                return responseJson('Eliminado Exitosamente', $branch,200);
+                return responseJson('Eliminado Exitosamente', $branch, 200);
             }
         } catch (\Exception $e) {
-            return responseJson('Server Error',[
-                'message'=> $e->getMessage(),
-                'code'=> $e->getCode(),
-            ],500);
+            return responseJson('Server Error', [
+                'message' => $e->getMessage(),
+                'code' => $e->getCode(),
+            ], 500);
         }
     }
 }

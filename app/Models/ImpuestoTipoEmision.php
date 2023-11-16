@@ -8,10 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class ImpuestoTipoEmision extends Model
 {
     use HasFactory;
+
     protected $table = 'impuestos_tipos_emisiones';
+
     protected $fillable =
     [
         'codigo_clasificador',
-        'descripcion'
+        'descripcion',
     ];
 }

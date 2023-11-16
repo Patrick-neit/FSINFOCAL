@@ -11,7 +11,9 @@ class Empresa extends Model
 {
     use HasFactory;
     use SoftDeletes;
+
     protected $table = 'empresas';
+
     protected $fillable = [
         'nombre_empresa',
         'nro_nit_empresa',

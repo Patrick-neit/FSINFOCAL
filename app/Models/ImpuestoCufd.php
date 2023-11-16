@@ -10,7 +10,9 @@ class ImpuestoCufd extends Model
 {
     use HasFactory;
     use SoftDeletes;
+
     protected $table = 'impuestos_cufds';
+
     protected $fillable =
     [
         'fecha_generado',
@@ -20,7 +22,7 @@ class ImpuestoCufd extends Model
         'direccion',
         'estado',
         'sucursal_id',
-        'empresa_id'
+        'empresa_id',
     ];
 
     public function sucursal()
@@ -32,6 +34,4 @@ class ImpuestoCufd extends Model
     {
         return $this->belongsTo(Empresa::class);
     }
-
-
 }

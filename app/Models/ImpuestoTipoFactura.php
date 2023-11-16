@@ -8,10 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class ImpuestoTipoFactura extends Model
 {
     use HasFactory;
+
     protected $table = 'impuestos_tipos_facturas';
+
     protected $fillable =
     [
         'codigo_clasificador',
-        'descripcion'
+        'descripcion',
     ];
 }

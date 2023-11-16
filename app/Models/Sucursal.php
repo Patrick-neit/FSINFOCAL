@@ -10,6 +10,7 @@ class Sucursal extends Model
 {
     use HasFactory;
     use SoftDeletes;
+
     protected $table = 'sucursales';
 
     protected $fillable =
@@ -18,7 +19,7 @@ class Sucursal extends Model
         'direccion',
         'codigo_sucursal',
         'telefono',
-        'empresa_id'
+        'empresa_id',
     ];
 
     public function empresa()
@@ -35,5 +36,4 @@ class Sucursal extends Model
     {
         return $this->hasMany(PuntoVenta::class);
     }
-
 }

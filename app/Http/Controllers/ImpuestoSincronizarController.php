@@ -29,9 +29,10 @@ class ImpuestoSincronizarController extends Controller
     {
         $this->sincronizar = new ImpuestoSincronizarService();
     }
+
     public function storeParametricaMotivoAnulacion($dataSincronizar)
     {
-        $resMotivoAnulacion =  $this->sincronizar->sincronizarParametricaMotivoAnulacion($dataSincronizar);
+        $resMotivoAnulacion = $this->sincronizar->sincronizarParametricaMotivoAnulacion($dataSincronizar);
         $cantidadRegistrosBD = ImpuestoMotivoAnulacion::count();
         $cantidadMotivosAnulaciones = count($resMotivoAnulacion->content->listaCodigos);
 
@@ -40,7 +41,7 @@ class ImpuestoSincronizarController extends Controller
             foreach ($motivosAnulaciones as $motivoAnulacion) {
                 ImpuestoMotivoAnulacion::create([
                     'codigo_clasificador' => $motivoAnulacion->codigoClasificador,
-                    'descripcion' => $motivoAnulacion->descripcion
+                    'descripcion' => $motivoAnulacion->descripcion,
                 ]);
             }
         }
@@ -48,7 +49,7 @@ class ImpuestoSincronizarController extends Controller
 
     public function storeActividadesDocumentoSector($dataSincronizar)
     {
-        $resActividadDocSector =  $this->sincronizar->sincronizarListaActividadesDocumentoSector($dataSincronizar);
+        $resActividadDocSector = $this->sincronizar->sincronizarListaActividadesDocumentoSector($dataSincronizar);
         $cantidadRegistrosBD = ImpuestoTipoDocumentoSector::count();
         $cantidadActividadesDS = $resActividadDocSector->content->listaActividadesDocumentoSector;
         $actividadesDocSectores = $resActividadDocSector->content->listaActividadesDocumentoSector;
@@ -65,7 +66,7 @@ class ImpuestoSincronizarController extends Controller
 
     public function storeParametricaTipoDocumentoSector($dataSincronizar)
     {
-        $resParametricaDocSector =  $this->sincronizar->sincronizarParametricaTipoDocumentoSector($dataSincronizar);
+        $resParametricaDocSector = $this->sincronizar->sincronizarParametricaTipoDocumentoSector($dataSincronizar);
         $cantidadRegistrosBD = ImpuestoDocumentoSector::count();
         $cantidadTipoDocumentoSector = count($resParametricaDocSector->content->listaCodigos);
         $tiposDocumentosSectores = $resParametricaDocSector->content->listaCodigos;
@@ -73,7 +74,7 @@ class ImpuestoSincronizarController extends Controller
             foreach ($tiposDocumentosSectores as $tipoDocumentoSector) {
                 ImpuestoDocumentoSector::create([
                     'codigo_clasificador' => $tipoDocumentoSector->codigoClasificador,
-                    'descripcion' => $tipoDocumentoSector->descripcion
+                    'descripcion' => $tipoDocumentoSector->descripcion,
                 ]);
             }
         }
@@ -81,7 +82,7 @@ class ImpuestoSincronizarController extends Controller
 
     public function storeParametricaTipoFactura($dataSincronizar)
     {
-        $resParametricaTipoFactura =  $this->sincronizar->sincronizarParametricaTiposFactura($dataSincronizar);
+        $resParametricaTipoFactura = $this->sincronizar->sincronizarParametricaTiposFactura($dataSincronizar);
         $cantidadRegistrosBD = ImpuestoTipoFactura::count();
         $cantidadTipoFactura = count($resParametricaTipoFactura->content->listaCodigos);
         $tiposFacturas = $resParametricaTipoFactura->content->listaCodigos;
@@ -89,7 +90,7 @@ class ImpuestoSincronizarController extends Controller
             foreach ($tiposFacturas as $tipoFactura) {
                 ImpuestoTipoFactura::create([
                     'codigo_clasificador' => $tipoFactura->codigoClasificador,
-                    'descripcion' => $tipoFactura->descripcion
+                    'descripcion' => $tipoFactura->descripcion,
                 ]);
             }
         }
@@ -97,7 +98,7 @@ class ImpuestoSincronizarController extends Controller
 
     public function storeListaMensajesServicio($dataSincronizar)
     {
-        $resMensajeServicio =  $this->sincronizar->sincronizarListaMensajesServicios($dataSincronizar);
+        $resMensajeServicio = $this->sincronizar->sincronizarListaMensajesServicios($dataSincronizar);
         $cantidadRegistrosBD = ImpuestoMensajeServicio::count();
         $cantidadMensajesServicios = count($resMensajeServicio->content->listaCodigos);
         $mensajesServicios = $resMensajeServicio->content->listaCodigos;
@@ -105,7 +106,7 @@ class ImpuestoSincronizarController extends Controller
             foreach ($mensajesServicios as $mensajeServicio) {
                 ImpuestoMensajeServicio::create([
                     'codigo_clasificador' => $mensajeServicio->codigoClasificador,
-                    'descripcion' => $mensajeServicio->descripcion
+                    'descripcion' => $mensajeServicio->descripcion,
                 ]);
             }
         }
@@ -113,7 +114,7 @@ class ImpuestoSincronizarController extends Controller
 
     public function storeParametricaEventoSignificativo($dataSincronizar)
     {
-        $resEventoSignificativo =  $this->sincronizar->sincronizarParametricaEventosSignificativos($dataSincronizar);
+        $resEventoSignificativo = $this->sincronizar->sincronizarParametricaEventosSignificativos($dataSincronizar);
 
         $cantidadRegistrosBD = ImpuestoEventoSignificativo::count();
         $cantidadEventosSignificativos = count($resEventoSignificativo->content->listaCodigos);
@@ -122,7 +123,7 @@ class ImpuestoSincronizarController extends Controller
             foreach ($eventosSignificativos as $eventoSignificativo) {
                 ImpuestoEventoSignificativo::create([
                     'codigo_clasificador' => $eventoSignificativo->codigoClasificador,
-                    'descripcion' => $eventoSignificativo->descripcion
+                    'descripcion' => $eventoSignificativo->descripcion,
                 ]);
             }
         }
@@ -130,7 +131,7 @@ class ImpuestoSincronizarController extends Controller
 
     public function storeParametricaTipoPuntoVenta($dataSincronizar)
     {
-        $resParametricaPuntoVenta =  $this->sincronizar->sincronizarParametricaTipoPuntoVenta($dataSincronizar);
+        $resParametricaPuntoVenta = $this->sincronizar->sincronizarParametricaTipoPuntoVenta($dataSincronizar);
         $cantidadRegistrosBD = ImpuestoTipoPuntoVenta::count();
         $cantidadTiposPuntosVentas = count($resParametricaPuntoVenta->content->listaCodigos);
         $tiposPuntosVentas = $resParametricaPuntoVenta->content->listaCodigos;
@@ -138,7 +139,7 @@ class ImpuestoSincronizarController extends Controller
             foreach ($tiposPuntosVentas as $puntoVenta) {
                 ImpuestoTipoPuntoVenta::create([
                     'codigo_clasificador' => $puntoVenta->codigoClasificador,
-                    'descripcion' => $puntoVenta->descripcion
+                    'descripcion' => $puntoVenta->descripcion,
                 ]);
             }
         }
@@ -146,7 +147,7 @@ class ImpuestoSincronizarController extends Controller
 
     public function storeListaProductosServicios($dataSincronizar)
     {
-        $resProductoServicio =  $this->sincronizar->sincronizarListaProductosServicios($dataSincronizar);
+        $resProductoServicio = $this->sincronizar->sincronizarListaProductosServicios($dataSincronizar);
         $cantidadRegistrosBD = ImpuestoProductoServicio::count();
         $cantidadProductosServicios = count($resProductoServicio->content->listaCodigos);
         $productosServicios = $resProductoServicio->content->listaCodigos;
@@ -155,7 +156,7 @@ class ImpuestoSincronizarController extends Controller
                 ImpuestoProductoServicio::create([
                     'codigo_actividad' => $productoServicio->codigoActividad,
                     'codigo_producto' => $productoServicio->codigoProducto,
-                    'descripcion_producto' => $productoServicio->descripcionProducto
+                    'descripcion_producto' => $productoServicio->descripcionProducto,
                 ]);
             }
         }
@@ -163,7 +164,7 @@ class ImpuestoSincronizarController extends Controller
 
     public function storeParametricaTipoMoneda($dataSincronizar)
     {
-        $resParametricaTipoMoneda =  $this->sincronizar->sincronizarParametricaTipoMoneda($dataSincronizar);
+        $resParametricaTipoMoneda = $this->sincronizar->sincronizarParametricaTipoMoneda($dataSincronizar);
         $cantidadTiposMonedas = count($resParametricaTipoMoneda->content->listaCodigos);
         $cantidadRegistrosBD = ImpuestoTipoMoneda::count();
         $tiposMonedas = $resParametricaTipoMoneda->content->listaCodigos;
@@ -171,7 +172,7 @@ class ImpuestoSincronizarController extends Controller
             foreach ($tiposMonedas as $tipoMoneda) {
                 ImpuestoTipoMoneda::create([
                     'codigo_clasificador' => $tipoMoneda->codigoClasificador,
-                    'descripcion' => $tipoMoneda->descripcion
+                    'descripcion' => $tipoMoneda->descripcion,
                 ]);
             }
         }
@@ -179,7 +180,7 @@ class ImpuestoSincronizarController extends Controller
 
     public function storeSincronizarActividades($dataSincronizar)
     {
-        $resSincronizarActividades =  $this->sincronizar->sincronizarActividades($dataSincronizar);
+        $resSincronizarActividades = $this->sincronizar->sincronizarActividades($dataSincronizar);
         $cantidadActividades = count($resSincronizarActividades->content->listaActividades);
         $cantidadRegistrosBD = ImpuestoListadoActividad::count();
         $actividades = $resSincronizarActividades->content->listaActividades;
@@ -188,7 +189,7 @@ class ImpuestoSincronizarController extends Controller
                 ImpuestoListadoActividad::create([
                     'codigo_caeb' => $actividad->codigoCaeb,
                     'descripcion' => $actividad->descripcion,
-                    'tipo_actividad' => $actividad->tipoActividad
+                    'tipo_actividad' => $actividad->tipoActividad,
                 ]);
             }
         }
@@ -196,7 +197,7 @@ class ImpuestoSincronizarController extends Controller
 
     public function storeParametricaTipoEmision($dataSincronizar)
     {
-        $resParametricaTipoEmision =  $this->sincronizar->sincronizarParametricaTipoEmision($dataSincronizar);
+        $resParametricaTipoEmision = $this->sincronizar->sincronizarParametricaTipoEmision($dataSincronizar);
         $cantidadRegistrosBD = ImpuestoTipoEmision::count();
         $cantidadTiposEmisiones = count($resParametricaTipoEmision->content->listaCodigos);
         $tiposEmisiones = $resParametricaTipoEmision->content->listaCodigos;
@@ -204,7 +205,7 @@ class ImpuestoSincronizarController extends Controller
             foreach ($tiposEmisiones as $tipoEmision) {
                 ImpuestoTipoEmision::create([
                     'codigo_clasificador' => $tipoEmision->codigoClasificador,
-                    'descripcion' => $tipoEmision->descripcion
+                    'descripcion' => $tipoEmision->descripcion,
                 ]);
             }
         }
@@ -212,7 +213,7 @@ class ImpuestoSincronizarController extends Controller
 
     public function storeParametricaTipoDocumentoIdentidad($dataSincronizar)
     {
-        $resParametricaTipoDocumentoIdentidad =  $this->sincronizar->sincronizarParametricaTipoDocumentoIdentidad($dataSincronizar);
+        $resParametricaTipoDocumentoIdentidad = $this->sincronizar->sincronizarParametricaTipoDocumentoIdentidad($dataSincronizar);
         $cantidadRegistrosBD = ImpuestoDocumentoIdentidad::count();
         $cantidadDocumentosIdentidad = count($resParametricaTipoDocumentoIdentidad->content->listaCodigos);
         $tiposDocumentosIdentidades = $resParametricaTipoDocumentoIdentidad->content->listaCodigos;
@@ -220,7 +221,7 @@ class ImpuestoSincronizarController extends Controller
             foreach ($tiposDocumentosIdentidades as $documentoIdentidad) {
                 ImpuestoDocumentoIdentidad::create([
                     'codigo_clasificador' => $documentoIdentidad->codigoClasificador,
-                    'descripcion' => $documentoIdentidad->descripcion
+                    'descripcion' => $documentoIdentidad->descripcion,
                 ]);
             }
         }
@@ -228,7 +229,7 @@ class ImpuestoSincronizarController extends Controller
 
     public function storeSincronizarListaLeyendasFactura($dataSincronizar)
     {
-        $resListaLeyendasFactura =  $this->sincronizar->sincronizarListaLeyendasFactura($dataSincronizar);
+        $resListaLeyendasFactura = $this->sincronizar->sincronizarListaLeyendasFactura($dataSincronizar);
         $cantidadRegistrosBD = ImpuestoLeyendaFactura::count();
         $cantidadLeyendasFacturas = count($resListaLeyendasFactura->content->listaLeyendas);
         $tiposLeyendasFacturas = $resListaLeyendasFactura->content->listaLeyendas;
@@ -236,7 +237,7 @@ class ImpuestoSincronizarController extends Controller
             foreach ($tiposLeyendasFacturas as $leyendaFactura) {
                 ImpuestoLeyendaFactura::create([
                     'codigo_actividad' => $leyendaFactura->codigoActividad,
-                    'descripcion_leyenda' => $leyendaFactura->descripcionLeyenda
+                    'descripcion_leyenda' => $leyendaFactura->descripcionLeyenda,
                 ]);
             }
         }
@@ -244,7 +245,7 @@ class ImpuestoSincronizarController extends Controller
 
     public function storeParametricaTipoMetodoPago($dataSincronizar)
     {
-        $resParametricaTipoMetodoPago =  $this->sincronizar->sincronizarParametricaTipoMetodoPago($dataSincronizar);
+        $resParametricaTipoMetodoPago = $this->sincronizar->sincronizarParametricaTipoMetodoPago($dataSincronizar);
         $cantidadRegistrosBD = ImpuestoMetodoPago::count();
         $cantidadMetodosPagos = count($resParametricaTipoMetodoPago->content->listaCodigos);
         $tiposMetodosPagos = $resParametricaTipoMetodoPago->content->listaCodigos;
@@ -252,7 +253,7 @@ class ImpuestoSincronizarController extends Controller
             foreach ($tiposMetodosPagos as $metodoPago) {
                 ImpuestoMetodoPago::create([
                     'codigo_clasificador' => $metodoPago->codigoClasificador,
-                    'descripcion' => $metodoPago->descripcion
+                    'descripcion' => $metodoPago->descripcion,
                 ]);
             }
         }
@@ -260,7 +261,7 @@ class ImpuestoSincronizarController extends Controller
 
     public function storeParametricaUnidadMedida($dataSincronizar)
     {
-        $resParametricaUnidadMedida =  $this->sincronizar->sincronizarParametricaUnidadMedida($dataSincronizar);
+        $resParametricaUnidadMedida = $this->sincronizar->sincronizarParametricaUnidadMedida($dataSincronizar);
         $cantidadRegistrosBD = ImpuestoUnidadMedida::count();
         $cantidadUnidadesMedidas = count($resParametricaUnidadMedida->content->listaCodigos);
         $tiposUnidadesMedidas = $resParametricaUnidadMedida->content->listaCodigos;
@@ -268,7 +269,7 @@ class ImpuestoSincronizarController extends Controller
             foreach ($tiposUnidadesMedidas as $unidadMedida) {
                 ImpuestoUnidadMedida::create([
                     'codigo_clasificador' => $unidadMedida->codigoClasificador,
-                    'descripcion' => $unidadMedida->descripcion
+                    'descripcion' => $unidadMedida->descripcion,
                 ]);
             }
         }
@@ -276,7 +277,7 @@ class ImpuestoSincronizarController extends Controller
 
     public function storeParametricaPaisOrigen($dataSincronizar)
     {
-        $sincronizarParametricaPaisOrigen =  $this->sincronizar->sincronizarParametricaPaisOrigen($dataSincronizar);
+        $sincronizarParametricaPaisOrigen = $this->sincronizar->sincronizarParametricaPaisOrigen($dataSincronizar);
         $cantidadRegistrosBD = ImpuestoListadoPais::count();
         $cantidadPaisesOrigen = count($sincronizarParametricaPaisOrigen->content->listaCodigos);
         $tiposPaisesOrigen = $sincronizarParametricaPaisOrigen->content->listaCodigos;
@@ -284,23 +285,22 @@ class ImpuestoSincronizarController extends Controller
             foreach ($tiposPaisesOrigen as $paisOrigen) {
                 ImpuestoListadoPais::create([
                     'codigo_clasificador' => $paisOrigen->codigoClasificador,
-                    'descripcion' => $paisOrigen->descripcion
+                    'descripcion' => $paisOrigen->descripcion,
                 ]);
             }
         }
     }
 
-
     public function storeFechaHoraImpuesto($dataSincronizar) //check
     {
-        $resFechaHora =  $this->sincronizar->sincronizarFechaHora($dataSincronizar);
+        $resFechaHora = $this->sincronizar->sincronizarFechaHora($dataSincronizar);
+
         return isset($resFechaHora->content->fechaHora) ? $resFechaHora->content->fechaHora : null;
     }
 
-
     public function storeParametricaTipoHabitacion($dataSincronizar)
     {
-        $resParametricaTipoHabitacion =  $this->sincronizar->sincronizarParametricaTipoHabitacion($dataSincronizar);
+        $resParametricaTipoHabitacion = $this->sincronizar->sincronizarParametricaTipoHabitacion($dataSincronizar);
         $cantidadRegistrosBD = ImpuestoTipoHabitacion::count();
         $cantidadHabitaciones = count($resParametricaTipoHabitacion->content->listaCodigos);
         $tiposHabitaciones = $resParametricaTipoHabitacion->content->listaCodigos;
@@ -308,7 +308,7 @@ class ImpuestoSincronizarController extends Controller
             foreach ($tiposHabitaciones as $habitacion) {
                 ImpuestoTipoHabitacion::create([
                     'codigo_clasificador' => $habitacion->codigoClasificador,
-                    'descripcion' => $habitacion->descripcion
+                    'descripcion' => $habitacion->descripcion,
                 ]);
             }
         }

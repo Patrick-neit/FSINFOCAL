@@ -1,8 +1,10 @@
-<?php // Code within app\Helpers\Helper.php
+<?php
+
+// Code within app\Helpers\Helper.php
+
 namespace App\Helpers;
 
 use Config;
-use Illuminate\Support\Str;
 
 class Helpers
 {
@@ -36,20 +38,20 @@ class Helpers
 
         // all available option of materialize template
         $allOptions = [
-            'mainLayoutType' => array('vertical-modern-menu', 'vertical-menu-nav-dark', 'vertical-gradient-menu', 'vertical-dark-menu', 'horizontal-menu'),
-            'pageHeader' => array(true, false),
-            'navbarLarge' => array(true, false),
-            'isNavbarDark' => array(null, true, false),
-            'isNavbarFixed' => array(true, false),
-            'isMenuDark' => array(null, true, false),
-            'isMenuCollapsed' => array(true, false),
-            'activeMenuType' => array('sidenav-active-square' => 'sidenav-active-square', 'sidenav-active-rounded' => 'sidenav-active-rounded', 'sidenav-active-fullwidth' => 'sidenav-active-fullwidth'),
-            'isFooterDark' => array(null, true, false),
-            'isFooterFixed' => array(false, true),
-            'isCustomizer' => array(true, false),
-            'isFabButton' => array(false, true),
-            'defaultLanguage' => array('en' => 'en', 'fr' => 'fr', 'de' => 'de', 'pt' => 'pt'),
-            'direction' => array('ltr' => 'ltr', 'rtl' => 'rtl'),
+            'mainLayoutType' => ['vertical-modern-menu', 'vertical-menu-nav-dark', 'vertical-gradient-menu', 'vertical-dark-menu', 'horizontal-menu'],
+            'pageHeader' => [true, false],
+            'navbarLarge' => [true, false],
+            'isNavbarDark' => [null, true, false],
+            'isNavbarFixed' => [true, false],
+            'isMenuDark' => [null, true, false],
+            'isMenuCollapsed' => [true, false],
+            'activeMenuType' => ['sidenav-active-square' => 'sidenav-active-square', 'sidenav-active-rounded' => 'sidenav-active-rounded', 'sidenav-active-fullwidth' => 'sidenav-active-fullwidth'],
+            'isFooterDark' => [null, true, false],
+            'isFooterFixed' => [false, true],
+            'isCustomizer' => [true, false],
+            'isFabButton' => [false, true],
+            'defaultLanguage' => ['en' => 'en', 'fr' => 'fr', 'de' => 'de', 'pt' => 'pt'],
+            'direction' => ['ltr' => 'ltr', 'rtl' => 'rtl'],
         ];
         //if any options value empty or wrong in custom.php config file then set a default value
         foreach ($allOptions as $key => $value) {
@@ -182,11 +184,13 @@ class Helpers
             'direction' => $data['direction'],
         ];
         // set default language if session hasn't locale value the set default language
-        if (!session()->has('locale')) {
+        if (! session()->has('locale')) {
             app()->setLocale($layoutClasses['defaultLanguage']);
         }
+
         return $layoutClasses;
     }
+
     // updatesPageConfig function override all configuration of custom.php file as page requirements.
     public static function updatePageConfig($pageConfigs)
     {
@@ -196,7 +200,7 @@ class Helpers
         if (isset($pageConfigs)) {
             if (count($pageConfigs) > 0) {
                 foreach ($pageConfigs as $config => $val) {
-                    Config::set($demo . '.' . $custom . '.' . $config, $val);
+                    Config::set($demo.'.'.$custom.'.'.$config, $val);
                 }
             }
         }

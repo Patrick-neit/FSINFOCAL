@@ -12,6 +12,7 @@ class Binnacle extends Model
     use HasFactory, SoftDeletes;
 
     protected $table = 'bitacora';
+
     protected $guarded = [];
 
     /**

@@ -12,7 +12,7 @@ class ImpuestoCufdController extends Controller
     {
         $registrarCufd = new ImpuestoCufd();
         $registrarCufd->fecha_generado = Carbon::now()->toDateTimeString();
-        $registrarCufd->fecha_vencimiento = (new Carbon($resCufd->content->RespuestaCufd->fechaVigencia->date))->toDateTimeString() ;
+        $registrarCufd->fecha_vencimiento = (new Carbon($resCufd->content->RespuestaCufd->fechaVigencia->date))->toDateTimeString();
         $registrarCufd->codigo_cufd = $resCufd->content->RespuestaCufd->codigo;
         $registrarCufd->codigo_control = $resCufd->content->RespuestaCufd->codigoControl;
         $registrarCufd->direccion = $resCufd->content->RespuestaCufd->direccion;
@@ -20,6 +20,7 @@ class ImpuestoCufdController extends Controller
         $registrarCufd->sucursal_id = $dataService->sucursal_id;
         $registrarCufd->empresa_id = Auth::user()->empresas[0]->id;
         $registrarCufd->save();
+
         return $registrarCufd->id;
     }
 }

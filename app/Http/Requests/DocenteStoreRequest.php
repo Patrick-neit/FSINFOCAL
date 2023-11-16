@@ -24,11 +24,11 @@ class DocenteStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'first_name'         => 'required|string',
-            'matricula_docente'  => 'required|string',
-            'phone_docente'      => 'required|string|max:8',
-            'direccion'          => 'required|string',
-            'estado'                   => 'required|string',
+            'first_name' => 'required|string',
+            'matricula_docente' => 'required|string',
+            'phone_docente' => 'required|string|max:8',
+            'direccion' => 'required|string',
+            'estado' => 'required|string',
         ];
     }
 
@@ -36,11 +36,11 @@ class DocenteStoreRequest extends FormRequest
     {
         return [
             'first_name.required' => 'Nombre es Requerido',
-            'matricula_docente.required'       => 'Matricula es Requerido',
-            'phone_docente.required'       => 'Celular es Requerido',
-            'phone_docente.integer'         => 'Celular no debe ser mayor A 8 Numeros',
-            'direccion.integer'         => 'Direccion es Requerido',
-            'estado'                   => 'Estado es Requerido'
+            'matricula_docente.required' => 'Matricula es Requerido',
+            'phone_docente.required' => 'Celular es Requerido',
+            'phone_docente.integer' => 'Celular no debe ser mayor A 8 Numeros',
+            'direccion.integer' => 'Direccion es Requerido',
+            'estado' => 'Estado es Requerido',
         ];
     }
 }

@@ -14,11 +14,11 @@ class ImpuestoCuisService
         $this->config = new ImpuestoConfigService();
     }
 
-    function obtenerCuisImpuestos($dataService)
+    public function obtenerCuisImpuestos($dataService)
     {
         $sucursal = Sucursal::find($dataService->sucursal_id);
         $response = Http::withHeaders([
-            'apikey' => $this->config->configService->token_sistema
+            'apikey' => $this->config->configService->token_sistema,
         ])
             ->post(
                 'https://www.codigos.rda-consultores.com/api/codes/cuis',
@@ -27,8 +27,8 @@ class ImpuestoCuisService
                     'codigoSistema' => $this->config->configService->codigoSistema,
                     'nit' => $this->config->configService->nit,
                     'codigoModalidad' => $this->config->configService->codigoModalidad,
-                    'codigoSucursal' =>  $sucursal->codigo_sucursal,
-                    'codigoPuntoVenta' => !isset($dataService->tipo_punto_venta) ? 0 : $dataService->tipo_punto_venta
+                    'codigoSucursal' => $sucursal->codigo_sucursal,
+                    'codigoPuntoVenta' => ! isset($dataService->tipo_punto_venta) ? 0 : $dataService->tipo_punto_venta,
                 ]
             );
 
