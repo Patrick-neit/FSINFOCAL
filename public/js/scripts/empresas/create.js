@@ -137,6 +137,8 @@ let direccion = document.getElementById("direccion");
 let telefono = document.getElementById("telefono");
 let representante_legal = document.getElementById("representante_legal");
 let id_empresa = document.getElementById("id_empresa");
+let form_empresa = document.getElementById("form_empresa");
+let logo_empresa = form_empresa.querySelector("#logo_empresa");
 
 registrarEmpresaButton.addEventListener("click", function (event) {
     event.preventDefault();
@@ -148,6 +150,7 @@ registrarEmpresaButton.addEventListener("click", function (event) {
         },
         body: JSON.stringify({
             id_empresa: id_empresa.value == "" ? 0 : id_empresa.value,
+            logo_empresa: logo_empresa.value,
             nombre_empresa: nombre_empresa.value,
             nro_nit_empresa: nro_nit_empresa.value,
             correo: correo.value,

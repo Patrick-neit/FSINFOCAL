@@ -3,7 +3,7 @@
         'name' => 'laravel/laravel',
         'pretty_version' => 'dev-develop',
         'version' => 'dev-develop',
-        'reference' => '39c84a28057553e055776bff2750df1b76216ac8',
+        'reference' => '11588154a6360579d09bd1655cf08469cd84e92c',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -36,6 +36,15 @@
             'install_path' => __DIR__ . '/../barryvdh/reflection-docblock',
             'aliases' => array(),
             'dev_requirement' => true,
+        ),
+        'brian2694/laravel-toastr' => array(
+            'pretty_version' => '5.58',
+            'version' => '5.58.0.0',
+            'reference' => '6c7d1c6a959b7042757865d3df0c2f57b912f2c1',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../brian2694/laravel-toastr',
+            'aliases' => array(),
+            'dev_requirement' => false,
         ),
         'brick/math' => array(
             'pretty_version' => '0.11.0',
@@ -466,7 +475,7 @@
         'laravel/laravel' => array(
             'pretty_version' => 'dev-develop',
             'version' => 'dev-develop',
-            'reference' => '39c84a28057553e055776bff2750df1b76216ac8',
+            'reference' => '11588154a6360579d09bd1655cf08469cd84e92c',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

@@ -53,7 +53,9 @@
                     </div> --}}
                     <!-- users edit media object ends -->
                     <!-- users edit account form start -->
-                    <form>
+                    <form id="form_empresa" method="POST" action="{{route('empresas.store')}}"
+                        enctype="multipart/form-data">
+                        @csrf
                         <div class="row">
                             <div class="col s12 m6">
                                 <div class="row">
@@ -107,19 +109,32 @@
                                     </div>
                                 </div>
                             </div>
-                            <input type="hidden" id="id_empresa" name="id"
+                            <input type="hidden" id="id_empresa" name="id_empresa"
                                 value="@if(isset($empresa)){{ $empresa->id }}@endif">
                             <div class="col s12 m12">
                                 <div class="row">
-                                    {{-- <div class="col s12 input-field">
-                                        <select>
-                                            <option>User</option>
-                                            <option>Staff</option>
-                                        </select>
-                                        <label>Role</label>
-                                    </div> --}}
-
-                                    <div class="col s12 input-field">
+                                    <div class="col s6 input-field">
+                                        <div class="col s12">
+                                            <div class="file-field input-field">
+                                                <div class="btn">
+                                                    <span>File</span>
+                                                    <input type="file" name="logo" id="logo_empresa">
+                                                </div>
+                                                <div class="file-path-wrapper">
+                                                    <input class="file-path validate" type="text">
+                                                </div>
+                                            </div>
+                                            @if (isset($empresa))
+                                            <div class="card">
+                                                <div class="card-image">
+                                                    <img src="{{ asset($empresa->logo) }}" class="responsive-img">
+                                                    <span class="card-title">Card Title</span>
+                                                </div>
+                                            </div>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="col s6 input-field">
                                         <select class="form-control" name="estado" id="estado">
                                             <option @if (isset($empresa)) @if ($empresa->estado == 1)
                                                 selected
@@ -133,11 +148,8 @@
                                         </select>
                                         <label>Estado</label>
                                     </div>
-
                                 </div>
                             </div>
-
-
                             {{-- <div class="col s12">
                                 <table class="mt-1">
                                     <thead>
@@ -237,7 +249,8 @@
                             </div> --}}
 
                             <div class="col s12 display-flex justify-content-end mt-3">
-                                <button id="registrarEmpresaButton" class="btn indigo mr-2">Guardar</button>
+                                <button id="registrarEmpresaButton" type="submit"
+                                    class="btn indigo mr-2">Guardar</button>
                                 <button type="button" class="btn btn-light">Cancel</button>
                             </div>
                         </div>
@@ -378,7 +391,7 @@
 
 {{-- page scripts --}}
 @section('page-script')
-<script src="{{asset('js/scripts/empresas/create.js')}}"></script>
+{{-- <script src="{{asset('js/scripts/empresas/create.js')}}"></script> --}}
 <script>
     let ruta_guardar_empresa = "{{route('empresas.store')}}";
     let ruta_index_empresa   = "{{route('empresas.index')}}";

@@ -145,8 +145,8 @@
 {{-- page script --}}
 @section('page-script')
 <script src="{{ asset('js/scripts/empresas/index.js') }}"></script>
-<script>
+{{-- <script>
     let ruta_index_empresa = "{{ route('empresas.index') }}";
         let ruta_eliminar_empresa = "{{ route('empresas.destroy') }}";
-</script>
+</script> --}}
 @endsection

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Empresa;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class EmpresaController extends Controller
 {
@@ -31,8 +33,11 @@ class EmpresaController extends Controller
     public function store(Request $request)
     {
         try {
-            if (! empty($request->id_empresa)) {
+            if (!empty($request->id_empresa)) {
                 return $this->update($request);
+            }
+            if ($request->hasFile('logo')) {
+                $path = Storage::disk('public')->put($request->nro_nit_empresa . '/logo', $request->file('logo'));
             }
             $enterprise = new Empresa();
             $enterprise->nombre_empresa = $request->nombre_empresa;
@@ -40,14 +45,16 @@ class EmpresaController extends Controller
             $enterprise->direccion = $request->direccion;
             $enterprise->telefono = $request->telefono;
             $enterprise->correo = $request->correo;
-            $enterprise->logo = $request->logo;
+            $enterprise->logo = '/storage/' . $path;
             $enterprise->representante_legal = $request->representante_legal;
             $enterprise->save();
-
+            $empresas = Empresa::all();
             if ($enterprise->save()) {
-                return responseJson('Registrado Exitosamente', $enterprise, 200);
+                Toastr::success('Guardado Correctamente', 'Guardado');
+                return redirect()->route('empresas.index');
             } else {
-                return responseJson('Something went Wrong', $enterprise, 400);
+                Toastr::error('Ocurrio un error', 'Error');
+                return redirect()->back();
             }
         } catch (\Exception $e) {
             return responseJson('Server Error', [
@@ -60,13 +67,16 @@ class EmpresaController extends Controller
     public function update(Request $request)
     {
         try {
+            if ($request->hasFile('logo')) {
+                $path = Storage::disk('public')->put($request->nro_nit_empresa . '/logo', $request->file('logo'));
+            }
             $enterprise = Empresa::find($request->id_empresa);
             $enterprise->nombre_empresa = $request->nombre_empresa;
             $enterprise->nro_nit_empresa = $request->nro_nit_empresa;
             $enterprise->direccion = $request->direccion;
             $enterprise->telefono = $request->telefono;
             $enterprise->correo = $request->correo;
-            $enterprise->logo = $request->logo;
+            $enterprise->logo = $request->hasFile('logo') ? '/storage/' . $path : $enterprise->logo;
             $enterprise->representante_legal = $request->representante_legal;
             $enterprise->save();
             if ($enterprise->save()) {

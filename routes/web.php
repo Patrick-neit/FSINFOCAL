@@ -221,7 +221,7 @@ Route::group(['middleware' => 'web'], function () {
 Route::group(['middleware' => 'web'], function () {
     Route::get('/empresas', [App\Http\Controllers\EmpresaController::class, 'index'])->name('empresas.index');
     Route::get('/empresas/create', [App\Http\Controllers\EmpresaController::class, 'create'])->name('empresas.create');
-    Route::post('/empresas', [App\Http\Controllers\EmpresaController::class, 'store'])->name('empresas.store');
+    Route::post('/empresas/store', [App\Http\Controllers\EmpresaController::class, 'store'])->name('empresas.store');
     Route::get('/empresas/edit/{id}', [App\Http\Controllers\EmpresaController::class, 'edit'])->name('empresas.edit');
     Route::put('/empresas/{id}', [App\Http\Controllers\EmpresaController::class, 'update'])->name('empresas.update');
     Route::get('/empresas/show/{id}', [App\Http\Controllers\EmpresaController::class, 'show'])->name('empresas.show');

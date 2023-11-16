@@ -1,4 +1,6 @@
+<script src="{{ asset('js/jquery-3.7.1.js') }}"></script>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<script src="{{ asset('js/custom/toast/toastr.min.js') }}"></script>
 <link rel="stylesheet" type="text/css" href="{{ asset('vendors/vendors.min.css') }}">
 <!-- BEGIN: VENDOR CSS-->
 @yield('vendor-style')
@@ -6,9 +8,9 @@
 <!-- BEGIN: Page Level CSS-->
 @if(!empty($configData['mainLayoutType']) && isset($configData['mainLayoutType']))
 <link rel="stylesheet" type="text/css"
-  href="{{asset('css/themes/'.$configData['mainLayoutType'].'-template/materialize.css')}}">
+    href="{{asset('css/themes/'.$configData['mainLayoutType'].'-template/materialize.css')}}">
 <link rel="stylesheet" type="text/css"
-  href="{{asset('css/themes/'.$configData['mainLayoutType'].'-template/style.css')}}">
+    href="{{asset('css/themes/'.$configData['mainLayoutType'].'-template/style.css')}}">
 
 @if($configData['mainLayoutType'] === 'horizontal-menu')
 {{-- horizontal style file only for horizontal layout --}}
@@ -28,4 +30,7 @@
 <!-- BEGIN: Custom CSS-->
 <link rel="stylesheet" type="text/css" href="{{asset('css/laravel-custom.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('css/custom/custom.css')}}">
+
 <!-- END: Custom CSS-->
+
+<link href="{{ asset('css/custom/toast/toastr.min.css') }}" rel="stylesheet">

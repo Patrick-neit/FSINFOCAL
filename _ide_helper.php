@@ -18313,6 +18313,109 @@
      
 }
 
+    namespace Brian2694\Toastr\Facades { 
+            /**
+     * 
+     *
+     */ 
+        class Toastr {
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function message()
+        {
+                        /** @var \Brian2694\Toastr\Toastr $instance */
+                        return $instance->message();
+        }
+                    /**
+         * Add a flash message to session.
+         *
+         * @param string $type Must be one of info, success, warning, error.
+         * @param string $message The flash message content.
+         * @param string $title The flash message title.
+         * @param array $options The custom options.
+         * @return void 
+         * @static 
+         */ 
+        public static function add($type, $message, $title = null, $options = [])
+        {
+                        /** @var \Brian2694\Toastr\Toastr $instance */
+                        $instance->add($type, $message, $title, $options);
+        }
+                    /**
+         * Add an info flash message to session.
+         *
+         * @param string $message The flash message content.
+         * @param string $title The flash message title.
+         * @param array $options The custom options.
+         * @return void 
+         * @static 
+         */ 
+        public static function info($message, $title = null, $options = [])
+        {
+                        /** @var \Brian2694\Toastr\Toastr $instance */
+                        $instance->info($message, $title, $options);
+        }
+                    /**
+         * Add a success flash message to session.
+         *
+         * @param string $message The flash message content.
+         * @param string $title The flash message title.
+         * @param array $options The custom options.
+         * @return void 
+         * @static 
+         */ 
+        public static function success($message, $title = null, $options = [])
+        {
+                        /** @var \Brian2694\Toastr\Toastr $instance */
+                        $instance->success($message, $title, $options);
+        }
+                    /**
+         * Add an warning flash message to session.
+         *
+         * @param string $message The flash message content.
+         * @param string $title The flash message title.
+         * @param array $options The custom options.
+         * @return void 
+         * @static 
+         */ 
+        public static function warning($message, $title = null, $options = [])
+        {
+                        /** @var \Brian2694\Toastr\Toastr $instance */
+                        $instance->warning($message, $title, $options);
+        }
+                    /**
+         * Add an error flash message to session.
+         *
+         * @param string $message The flash message content.
+         * @param string $title The flash message title.
+         * @param array $options The custom options.
+         * @return void 
+         * @static 
+         */ 
+        public static function error($message, $title = null, $options = [])
+        {
+                        /** @var \Brian2694\Toastr\Toastr $instance */
+                        $instance->error($message, $title, $options);
+        }
+                    /**
+         * Clear messages
+         *
+         * @return void 
+         * @static 
+         */ 
+        public static function clear()
+        {
+                        /** @var \Brian2694\Toastr\Toastr $instance */
+                        $instance->clear();
+        }
+         
+    }
+     
+}
+
     namespace Spatie\LaravelIgnition\Facades { 
             /**
      * 
@@ -22681,6 +22784,7 @@ namespace  {
             class Vite extends \Illuminate\Support\Facades\Vite {}
             class Helper extends \App\Helpers\Helpers {}
             class Debugbar extends \Barryvdh\Debugbar\Facades\Debugbar {}
+            class Toastr extends \Brian2694\Toastr\Facades\Toastr {}
             class Flare extends \Spatie\LaravelIgnition\Facades\Flare {}
      
 }
