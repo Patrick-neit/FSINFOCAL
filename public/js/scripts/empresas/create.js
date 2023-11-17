@@ -138,26 +138,30 @@ let telefono = document.getElementById("telefono");
 let representante_legal = document.getElementById("representante_legal");
 let id_empresa = document.getElementById("id_empresa");
 let form_empresa = document.getElementById("form_empresa");
-let logo_empresa = form_empresa.querySelector("#logo_empresa");
+let logo_empresa = document.getElementById("logo_empresa");
 
 registrarEmpresaButton.addEventListener("click", function (event) {
     event.preventDefault();
+    const file = logo_empresa.files[0];
+    const formData = new FormData();
+    formData.append("logo_empresa", file);
+    formData.append(
+        "id_empresa",
+        id_empresa.value == "" ? 0 : id_empresa.value
+    );
+    formData.append("nombre_empresa", nombre_empresa.value);
+    formData.append("nro_nit_empresa", nro_nit_empresa.value);
+    formData.append("correo", correo.value);
+    formData.append("direccion", direccion.value);
+    formData.append("telefono", telefono.value);
+    formData.append("representante_legal", representante_legal.value);
+
     fetch(ruta_guardar_empresa, {
         method: "POST",
         headers: {
-            "Content-Type": "application/json",
             "X-CSRF-Token": csrfToken,
         },
-        body: JSON.stringify({
-            id_empresa: id_empresa.value == "" ? 0 : id_empresa.value,
-            logo_empresa: logo_empresa.value,
-            nombre_empresa: nombre_empresa.value,
-            nro_nit_empresa: nro_nit_empresa.value,
-            correo: correo.value,
-            direccion: direccion.value,
-            telefono: telefono.value,
-            representante_legal: representante_legal.value,
-        }),
+        body: formData,
     })
         .then((response) => response.json())
         .then((data) => {
