@@ -628,6 +628,8 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Binnacle> $binacle
+ * @property-read int|null $binacle_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Empresa> $empresas
  * @property-read int|null $empresas_count
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications

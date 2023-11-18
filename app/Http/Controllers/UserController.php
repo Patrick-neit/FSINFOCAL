@@ -37,22 +37,25 @@ class UserController extends Controller
 
     public function update(Request $request)
     {
+        try {
+            if ($request->hasFile('avatar')) {
+                $path = Storage::disk('public')->put('avatars', $request->file('avatar'));
+            }
+            $user = User::find($request->user_id);
 
-        if ($request->hasFile('avatar')) {
-            $path = Storage::disk('public')->put('avatars', $request->file('avatar'));
-        }
-        $user = User::find($request->user_id);
-
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = empty($request->password) ? Hash::make($request->password) : $user->password;
-        $user->avatar = $request->hasFile('avatar') ? '/storage/' . $path : $user->avatar;
-        $user->estado = $request->estado;
-        $user->save();
-        if ($user->save()) {
-            return responseJson('Registrado Exitosamente', $user, 200);
-        } else {
-            return responseJson('Something went Wrong', $user, 400);
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->password = empty($request->password) ? Hash::make($request->password) : $user->password;
+            $user->avatar = $request->hasFile('avatar') ? '/storage/' . $path : $user->avatar;
+            $user->estado = $request->estado;
+            $user->save();
+            if ($user->save()) {
+                return responseJson('Registrado Exitosamente', $user, 200);
+            } else {
+                return responseJson('Something went Wrong', $user, 400);
+            }
+        } catch (\Exception $e) {
+            return responseJson('Server Error', $e->getMessage(), 500);
         }
     }
 
@@ -132,8 +135,12 @@ class UserController extends Controller
 
     public function deleteUser(Request $request)
     {
-        $user = User::find($request->user_id);
-        $user->delete();
-        return responseJson('Success', [], 200);
+        try {
+            $user = User::find($request->user_id);
+            $user->delete();
+            return responseJson('Success', [], 200);
+        } catch (\Exception $e) {
+            return responseJson('Server Error', [], 500);
+        }
     }
 }

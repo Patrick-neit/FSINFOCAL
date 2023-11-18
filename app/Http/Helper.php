@@ -28,6 +28,13 @@ function verificarPuntoVentaSucursal0($userID, $empresaID)
     return isset($puntoVenta0) ? true : false;
 }
 
+/**
+ * Registrar en la tabla Bitácoras
+ * @param $modelo
+ * @param $action
+ *
+ * @return void
+ */
 function paramsObservers($modelo, $action)
 {
     Binnacle::create([
