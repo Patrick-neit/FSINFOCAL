@@ -251,12 +251,17 @@ Route::group(['middleware' => 'web'], function () {
 });
 
 Route::group([
+    'middleware' => 'web',
     'prefix' => 'users',
     'controller' => UserController::class,
 ], function () {
     Route::get('index', 'index')->name('users.index');
     Route::get('asignarEmpresaUser/{id}', 'asignarEmpresaUser')->name('users.asignarEmpresaUser');
+    Route::post('user/show', 'show')->name('users.show');
+    Route::post('user/update', 'update')->name('users.update');
     Route::post('saveAsignarEmpresaUser', 'saveAsignarEmpresaUser')->name('users.saveAsignarEmpresaUser');
+    Route::post('save/user', 'store')->name('users.store');
+    Route::delete('user/delete', 'deleteUser')->name('users.deleteUser');
 });
 
 Route::group([

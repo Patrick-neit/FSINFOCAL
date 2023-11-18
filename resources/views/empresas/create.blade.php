@@ -53,8 +53,7 @@
                     </div> --}}
                     <!-- users edit media object ends -->
                     <!-- users edit account form start -->
-                    <form id="form_empresa" method="POST" action="{{route('empresas.store')}}"
-                        enctype="multipart/form-data">
+                    <form>
                         @csrf
                         <div class="row">
                             <div class="col s12 m6">
@@ -249,8 +248,7 @@
                             </div> --}}
 
                             <div class="col s12 display-flex justify-content-end mt-3">
-                                <button id="registrarEmpresaButton" type="submit"
-                                    class="btn indigo mr-2">Guardar</button>
+                                <button id="registrarEmpresaButton" class="btn indigo mr-2">Guardar</button>
                                 <button type="button" class="btn btn-light">Cancel</button>
                             </div>
                         </div>
@@ -391,7 +389,7 @@
 
 {{-- page scripts --}}
 @section('page-script')
-{{-- <script src="{{asset('js/scripts/empresas/create.js')}}"></script> --}}
+<script src="{{asset('js/scripts/empresas/create.js')}}"></script>
 <script>
     let ruta_guardar_empresa = "{{route('empresas.store')}}";
     let ruta_index_empresa   = "{{route('empresas.index')}}";

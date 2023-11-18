@@ -17,6 +17,44 @@ $(document).ready(function () {
         scrollX: false,
         paging: true,
         responsive: true,
+        lengthMenu: [15],
+        language: {
+            decimal: "",
+            emptyTable: "No hay información",
+            info: "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
+            infoEmpty: "Mostrando 0 to 0 of 0 Entradas",
+            infoFiltered: "(Filtrado de _MAX_ total entradas)",
+            infoPostFix: "",
+            thousands: ",",
+            lengthMenu: "Mostrar _MENU_ Entradas",
+            loadingRecords: "Cargando...",
+            processing: "Procesando...",
+            search: "Buscar:",
+            zeroRecords: "Sin resultados encontrados",
+            paginate: {
+                first: "Primero",
+                last: "Ultimo",
+                next: "Siguiente",
+                previous: "Anterior",
+            },
+        },
+        /* aoColumns: [
+            {
+                bSortable: false
+            },
+            {
+                bSortable: false
+            },
+            null,
+            null,
+            null,
+            {
+                bSortable: false
+            },
+            {
+                bSortable: false
+            }
+        ], */
         fnInitComplete: function () {
             var ps_datatable = new PerfectScrollbar(".dataTables_scrollBody");
         },
@@ -117,6 +155,7 @@ $(document).ready(function () {
         addcontact.removeClass("display-none");
         contactComposeSidebar.addClass("show");
         labelEditForm.removeClass("active");
+        $("#card_image").css("display", "none");
         $(".contact-compose-sidebar input").val("");
     });
     $(
@@ -124,23 +163,49 @@ $(document).ready(function () {
     ).on("click", function () {
         contactOverlay.removeClass("show");
         contactComposeSidebar.removeClass("show");
+        console.log("entro aqui cerrar");
     });
 
     $(".dataTables_scrollBody tr")
         .on("click", function () {
-            updatecontact.removeClass("display-none");
-            addcontact.addClass("display-none");
-            contactOverlay.addClass("show");
-            contactComposeSidebar.addClass("show");
-            $("#first_name").val("Paul");
-            $("#last_name").val("Rees");
-            $("#company").val("Acme Corporation");
-            $("#business").val("Software Developer");
-            $("#email").val("paul.rees@domain.com");
-            $("#phone").val("+1-202-555-0112");
-            $("#notes").val("Do not disturb during work.");
-            0.2;
-            labelEditForm.addClass("active");
+            fetch(ruta_get_user_show, {
+                method: "POST",
+                headers: {
+                    "X-CSRF-Token": csrfToken,
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    user_id: $(this).attr("id"),
+                }),
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    if (data.status == 200) {
+                        let dataUser = data.content;
+
+                        updatecontact.removeClass("display-none");
+                        addcontact.addClass("display-none");
+                        contactOverlay.addClass("show");
+                        contactComposeSidebar.addClass("show");
+                        $("#user_id").val(dataUser.id);
+                        $("#name_user").val(dataUser.name);
+                        $("#email").val(dataUser.email);
+                        $("#estado").val(dataUser.estado).trigger("change");
+                        let card_image = document.getElementById("card_image");
+                        let image_element =
+                            document.getElementById("image_element");
+                        card_image.style.removeProperty("display");
+
+                        image_element.src = ruta_recursos + dataUser.avatar;
+                        //remove style this card_image
+                        card_image.style.display = "block";
+                        0.2;
+                        labelEditForm.addClass("active");
+                    }
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
         })
         .on("click", ".checkbox-label,.favorite,.delete", function (e) {
             e.stopPropagation();
@@ -170,13 +235,64 @@ $(document).ready(function () {
         });
     }
 });
+let name_user = document.getElementById("name_user");
+let email = document.getElementById("email");
+let password = document.getElementById("password");
+let estado = document.getElementById("estado");
+let avatar = document.getElementById("avatar");
+let user_id_update = document.getElementById("user_id");
+/**
+ * Actualizar usuario
+ */
+let actualizarUsuarioButton = document.getElementById("actualizarUser");
 
+actualizarUsuarioButton.addEventListener("click", function (event) {
+    event.preventDefault();
+    const formData = new FormData();
+    formData.append("avatar", avatar.files[0]);
+    formData.append("name", name_user.value);
+    formData.append("email", email.value);
+    formData.append("password", password.value);
+    formData.append("estado", estado.value);
+    formData.append("user_id", user_id_update.value);
+
+    fetch(ruta_user_update, {
+        method: "POST",
+        headers: {
+            "X-CSRF-Token": csrfToken,
+        },
+        body: formData,
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            if (data.status == 200) {
+                M.toast({
+                    html: "Actualizado con Exito!",
+                    classes: "rounded",
+                    displayLength: 3000,
+                    completeCallback: function () {
+                        window.location.href = ruta_index_user;
+                    },
+                });
+            } else {
+                M.toast({
+                    html: "Algo salio Mal!",
+                    classes: "rounded",
+                    displayLength: 3000,
+                    classes: "blue lighten-1",
+                });
+            }
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+});
 /* $(document).ready(function(){
     $('.datepicker').datepicker();
   }); */
 
 /* Registrar Alumno */
-let registrarDocenteButton = document.getElementById("registrarDocente");
+/* let registrarDocenteButton = document.getElementById("registrarDocente");
 
 let first_name = document.getElementById("first_name");
 let matricula_docente = document.getElementById("matricula");
@@ -186,32 +302,34 @@ let fecha_incorporacion_docente = document.getElementById(
 let phone_docente = document.getElementById("telefono");
 let direccion = document.getElementById("direccion");
 let estado = document.getElementById("estado");
+let avatar = document.getElementById("avatar"); */
+let registrarDocenteButton = document.getElementById("registrarDocente");
+
 registrarDocenteButton.addEventListener("click", function (event) {
     event.preventDefault();
-    fetch(ruta_guardar_docente, {
+    const formData = new FormData();
+    formData.append("avatar", avatar.files[0]);
+    formData.append("name", name_user.value);
+    formData.append("email", email.value);
+    formData.append("password", password.value);
+    formData.append("estado", estado.value);
+
+    fetch(ruta_guardar_user, {
         method: "POST",
         headers: {
-            "Content-Type": "application/json",
             "X-CSRF-Token": csrfToken,
         },
-        body: JSON.stringify({
-            first_name: first_name.value,
-            matricula_docente: matricula_docente.value,
-            fecha_incorporacion_docente: fecha_incorporacion_docente.value,
-            phone_docente: phone_docente.value,
-            direccion: direccion.value,
-            estado: estado.value,
-        }),
+        body: formData,
     })
         .then((response) => response.json())
         .then((data) => {
-            if (data.success == true) {
+            if (data.status == 200) {
                 M.toast({
                     html: "Registrado con Exito!",
                     classes: "rounded",
                     displayLength: 3000,
                     completeCallback: function () {
-                        window.location.href = ruta_index_docente;
+                        window.location.href = ruta_index_user;
                     },
                 });
             } else {
@@ -230,30 +348,31 @@ registrarDocenteButton.addEventListener("click", function (event) {
 
 /* Eliminar Docente */
 function eliminar(e) {
-    fetch(ruta_eliminar_docente, {
+    console.log(e);
+    fetch(ruta_eliminar_user, {
         method: "DELETE",
         headers: {
             "Content-Type": "application/json",
             "X-CSRF-Token": csrfToken,
         },
         body: JSON.stringify({
-            docente_id: e,
+            user_id: e,
         }),
     })
         .then((response) => response.json())
         .then((data) => {
-            if (data.success == true) {
+            if (data.status == 200) {
                 M.toast({
-                    html: data.response,
+                    html: data.description,
                     classes: "rounded",
                     displayLength: 2000,
                     completeCallback: function () {
-                        window.location.href = ruta_index_docente;
+                        window.location.href = ruta_index_user;
                     },
                 });
             } else {
                 M.toast({
-                    html: data.response,
+                    html: data.description,
                     classes: "rounded",
                     displayLength: 2000,
                 });
@@ -298,7 +417,7 @@ $(window).on("resize", function () {
 
 function resizetable() {
     $(".app-page .dataTables_scrollBody").css({
-        maxHeight: $(window).height() - 500 + "px",
+        maxHeight: $(window).height() - 420 + "px",
     });
 }
 resizetable();
