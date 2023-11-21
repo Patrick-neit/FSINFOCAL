@@ -37,6 +37,6 @@ $configData = Helper::applClasses();
 {{-- if mainLaoutType is empty or not set then its print below line --}}
 <h1>{{'mainLayoutType Option is empty in config custom.php file.'}}</h1>
 @endif
-{!! Toastr::message() !!}
+
 
 </html>
