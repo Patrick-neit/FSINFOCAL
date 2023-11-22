@@ -12,20 +12,25 @@
 {{-- page content --}}
 @section('content')
 <div id="login-page" class="row">
-    <div class="col s6 m6 l4 z-depth-4 card-panel border-radius-6 login-card bg-opacity-8">
-        <div class="row">
-            <div class="input-field col s12 center">
-                <img class="rounded-3" src="{{ asset('images/logo/logorda.png') }}" alt="Logo RDA CONSULTORES">
+
+    <div class="col s12 m6 l4 z-depth-4 card-panel border-radius-6 login-card bg-opacity-8">
+        <div class="row center-align">
+            <div class="input-field col s3">
+            </div>
+            <div class="input-field col s6 center-align">
+                <a href="{{ route('login') }}">
+                    <img class="circle responsive-img" src="{{ asset('images/logo/logorda.png') }}"
+                        alt="Logo RDA CONSULTORES">
+                </a>
+            </div>
+            <div class="input-field col s3">
             </div>
         </div>
-    </div>
-    <div class="col s6 m6 l4 z-depth-4 card-panel border-radius-6 login-card bg-opacity-8">
-
         <div class="row">
             <div class="input-field col s6">
                 <h5 class="ml-4">Iniciar Sesión</h5>
             </div>
-            <div class="input-field col s2">
+            <div class="input-field col s2 center">
                 <h5 class="ml-4"> -&nbsp;&oacute;&nbsp;-</h5>
             </div>
             <div class="input-field col s4 center">
