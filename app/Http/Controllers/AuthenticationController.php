@@ -6,9 +6,39 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Laravel\Socialite\Facades\Socialite;
 
 class AuthenticationController extends Controller
 {
+
+    public function redirectLogin()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+
+    public function callbackLogin()
+    {
+        $googleUser = Socialite::driver('google')->user();
+
+        $user = User::where('email', $googleUser->email)->first();
+
+        if (!$user) {
+            return responseJson('Usuario no encontrado', [], 404);
+        }
+
+        $user->update([
+            'google_id' => $googleUser->id,
+            'google_token' => $googleUser->token,
+            'google_refresh_token' => $googleUser->refreshToken,
+            'name' => $googleUser->name,
+            'email' => $googleUser->email,
+            'password' => Hash::make($googleUser->id),
+        ]);
+        Auth::login($user);
+
+        return responseJson('Logeado Exitosamente. Espere...', $googleUser->email, 200);
+    }
+
     public function userLogin()
     {
         $pageConfigs = ['bodyCustomClass' => 'login-bg', 'isCustomizer' => false];

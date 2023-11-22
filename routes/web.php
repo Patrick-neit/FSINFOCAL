@@ -52,6 +52,8 @@ Route::group([
     Route::post('login', 'login')->name('autentification.login');
     Route::post('register', 'register')->name('autentification.register');
     Route::get('userLogin', 'userLogin')->name('autentification.userLogin'); //View
+    Route::get('/auth/google/redirect', 'redirectLogin')->name('auth.google.redirect');
+    Route::get('/login/google/callback', 'callbackLogin')->name('login.google.callback');
 });
 
 Route::group([

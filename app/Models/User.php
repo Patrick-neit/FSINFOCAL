@@ -30,6 +30,9 @@ class User extends Authenticatable implements BannableInterface
         'fecha_nacimiento',
         'ci',
         'fotografia',
+        'google_id',
+        'google_token',
+        'google_refresh_token',
         'banned_at'
     ];
 

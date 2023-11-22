@@ -23,6 +23,9 @@ return new class extends Migration
             $table->date('fecha_nacimiento');
             $table->string('ci');
             $table->string('fotografia');
+            $table->string('google_id')->unique()->nullable();
+            $table->string('google_token')->nullable();
+            $table->string('google_refresh_token')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
