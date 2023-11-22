@@ -38,7 +38,7 @@ function verificarPuntoVentaSucursal0($userID, $empresaID)
 function paramsObservers($modelo, $action)
 {
     Binnacle::create([
-        'user_id' => auth()->user()->id,
+        'user_id' => isset(auth()->user()->id) ? auth()->user()->id : 1,
         'ip' => request()->ip(),
         'action' => $action,
         'binnacleable_id' => $modelo->id,

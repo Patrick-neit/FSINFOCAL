@@ -17,17 +17,23 @@ class UserSeeder extends Seeder
     {
         User::create([
             'name' => 'Patrick Aguilar',
+            'apellidos' => 'Aguilar Nuñez',
+            'departamento_id' => 1,
+            'fecha_nacimiento' => '1999-01-01',
+            'ci' => '123456',
             'email' => 'patrickaguilar2403@gmail.com',
-            'avatar' => 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png',
+            'fotografia' => 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png',
             'password' => bcrypt('123456'),
-            'estado' => 1
-        ]);
+        ])->assignRole('Administrador');
         User::create([
             'name' => 'Angel Espinoza',
+            'apellidos' => 'Ibañez',
+            'departamento_id' => 1,
+            'fecha_nacimiento' => '1999-01-01',
+            'ci' => '123456',
             'email' => 'angel_nayib.07@gmail.com',
-            'avatar' => 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png',
+            'fotografia' => 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png',
             'password' => Hash::make('123456'),
-            'estado' => 1
-        ]);
+        ])->assignRole('Administrador');
     }
 }
