@@ -40,7 +40,7 @@ Auth::routes(['verify' => true]);
 /* Route::get('/', [DashboardController::class, 'dashboardModern']); */
 
 // Authentication Route
-Route::get('/', [AuthenticationController::class, 'userLogin']);
+Route::get('/', [AuthenticationController::class, 'userLogin'])->name('login');
 Route::get('/user-register', [AuthenticationController::class, 'userRegister']);
 Route::get('/user-forgot-password', [AuthenticationController::class, 'forgotPassword']);
 Route::get('/user-lock-screen', [AuthenticationController::class, 'lockScreen']);
@@ -54,6 +54,15 @@ Route::group([
     Route::get('userLogin', 'userLogin')->name('autentification.userLogin'); //View
     Route::get('/auth/google/redirect', 'redirectLogin')->name('auth.google.redirect');
     Route::get('/login/google/callback', 'callbackLogin')->name('login.google.callback');
+
+    // Función que se ejecuta al enviar el formulario y que enviará el email al usuario
+    Route::post('/enviar-recuperar-contrasenia', 'enviarRecuperarContrasenia')->name('enviar-recuperacion');
+
+    // Formulario donde se modificará la contraseña
+    Route::get('/reiniciar-contrasenia/{token}', 'formularioActualizacion')->name('formulario-actualizar-contrasenia');
+
+    // Función que actualiza la contraseña del usuario
+    Route::post('/actualizar-contrasenia', 'actualizarContrasenia')->name('actualizar-contrasenia');
 });
 
 Route::group([

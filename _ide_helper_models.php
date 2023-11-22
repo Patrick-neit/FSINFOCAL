@@ -626,6 +626,9 @@ namespace App\Models{
  * @property string $fecha_nacimiento
  * @property string $ci
  * @property string $fotografia
+ * @property string|null $google_id
+ * @property string|null $google_token
+ * @property string|null $google_refresh_token
  * @property \Illuminate\Support\Carbon|null $email_verified_at
  * @property string|null $remember_token
  * @property \Illuminate\Support\Carbon|null $created_at

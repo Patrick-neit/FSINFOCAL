@@ -2,14 +2,102 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\SendMailReset;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Socialite\Facades\Socialite;
+use Illuminate\Support\Str;
+use DB;
+use Carbon\Carbon;
+use Mail;
 
 class AuthenticationController extends Controller
 {
+
+    public function enviarRecuperarContrasenia(Request $request)
+    {
+        // Validación del email
+        $request->validate([
+            'email' => 'required|email|exists:users',
+        ]);
+
+        // Generamos un token único
+        $token = Str::random(64);
+
+        User::where('email', $request->email)->update(['remember_token' => $token]);
+
+        // Eliminamos la anterior reseteo de contraseña sin terminar
+        /* DB::table('password_reset_tokens')->where(['email' => $request->email])->delete(); */
+
+        // Creamos la solicitud de reseteo de contraseña
+        /* DB::table('password_reset_tokens')->insert([
+            'email' => $request->email,
+            'token' => $token,
+            'created_at' => Carbon::now()
+        ]); */
+
+
+        // Enviamos el email de recuperación de contraseña
+        Mail::to($request->email)->send(new SendMailReset($token, $request->email));
+
+        return responseJson('Te hemos enviado un email con las instrucciones para que recuperes tu contraseña', [], 200);
+    }
+    /**
+     * Función que devuelve la vista con el formulario que actualiza la contraseña
+     *
+     * @return response()
+     */
+    public function formularioActualizacion($token)
+    {
+        return view('auth.passwords.reset', ['token' => $token]);
+    }
+
+    /**
+     * Función que actualiza la contraseña del usuario
+     *
+     * @return response()
+     */
+    public function actualizarContrasenia(Request $request)
+    {
+        // Validaciones
+        $request->validate([
+            'email' => 'required|email|exists:users',
+            'password' => 'required|string|min:6|confirmed',
+            'password_confirmation' => 'required'
+        ]);
+
+        // Obtenemos el registro que contiene la solicitud de reseteo de contraseña
+        /* $updatePassword = DB::table('password_reset_tokens')
+            ->where([
+                'email' => $request->email,
+                'token' => $request->token
+            ])
+            ->first(); */
+
+        // Si no existe la solicitud devolvemos un error
+        /* if (!$updatePassword) {
+            return back()->withInput()->with('error', 'Token inválido');
+        } */
+
+        // Actualizamos la contraseña del usuario
+        $user = User::where('email', $request->email)
+            ->where('remember_token', $request->token)->first();
+
+        if (!$user) {
+            return responseJson('Uusario o token invalidos', [], 500);
+        }
+        // Eliminamos la solicitud
+        /* DB::table('password_reset_tokens')->where(['email' => $request->email])->delete(); */
+
+        // Devolvemos al formulario de login (devolvera un 404 puesto que no existe la ruta)
+        $user->update([
+            'password' => Hash::make($request->password),
+            'remember_token' => null
+        ]);
+        return responseJson('Contrasena actualizada', [], 200);
+    }
 
     public function redirectLogin()
     {
