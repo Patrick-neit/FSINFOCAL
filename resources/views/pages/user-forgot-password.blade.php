@@ -36,7 +36,7 @@
             </div>
             <div class="row">
                 <div class="input-field col s6 m6 l6">
-                    <p class="margin medium-small"><a href="{{asset('user-login')}}">
+                    <p class="margin medium-small"><a href="{{ route('login')}}">
                             <- Login </a>
                     </p>
                 </div>

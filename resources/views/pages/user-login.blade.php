@@ -12,7 +12,14 @@
 {{-- page content --}}
 @section('content')
 <div id="login-page" class="row">
-    <div class="col s12 m6 l4 z-depth-4 card-panel border-radius-6 login-card bg-opacity-8">
+    <div class="col s6 m6 l4 z-depth-4 card-panel border-radius-6 login-card bg-opacity-8">
+        <div class="row">
+            <div class="input-field col s12 center">
+                <img class="rounded-3" src="{{ asset('images/logo/logorda.png') }}" alt="Logo RDA CONSULTORES">
+            </div>
+        </div>
+    </div>
+    <div class="col s6 m6 l4 z-depth-4 card-panel border-radius-6 login-card bg-opacity-8">
 
         <div class="row">
             <div class="input-field col s6">
