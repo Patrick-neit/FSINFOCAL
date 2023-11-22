@@ -14,7 +14,7 @@ use Cog\Laravel\Ban\Traits\Bannable;
 
 class User extends Authenticatable implements BannableInterface
 {
-    use HasApiTokens, HasFactory, Notifiable, SoftDeletes, HasRoles, Bannable;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles, Bannable;
 
     /**
      * The attributes that are mass assignable.

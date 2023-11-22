@@ -47,12 +47,11 @@ class AuthenticationController extends Controller
             ]);
 
             if (Auth::attempt($credentials)) {
-
-                return responseJson('Logeado Exitosamente', $request->email, 200);
+                //TODO: Aqui se añadirá la consulta para obtener el rol del usuario y de acuerdo a eso loquearse
+                return responseJson('Logeado Exitosamente. Espere...', $request->email, 200);
             }
 
             return responseJson('Las credenciales no coinciden con nuestros registros', $request->email, 500);
-
         } catch (\Exception $e) {
             return responseJson('Server Error', [
                 'message' => $e->getMessage(),
