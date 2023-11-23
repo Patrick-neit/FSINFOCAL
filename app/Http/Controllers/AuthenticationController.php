@@ -165,7 +165,12 @@ class AuthenticationController extends Controller
             ]);
 
             if (Auth::attempt($credentials)) {
+                $user = Auth::user();
                 //TODO: Aqui se añadirá la consulta para obtener el rol del usuario y de acuerdo a eso loquearse
+                if ($user->isBanned()) {
+                    Auth::logout();
+                    return responseJson('Cuenta suspendida', [], 500);
+                }
                 return responseJson('Logeado Exitosamente. Espere...', $request->email, 200);
             }
 

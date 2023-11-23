@@ -59,9 +59,9 @@ class DocenteController extends Controller
     public function destroy(Request $request)
     {
         $docente = Docente::find($request->docente_id);
-        $docente->delete();
+        $docente->ban();
 
-        if ($docente->trashed()) {
+        if ($docente->isBanned()) {
 
             return response()->json([
                 'success' => true,

@@ -106,7 +106,8 @@ class UserController extends Controller
 
     public function index()
     {
-        $users = User::all();
+        //Obtenemos todos los usuarios que no están baneados
+        $users = User::withoutBanned()->get();
 
         return view('users.index', compact('users'));
     }
@@ -144,7 +145,7 @@ class UserController extends Controller
     {
         try {
             $user = User::find($request->user_id);
-            $user->delete();
+            $user->ban();
             return responseJson('Success', [], 200);
         } catch (\Exception $e) {
             return responseJson('Server Error', [], 500);
