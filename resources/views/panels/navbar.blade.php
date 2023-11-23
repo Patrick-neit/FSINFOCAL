@@ -143,10 +143,14 @@
                     </a>
                 </li>
                 <li>
-                    <a class="grey-text text-darken-1" href="{{asset('user-login')}}">
+                    <a class="grey-text text-darken-1" href="{{ route('logout') }}"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         <i class="material-icons">keyboard_tab</i>
                         Logout
                     </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        {{ csrf_field() }}
+                    </form>
                 </li>
             </ul>
         </div>

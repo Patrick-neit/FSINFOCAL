@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Empresa;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -13,17 +14,19 @@ class UserController extends Controller
     public function store(Request $request)
     {
         try {
-
-
             if ($request->hasFile('avatar')) {
                 $path = Storage::disk('public')->put('avatars', $request->file('avatar'));
             }
             $user = new User;
             $user->name = $request->name;
+            $user->apellidos = $request->apellido;
             $user->email = $request->email;
             $user->password = Hash::make($request->password);
-            $user->avatar = '/storage/' . $path;
-            $user->estado = $request->estado;
+            $user->ci = $request->ci;
+            $user->fecha_nacimiento = Carbon::parse($request->fecha_nacimiento)->format('Y-m-d'); //$request->fecha_nacimiento;
+            $user->departamento_id = $request->departamento_id;
+            $user->fotografia = '/storage/' . $path;
+            //$user->estado = $request->estado;
             $user->save();
             if ($user->save()) {
                 return responseJson('Registrado Exitosamente', $user, 200);
@@ -44,10 +47,14 @@ class UserController extends Controller
             $user = User::find($request->user_id);
 
             $user->name = $request->name;
+            $user->apellidos = $request->apellido;
             $user->email = $request->email;
             $user->password = empty($request->password) ? Hash::make($request->password) : $user->password;
-            $user->avatar = $request->hasFile('avatar') ? '/storage/' . $path : $user->avatar;
-            $user->estado = $request->estado;
+            $user->ci = $request->ci;
+            $user->fecha_nacimiento = Carbon::parse($request->fecha_nacimiento)->format('Y-m-d'); //$request->fecha_nacimiento;
+            $user->departamento_id = $request->departamento_id;
+            $user->fotografia = $request->hasFile('avatar') ? '/storage/' . $path : $user->fotografia;
+            //$user->estado = $request->estado;
             $user->save();
             if ($user->save()) {
                 return responseJson('Registrado Exitosamente', $user, 200);

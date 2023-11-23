@@ -120,7 +120,7 @@
                                     <span></span>
                                 </label>
                             </td> --}}
-                            <td><span class="avatar-contact avatar-online"><img src="{{asset($user->avatar)}}"
+                            <td><span class="avatar-contact avatar-online"><img src="{{asset($user->fotografia)}}"
                                         alt="avatar"></span></td>
                             <td>{{$user->name}} @csrf</td>
                             <td>{{$user->email}}</td>
@@ -177,6 +177,12 @@
                             <label for="name">Nombre Completo</label>
                         </div>
                         <div class="input-field col s12">
+                            <i class="material-icons prefix"> perm_identity </i>
+                            <input id="apellido_user" type="text" name="apellido_user" value="{{old('apellido_user')}}"
+                                class="validate">
+                            <label for="apellido_user">Apellidos</label>
+                        </div>
+                        <div class="input-field col s12">
                             <i class="material-icons prefix"> email </i>
                             <input id="email" type="email" name="email" class="validate">
                             <label for="email">Email</label>
@@ -187,12 +193,29 @@
                             <label for="password">Contraseña</label>
                         </div>
                         <div class="input-field col s12">
-                            <i class="material-icons prefix"> group </i>
-                            <select id="estado">
-                                <option value="1">Activo</option>
-                                <option value="0">Inactivo</option>
+                            <i class="material-icons prefix"> assignment_ind </i>
+                            <input id="fecha_nacimiento" type="text" class="datepicker">
+                            <label for="fecha_nacimiento">Fecha Nacimiento</label>
+                        </div>
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix"> contacts </i>
+                            <input id="ci" type="text" name="ci" class="validate">
+                            <label for="ci">C.I.</label>
+                        </div>
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix"> add_location </i>
+                            <select id="departamento_id">
+                                <option value="1">La Paz</option>
+                                <option value="2">Cochabamba</option>
+                                <option value="3">Santa Cruz</option>
+                                <option value="4">Oruro</option>
+                                <option value="5">Potosi</option>
+                                <option value="6">Tarija</option>
+                                <option value="7">Beni</option>
+                                <option value="8">Pando</option>
+                                <option value="9">Chuquisaca</option>
                             </select>
-                            <label>Estado</label>
+                            <label for="departamento_id">Departamento</label>
                         </div>
                         <div id="card_image" class="col s12 m7" style="display: none;">
                             <div class="card">

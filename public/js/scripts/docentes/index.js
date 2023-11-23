@@ -10,7 +10,10 @@ $(document).ready(function () {
     var calcDataTableHeight = function () {
         return $(window).height() - 500 + "px";
     };
-
+    $(".datepicker").datepicker({
+        format: "dd/mm/yyyy",
+        language: "es",
+    });
     var table = $("#data-table-contact").DataTable({
         scrollY: calcDataTableHeight(),
         scrollCollapse: true,
@@ -189,14 +192,19 @@ $(document).ready(function () {
                         contactComposeSidebar.addClass("show");
                         $("#user_id").val(dataUser.id);
                         $("#name_user").val(dataUser.name);
+                        $("#apellido_user").val(dataUser.apellidos);
+                        $("#fecha_nacimiento").val(dataUser.fecha_nacimiento);
+                        $("#ci").val(dataUser.ci);
                         $("#email").val(dataUser.email);
-                        $("#estado").val(dataUser.estado).trigger("change");
+                        $("#departamento_id")
+                            .val(dataUser.departamento_id)
+                            .trigger("change");
                         let card_image = document.getElementById("card_image");
                         let image_element =
                             document.getElementById("image_element");
                         card_image.style.removeProperty("display");
 
-                        image_element.src = ruta_recursos + dataUser.avatar;
+                        image_element.src = ruta_recursos + dataUser.fotografia;
                         //remove style this card_image
                         card_image.style.display = "block";
                         0.2;
@@ -236,9 +244,13 @@ $(document).ready(function () {
     }
 });
 let name_user = document.getElementById("name_user");
+let apellido_user = document.getElementById("apellido_user");
 let email = document.getElementById("email");
 let password = document.getElementById("password");
-let estado = document.getElementById("estado");
+let fecha_nacimiento = document.getElementById("fecha_nacimiento");
+let ci = document.getElementById("ci");
+let departamento_id = document.getElementById("departamento_id");
+/* let estado = document.getElementById("estado"); */
 let avatar = document.getElementById("avatar");
 let user_id_update = document.getElementById("user_id");
 /**
@@ -251,9 +263,13 @@ actualizarUsuarioButton.addEventListener("click", function (event) {
     const formData = new FormData();
     formData.append("avatar", avatar.files[0]);
     formData.append("name", name_user.value);
+    formData.append("apellido", apellido_user.value);
+    formData.append("ci", ci.value);
     formData.append("email", email.value);
     formData.append("password", password.value);
-    formData.append("estado", estado.value);
+    formData.append("fecha_nacimiento", fecha_nacimiento.value);
+    formData.append("departamento_id", departamento_id.value);
+    /* formData.append("estado", estado.value); */
     formData.append("user_id", user_id_update.value);
 
     fetch(ruta_user_update, {
@@ -310,9 +326,13 @@ registrarDocenteButton.addEventListener("click", function (event) {
     const formData = new FormData();
     formData.append("avatar", avatar.files[0]);
     formData.append("name", name_user.value);
+    formData.append("apellido", apellido_user.value);
     formData.append("email", email.value);
     formData.append("password", password.value);
-    formData.append("estado", estado.value);
+    formData.append("ci", ci.value);
+    formData.append("fecha_nacimiento", fecha_nacimiento.value);
+    formData.append("departamento_id", departamento_id.value);
+    /* formData.append("estado", estado.value); */
 
     fetch(ruta_guardar_user, {
         method: "POST",

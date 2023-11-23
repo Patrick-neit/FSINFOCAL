@@ -30,9 +30,7 @@
             <div class="input-field col s6">
                 <h5 class="ml-4">Iniciar Sesión</h5>
             </div>
-            <div class="input-field col s2 center">
-                <h5 class="ml-4"> -&nbsp;&oacute;&nbsp;-</h5>
-            </div>
+
             <div class="input-field col s4 center">
                 <a href="{{ route('auth.google.redirect') }}">
                     <h5 class="ml-4">
