@@ -188,6 +188,13 @@
                     "slug" => "configuraciones"
                 ),
 
+                array(
+                    "url" =>trim( parse_url(route('dosificaciones_empresas.create'), PHP_URL_PATH) ,'/'),
+                    "i18n" => "Dosificacion Empresa",
+                    "name" => "Dosificacion Empresa",
+                    "slug" => "dosificaciones"
+                ),
+
             )
         ),
         array(

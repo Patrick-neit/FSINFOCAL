@@ -59,6 +59,7 @@ return array(
     'App\\Http\\Requests\\AlumnoStoreRequest' => $baseDir . '/app/Http/Requests/AlumnoStoreRequest.php',
     'App\\Http\\Requests\\ConfImp\\StoreConfImpRequest' => $baseDir . '/app/Http/Requests/ConfImp/StoreConfImpRequest.php',
     'App\\Http\\Requests\\DocenteStoreRequest' => $baseDir . '/app/Http/Requests/DocenteStoreRequest.php',
+    'App\\Mail\\SendMailReset' => $baseDir . '/app/Mail/SendMailReset.php',
     'App\\Models\\Alumno' => $baseDir . '/app/Models/Alumno.php',
     'App\\Models\\AlumnoCurso' => $baseDir . '/app/Models/AlumnoCurso.php',
     'App\\Models\\Binnacle' => $baseDir . '/app/Models/Binnacle.php',

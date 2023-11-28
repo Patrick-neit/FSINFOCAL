@@ -10,6 +10,7 @@ use App\Http\Controllers\ChartController;
 use App\Http\Controllers\CssController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DataTableController;
+use App\Http\Controllers\DosificacionEmpresaController;
 use App\Http\Controllers\EjemploController;
 use App\Http\Controllers\ExtraComponentsController;
 use App\Http\Controllers\FormController;
@@ -282,4 +283,15 @@ Route::group([
     Route::get('index', 'index')->name('puntos_ventas.index');
     Route::get('create', 'create')->name('puntos_ventas.create');
     Route::post('store', 'store')->name('puntos_ventas.store');
+});
+
+Route::group([
+    'prefix' => 'dosificaciones_empresas',
+    'controller' => DosificacionEmpresaController::class,
+], function () {
+    Route::get('index', 'index')->name('dosificaciones_empresas.index');
+    Route::get('create', 'create')->name('dosificaciones_empresas.create');
+    Route::post('store', 'store')->name('dosificaciones_empresas.store');
+    Route::post('getDataDocumentoSector', 'getDataDocumentoSector')->name('dosificaciones_empresas.getDataDocumentoSector');
+
 });

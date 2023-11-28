@@ -685,6 +685,7 @@ class ComposerStaticInit3ea74f8ba45b7ba0443bbe3ed7a8894a
         'App\\Http\\Requests\\AlumnoStoreRequest' => __DIR__ . '/../..' . '/app/Http/Requests/AlumnoStoreRequest.php',
         'App\\Http\\Requests\\ConfImp\\StoreConfImpRequest' => __DIR__ . '/../..' . '/app/Http/Requests/ConfImp/StoreConfImpRequest.php',
         'App\\Http\\Requests\\DocenteStoreRequest' => __DIR__ . '/../..' . '/app/Http/Requests/DocenteStoreRequest.php',
+        'App\\Mail\\SendMailReset' => __DIR__ . '/../..' . '/app/Mail/SendMailReset.php',
         'App\\Models\\Alumno' => __DIR__ . '/../..' . '/app/Models/Alumno.php',
         'App\\Models\\AlumnoCurso' => __DIR__ . '/../..' . '/app/Models/AlumnoCurso.php',
         'App\\Models\\Binnacle' => __DIR__ . '/../..' . '/app/Models/Binnacle.php',

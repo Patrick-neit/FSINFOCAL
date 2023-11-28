@@ -83,6 +83,8 @@ class PuntoVentaController extends Controller
 
             $resCuis = $this->cuiService->obtenerCuisImpuestos($dataService);
             $resCodigoCuis = $resCuis->content->codigo;
+
+
             $resCufd = $this->cufdService->obtenerCufdImpuestos($dataService, $resCodigoCuis);
 
             if ($resCuis->content->mensajesList[0]->codigo != 980 || $resCufd->content->RespuestaCufd->transaccion != true) {
@@ -114,9 +116,9 @@ class PuntoVentaController extends Controller
             $registrarCufd = (new ImpuestoCufdController())->store($resCufd, $dataService);
 
             $verificarPuntoVenta = verificarSiPuntoVenta($userID, $empresaID);
-            if (! $verificarPuntoVenta) {
+            /* if (! $verificarPuntoVenta) { */
                 $sincronizarCatalogos = (new ImpuestoSincronizarController())->sincronizarCatalogosImpuestos($dataSincronizar);
-            }
+            /* } */
 
             $registrarPuntoVentaCufd = new PuntoVentaCufd();
             $registrarPuntoVentaCufd->cuis_id = $registrarCuis;
