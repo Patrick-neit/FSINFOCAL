@@ -19,6 +19,7 @@ class ImpuestoProductoServicio extends Model
         'codigo_actividad',
         'codigo_producto',
         'descripcion_producto',
+        'nandina',
         'transaccion',
     ];
 

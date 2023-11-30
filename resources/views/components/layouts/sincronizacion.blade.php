@@ -49,7 +49,9 @@
                             <tr>
                                 @foreach ($data->toArray() as $key => $value)
                                 @if ($key != 'id')
+                                @if ($key != 'nandina')
                                 <td>{{ $value }}</td>
+                                @endif
                                 @endif
                                 @endforeach
                             </tr>
