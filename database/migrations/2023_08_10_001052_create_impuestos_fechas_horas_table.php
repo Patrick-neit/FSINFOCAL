@@ -16,7 +16,8 @@ return new class extends Migration
         Schema::create('impuestos_fechas_horas', function (Blueprint $table) {
             $table->id();
             $table->dateTime('fecha_hora');
-            $table->timestamps();
+            $table->string('transaccion');
+            //$table->timestamps();
         });
     }
 

@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\BasicTableController;
 use App\Http\Controllers\BasicUiController;
 use App\Http\Controllers\CardController;
+use App\Http\Controllers\CatalogosController;
 use App\Http\Controllers\ChartController;
 use App\Http\Controllers\CssController;
 use App\Http\Controllers\DashboardController;
@@ -260,6 +261,17 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/configuraciones_impuestos/show/{id}', [App\Http\Controllers\ConfiguracionImpuestoController::class, 'show'])->name('configuraciones_impuestos.show');
     Route::delete('/configuraciones_impuestos', [\App\Http\Controllers\ConfiguracionImpuestoController::class, 'destroy'])->name('configuraciones_impuestos.destroy');
 });
+
+//sincronizacion de catalogos
+Route::get('/catalogos/sincronizacion_fecha_hora', [CatalogosController::class, 'index'])->name('catalogos.index');
+Route::get('/catalogos/sincronizacion_motivo_anulaciones', [CatalogosController::class, 'indexAnulacion'])->name('catalogos.index.anulacion');
+Route::get('/catalogos/sincronizacion_tipo_documento_sector', [CatalogosController::class, 'indexTipoDocSector'])->name('catalogos.index.tipoDocSector');
+Route::get('/catalogos/sincronizacion_documento_sector', [CatalogosController::class, 'indexDocumentoSector'])->name('catalogos.index.documentoSector');
+Route::get('/catalogos/sincronizacion_tipos_factura', [CatalogosController::class, 'indexTiposFactura'])->name('catalogos.index.tiposFactura');
+Route::get('/catalogos/sincronizacion_mensajes_servicios', [CatalogosController::class, 'indexMensajesServicios'])->name('catalogos.index.mensajesServicios');
+Route::get('/catalogos/sincronizacion_eventos_significativos', [CatalogosController::class, 'indexEventos'])->name('catalogos.index.eventos');
+Route::get('/catalogos/sincronizacion_tipo_puntoventa', [CatalogosController::class, 'indexTipoPV'])->name('catalogos.index.tipoPV');
+Route::get('/catalogos/sincronizarCatalogos/{accion}', [CatalogosController::class, 'sincronizarCatalogos'])->name('sincronizar');
 
 Route::group([
     'middleware' => 'web',

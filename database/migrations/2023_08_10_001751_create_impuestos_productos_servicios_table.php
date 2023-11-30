@@ -18,7 +18,8 @@ return new class extends Migration
             $table->string('codigo_actividad');
             $table->integer('codigo_producto');
             $table->string('descripcion_producto');
-            $table->timestamps();
+            $table->string('transaccion');
+            //$table->timestamps();
         });
     }
 

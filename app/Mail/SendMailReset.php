@@ -3,7 +3,6 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
@@ -19,7 +18,9 @@ class SendMailReset extends Mailable
      * @return void
      */
     protected $token;
+
     protected $email;
+
     public function __construct($token, $email)
     {
         $this->token = $token;
@@ -49,7 +50,7 @@ class SendMailReset extends Mailable
             markdown: 'emails.users.resetPassword',
             with: [
                 'token' => $this->token,
-                'email' => $this->email
+                'email' => $this->email,
             ],
         );
     }

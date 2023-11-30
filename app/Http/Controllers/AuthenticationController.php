@@ -4,18 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Mail\SendMailReset;
 use App\Models\User;
+use Carbon\Carbon;
+use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Str;
-use DB;
-use Carbon\Carbon;
+use Laravel\Socialite\Facades\Socialite;
 use Mail;
 
 class AuthenticationController extends Controller
 {
-
     public function enviarRecuperarContrasenia(Request $request)
     {
         // Validación del email
@@ -38,12 +37,12 @@ class AuthenticationController extends Controller
             'created_at' => Carbon::now()
         ]); */
 
-
         // Enviamos el email de recuperación de contraseña
         Mail::to($request->email)->send(new SendMailReset($token, $request->email));
 
         return responseJson('Te hemos enviado un email con las instrucciones para que recuperes tu contraseña', [], 200);
     }
+
     /**
      * Función que devuelve la vista con el formulario que actualiza la contraseña
      *
@@ -65,7 +64,7 @@ class AuthenticationController extends Controller
         $request->validate([
             'email' => 'required|email|exists:users',
             'password' => 'required|string|min:6|confirmed',
-            'password_confirmation' => 'required'
+            'password_confirmation' => 'required',
         ]);
 
         // Obtenemos el registro que contiene la solicitud de reseteo de contraseña
@@ -85,7 +84,7 @@ class AuthenticationController extends Controller
         $user = User::where('email', $request->email)
             ->where('remember_token', $request->token)->first();
 
-        if (!$user) {
+        if (! $user) {
             return responseJson('Uusario o token invalidos', [], 500);
         }
         // Eliminamos la solicitud
@@ -94,8 +93,9 @@ class AuthenticationController extends Controller
         // Devolvemos al formulario de login (devolvera un 404 puesto que no existe la ruta)
         $user->update([
             'password' => Hash::make($request->password),
-            'remember_token' => null
+            'remember_token' => null,
         ]);
+
         return responseJson('Contrasena actualizada', [], 200);
     }
 
@@ -110,7 +110,7 @@ class AuthenticationController extends Controller
 
         $user = User::where('email', $googleUser->email)->first();
 
-        if (!$user) {
+        if (! $user) {
             return responseJson('Usuario no encontrado', [], 404);
         }
 
@@ -169,8 +169,10 @@ class AuthenticationController extends Controller
                 //TODO: Aqui se añadirá la consulta para obtener el rol del usuario y de acuerdo a eso loquearse
                 if ($user->isBanned()) {
                     Auth::logout();
+
                     return responseJson('Cuenta suspendida', [], 500);
                 }
+
                 return responseJson('Logeado Exitosamente. Espere...', $request->email, 200);
             }
 

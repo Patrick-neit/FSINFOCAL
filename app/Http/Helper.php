@@ -30,8 +30,6 @@ function verificarPuntoVentaSucursal0($userID, $empresaID)
 
 /**
  * Registrar en la tabla Bitácoras
- * @param $modelo
- * @param $action
  *
  * @return void
  */

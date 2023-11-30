@@ -255,8 +255,7 @@ namespace App\Models{
  * @property int $id
  * @property int $codigo_clasificador
  * @property string $descripcion
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string $transaccion
  * @method static \Illuminate\Database\Eloquent\Builder|ImpuestoDocumentoIdentidad newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ImpuestoDocumentoIdentidad newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ImpuestoDocumentoIdentidad query()
@@ -269,10 +268,10 @@ namespace App\Models{
  * App\Models\ImpuestoDocumentoSector
  *
  * @property int $id
- * @property int $codigo_clasificador
- * @property string $descripcion
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string $codigo_actividad
+ * @property int $codigo_documento_sector
+ * @property string $tipo_documento_sector
+ * @property string $transaccion
  * @method static \Illuminate\Database\Eloquent\Builder|ImpuestoDocumentoSector newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ImpuestoDocumentoSector newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ImpuestoDocumentoSector query()
@@ -287,8 +286,7 @@ namespace App\Models{
  * @property int $id
  * @property int $codigo_clasificador
  * @property string $descripcion
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string $transaccion
  * @method static \Illuminate\Database\Eloquent\Builder|ImpuestoEventoSignificativo newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ImpuestoEventoSignificativo newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ImpuestoEventoSignificativo query()
@@ -302,8 +300,7 @@ namespace App\Models{
  *
  * @property int $id
  * @property string $fecha_hora
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string $transaccion
  * @method static \Illuminate\Database\Eloquent\Builder|ImpuestoFechaHora newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ImpuestoFechaHora newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ImpuestoFechaHora query()
@@ -335,8 +332,7 @@ namespace App\Models{
  * @property int $codigo_caeb
  * @property string $descripcion
  * @property string $tipo_actividad
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string $transaccion
  * @method static \Illuminate\Database\Eloquent\Builder|ImpuestoListadoActividad newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ImpuestoListadoActividad newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ImpuestoListadoActividad query()
@@ -351,8 +347,7 @@ namespace App\Models{
  * @property int $id
  * @property int $codigo_clasificador
  * @property string $descripcion
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string $transaccion
  * @method static \Illuminate\Database\Eloquent\Builder|ImpuestoListadoPais newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ImpuestoListadoPais newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ImpuestoListadoPais query()
@@ -367,8 +362,7 @@ namespace App\Models{
  * @property int $id
  * @property int $codigo_clasificador
  * @property string $descripcion
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string $transaccion
  * @method static \Illuminate\Database\Eloquent\Builder|ImpuestoMensajeServicio newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ImpuestoMensajeServicio newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ImpuestoMensajeServicio query()
@@ -383,8 +377,7 @@ namespace App\Models{
  * @property int $id
  * @property int $codigo_clasificador
  * @property string $descripcion
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string $transaccion
  * @method static \Illuminate\Database\Eloquent\Builder|ImpuestoMetodoPago newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ImpuestoMetodoPago newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ImpuestoMetodoPago query()
@@ -399,8 +392,7 @@ namespace App\Models{
  * @property int $id
  * @property int $codigo_clasificador
  * @property string $descripcion
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string $transaccion
  * @method static \Illuminate\Database\Eloquent\Builder|ImpuestoMotivoAnulacion newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ImpuestoMotivoAnulacion newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ImpuestoMotivoAnulacion query()
@@ -416,8 +408,7 @@ namespace App\Models{
  * @property string $codigo_actividad
  * @property int $codigo_producto
  * @property string $descripcion_producto
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string $transaccion
  * @method static \Illuminate\Database\Eloquent\Builder|ImpuestoProductoServicio newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ImpuestoProductoServicio newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ImpuestoProductoServicio query()
@@ -430,11 +421,9 @@ namespace App\Models{
  * App\Models\ImpuestoTipoDocumentoSector
  *
  * @property int $id
- * @property string $codigo_actividad
- * @property int $codigo_documento_sector
- * @property string $tipo_documento_sector
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property int $codigo_clasificador
+ * @property string $descripcion
+ * @property string $transaccion
  * @method static \Illuminate\Database\Eloquent\Builder|ImpuestoTipoDocumentoSector newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ImpuestoTipoDocumentoSector newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ImpuestoTipoDocumentoSector query()
@@ -449,8 +438,7 @@ namespace App\Models{
  * @property int $id
  * @property int $codigo_clasificador
  * @property string $descripcion
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string $transaccion
  * @method static \Illuminate\Database\Eloquent\Builder|ImpuestoTipoEmision newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ImpuestoTipoEmision newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ImpuestoTipoEmision query()
@@ -465,8 +453,7 @@ namespace App\Models{
  * @property int $id
  * @property int $codigo_clasificador
  * @property string $descripcion
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string $transaccion
  * @method static \Illuminate\Database\Eloquent\Builder|ImpuestoTipoFactura newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ImpuestoTipoFactura newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ImpuestoTipoFactura query()
@@ -481,8 +468,7 @@ namespace App\Models{
  * @property int $id
  * @property int $codigo_clasificador
  * @property string $descripcion
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string $transaccion
  * @method static \Illuminate\Database\Eloquent\Builder|ImpuestoTipoHabitacion newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ImpuestoTipoHabitacion newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ImpuestoTipoHabitacion query()
@@ -497,8 +483,7 @@ namespace App\Models{
  * @property int $id
  * @property int $codigo_clasificador
  * @property string $descripcion
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string $transaccion
  * @method static \Illuminate\Database\Eloquent\Builder|ImpuestoTipoMoneda newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ImpuestoTipoMoneda newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ImpuestoTipoMoneda query()
@@ -513,8 +498,7 @@ namespace App\Models{
  * @property int $id
  * @property int $codigo_clasificador
  * @property string $descripcion
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string $transaccion
  * @method static \Illuminate\Database\Eloquent\Builder|ImpuestoTipoPuntoVenta newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ImpuestoTipoPuntoVenta newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ImpuestoTipoPuntoVenta query()
@@ -529,8 +513,7 @@ namespace App\Models{
  * @property int $id
  * @property int $codigo_clasificador
  * @property string $descripcion
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string $transaccion
  * @method static \Illuminate\Database\Eloquent\Builder|ImpuestoUnidadMedida newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ImpuestoUnidadMedida newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ImpuestoUnidadMedida query()
