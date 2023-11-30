@@ -21,6 +21,7 @@ use App\Models\ImpuestoTipoMoneda;
 use App\Models\ImpuestoTipoPuntoVenta;
 use App\Models\ImpuestoUnidadMedida;
 use App\Services\ImpuestoSincronizarService;
+use Illuminate\Support\Facades\Log;
 
 class CatalogosController extends Controller
 {
@@ -129,6 +130,34 @@ class CatalogosController extends Controller
         return view($view, compact($params));
     }
 
+    public function sincPrueba()
+    {
+        $acciones = [
+            config('sistema.sincMotivoAnulacion'),
+            config('sistema.sincFechaHora'),
+            config('sistema.sincTipoDocumentoSector'),
+            config('sistema.sincActividadesDocumentoSector'),
+            config('sistema.sincTiposFactura'),
+            config('sistema.sincMensajesServicios'),
+            config('sistema.sincEventosSignificativos'),
+            config('sistema.sincTipoPV'),
+            config('sistema.sincProductosServicios'),
+            config('sistema.sincTipoMoneda'),
+            config('sistema.sincActividades'),
+            config('sistema.sincTipoEmision'),
+            config('sistema.sincTipoDocumentoIdentidad'),
+            config('sistema.sincLeyendas'),
+            config('sistema.sincTipoMetodoPago'),
+            config('sistema.sincUnidadMedida'),
+            config('sistema.sincPaisOrigen'),
+            config('sistema.sincTipoHabitacion'),
+        ];
+        foreach ($acciones as $accion) {
+
+            $this->sincronizarCatalogos($accion);
+        }
+    }
+
     public function sincronizarCatalogos($accion)
     {
         $dataSincronizar = json_decode(json_encode([
@@ -154,6 +183,7 @@ class CatalogosController extends Controller
 
                 case config('sistema.sincFechaHora'):
                     ImpuestoFechaHora::truncate();
+                    Log::info($dataSincronizar->content->transaccion);
                     ImpuestoFechaHora::create([
                         'fecha_hora' => $dataSincronizar->content->fechaHora,
                         'transaccion' => $dataSincronizar->content->transaccion,
@@ -231,6 +261,7 @@ class CatalogosController extends Controller
                             'transaccion' => $dataSincronizar->content->transaccion,
                         ]);
                     }
+                    break;
                 case config('sistema.sincTipoMoneda'):
                     ImpuestoTipoMoneda::truncate();
                     foreach ($dataSincronizar->content->listaCodigos as $sector) {
