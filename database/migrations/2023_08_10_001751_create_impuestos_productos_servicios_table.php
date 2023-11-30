@@ -17,7 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('codigo_actividad');
             $table->integer('codigo_producto');
-            $table->string('descripcion_producto');
+            $table->text('descripcion_producto');
+            $table->json('nandina')->nullable();
             $table->string('transaccion');
             //$table->timestamps();
         });

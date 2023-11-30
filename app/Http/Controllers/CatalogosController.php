@@ -135,7 +135,7 @@ class CatalogosController extends Controller
         $dataSincronizar = json_decode(json_encode([
             'codigoSucursal' => 0,
             'codigoPuntoVenta' => 0,
-            'cuis' => '49DC0A17',
+            'cuis' => '5141470F',
         ]));
         $dataSincronizar = $this->sincService->sincronizarServices($dataSincronizar, $accion);
 
@@ -230,6 +230,7 @@ class CatalogosController extends Controller
                             'codigo_actividad' => $sector->codigoActividad,
                             'codigo_producto' => $sector->codigoProducto,
                             'descripcion_producto' => $sector->descripcionProducto,
+                            'nandina' => isset($sector->nandina) ? json_encode($sector->nandina) : null,
                             'transaccion' => $dataSincronizar->content->transaccion,
                         ]);
                     }
