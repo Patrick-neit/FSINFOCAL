@@ -264,7 +264,6 @@ Route::group(['middleware' => 'web'], function () {
 
 //sincronizacion de catalogos
 Route::get('/catalogos/{sincronizacion}', [CatalogosController::class, 'index'])->name('catalogos.index');
-Route::get('/prueba/sinc_prueba', [CatalogosController::class, 'sincPrueba'])->name('catalogos.index.sinc_jjob');
 Route::get('/catalogos/sincronizarCatalogos/{accion}', [CatalogosController::class, 'sincronizarCatalogos'])->name('sincronizar');
 
 Route::group([
