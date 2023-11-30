@@ -17,7 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('codigo_actividad');
             $table->string('descripcion_leyenda');
-            $table->timestamps();
+            $table->string('transaccion');
+            //$table->timestamps();
         });
     }
 

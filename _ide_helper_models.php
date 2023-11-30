@@ -315,8 +315,7 @@ namespace App\Models{
  * @property int $id
  * @property string $codigo_actividad
  * @property string $descripcion_leyenda
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string $transaccion
  * @method static \Illuminate\Database\Eloquent\Builder|ImpuestoLeyendaFactura newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ImpuestoLeyendaFactura newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ImpuestoLeyendaFactura query()

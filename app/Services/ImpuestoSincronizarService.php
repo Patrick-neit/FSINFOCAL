@@ -19,7 +19,7 @@ class ImpuestoSincronizarService
             'apikey' => $this->config->configService->token_sistema,
         ])
             ->post(
-                config('sistema.url_api').'api/sincronizacion',
+                config('sistema.url_api') . 'api/sincronizacion',
                 [
                     'codigoAmbiente' => $this->config->configService->codigoAmbiente,
                     'codigoSistema' => $this->config->configService->codigoSistema,
@@ -168,7 +168,7 @@ class ImpuestoSincronizarService
         return $response->object();
     }
 
-    public function sincronizarParametricaTipoPuntoVenta($dataSincronizar)
+    public function sincronizarParametricaTipoPuntoVenta($dataSincronizar) //TODO: Hecho
     {
         $response = Http::withHeaders([
             'apikey' => $this->config->configService->token_sistema,
@@ -190,7 +190,7 @@ class ImpuestoSincronizarService
         return $response->object();
     }
 
-    public function sincronizarListaProductosServicios($dataSincronizar)
+    public function sincronizarListaProductosServicios($dataSincronizar) //TODO: Hecho
     {
         $response = Http::withHeaders([
             'apikey' => $this->config->configService->token_sistema,
@@ -212,7 +212,7 @@ class ImpuestoSincronizarService
         return $response->object();
     }
 
-    public function sincronizarParametricaTipoMoneda($dataSincronizar)
+    public function sincronizarParametricaTipoMoneda($dataSincronizar) //TODO: Hecho
     {
         $response = Http::withHeaders([
             'apikey' => $this->config->configService->token_sistema,
@@ -234,7 +234,7 @@ class ImpuestoSincronizarService
         return $response->object();
     }
 
-    public function sincronizarActividades($dataSincronizar)
+    public function sincronizarActividades($dataSincronizar) //TODO: Hecho
     {
         $response = Http::withHeaders([
             'apikey' => $this->config->configService->token_sistema,
@@ -256,7 +256,7 @@ class ImpuestoSincronizarService
         return $response->object();
     }
 
-    public function sincronizarParametricaTipoEmision($dataSincronizar)
+    public function sincronizarParametricaTipoEmision($dataSincronizar) //TODO: Hecho
     {
         $response = Http::withHeaders([
             'apikey' => $this->config->configService->token_sistema,
@@ -278,7 +278,7 @@ class ImpuestoSincronizarService
         return $response->object();
     }
 
-    public function sincronizarParametricaTipoDocumentoIdentidad($dataSincronizar)
+    public function sincronizarParametricaTipoDocumentoIdentidad($dataSincronizar) //TODO: Hecho
     {
         $response = Http::withHeaders([
             'apikey' => $this->config->configService->token_sistema,
@@ -300,7 +300,7 @@ class ImpuestoSincronizarService
         return $response->object();
     }
 
-    public function sincronizarListaLeyendasFactura($dataSincronizar)
+    public function sincronizarListaLeyendasFactura($dataSincronizar) //TODO: Hecho
     {
         $response = Http::withHeaders([
             'apikey' => $this->config->configService->token_sistema,

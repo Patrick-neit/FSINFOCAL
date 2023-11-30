@@ -232,16 +232,46 @@
     "slug" => "Sinc. Doc Sector"
     ),
     array(
-    "url" =>trim( parse_url(route('catalogos.index.tiposFactura'), PHP_URL_PATH) ,'/'),
-    "i18n" => "Sinc. Tipos Facturas",
-    "name" => "Sinc. Tipos Facturas",
-    "slug" => "Sinc. Tipos Facturas"
-    ),
-    array(
     "url" =>trim( parse_url(route('catalogos.index.mensajesServicios'), PHP_URL_PATH) ,'/'),
     "i18n" => "Sinc. Mensajes Servicios",
     "name" => "Sinc. Mensajes Servicios",
     "slug" => "Sinc. Mensajes Servicios"
+    ),
+    array(
+    "url" =>trim( parse_url(route('catalogos.index.eventos'), PHP_URL_PATH) ,'/'),
+    "i18n" => "Sinc. Eventos Sig.",
+    "name" => "Sinc. Eventos Sig.",
+    "slug" => "Sinc. Eventos Sig."
+    ),
+    array(
+    "url" =>trim( parse_url(route('catalogos.index.productosServicios'), PHP_URL_PATH) ,'/'),
+    "i18n" => "Sinc. Prod. Serv.",
+    "name" => "Sinc. Prod. Serv.",
+    "slug" => "Sinc. Prod. Serv."
+    ),
+    array(
+    "url" =>trim( parse_url(route('catalogos.index.leyendasFactura'), PHP_URL_PATH) ,'/'),
+    "i18n" => "Sinc. Leyendas",
+    "name" => "Sinc. Leyendas",
+    "slug" => "Sinc. Leyendas"
+    ),
+    array(
+    "url" =>trim( parse_url(route('catalogos.index.actividades'), PHP_URL_PATH) ,'/'),
+    "i18n" => "Sinc. Actividades",
+    "name" => "Sinc. Actividades",
+    "slug" => "Sinc. Actividades"
+    ),
+    array(
+    "url" =>trim( parse_url(route('catalogos.index.metodosPago'), PHP_URL_PATH) ,'/'),
+    "i18n" => "Sinc. Tipos Metodos Pago",
+    "name" => "Sinc. Tipos Metodos Pago",
+    "slug" => "Sinc. Tipos Metodos Pago"
+    ),
+    array(
+    "url" =>trim( parse_url(route('catalogos.index.tiposFactura'), PHP_URL_PATH) ,'/'),
+    "i18n" => "Sinc. Tipos Facturas",
+    "name" => "Sinc. Tipos Facturas",
+    "slug" => "Sinc. Tipos Facturas"
     ),
     array(
     "url" =>trim( parse_url(route('catalogos.index.tipoPV'), PHP_URL_PATH) ,'/'),
@@ -250,10 +280,22 @@
     "slug" => "Sinc. Tipos PV"
     ),
     array(
-    "url" =>trim( parse_url(route('catalogos.index.eventos'), PHP_URL_PATH) ,'/'),
-    "i18n" => "Sinc. Eventos Sig.",
-    "name" => "Sinc. Eventos Sig.",
-    "slug" => "Sinc. Eventos Sig."
+    "url" =>trim( parse_url(route('catalogos.index.tipoMonedas'), PHP_URL_PATH) ,'/'),
+    "i18n" => "Sinc. Tipo Monedas",
+    "name" => "Sinc. Tipo Monedas",
+    "slug" => "Sinc. Tipo Monedas"
+    ),
+    array(
+    "url" =>trim( parse_url(route('catalogos.index.tipoEmision'), PHP_URL_PATH) ,'/'),
+    "i18n" => "Sinc. Tipo Emision",
+    "name" => "Sinc. Tipo Emision",
+    "slug" => "Sinc. Tipo Emision"
+    ),
+    array(
+    "url" =>trim( parse_url(route('catalogos.index.tipoDocumentoIdentidad'), PHP_URL_PATH) ,'/'),
+    "i18n" => "Sinc. Tipo Documento I.",
+    "name" => "Sinc. Tipo Documento I.",
+    "slug" => "Sinc. Tipo Documento I."
     ),
 
     )
