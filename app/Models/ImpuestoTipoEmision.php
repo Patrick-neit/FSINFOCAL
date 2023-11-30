@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class ImpuestoTipoEmision extends Model
 {
@@ -18,7 +18,7 @@ class ImpuestoTipoEmision extends Model
     [
         'codigo_clasificador',
         'descripcion',
-        'transaccion'
+        'transaccion',
     ];
 
     protected function transaccion(): Attribute

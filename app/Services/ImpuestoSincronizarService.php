@@ -19,7 +19,7 @@ class ImpuestoSincronizarService
             'apikey' => $this->config->configService->token_sistema,
         ])
             ->post(
-                config('sistema.url_api') . 'api/sincronizacion',
+                config('sistema.url_api').'api/sincronizacion',
                 [
                     'codigoAmbiente' => $this->config->configService->codigoAmbiente,
                     'codigoSistema' => $this->config->configService->codigoSistema,
@@ -322,7 +322,7 @@ class ImpuestoSincronizarService
         return $response->object();
     }
 
-    public function sincronizarParametricaTipoMetodoPago($dataSincronizar)
+    public function sincronizarParametricaTipoMetodoPago($dataSincronizar) //TODO: Hecho
     {
         $response = Http::withHeaders([
             'apikey' => $this->config->configService->token_sistema,
@@ -344,7 +344,7 @@ class ImpuestoSincronizarService
         return $response->object();
     }
 
-    public function sincronizarParametricaUnidadMedida($dataSincronizar)
+    public function sincronizarParametricaUnidadMedida($dataSincronizar) //TODO: Hecho
     {
         $response = Http::withHeaders([
             'apikey' => $this->config->configService->token_sistema,
@@ -366,7 +366,7 @@ class ImpuestoSincronizarService
         return $response->object();
     }
 
-    public function sincronizarParametricaPaisOrigen($dataSincronizar)
+    public function sincronizarParametricaPaisOrigen($dataSincronizar) //TODO: Hecho
     {
         $response = Http::withHeaders([
             'apikey' => $this->config->configService->token_sistema,

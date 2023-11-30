@@ -14,4 +14,10 @@ return [
     'sincTipoDocumentoIdentidad' => env('SINCRONIZAR_TIPO_DOCUMENTO_IDENTIDAD'),
     'sincLeyendas' => env('SINCRONIZAR_LEYENDAS'),
     'sincTipoMetodoPago' => env('SINCRONIZAR_TIPO_METODO_PAGO'),
+    'sincUnidadMedida' => env('SINCRONIZAR_UNIDAD_MEDIDA'),
+    'sincPaisOrigen' => env('SINCRONIZAR_PAIS_ORIGEN'),
+    'sincTipoHabitacion' => env('SINCRONIZAR_TIPO_HABITACION'),
+    'sincMotivoAnulacion' => env('SINCRONIZAR_MOTIVO_ANULACION'),
+    'sincTipoDocumentoSector' => env('SINCRONIZAR_TIPO_DOCUMENTO_SECTOR'),
+    'sincActividadesDocumentoSector' => env('SINCRONIZAR_ACTIVIDADES_DOCUMENTO_SECTOR'),
 ];

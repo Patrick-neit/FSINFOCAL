@@ -263,21 +263,7 @@ Route::group(['middleware' => 'web'], function () {
 });
 
 //sincronizacion de catalogos
-Route::get('/catalogos/sincronizacion_fecha_hora', [CatalogosController::class, 'index'])->name('catalogos.index');
-Route::get('/catalogos/sincronizacion_motivo_anulaciones', [CatalogosController::class, 'indexAnulacion'])->name('catalogos.index.anulacion');
-Route::get('/catalogos/sincronizacion_tipo_documento_sector', [CatalogosController::class, 'indexTipoDocSector'])->name('catalogos.index.tipoDocSector');
-Route::get('/catalogos/sincronizacion_documento_sector', [CatalogosController::class, 'indexDocumentoSector'])->name('catalogos.index.documentoSector');
-Route::get('/catalogos/sincronizacion_tipos_factura', [CatalogosController::class, 'indexTiposFactura'])->name('catalogos.index.tiposFactura');
-Route::get('/catalogos/sincronizacion_mensajes_servicios', [CatalogosController::class, 'indexMensajesServicios'])->name('catalogos.index.mensajesServicios');
-Route::get('/catalogos/sincronizacion_eventos_significativos', [CatalogosController::class, 'indexEventos'])->name('catalogos.index.eventos');
-Route::get('/catalogos/sincronizacion_tipo_puntoventa', [CatalogosController::class, 'indexTipoPV'])->name('catalogos.index.tipoPV');
-Route::get('/catalogos/sincronizacion_productos_servicios', [CatalogosController::class, 'indexProductosServicios'])->name('catalogos.index.productosServicios');
-Route::get('/catalogos/sincronizacion_tipo_moneda', [CatalogosController::class, 'indexTipoMonedas'])->name('catalogos.index.tipoMonedas');
-Route::get('/catalogos/sincronizacion_actividades', [CatalogosController::class, 'indexActividades'])->name('catalogos.index.actividades');
-Route::get('/catalogos/sincronizacion_tipo_emision', [CatalogosController::class, 'indexTipoEmision'])->name('catalogos.index.tipoEmision');
-Route::get('/catalogos/sincronizacion_tipo_documento_identidad', [CatalogosController::class, 'indexTipoDocumentoIdentidad'])->name('catalogos.index.tipoDocumentoIdentidad');
-Route::get('/catalogos/sincronizacion_leyendas_factura', [CatalogosController::class, 'indexLeyendasFactura'])->name('catalogos.index.leyendasFactura');
-Route::get('/catalogos/sincronizacion_metodos_pago', [CatalogosController::class, 'indexMetodosPago'])->name('catalogos.index.metodosPago');
+Route::get('/catalogos/{sincronizacion}', [CatalogosController::class, 'index'])->name('catalogos.index');
 Route::get('/catalogos/sincronizarCatalogos/{accion}', [CatalogosController::class, 'sincronizarCatalogos'])->name('sincronizar');
 
 Route::group([

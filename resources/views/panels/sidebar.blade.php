@@ -208,91 +208,110 @@
     "class"=> "collapsible-header waves-effect waves-cyan",
     "submenu" => array(
     array(
-    "url" =>trim( parse_url(route('catalogos.index'), PHP_URL_PATH) ,'/'),
+    "url" =>trim( parse_url(route('catalogos.index', 'sincronizacion_fecha_hora'), PHP_URL_PATH) ,'/'),
     "i18n" => "Sinc. Fecha y Hora",
     "name" => "Sinc. Fecha y Hora",
     "slug" => "Sinc. Fecha y Hora"
     ),
     array(
-    "url" =>trim( parse_url(route('catalogos.index.anulacion'), PHP_URL_PATH) ,'/'),
+    "url" =>trim( parse_url(route('catalogos.index', 'sincronizacion_motivo_anulaciones'), PHP_URL_PATH)
+    ,'/'),
     "i18n" => "Sinc. Motivo Anulaciones",
     "name" => "Sinc. Motivo Anulaciones",
     "slug" => "Sinc. Motivo Anulaciones"
     ),
     array(
-    "url" =>trim( parse_url(route('catalogos.index.tipoDocSector'), PHP_URL_PATH) ,'/'),
+    "url" =>trim( parse_url(route('catalogos.index', 'sincronizacion_tipo_habitacion'), PHP_URL_PATH) ,'/'),
+    "i18n" => "Sinc. Tipo Habitacion",
+    "name" => "Sinc. Tipo Habitacion",
+    "slug" => "Sinc. Tipo Habitacion"
+    ),
+    array(
+    "url" =>trim( parse_url(route('catalogos.index', 'sincronizacion_paises_origen'), PHP_URL_PATH) ,'/'),
+    "i18n" => "Sinc. Origen Paises",
+    "name" => "Sinc. Origen Paises",
+    "slug" => "Sinc. Origen Paises"
+    ),
+    array(
+    "url" =>trim( parse_url(route('catalogos.index', 'sincronizacion_tipo_documento_sector'), PHP_URL_PATH) ,'/'),
+    "i18n" => "Sinc. Tipo Doc Sector",
+    "name" => "Sinc. Tipo Doc Sector",
+    "slug" => "Sinc. Tipo Doc Sector"
+    ),
+    array(
+    "url" =>trim( parse_url(route('catalogos.index', 'sincronizacion_documento_sector'), PHP_URL_PATH) ,'/'),
     "i18n" => "Sinc. Doc Sector",
     "name" => "Sinc. Doc Sector",
     "slug" => "Sinc. Doc Sector"
     ),
     array(
-    "url" =>trim( parse_url(route('catalogos.index.documentoSector'), PHP_URL_PATH) ,'/'),
-    "i18n" => "Sinc. Doc Sector",
-    "name" => "Sinc. Doc Sector",
-    "slug" => "Sinc. Doc Sector"
-    ),
-    array(
-    "url" =>trim( parse_url(route('catalogos.index.mensajesServicios'), PHP_URL_PATH) ,'/'),
+    "url" =>trim( parse_url(route('catalogos.index', 'sincronizacion_mensajes_servicios'), PHP_URL_PATH) ,'/'),
     "i18n" => "Sinc. Mensajes Servicios",
     "name" => "Sinc. Mensajes Servicios",
     "slug" => "Sinc. Mensajes Servicios"
     ),
     array(
-    "url" =>trim( parse_url(route('catalogos.index.eventos'), PHP_URL_PATH) ,'/'),
+    "url" =>trim( parse_url(route('catalogos.index', 'sincronizacion_eventos_significativos'), PHP_URL_PATH) ,'/'),
     "i18n" => "Sinc. Eventos Sig.",
     "name" => "Sinc. Eventos Sig.",
     "slug" => "Sinc. Eventos Sig."
     ),
     array(
-    "url" =>trim( parse_url(route('catalogos.index.productosServicios'), PHP_URL_PATH) ,'/'),
+    "url" =>trim( parse_url(route('catalogos.index', 'sincronizacion_productos_servicios'), PHP_URL_PATH) ,'/'),
     "i18n" => "Sinc. Prod. Serv.",
     "name" => "Sinc. Prod. Serv.",
     "slug" => "Sinc. Prod. Serv."
     ),
     array(
-    "url" =>trim( parse_url(route('catalogos.index.leyendasFactura'), PHP_URL_PATH) ,'/'),
+    "url" =>trim( parse_url(route('catalogos.index', 'sincronizacion_unidades_medida'), PHP_URL_PATH) ,'/'),
+    "i18n" => "Sinc. Unidades Medida",
+    "name" => "Sinc. Unidades Medida",
+    "slug" => "Sinc. Unidades Medida"
+    ),
+    array(
+    "url" =>trim( parse_url(route('catalogos.index', 'sincronizacion_leyendas_factura'), PHP_URL_PATH) ,'/'),
     "i18n" => "Sinc. Leyendas",
     "name" => "Sinc. Leyendas",
     "slug" => "Sinc. Leyendas"
     ),
     array(
-    "url" =>trim( parse_url(route('catalogos.index.actividades'), PHP_URL_PATH) ,'/'),
+    "url" =>trim( parse_url(route('catalogos.index', 'sincronizacion_actividades'), PHP_URL_PATH) ,'/'),
     "i18n" => "Sinc. Actividades",
     "name" => "Sinc. Actividades",
     "slug" => "Sinc. Actividades"
     ),
     array(
-    "url" =>trim( parse_url(route('catalogos.index.metodosPago'), PHP_URL_PATH) ,'/'),
+    "url" =>trim( parse_url(route('catalogos.index', 'sincronizacion_metodos_pago'), PHP_URL_PATH) ,'/'),
     "i18n" => "Sinc. Tipos Metodos Pago",
     "name" => "Sinc. Tipos Metodos Pago",
     "slug" => "Sinc. Tipos Metodos Pago"
     ),
     array(
-    "url" =>trim( parse_url(route('catalogos.index.tiposFactura'), PHP_URL_PATH) ,'/'),
+    "url" =>trim( parse_url(route('catalogos.index', 'sincronizacion_tipos_factura'), PHP_URL_PATH) ,'/'),
     "i18n" => "Sinc. Tipos Facturas",
     "name" => "Sinc. Tipos Facturas",
     "slug" => "Sinc. Tipos Facturas"
     ),
     array(
-    "url" =>trim( parse_url(route('catalogos.index.tipoPV'), PHP_URL_PATH) ,'/'),
+    "url" =>trim( parse_url(route('catalogos.index', 'sincronizacion_tipo_puntoventa'), PHP_URL_PATH) ,'/'),
     "i18n" => "Sinc. Tipos PV",
     "name" => "Sinc. Tipos PV",
     "slug" => "Sinc. Tipos PV"
     ),
     array(
-    "url" =>trim( parse_url(route('catalogos.index.tipoMonedas'), PHP_URL_PATH) ,'/'),
+    "url" =>trim( parse_url(route('catalogos.index', 'sincronizacion_tipo_moneda'), PHP_URL_PATH) ,'/'),
     "i18n" => "Sinc. Tipo Monedas",
     "name" => "Sinc. Tipo Monedas",
     "slug" => "Sinc. Tipo Monedas"
     ),
     array(
-    "url" =>trim( parse_url(route('catalogos.index.tipoEmision'), PHP_URL_PATH) ,'/'),
+    "url" =>trim( parse_url(route('catalogos.index', 'sincronizacion_tipo_emision'), PHP_URL_PATH) ,'/'),
     "i18n" => "Sinc. Tipo Emision",
     "name" => "Sinc. Tipo Emision",
     "slug" => "Sinc. Tipo Emision"
     ),
     array(
-    "url" =>trim( parse_url(route('catalogos.index.tipoDocumentoIdentidad'), PHP_URL_PATH) ,'/'),
+    "url" =>trim( parse_url(route('catalogos.index', 'sincronizacion_tipo_documento_identidad'), PHP_URL_PATH) ,'/'),
     "i18n" => "Sinc. Tipo Documento I.",
     "name" => "Sinc. Tipo Documento I.",
     "slug" => "Sinc. Tipo Documento I."
@@ -333,7 +352,7 @@
     "slug" => "Puntos Ventas"
     ),
     array(
-    "url" =>trim( parse_url(route('catalogos.index'), PHP_URL_PATH) ,'/'),
+    "url" =>trim( parse_url(route('puntos_ventas.index'), PHP_URL_PATH) ,'/'), //TODO: VERIFICAR
     "i18n" => "Puntos Ventas ",
     "name" => "Puntos Ventas ",
     "slug" => "Puntos Ventas"

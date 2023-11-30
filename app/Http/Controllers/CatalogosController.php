@@ -16,8 +16,10 @@ use App\Models\ImpuestoProductoServicio;
 use App\Models\ImpuestoTipoDocumentoSector;
 use App\Models\ImpuestoTipoEmision;
 use App\Models\ImpuestoTipoFactura;
+use App\Models\ImpuestoTipoHabitacion;
 use App\Models\ImpuestoTipoMoneda;
 use App\Models\ImpuestoTipoPuntoVenta;
+use App\Models\ImpuestoUnidadMedida;
 use App\Services\ImpuestoSincronizarService;
 
 class CatalogosController extends Controller
@@ -29,109 +31,102 @@ class CatalogosController extends Controller
         $this->sincService = new ImpuestoSincronizarService();
     }
 
-    public function index()
+    public function index($sincronizacion)
     {
-        $impuestosFechaHora = ImpuestoFechaHora::all();
+        switch ($sincronizacion) {
+            case 'sincronizacion_fecha_hora':
+                $impuestosFechaHora = ImpuestoFechaHora::all();
+                $view = 'sincronizacion.fechahora';
+                $params = 'impuestosFechaHora';
+                break;
+            case 'sincronizacion_motivo_anulaciones':
+                $motivoAnulaciones = ImpuestoMotivoAnulacion::all();
+                $view = 'sincronizacion.motivoanulacion';
+                $params = 'motivoAnulaciones';
+                break;
+            case 'sincronizacion_tipo_documento_sector':
+                $tipoDocumentoSector = ImpuestoTipoDocumentoSector::all();
+                $view = 'sincronizacion.tipodocumentosector';
+                $params = 'tipoDocumentoSector';
+                break;
+            case 'sincronizacion_documento_sector':
+                $documentoSector = ImpuestoDocumentoSector::all();
+                $view = 'sincronizacion.documentosector';
+                $params = 'documentoSector';
+                break;
+            case 'sincronizacion_tipos_factura':
+                $tiposFactura = ImpuestoTipoFactura::all();
+                $view = 'sincronizacion.tiposfactura';
+                $params = 'tiposFactura';
+                break;
+            case 'sincronizacion_mensajes_servicios':
+                $mensajesServicios = ImpuestoMensajeServicio::all();
+                $view = 'sincronizacion.mensajesServicios';
+                $params = 'mensajesServicios';
+                break;
+            case 'sincronizacion_eventos_significativos':
+                $eventosSignificativos = ImpuestoEventoSignificativo::all();
+                $view = 'sincronizacion.eventosSignificativos';
+                $params = 'eventosSignificativos';
+                break;
+            case 'sincronizacion_tipo_puntoventa':
+                $tipoPuntoVenta = ImpuestoTipoPuntoVenta::all();
+                $view = 'sincronizacion.tipoPV';
+                $params = 'tipoPuntoVenta';
+                break;
+            case 'sincronizacion_productos_servicios':
+                $productosServicios = ImpuestoProductoServicio::all();
+                $view = 'sincronizacion.productosServicios';
+                $params = 'productosServicios';
+                break;
+            case 'sincronizacion_tipo_moneda':
+                $tipoMonedas = ImpuestoTipoMoneda::all();
+                $view = 'sincronizacion.tipoMoneda';
+                $params = 'tipoMonedas';
+                break;
+            case 'sincronizacion_actividades':
+                $actividades = ImpuestoListadoActividad::all();
+                $view = 'sincronizacion.listadoActividades';
+                $params = 'actividades';
+                break;
+            case 'sincronizacion_tipo_emision':
+                $tipoEmisiones = ImpuestoTipoEmision::all();
+                $view = 'sincronizacion.tipoEmision';
+                $params = 'tipoEmisiones';
+                break;
+            case 'sincronizacion_tipo_documento_identidad':
+                $tipoDocumentoIdentidad = ImpuestoDocumentoIdentidad::all();
+                $view = 'sincronizacion.tipodocumentoidentidad';
+                $params = 'tipoDocumentoIdentidad';
+                break;
+            case 'sincronizacion_leyendas_factura':
+                $leyendasFactura = ImpuestoLeyendaFactura::all();
+                $view = 'sincronizacion.leyendasFacturas';
+                $params = 'leyendasFactura';
+                break;
+            case 'sincronizacion_metodos_pago':
+                $metodosPagos = ImpuestoMetodoPago::all();
+                $view = 'sincronizacion.metodosPagos';
+                $params = 'metodosPagos';
+                break;
+            case 'sincronizacion_unidades_medida':
+                $unidadMedida = ImpuestoUnidadMedida::all();
+                $view = 'sincronizacion.unidadMedida';
+                $params = 'unidadMedida';
+                break;
+            case 'sincronizacion_paises_origen':
+                $paises = ImpuestoListadoPais::all();
+                $view = 'sincronizacion.paisOrigen';
+                $params = 'paises';
+                break;
+            case 'sincronizacion_tipo_habitacion':
+                $tipoHabitacion = ImpuestoTipoHabitacion::all();
+                $view = 'sincronizacion.tipoHabitacion';
+                $params = 'tipoHabitacion';
+                break;
+        }
 
-        return view('sincronizacion.fechahora', compact('impuestosFechaHora'));
-    }
-
-    public function indexAnulacion()
-    {
-        $motivoAnulaciones = ImpuestoMotivoAnulacion::all();
-
-        return view('sincronizacion.motivoanulacion', compact('motivoAnulaciones'));
-    }
-
-    public function indexTipoDocSector()
-    {
-        $tipoDocumentoSector = ImpuestoTipoDocumentoSector::all();
-
-        return view('sincronizacion.tipoDocumentoSector', compact('tipoDocumentoSector'));
-    }
-
-    public function indexDocumentoSector()
-    {
-        $documentoSector = ImpuestoDocumentoSector::all();
-
-        return view('sincronizacion.documentoSector', compact('documentoSector'));
-    }
-
-    public function indexTiposFactura()
-    {
-        $tiposFactura = ImpuestoTipoFactura::all();
-
-        return view('sincronizacion.tiposFactura', compact('tiposFactura'));
-    }
-
-    public function indexMensajesServicios()
-    {
-        $mensajesServicios = ImpuestoMensajeServicio::all();
-
-        return view('sincronizacion.mensajesServicios', compact('mensajesServicios'));
-    }
-
-    public function indexEventos()
-    {
-        $eventosSignificativos = ImpuestoEventoSignificativo::all();
-
-        return view('sincronizacion.eventosSignificativos', compact('eventosSignificativos'));
-    }
-
-    public function indexTipoPV()
-    {
-        $tipoPuntoVenta = ImpuestoTipoPuntoVenta::all();
-
-        return view('sincronizacion.tipoPV', compact('tipoPuntoVenta'));
-    }
-
-    public function indexProductosServicios()
-    {
-        $productosServicios = ImpuestoProductoServicio::all();
-
-        return view('sincronizacion.productosServicios', compact('productosServicios'));
-    }
-
-    public function indexTipoEmision()
-    {
-        $tipoEmisiones = ImpuestoTipoEmision::all();
-
-        return view('sincronizacion.tipoEmision', compact('tipoEmisiones'));
-    }
-
-    public function indexTipoMonedas()
-    {
-        $tipoMonedas = ImpuestoTipoMoneda::all();
-
-        return view('sincronizacion.tipoMoneda', compact('tipoMonedas'));
-    }
-
-    public function indexActividades()
-    {
-        $actividades = ImpuestoListadoActividad::all();
-
-        return view('sincronizacion.listadoActividades', compact('actividades'));
-    }
-
-    public function indexTipoDocumentoIdentidad()
-    {
-        $tipoDocumentoIdentidad = ImpuestoDocumentoIdentidad::all();
-
-        return view('sincronizacion.tipoDocumentoIdentidad', compact('tipoDocumentoIdentidad'));
-    }
-
-    public function indexLeyendasFactura()
-    {
-        $leyendasFactura = ImpuestoLeyendaFactura::all();
-
-        return view('sincronizacion.leyendasFacturas', compact('leyendasFactura'));
-    }
-
-    public function indexMetodosPago()
-    {
-        $metodosPagos = ImpuestoMetodoPago::all();
-
-        return view('sincronizacion.metodosPagos', compact('metodosPagos'));
+        return view($view, compact($params));
     }
 
     public function sincronizarCatalogos($accion)
@@ -146,7 +141,7 @@ class CatalogosController extends Controller
         if ($dataSincronizar->content->transaccion) {
 
             switch ($accion) {
-                case 'sincronizarParametricaMotivoAnulacion':
+                case config('sistema.sincMotivoAnulacion'):
                     ImpuestoMotivoAnulacion::truncate();
                     foreach ($dataSincronizar->content->listaCodigos as $motivo) {
                         ImpuestoMotivoAnulacion::create([
@@ -165,7 +160,7 @@ class CatalogosController extends Controller
                     ]);
                     break;
 
-                case 'sincronizarParametricaTipoDocumentoSector':
+                case config('sistema.sincTipoDocumentoSector'):
                     ImpuestoTipoDocumentoSector::truncate();
                     foreach ($dataSincronizar->content->listaCodigos as $sector) {
                         ImpuestoTipoDocumentoSector::create([
@@ -175,7 +170,7 @@ class CatalogosController extends Controller
                         ]);
                     }
                     break;
-                case 'sincronizarListaActividadesDocumentoSector':
+                case config('sistema.sincActividadesDocumentoSector'):
                     ImpuestoDocumentoSector::truncate();
                     foreach ($dataSincronizar->content->listaActividadesDocumentoSector as $sector) {
                         ImpuestoDocumentoSector::create([
@@ -291,6 +286,36 @@ class CatalogosController extends Controller
                     ImpuestoMetodoPago::truncate();
                     foreach ($dataSincronizar->content->listaCodigos as $sector) {
                         ImpuestoMetodoPago::create([
+                            'codigo_clasificador' => $sector->codigoClasificador,
+                            'descripcion' => $sector->descripcion,
+                            'transaccion' => $dataSincronizar->content->transaccion,
+                        ]);
+                    }
+                    break;
+                case config('sistema.sincUnidadMedida'):
+                    ImpuestoUnidadMedida::truncate();
+                    foreach ($dataSincronizar->content->listaCodigos as $sector) {
+                        ImpuestoUnidadMedida::create([
+                            'codigo_clasificador' => $sector->codigoClasificador,
+                            'descripcion' => $sector->descripcion,
+                            'transaccion' => $dataSincronizar->content->transaccion,
+                        ]);
+                    }
+                    break;
+                case config('sistema.sincPaisOrigen'):
+                    ImpuestoListadoPais::truncate();
+                    foreach ($dataSincronizar->content->listaCodigos as $sector) {
+                        ImpuestoListadoPais::create([
+                            'codigo_clasificador' => $sector->codigoClasificador,
+                            'descripcion' => $sector->descripcion,
+                            'transaccion' => $dataSincronizar->content->transaccion,
+                        ]);
+                    }
+                    break;
+                case config('sistema.sincTipoHabitacion'):
+                    ImpuestoTipoHabitacion::truncate();
+                    foreach ($dataSincronizar->content->listaCodigos as $sector) {
+                        ImpuestoTipoHabitacion::create([
                             'codigo_clasificador' => $sector->codigoClasificador,
                             'descripcion' => $sector->descripcion,
                             'transaccion' => $dataSincronizar->content->transaccion,
