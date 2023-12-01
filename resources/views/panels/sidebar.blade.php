@@ -351,12 +351,6 @@
     "name" => "Puntos Ventas ",
     "slug" => "Puntos Ventas"
     ),
-    array(
-    "url" =>trim( parse_url(route('puntos_ventas.index'), PHP_URL_PATH) ,'/'), //TODO: VERIFICAR
-    "i18n" => "Puntos Ventas ",
-    "name" => "Puntos Ventas ",
-    "slug" => "Puntos Ventas"
-    ),
 
     )
     ),

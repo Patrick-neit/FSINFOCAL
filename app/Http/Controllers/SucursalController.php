@@ -47,7 +47,7 @@ class SucursalController extends Controller
     public function store(Request $request)
     {
         try {
-            if (!empty($request->sucursal_id)) {
+            if (! empty($request->sucursal_id)) {
                 return $this->update($request);
             }
             $branch = new Sucursal();

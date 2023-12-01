@@ -17,7 +17,7 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
         //$schedule->job(new SincCatalogos)->everyMinute();
-        $schedule->command('sincronizar:catalogos')->daily();
+        $schedule->command('sincronizar:catalogos')->everyMinute();
     }
 
     /**
