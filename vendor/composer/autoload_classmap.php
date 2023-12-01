@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'App\\Console\\Commands\\SincronizarCatalogos' => $baseDir . '/app/Console/Commands/SincronizarCatalogos.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Helpers\\Helpers' => $baseDir . '/app/Helpers/Helpers.php',
@@ -60,6 +61,7 @@ return array(
     'App\\Http\\Requests\\AlumnoStoreRequest' => $baseDir . '/app/Http/Requests/AlumnoStoreRequest.php',
     'App\\Http\\Requests\\ConfImp\\StoreConfImpRequest' => $baseDir . '/app/Http/Requests/ConfImp/StoreConfImpRequest.php',
     'App\\Http\\Requests\\DocenteStoreRequest' => $baseDir . '/app/Http/Requests/DocenteStoreRequest.php',
+    'App\\Jobs\\SincCatalogos' => $baseDir . '/app/Jobs/SincCatalogos.php',
     'App\\Mail\\SendMailReset' => $baseDir . '/app/Mail/SendMailReset.php',
     'App\\Models\\Alumno' => $baseDir . '/app/Models/Alumno.php',
     'App\\Models\\AlumnoCurso' => $baseDir . '/app/Models/AlumnoCurso.php',

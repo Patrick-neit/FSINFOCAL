@@ -13,14 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('sucursales', function (Blueprint $table) {
+        Schema::create('correlativo', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre_sucursal');
-            $table->string('direccion');
-            $table->integer('codigo_sucursal');
-            $table->integer('telefono');
-            $table->unsignedBigInteger('empresa_id');
-            //$table->softDeletes();
+            $table->unsignedBigInteger('sucursal_id');
+            $table->string('documento');
+            $table->string('serie');
+            $table->integer('numero');
             //$table->timestamps();
         });
     }
@@ -32,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sucursales');
+        Schema::dropIfExists('correlativo');
     }
 };

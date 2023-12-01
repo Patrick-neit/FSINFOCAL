@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Correlativo;
 use App\Models\Empresa;
 use App\Models\Sucursal;
 use Illuminate\Http\Request;
@@ -9,6 +10,18 @@ use Illuminate\Support\Facades\Auth;
 
 class SucursalController extends Controller
 {
+    protected $documento = [
+        '0' => 'Factura',
+        '1' => 'Boleta',
+        '2' => 'NotaVenta',
+    ];
+
+    protected $serie = [
+        '0' => 'F-000',
+        '1' => 'B-000',
+        '2' => 'NV-000',
+    ];
+
     public function index()
     {
         $branches = Sucursal::where('empresa_id', Auth::user()->empresas[0]->id)->get();
@@ -34,8 +47,16 @@ class SucursalController extends Controller
             $branch->empresa_id = $request->empresa_id;
             $branch->save();
             if ($branch->save()) {
-                return responseJson('Registrado Exitosamente', $branch, 200);
+                for ($i = 0; $i < 3; $i++) {
+                    Correlativo::create([
+                        'sucursal_id' => $branch->id,
+                        'documento' => $this->documento[$i],
+                        'serie' => $this->serie[$i],
+                        'numero' => 1,
+                    ]);
+                }
 
+                return responseJson('Registrado Exitosamente', $branch, 200);
             } else {
                 return responseJson('Something went Wrong', $branch, 400);
             }

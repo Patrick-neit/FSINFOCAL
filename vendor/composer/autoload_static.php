@@ -632,6 +632,7 @@ class ComposerStaticInit3ea74f8ba45b7ba0443bbe3ed7a8894a
     );
 
     public static $classMap = array (
+        'App\\Console\\Commands\\SincronizarCatalogos' => __DIR__ . '/../..' . '/app/Console/Commands/SincronizarCatalogos.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Helpers\\Helpers' => __DIR__ . '/../..' . '/app/Helpers/Helpers.php',
@@ -686,6 +687,7 @@ class ComposerStaticInit3ea74f8ba45b7ba0443bbe3ed7a8894a
         'App\\Http\\Requests\\AlumnoStoreRequest' => __DIR__ . '/../..' . '/app/Http/Requests/AlumnoStoreRequest.php',
         'App\\Http\\Requests\\ConfImp\\StoreConfImpRequest' => __DIR__ . '/../..' . '/app/Http/Requests/ConfImp/StoreConfImpRequest.php',
         'App\\Http\\Requests\\DocenteStoreRequest' => __DIR__ . '/../..' . '/app/Http/Requests/DocenteStoreRequest.php',
+        'App\\Jobs\\SincCatalogos' => __DIR__ . '/../..' . '/app/Jobs/SincCatalogos.php',
         'App\\Mail\\SendMailReset' => __DIR__ . '/../..' . '/app/Mail/SendMailReset.php',
         'App\\Models\\Alumno' => __DIR__ . '/../..' . '/app/Models/Alumno.php',
         'App\\Models\\AlumnoCurso' => __DIR__ . '/../..' . '/app/Models/AlumnoCurso.php',

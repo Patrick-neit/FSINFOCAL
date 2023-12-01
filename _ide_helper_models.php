@@ -108,6 +108,22 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * App\Models\Correlativo
+ *
+ * @property int $id
+ * @property int $sucursal_id
+ * @property string $documento
+ * @property string $serie
+ * @property int $numero
+ * @method static \Illuminate\Database\Eloquent\Builder|Correlativo newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Correlativo newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Correlativo query()
+ */
+	class Correlativo extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\Curso
  *
  * @property int $id
@@ -407,6 +423,7 @@ namespace App\Models{
  * @property string $codigo_actividad
  * @property int $codigo_producto
  * @property string $descripcion_producto
+ * @property mixed|null $nandina
  * @property string $transaccion
  * @method static \Illuminate\Database\Eloquent\Builder|ImpuestoProductoServicio newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ImpuestoProductoServicio newQuery()
@@ -577,9 +594,9 @@ namespace App\Models{
  * @property int $codigo_sucursal
  * @property int $telefono
  * @property int $empresa_id
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string|null $deleted_at
+ * @property string|null $created_at
+ * @property string|null $updated_at
  * @property-read \App\Models\Empresa|null $empresa
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ImpuestoCuis> $impuestos_cuis
  * @property-read int|null $impuestos_cuis_count
@@ -587,10 +604,7 @@ namespace App\Models{
  * @property-read int|null $puntos_ventas_count
  * @method static \Illuminate\Database\Eloquent\Builder|Sucursal newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Sucursal newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|Sucursal onlyTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Sucursal query()
- * @method static \Illuminate\Database\Eloquent\Builder|Sucursal withTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder|Sucursal withoutTrashed()
  */
 	class Sucursal extends \Eloquent {}
 }
