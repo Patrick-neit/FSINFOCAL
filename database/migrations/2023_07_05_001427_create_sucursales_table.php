@@ -20,8 +20,8 @@ return new class extends Migration
             $table->integer('codigo_sucursal');
             $table->integer('telefono');
             $table->unsignedBigInteger('empresa_id');
-            //$table->softDeletes();
-            //$table->timestamps();
+            $table->softDeletes();
+            $table->timestamps();
         });
     }
 

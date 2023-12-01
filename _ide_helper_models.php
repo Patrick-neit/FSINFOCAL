@@ -594,9 +594,10 @@ namespace App\Models{
  * @property int $codigo_sucursal
  * @property int $telefono
  * @property int $empresa_id
- * @property string|null $deleted_at
- * @property string|null $created_at
- * @property string|null $updated_at
+ * @property int $estado
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Empresa|null $empresa
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ImpuestoCuis> $impuestos_cuis
  * @property-read int|null $impuestos_cuis_count
@@ -604,7 +605,10 @@ namespace App\Models{
  * @property-read int|null $puntos_ventas_count
  * @method static \Illuminate\Database\Eloquent\Builder|Sucursal newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Sucursal newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Sucursal onlyTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Sucursal query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Sucursal withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Sucursal withoutTrashed()
  */
 	class Sucursal extends \Eloquent {}
 }

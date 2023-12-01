@@ -29,6 +29,14 @@ class SucursalController extends Controller
         return view('sucursales.index', compact('branches'));
     }
 
+    public function edit($id)
+    {
+        $empresas = Empresa::where('id', Auth::user()->empresas[0]->id)->get();
+        $sucursal = Sucursal::find($id);
+
+        return view('sucursales.create', compact('sucursal', 'empresas'));
+    }
+
     public function create()
     {
         $empresas = Empresa::where('id', Auth::user()->empresas[0]->id)->get();
@@ -39,6 +47,9 @@ class SucursalController extends Controller
     public function store(Request $request)
     {
         try {
+            if (!empty($request->sucursal_id)) {
+                return $this->update($request);
+            }
             $branch = new Sucursal();
             $branch->nombre_sucursal = $request->nombre_sucursal;
             $branch->direccion = $request->direccion;
@@ -57,6 +68,28 @@ class SucursalController extends Controller
                 }
 
                 return responseJson('Registrado Exitosamente', $branch, 200);
+            } else {
+                return responseJson('Something went Wrong', $branch, 400);
+            }
+        } catch (\Exception $e) {
+            return responseJson('Server Error', [
+                'message' => $e->getMessage(),
+                'code' => $e->getCode(),
+            ], 500);
+        }
+    }
+
+    public function update($request)
+    {
+        try {
+            $branch = Sucursal::find($request->sucursal_id);
+            $branch->nombre_sucursal = $request->nombre_sucursal;
+            $branch->direccion = $request->direccion;
+            $branch->codigo_sucursal = $request->codigo_sucursal;
+            $branch->telefono = $request->telefono;
+            $branch->save();
+            if ($branch->save()) {
+                return responseJson('Actualizado Exitosamente', $branch, 200);
             } else {
                 return responseJson('Something went Wrong', $branch, 400);
             }
