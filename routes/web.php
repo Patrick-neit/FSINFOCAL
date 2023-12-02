@@ -13,6 +13,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DataTableController;
 use App\Http\Controllers\EjemploController;
 use App\Http\Controllers\ExtraComponentsController;
+use App\Http\Controllers\FamiliaController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\MarcaController;
@@ -289,7 +290,16 @@ Route::group([
     Route::get('create', 'create')->name('puntos_ventas.create');
     Route::post('store', 'store')->name('puntos_ventas.store');
 });
-
+Route::group([
+    'prefix' => 'familia',
+    'controller' => FamiliaController::class,
+], function () {
+    Route::get('index', 'index')->name('familia.index');
+    Route::get('create', 'create')->name('familia.create');
+    Route::get('/edit/{id}', 'edit')->name('familia.edit');
+    Route::post('store', 'store')->name('familia.store');
+    Route::delete('destroy', 'destroy')->name('familia.destroy');
+});
 Route::group([
     'prefix' => 'marca',
     'controller' => MarcaController::class,
@@ -299,6 +309,4 @@ Route::group([
     Route::get('/edit/{id}', 'edit')->name('marca.edit');
     Route::post('store', 'store')->name('marca.store');
     Route::delete('destroy', 'destroy')->name('marca.destroy');
-    /* Route::get('create', 'create')->name('puntos_ventas.create');
-    Route::post('store', 'store')->name('puntos_ventas.store'); */
 });

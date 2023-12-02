@@ -27,23 +27,31 @@ class MarcaController extends Controller
 
     public function store(Request $request)
     {
-        if (!empty($request->marca_id)) {
-            return $this->update($request);
+        try {
+            if (!empty($request->marca_id)) {
+                return $this->update($request);
+            }
+            $marca = new Marca();
+            $marca->nombre_marca = $request->nombre_marca;
+            $marca->estado = $request->estado;
+            $marca->save();
+            return responseJson('Guardado Exitosamente', $marca, 200);
+        } catch (\Exception $e) {
+            return responseJson('Server Error', $e->getMessage(), 500);
         }
-        $marca = new Marca();
-        $marca->nombre_marca = $request->nombre_marca;
-        $marca->estado = $request->estado;
-        $marca->save();
-        return responseJson('Guardado Exitosamente', $marca, 200);
     }
 
     public function update($request)
     {
-        $marca = Marca::find($request->marca_id);
-        $marca->nombre_marca = $request->nombre_marca;
-        $marca->estado = $request->estado;
-        $marca->save();
-        return responseJson('Actualizado Exitosamente', $marca, 200);
+        try {
+            $marca = Marca::find($request->marca_id);
+            $marca->nombre_marca = $request->nombre_marca;
+            $marca->estado = $request->estado;
+            $marca->save();
+            return responseJson('Actualizado Exitosamente', $marca, 200);
+        } catch (\Exception $e) {
+            return responseJson('Server Error', $e->getMessage(), 500);
+        }
     }
 
     public function destroy(Request $request)

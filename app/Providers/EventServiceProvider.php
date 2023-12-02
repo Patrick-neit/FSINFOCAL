@@ -4,12 +4,14 @@ namespace App\Providers;
 
 use App\Models\ConfiguracionImpuesto;
 use App\Models\Empresa;
+use App\Models\Familia;
 use App\Models\Marca;
 use App\Models\PuntoVenta;
 use App\Models\Sucursal;
 use App\Models\User;
 use App\Observers\ConfigImpuestoObserver;
 use App\Observers\EmpresaObserver;
+use App\Observers\FamiliaObserver;
 use App\Observers\MarcaObserver;
 use App\Observers\PuntoVentaObserver;
 use App\Observers\SucursalesObserver;
@@ -33,6 +35,7 @@ class EventServiceProvider extends ServiceProvider
         User::class => [UserObserver::class],
         Sucursal::class => [SucursalesObserver::class],
         Marca::class => [MarcaObserver::class],
+        Familia::class => [FamiliaObserver::class],
     ];
 
     protected $listen = [

@@ -372,6 +372,12 @@
     "name" => "Marca",
     "slug" => "marcas"
     ),
+    array(
+    "url" =>trim(parse_url(route('familia.index'), PHP_URL_PATH) ,'/'),
+    "i18n" => "Familia",
+    "name" => "Familia",
+    "slug" => "Familias"
+    ),
 
     )
     ),

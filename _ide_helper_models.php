@@ -212,6 +212,20 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * App\Models\Familia
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|Familia newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Familia newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Familia onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Familia query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Familia withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Familia withoutTrashed()
+ */
+	class Familia extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\ImpuestoCufd
  *
  * @property int $id
