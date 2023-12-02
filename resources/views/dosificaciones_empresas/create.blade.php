@@ -93,11 +93,28 @@
                                                 <th>Empresa Dosificacion</th>
                                                 <th>Descripcion DS</th>
                                                 <th>Tipo Factura DS</th>
+                                                <th>ACCION</th>
 
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody id="tbody">
+                                            @if (session('dosificaciones_sucursales_detalle'))
+                                            @foreach (session('dosificaciones_sucursales_detalle') as $indice => $item)
+                                            <tr>
+                                                <td style="text-align: center;">
+                                                    {{ $item['empresa_nombre'] }}
+                                                </td>
+                                                <td style="text-align: center;"> {{ $item['descripcion_ds']  }} </td>
+                                                <td style="text-align: center;"> {{ $item['tipo_factura_ds']  }} </td>
+                                                <td style="text-align: center;">
+                                                    <button class="btn btn-danger" onclick="eliminar({{ $indice }});">
+                                                        <i class="material-icons">delete</i>
+                                                    </button>
+                                                </td>
 
+                                            </tr>
+                                            @endforeach
+                                            @endif
 
                                         </tbody>
                                     </table>

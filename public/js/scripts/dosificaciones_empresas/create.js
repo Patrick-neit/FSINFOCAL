@@ -133,6 +133,9 @@ const handleChange = () => {
 
 function setChangeDSInput(){
     let documento_sector_id = document.getElementById('documento_sector_id');
+    let empresa_nombre = document.getElementById('empresa_nombre');
+    let empresa_id = document.getElementById('empresa_id');
+
         fetch(ruta_dosificacion_empresa, {
             method: "POST",
             headers: {
@@ -140,6 +143,8 @@ function setChangeDSInput(){
                 "X-CSRF-Token": csrfToken,
             },
             body: JSON.stringify({
+                empresa_id : empresa_id.value,
+                empresa_nombre : empresa_nombre.value,
                 documento_sector_id: documento_sector_id.value,
             }),
 
@@ -165,26 +170,39 @@ function setChangeDSInput(){
 }
 
 function createTableDS(data) {
-    let tableBody = document.querySelector('table tbody');
-    // Limpiar el contenido previo de la tabla
-    tableBody.innerHTML = '';
-        let rowData = data;
-        // Crear una nueva fila en la tabla
-        let newRow = document.createElement('tr');
-        console.log('llega');
+    var opciones = "";
+    for (let i in data.content) {
+        opciones += "<tr>";
+        opciones +=
+            '<td style="text-align: center;">' +
+            data.content[i]["empresa_nombre"] +
+            "</td>";
+        opciones +=
+            '<td style="text-align: center;">' +
+            data.content[i]["descripcion_ds"] +
+            "</td>";
+        opciones +=
+            '<td style="text-align: center;">' +
+            data.content[i]["tipo_factura_ds"] +
+            "</td>";
+        opciones +=
+        '<td style="text-align: center;">' +
+        '<button class="btn btn-danger" onclick="eliminar('+indice+' );">'
+            '<i class="material-icons">delete</i>'
+        '</button>'
+    '</td>'
+            '<td style="text-align: center;">' +
+            '<button class="btn btn-danger" onclick="eliminar(' +
+            i +
+            ');"><i class="fas fa-trash"></i></button>' +
+            "</td>";
+        opciones += "</tr>";
+    }
+    document.getElementById("tbody").innerHTML = opciones;
+}
 
-        let empresaDosificacionCell = document.createElement('td');
-        empresaDosificacionCell.textContent = rowData.codigo_actividad_ds;
-        newRow.appendChild(empresaDosificacionCell);
+function eliminar(i){
 
-        let descripcionDSCell = document.createElement('td');
-        descripcionDSCell.textContent = rowData.descripcion_ds;
-        newRow.appendChild(descripcionDSCell);
-
-        let tipoFacturaDSCell = document.createElement('td');
-        tipoFacturaDSCell.textContent = rowData.tipo_factura_ds;
-        newRow.appendChild(tipoFacturaDSCell);
-        tableBody.appendChild(newRow);
 }
 
 
