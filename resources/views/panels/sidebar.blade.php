@@ -191,10 +191,15 @@
     "name" => "Configuracion impuesto",
     "slug" => "configuraciones"
     ),
+    array(
+    "url" =>trim( parse_url(route('dosificaciones_empresas.create'), PHP_URL_PATH) ,'/'),
+    "i18n" => "Configuracion Dosificacion",
+    "name" => "Configuracion Dosificacion",
+    "slug" => "dosificaciones"
+    ),
 
     )
     ),
-    //
     array(
     "navheader"=> "Sincronizacion de Catalogos",
     "icon"=> "more_horiz"
@@ -326,27 +331,6 @@
 
         )
         ),
-        array(
-        "navheader"=> "Modulo Empresa",
-        "icon"=> "more_horiz"
-        ),
-        array(
-            "url" => "javascript:void(0)",
-            "i18n" => "Empresas",
-            "name" => "Empresas",
-            "icon" => "business_center",
-            "slug" => "Empresas",
-            "class"=> "collapsible-header waves-effect waves-cyan",
-            "submenu" => array(
-                array(
-                    "url" =>trim(parse_url(route('empresas.index'), PHP_URL_PATH) ,'/'),
-                    "i18n" => "Empresas ",
-                    "name" => "Empresas ",
-                    "slug" => "empresas"
-                ),
-    )
-    ),
-    //
     array(
     "navheader"=> "Modulo Empresa",
     "icon"=> "more_horiz"

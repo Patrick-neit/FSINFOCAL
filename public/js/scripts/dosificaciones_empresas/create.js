@@ -135,6 +135,9 @@ function setChangeDSInput(){
     let documento_sector_id = document.getElementById('documento_sector_id');
     let empresa_nombre = document.getElementById('empresa_nombre');
     let empresa_id = document.getElementById('empresa_id');
+    /* let empresa_cafc = document.getElementById('empresa_cafc'); */
+    /* let nro_inicio_factura = document.getElementById('nro_inicio_factura'); */
+    /* let nro_fin_factura = document.getElementById('nro_fin_factura'); */
 
         fetch(ruta_dosificacion_empresa, {
             method: "POST",
@@ -170,6 +173,8 @@ function setChangeDSInput(){
 }
 
 function createTableDS(data) {
+    console.log(data);
+    console.log(data.content);
     var opciones = "";
     for (let i in data.content) {
         opciones += "<tr>";
@@ -187,24 +192,54 @@ function createTableDS(data) {
             "</td>";
         opciones +=
         '<td style="text-align: center;">' +
-        '<button class="btn btn-danger" onclick="eliminar('+indice+' );">'
-            '<i class="material-icons">delete</i>'
-        '</button>'
-    '</td>'
-            '<td style="text-align: center;">' +
-            '<button class="btn btn-danger" onclick="eliminar(' +
-            i +
-            ');"><i class="fas fa-trash"></i></button>' +
-            "</td>";
+        '<button class="btn btn-danger" onclick="eliminar(' +
+        i +
+        ');"><i class="material-icons">delete</i></button>' +
+        "</td>";
         opciones += "</tr>";
     }
     document.getElementById("tbody").innerHTML = opciones;
 }
 
-function eliminar(i){
-
+function eliminar(i) {
+    fetch(ruta_eliminar_detalle_dosificacion, {
+        method: "POST",
+        body: JSON.stringify({
+            data: i,
+        }),
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-Token": csrfToken,
+        },
+    })
+        .then((response) => {
+            return response.json();
+        })
+        .then((data) => {
+            var opciones = "";
+              for (let i in data.content) {
+        opciones += "<tr>";
+        opciones +=
+            '<td style="text-align: center;">' +
+            data.content[i]["empresa_nombre"] +
+            "</td>";
+        opciones +=
+            '<td style="text-align: center;">' +
+            data.content[i]["descripcion_ds"] +
+            "</td>";
+        opciones +=
+            '<td style="text-align: center;">' +
+            data.content[i]["tipo_factura_ds"] +
+            "</td>";
+        opciones +=
+        '<td style="text-align: center;">' +
+        '<button class="btn btn-danger" onclick="eliminar(' + i + ');"><i class="material-icons">delete</i></button>' +
+        "</td>";
+        opciones += "</tr>";
+    }
+    document.getElementById("tbody").innerHTML = opciones;
+    });
 }
-
 
 let asignarEmpresaButton = document.getElementById('asignarEmpresaButton');
 let user_id = document.getElementById('user_id')

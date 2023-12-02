@@ -30,13 +30,25 @@ class DosificacionEmpresaController extends Controller
             $fechaAsignacion = Carbon::now()->toDateString();
             $dosificacion_empresa = new DosificacionEmpresa();
             $dosificacion_empresa->fecha_asignacion = $fechaAsignacion;
+            $dosificacion_empresa->cafc = $request->empresa_cafc;
+            $dosificacion_empresa->inicio_nro_factura = $request->inicio_nro_factura;
+            $dosificacion_empresa->fin_nro_factura = $request->fin_nro_factura;
             $dosificacion_empresa->empresa_id = $request->empresa_id;
             $dosificacion_empresa->estado = 1;
             $dosificacion_empresa->save();
             if ($dosificacion_empresa->save()) {
-                /* $detalle_dosificacion = new DetalleDosificacionEmpresa(); */
+                foreach (session('dosificaciones_sucursales_detalle') as $key => $value) {
+                $detalle_dosificacion = new DetalleDosificacionEmpresa();
+                $detalle_dosificacion->descripcion_documento_sector = $value['descripcion_ds'];
+                $detalle_dosificacion->descripcion_documento_sector = $value['codigo_clasificador_ds'];
+                $detalle_dosificacion->descripcion_documento_sector = $value['tipo_factura_cc'];
+                $detalle_dosificacion->descripcion_documento_sector = $value['codigo_clasificador_ds'];
+                $detalle_dosificacion->descripcion_documento_sector = $value['empresa_id'];
+                $detalle_dosificacion->save();
+                }
 
             }
+            return responseJson('Asignado Exitosamente', $dosificacion_empresa ,200);
 
         } catch (\Exception $e) {
             return responseJson('Server Error', [
@@ -68,10 +80,15 @@ class DosificacionEmpresaController extends Controller
             ];
 
             session()->get('dosificaciones_sucursales_detalle');
-            session()->push('dosificaciones_sucursales_detalle', $dataDocumentoSector);
+            $verificarDSAgregado = $this->verificarDocumentoSectorAgregado($documentoSectorID);
+            if(!$verificarDSAgregado){ //? False = No existe ese DS en la session
+                session()->push('dosificaciones_sucursales_detalle', $dataDocumentoSector);
+                return responseJson('Data DS Encountered', session()->get('dosificaciones_sucursales_detalle'), 200);
+            }
+
+            return responseJson('DS Ya esta Agregado', session()->get('dosificaciones_sucursales_detalle') , 400);
 
 
-            return responseJson('Data DS Encountered', session()->get('dosificaciones_sucursales_detalle'), 200);
 
 
         } catch (\Exception $e) {
@@ -80,5 +97,25 @@ class DosificacionEmpresaController extends Controller
                 'code' => $e->getCode(),
             ], 500);
         }
+    }
+
+    public function eliminarDetalle(Request $request){
+
+        $detalle_dosificaciones = session('dosificaciones_sucursales_detalle');
+        unset($detalle_dosificaciones[$request->data]);
+        session()->put('dosificaciones_sucursales_detalle', $detalle_dosificaciones);
+        return responseJson('Session Actualizada', session()->get('dosificaciones_sucursales_detalle'), 200);
+
+    }
+
+    function verificarDocumentoSectorAgregado($documentoSectorID){
+        if (!empty(session()->get('dosificaciones_sucursales_detalle')) ) {
+            foreach (session('dosificaciones_sucursales_detalle') as $key => $value) {
+                if (in_array($value['codigo_clasificador_ds'], $documentoSectorID)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

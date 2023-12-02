@@ -58,7 +58,7 @@
                                 <input type="hidden" value="{{$empresa->id}}" id="empresa_id">
                                 <div class="col s12 m6">
                                     <div class="row">
-                                        <div class="col s12 input-field">
+                                        <div class="col s6 input-field">
                                             <input id="empresa_nombre" name="empresa_nombre" type="text"
                                                 class="validate" value="{{ $empresa->nombre_empresa }}"
                                                 data-error=".errorTxt1"
@@ -67,7 +67,13 @@
                                             <small class="errorTxt1"></small>
                                         </div>
 
-
+                                        <div class="col s6 input-field">
+                                            <input id="empresa_cafc" name="empresa_cafc" type="text"
+                                                class="validate"
+                                                data-error=".errorTxt1">
+                                            <label for="empresa_cafc">CAFC</label>
+                                            <small class="errorTxt1"></small>
+                                        </div>
 
                                     </div>
                                 </div>
@@ -84,6 +90,25 @@
                                     </div>
                                 </div>
 
+                                <div class="row">
+                                    <div class="col s6 m6">
+                                        <div class="col s12 input-field">
+                                            <label>Numeracion Inicio Facturas</label>
+                                            <input id="nro_inicio_factura" name="nro_inicio_factura" type="text"
+                                                class="validate"
+                                                data-error=".errorTxt1">
+                                        </div>
+                                    </div>
+                                    <div class="col s6 m6">
+                                        <div class="col s12 input-field">
+                                            <label>Numeracion Fin Facturas</label>
+                                            <input id="nro_fin_factura" name="nro_fin_factura" type="text"
+                                                class="validate"
+                                                data-error=".errorTxt1">
+                                        </div>
+                                    </div>
+                                </div>
+
 
 
                                 <div class="col s12">
@@ -94,7 +119,6 @@
                                                 <th>Descripcion DS</th>
                                                 <th>Tipo Factura DS</th>
                                                 <th>ACCION</th>
-
                                             </tr>
                                         </thead>
                                         <tbody id="tbody">
@@ -107,15 +131,13 @@
                                                 <td style="text-align: center;"> {{ $item['descripcion_ds']  }} </td>
                                                 <td style="text-align: center;"> {{ $item['tipo_factura_ds']  }} </td>
                                                 <td style="text-align: center;">
-                                                    <button class="btn btn-danger" onclick="eliminar({{ $indice }});">
+                                                    <button class="btn btn-danger" onclick="eliminar(i);">
                                                         <i class="material-icons">delete</i>
                                                     </button>
                                                 </td>
-
                                             </tr>
                                             @endforeach
                                             @endif
-
                                         </tbody>
                                     </table>
                                 </div>
@@ -267,7 +289,9 @@
 @section('page-script')
     <script src="{{ asset('js/scripts/dosificaciones_empresas/create.js') }}"></script>
     <script>
+        let ruta_eliminar_detalle_dosificacion = "{{ route('dosificaciones_empresas.eliminarDetalle') }}";
         let ruta_dosificacion_empresa = "{{ route('dosificaciones_empresas.getDataDocumentoSector') }}";
+
         let ruta_index_dosificacion = "{{ route('dosificaciones_empresas.index') }}";
 
     </script>

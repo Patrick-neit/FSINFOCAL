@@ -16,6 +16,9 @@ return new class extends Migration
         Schema::create('dosificaciones_empresas', function (Blueprint $table) {
             $table->id();
             $table->date('fecha_asignacion');
+            $table->string('cafc')->nullable();
+            $table->integer('inicio_nro_factura')->nullable();
+            $table->integer('fin_nro_factura')->nullable();
             $table->unsignedBigInteger('empresa_id');
             $table->boolean('estado');
             $table->timestamps();

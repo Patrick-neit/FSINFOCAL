@@ -9,8 +9,12 @@ class DosificacionEmpresa extends Model
 {
     use HasFactory;
     protected $table = 'dosificaciones_empresas';
-    protected $fillable = [
+    protected $fillable =
+    [
         'fecha_asignacion',
+        'cafc',
+        'inicio_nro_factura',
+        'fin_nro_factura',
         'empresa_id',
         'estado'
     ];
