@@ -21,7 +21,7 @@ class ImpuestoCuisService
             'apikey' => $this->config->configService->token_sistema,
         ])
             ->post(
-                'https://www.codigos.rda-consultores.com/api/codes/cuis',
+                config('sistema.url_api').'api/cuis',
                 [
                     'codigoAmbiente' => $this->config->configService->codigoAmbiente,
                     'codigoSistema' => $this->config->configService->codigoSistema,

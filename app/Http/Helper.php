@@ -12,16 +12,16 @@ function responseJson($description, $content, $status)
     ], $status);
 }
 
-function verificarSiPuntoVenta($userID, $empresaID)
+function verificarSiPuntoVenta($empresaID)
 {
-    $puntoVentaUsuario = PuntoVenta::where('user_id', $userID)->where('empresa_id', $empresaID)->first();
+    $puntoVentaUsuario = PuntoVenta::where('empresa_id', $empresaID)->first();
 
     return isset($puntoVentaUsuario) ? true : false;
 }
 
-function verificarPuntoVentaSucursal0($userID, $empresaID)
+function verificarPuntoVentaSucursal0($empresaID)
 {
-    $puntoVenta0 = PuntoVenta::where('user_id', $userID)->where('empresa_id', $empresaID)
+    $puntoVenta0 = PuntoVenta::where('empresa_id', $empresaID)
         ->where('codigo_punto_venta', 0)
         ->first();
 
@@ -30,8 +30,6 @@ function verificarPuntoVentaSucursal0($userID, $empresaID)
 
 /**
  * Registrar en la tabla Bitácoras
- * @param $modelo
- * @param $action
  *
  * @return void
  */

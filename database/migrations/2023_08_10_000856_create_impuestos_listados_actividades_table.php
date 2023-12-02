@@ -18,7 +18,8 @@ return new class extends Migration
             $table->integer('codigo_caeb');
             $table->string('descripcion');
             $table->string('tipo_actividad');
-            $table->timestamps();
+            $table->string('transaccion');
+            //$table->timestamps();
         });
     }
 

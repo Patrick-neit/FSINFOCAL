@@ -5,15 +5,17 @@ namespace App\Providers;
 use App\Models\ConfiguracionImpuesto;
 use App\Models\Empresa;
 use App\Models\PuntoVenta;
+use App\Models\Sucursal;
 use App\Models\User;
 use App\Observers\ConfigImpuestoObserver;
 use App\Observers\EmpresaObserver;
 use App\Observers\PuntoVentaObserver;
+use App\Observers\SucursalesObserver;
+use App\Observers\UserObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
-use App\Observers\UserObserver;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -27,6 +29,7 @@ class EventServiceProvider extends ServiceProvider
         ConfiguracionImpuesto::class => [ConfigImpuestoObserver::class],
         PuntoVenta::class => [PuntoVentaObserver::class],
         User::class => [UserObserver::class],
+        Sucursal::class => [SucursalesObserver::class],
     ];
 
     protected $listen = [

@@ -15,9 +15,11 @@ return new class extends Migration
     {
         Schema::create('impuestos_documentos_sectores', function (Blueprint $table) {
             $table->id();
-            $table->integer('codigo_clasificador');
-            $table->string('descripcion');
-            $table->timestamps();
+            $table->string('codigo_actividad');
+            $table->integer('codigo_documento_sector');
+            $table->string('tipo_documento_sector');
+            $table->string('transaccion');
+            //$table->timestamps();
         });
     }
 

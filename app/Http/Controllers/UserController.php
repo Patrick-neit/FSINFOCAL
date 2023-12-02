@@ -25,7 +25,7 @@ class UserController extends Controller
             $user->ci = $request->ci;
             $user->fecha_nacimiento = Carbon::parse($request->fecha_nacimiento)->format('Y-m-d'); //$request->fecha_nacimiento;
             $user->departamento_id = $request->departamento_id;
-            $user->fotografia = '/storage/' . $path;
+            $user->fotografia = '/storage/'.$path;
             //$user->estado = $request->estado;
             $user->save();
             if ($user->save()) {
@@ -53,7 +53,7 @@ class UserController extends Controller
             $user->ci = $request->ci;
             $user->fecha_nacimiento = Carbon::parse($request->fecha_nacimiento)->format('Y-m-d'); //$request->fecha_nacimiento;
             $user->departamento_id = $request->departamento_id;
-            $user->fotografia = $request->hasFile('avatar') ? '/storage/' . $path : $user->fotografia;
+            $user->fotografia = $request->hasFile('avatar') ? '/storage/'.$path : $user->fotografia;
             //$user->estado = $request->estado;
             $user->save();
             if ($user->save()) {
@@ -69,8 +69,10 @@ class UserController extends Controller
     public function show(Request $request)
     {
         $user = User::find($request->user_id);
+
         return responseJson('Success', $user, 200);
     }
+
     public function usersList()
     {
         $breadcrumbs = [
@@ -146,6 +148,7 @@ class UserController extends Controller
         try {
             $user = User::find($request->user_id);
             $user->ban();
+
             return responseJson('Success', [], 200);
         } catch (\Exception $e) {
             return responseJson('Server Error', [], 500);

@@ -9,18 +9,22 @@ var usersDataArray = [];
 if ($("#users-list-datatable").length > 0) {
     usersTable = $("#users-list-datatable").DataTable({
         responsive: true,
-        'columnDefs': [{
-            "orderable": false,
-            "targets": [0, 8, 9]
-        }]
+        columnDefs: [
+            {
+                orderable: false,
+                targets: [0, 8, 9],
+            },
+        ],
     });
-};
+}
 // on click selected users data from table(page named page-users-list)
 // to store into local storage to get rendered on second page named page-users-view
 $(document).on("click", "#users-list-datatable tr", function () {
-    $(this).find("td").each(function () {
-        usersDataArray.push($(this).text().trim())
-    })
+    $(this)
+        .find("td")
+        .each(function () {
+            usersDataArray.push($(this).text().trim());
+        });
 
     localStorage.setItem("usersId", usersDataArray[1]);
     localStorage.setItem("usersUsername", usersDataArray[2]);
@@ -28,7 +32,7 @@ $(document).on("click", "#users-list-datatable tr", function () {
     localStorage.setItem("usersVerified", usersDataArray[5]);
     localStorage.setItem("usersRole", usersDataArray[6]);
     localStorage.setItem("usersStatus", usersDataArray[7]);
-})
+});
 // render stored local storage data on page named page-users-view
 if (localStorage.usersId !== undefined) {
     $(".users-view-id").html(localStorage.getItem("usersId"));
@@ -39,11 +43,15 @@ if (localStorage.usersId !== undefined) {
     $(".users-view-status").html(localStorage.getItem("usersStatus"));
     // update badge color on status change
     if ($(".users-view-status").text() === "Banned") {
-        $(".users-view-status").toggleClass("badge-light-success badge-light-danger")
+        $(".users-view-status").toggleClass(
+            "badge-light-success badge-light-danger"
+        );
     }
     // update badge color on status change
     if ($(".users-view-status").text() === "Close") {
-        $(".users-view-status").toggleClass("badge-light-success badge-light-warning")
+        $(".users-view-status").toggleClass(
+            "badge-light-success badge-light-warning"
+        );
     }
 }
 // page users list verified filter
@@ -67,21 +75,21 @@ $("#users-list-status").on("change", function () {
 if ($("#users-language-select2").length > 0) {
     $("#users-language-select2").select2({
         dropdownAutoWidth: true,
-        width: '100%'
+        width: "100%",
     });
 }
 // users music select
 if ($("#users-music-select2").length > 0) {
     $("#users-music-select2").select2({
         dropdownAutoWidth: true,
-        width: '100%'
+        width: "100%",
     });
 }
 // users movies select
 if ($("#users-movies-select2").length > 0) {
     $("#users-movies-select2").select2({
         dropdownAutoWidth: true,
-        width: '100%'
+        width: "100%",
     });
 }
 
@@ -121,13 +129,15 @@ if ($("#users-movies-select2").length > 0) {
   });
 } */
 
-
-let registrarPuntoVentaButton = document.getElementById('registrarPuntoVentaButton');
-let nombre_punto_venta = document.getElementById('nombre_punto_venta');
-let descripcion_punto_venta = document.getElementById('descripcion_punto_venta');
-let tipo_punto_venta = document.getElementById('tipo_punto_venta');
-let sucursal_id = document.getElementById('sucursal_id');
-
+let registrarPuntoVentaButton = document.getElementById(
+    "registrarPuntoVentaButton"
+);
+let nombre_punto_venta = document.getElementById("nombre_punto_venta");
+let descripcion_punto_venta = document.getElementById(
+    "descripcion_punto_venta"
+);
+let tipo_punto_venta = document.getElementById("tipo_punto_venta");
+let sucursal_id = document.getElementById("sucursal_id");
 
 registrarPuntoVentaButton.addEventListener("click", function (event) {
     event.preventDefault();
@@ -145,35 +155,39 @@ registrarPuntoVentaButton.addEventListener("click", function (event) {
             tipo_punto_venta: tipo_punto_venta.value,
             sucursal_id: sucursal_id.value,
         }),
-
-    }).then(response => response.json())
-        .then(data => {
+    })
+        .then((response) => response.json())
+        .then((data) => {
             console.log(data);
             if (data.status == 200) {
                 M.toast({
                     html: data.description,
-                    classes: 'rounded', displayLength: 2000,
+                    classes: "rounded",
+                    displayLength: 2000,
                     completeCallback: function () {
-                        window.location.href = ruta_index_puntos_ventas
-                    }
-                })
+                        console.log("redirecting");
+                        //window.location.href = ruta_index_puntos_ventas;
+                    },
+                });
             } else {
                 M.toast({
                     html: data.description,
-                    classes: 'rounded', displayLength: 3000, classes: 'blue lighten-1'
-                })
+                    classes: "rounded",
+                    displayLength: 3000,
+                    classes: "blue lighten-1",
+                });
             }
-        }).catch(error => {
+        })
+        .catch((error) => {
             M.toast({
                 html: data.content.message,
-                classes: 'rounded', displayLength: 3000, classes: 'blue lighten-1'
-            })
-        }).finally(() => {
+                classes: "rounded",
+                displayLength: 3000,
+                classes: "blue lighten-1",
+            });
+        })
+        .finally(() => {
             document.getElementById("loadingIndicator").style.display = "none";
             registrarPuntoVentaButton.style.display = "block";
         });
-})
-
-
-
-
+});

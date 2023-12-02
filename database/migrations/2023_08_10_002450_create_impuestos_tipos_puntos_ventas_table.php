@@ -17,7 +17,8 @@ return new class extends Migration
             $table->id();
             $table->integer('codigo_clasificador');
             $table->string('descripcion');
-            $table->timestamps();
+            $table->string('transaccion');
+            //$table->timestamps();
         });
     }
 

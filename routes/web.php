@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\BasicTableController;
 use App\Http\Controllers\BasicUiController;
 use App\Http\Controllers\CardController;
+use App\Http\Controllers\CatalogosController;
 use App\Http\Controllers\ChartController;
 use App\Http\Controllers\CssController;
 use App\Http\Controllers\DashboardController;
@@ -261,6 +262,10 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/configuraciones_impuestos/show/{id}', [App\Http\Controllers\ConfiguracionImpuestoController::class, 'show'])->name('configuraciones_impuestos.show');
     Route::delete('/configuraciones_impuestos', [\App\Http\Controllers\ConfiguracionImpuestoController::class, 'destroy'])->name('configuraciones_impuestos.destroy');
 });
+
+//sincronizacion de catalogos
+Route::get('/catalogos/{sincronizacion}', [CatalogosController::class, 'index'])->name('catalogos.index');
+Route::get('/catalogos/sincronizarCatalogos/{accion}', [CatalogosController::class, 'sincronizarCatalogos'])->name('sincronizar');
 
 Route::group([
     'middleware' => 'web',

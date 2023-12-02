@@ -2,19 +2,18 @@
 
 namespace App\Models;
 
+use Cog\Contracts\Ban\Bannable as BannableInterface;
+use Cog\Laravel\Ban\Traits\Bannable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
-use Cog\Contracts\Ban\Bannable as BannableInterface;
-use Cog\Laravel\Ban\Traits\Bannable;
 
 class User extends Authenticatable implements BannableInterface
 {
-    use HasApiTokens, HasFactory, Notifiable, HasRoles, Bannable;
+    use Bannable, HasApiTokens, HasFactory, HasRoles, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -34,7 +33,7 @@ class User extends Authenticatable implements BannableInterface
         'google_token',
         'google_refresh_token',
         'banned_at',
-        'remember_token'
+        'remember_token',
     ];
 
     /**
