@@ -196,7 +196,7 @@
     ),
     //
     array(
-    "navheader"=> "Sincronizacion de Catalogos",
+    "navheader"=> "Sinc. de Catalogos",
     "icon"=> "more_horiz"
     ),
     array(
@@ -350,6 +350,27 @@
     "i18n" => "Puntos Ventas ",
     "name" => "Puntos Ventas ",
     "slug" => "Puntos Ventas"
+    ),
+    )
+    ),
+    //
+    array(
+    "navheader"=> "Modulo Productos",
+    "icon"=> "more_horiz"
+    ),
+    array(
+    "url" => "javascript:void(0)",
+    "i18n" => "Productos",
+    "name" => "Productos",
+    "icon" => "filter_none",
+    "slug" => "Productos",
+    "class"=> "collapsible-header waves-effect waves-cyan",
+    "submenu" => array(
+    array(
+    "url" =>trim(parse_url(route('marca.index'), PHP_URL_PATH) ,'/'),
+    "i18n" => "Marca",
+    "name" => "Marca",
+    "slug" => "marcas"
     ),
 
     )

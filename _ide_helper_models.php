@@ -539,6 +539,26 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * App\Models\Marca
+ *
+ * @property int $id
+ * @property string $nombre_marca
+ * @property int $estado
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Marca newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Marca newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Marca onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Marca query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Marca withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Marca withoutTrashed()
+ */
+	class Marca extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\PuntoVenta
  *
  * @property int $id

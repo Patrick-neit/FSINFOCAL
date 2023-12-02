@@ -15,6 +15,7 @@ use App\Http\Controllers\EjemploController;
 use App\Http\Controllers\ExtraComponentsController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\MarcaController;
 use App\Http\Controllers\MediaController;
 use App\Http\Controllers\MiscController;
 use App\Http\Controllers\PageController;
@@ -287,4 +288,17 @@ Route::group([
     Route::get('index', 'index')->name('puntos_ventas.index');
     Route::get('create', 'create')->name('puntos_ventas.create');
     Route::post('store', 'store')->name('puntos_ventas.store');
+});
+
+Route::group([
+    'prefix' => 'marca',
+    'controller' => MarcaController::class,
+], function () {
+    Route::get('index', 'index')->name('marca.index');
+    Route::get('create', 'create')->name('marca.create');
+    Route::get('/edit/{id}', 'edit')->name('marca.edit');
+    Route::post('store', 'store')->name('marca.store');
+    Route::delete('destroy', 'destroy')->name('marca.destroy');
+    /* Route::get('create', 'create')->name('puntos_ventas.create');
+    Route::post('store', 'store')->name('puntos_ventas.store'); */
 });
