@@ -48,7 +48,7 @@ class PuntoVentaController extends Controller
         try {
             $userID = Auth::user()->id;
             $empresaID = Auth::user()->empresas[0]->id;
-            $verificarPuntoVenta = verificarSiPuntoVenta($userID, $empresaID);
+            $verificarPuntoVenta = verificarSiPuntoVenta($empresaID);
             /* if (!$verificarPuntoVenta) { */
             $resPuntoVenta = $this->storePuntoVenta($request);
             if ($resPuntoVenta) {
@@ -88,35 +88,29 @@ class PuntoVentaController extends Controller
             if ($resCuis->content->mensajesList[0]->codigo != 980 || $resCufd->content->RespuestaCufd->transaccion != true) {
                 return responseJson('Error al Consumir Servicio', $resCuis->content->mensajesList->descripcion, 500);
             }
-            $resExistePV = verificarPuntoVentaSucursal0($userID, $empresaID);
+            $resExistePV = verificarPuntoVentaSucursal0($empresaID);
             if ($resExistePV) { //Si ya existe 1 PV creado
-                $resRegistroPVImpuesto = $this->registrarPVImpuesto->registrarPVImpuesto($dataService, $resCodigoCuis);
+
+                $resRegistroPV = $this->registrarPVImpuesto->registrarPVImpuesto($dataService, $resCodigoCuis);
+
+                if ($resRegistroPV->content->mensajesList[0]->codigo != 980 || $resRegistroPV->content->transaccion != true) {
+                    return responseJson('Algo salio mal', $resRegistroPV->content->mensajesList[0]->descripcion, 500);
+                }
             }
 
             DB::beginTransaction();
             $registrarPuntoVenta = new PuntoVenta();
             $registrarPuntoVenta->nombre_punto_venta = $request->nombre_punto_venta;
             $registrarPuntoVenta->tipo_punto_venta = ! isset($request->tipo_punto_venta) ? 0 : $request->tipo_punto_venta;
-            $registrarPuntoVenta->codigo_punto_venta = ! isset($request->tipo_punto_venta) ? 0 : $request->tipo_punto_venta; //todo
+            $registrarPuntoVenta->codigo_punto_venta = ! isset($request->tipo_punto_venta) ? 0 : $resRegistroPV->content->codigoPuntoVenta; //todo
             $registrarPuntoVenta->descripcion_punto_venta = $request->descripcion_punto_venta;
-            $registrarPuntoVenta->user_id = $userID;
+
             $registrarPuntoVenta->sucursal_id = $request->sucursal_id;
             $registrarPuntoVenta->empresa_id = Auth::user()->empresas[0]->id;
             $registrarPuntoVenta->save();
 
-            $dataSincronizar = json_decode(json_encode([
-                'codigoSucursal' => $sucursal->codigo_sucursal,
-                'codigoPuntoVenta' => $registrarPuntoVenta->codigo_punto_venta,
-                'cuis' => $resCodigoCuis,
-            ]));
-
             $registrarCuis = (new ImpuestoCuisController())->store($resCuis, $dataService);
             $registrarCufd = (new ImpuestoCufdController())->store($resCufd, $dataService);
-
-            $verificarPuntoVenta = verificarSiPuntoVenta($userID, $empresaID);
-            if (! $verificarPuntoVenta) {
-                $sincronizarCatalogos = (new ImpuestoSincronizarController())->sincronizarCatalogosImpuestos($dataSincronizar);
-            }
 
             $registrarPuntoVentaCufd = new PuntoVentaCufd();
             $registrarPuntoVentaCufd->cuis_id = $registrarCuis;

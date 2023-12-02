@@ -21,7 +21,7 @@ class ImpuestoCufdService
             'apikey' => $this->config->configService->token_sistema,
         ])
             ->post(
-                'https://www.codigos.rda-consultores.com/api/codes/cufd',
+                config('sistema.url_api') . 'api/cufd',
                 [
                     'codigoAmbiente' => $this->config->configService->codigoAmbiente,
                     'codigoSistema' => $this->config->configService->codigoSistema,
@@ -29,7 +29,7 @@ class ImpuestoCufdService
                     'codigoModalidad' => $this->config->configService->codigoModalidad,
                     'cuis' => $resCodigoCuis,
                     'codigoSucursal' => $sucursal->codigo_sucursal,
-                    'codigoPuntoVenta' => ! isset($dataService->tipo_punto_venta) ? 0 : $dataService->tipo_punto_venta,
+                    'codigoPuntoVenta' => !isset($dataService->tipo_punto_venta) ? 0 : $dataService->tipo_punto_venta,
                 ]
             );
 

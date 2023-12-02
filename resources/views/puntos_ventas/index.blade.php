@@ -46,7 +46,7 @@
                             <tr>
                                 <th>Tipo Punto Venta</th>
                                 <th>Descripcion Punto Venta</th>
-                                <th>Personal Asociado</th>
+
                                 <th>Sucursal Asociada</th>
                                 <th>Acciones</th>
                             </tr>
@@ -57,7 +57,7 @@
                                 <td>{{ $puntoVenta->codigo_punto_venta }}</td>
                                 <td> <span class="green-text">{{ $puntoVenta->descripcion_punto_venta }}</span>
                                     </span> </td>
-                                <td>{{$puntoVenta->user->name}} </td>
+
                                 <td> <span class="red-text">{{$puntoVenta->sucursal->nombre_sucursal}}</span> </td>
                                 <td>
                                     <a href="{{ asset('page-users-view') }}"><i class="material-icons">cached</i></a>

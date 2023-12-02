@@ -20,7 +20,6 @@ class PuntoVenta extends Model
         'tipo_punto_venta',
         'codigo_punto_venta',
         'descripcion_punto_venta',
-        'user_id',
         'sucursal_id',
         'empresa_id',
     ];

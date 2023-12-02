@@ -546,7 +546,6 @@ namespace App\Models{
  * @property int $tipo_punto_venta
  * @property int $codigo_punto_venta
  * @property string|null $descripcion_punto_venta
- * @property int $user_id
  * @property int $sucursal_id
  * @property int $empresa_id
  * @property \Illuminate\Support\Carbon|null $deleted_at
@@ -594,7 +593,6 @@ namespace App\Models{
  * @property int $codigo_sucursal
  * @property int $telefono
  * @property int $empresa_id
- * @property int $estado
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
