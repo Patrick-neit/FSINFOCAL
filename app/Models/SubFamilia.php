@@ -4,22 +4,23 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Familia extends Model
+class SubFamilia extends Model
 {
     use HasFactory, SoftDeletes;
 
-    public $table = 'familias';
+    public $table = 'sub_familias';
 
     public $fillable = [
-        'nombre_familia',
+        'familia_id',
+        'nombre_sub_familia',
         'estado'
     ];
 
-    public function sub_familias()
+    public function familia()
     {
-        return $this->hasMany(SubFamilia::class);
+        return $this->belongsTo(Familia::class);
     }
 }

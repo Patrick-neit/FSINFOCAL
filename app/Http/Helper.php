@@ -31,6 +31,8 @@ function verificarPuntoVentaSucursal0($empresaID)
 /**
  * Registrar en la tabla Bitácoras
  *
+ * @param $modelo
+ * @param $action
  * @return void
  */
 function paramsObservers($modelo, $action)

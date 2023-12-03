@@ -7,6 +7,7 @@ use App\Models\Empresa;
 use App\Models\Familia;
 use App\Models\Marca;
 use App\Models\PuntoVenta;
+use App\Models\SubFamilia;
 use App\Models\Sucursal;
 use App\Models\User;
 use App\Observers\ConfigImpuestoObserver;
@@ -14,6 +15,7 @@ use App\Observers\EmpresaObserver;
 use App\Observers\FamiliaObserver;
 use App\Observers\MarcaObserver;
 use App\Observers\PuntoVentaObserver;
+use App\Observers\SubFamiliaObserver;
 use App\Observers\SucursalesObserver;
 use App\Observers\UserObserver;
 use Illuminate\Auth\Events\Registered;
@@ -36,6 +38,7 @@ class EventServiceProvider extends ServiceProvider
         Sucursal::class => [SucursalesObserver::class],
         Marca::class => [MarcaObserver::class],
         Familia::class => [FamiliaObserver::class],
+        SubFamilia::class => [SubFamiliaObserver::class],
     ];
 
     protected $listen = [

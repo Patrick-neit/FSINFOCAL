@@ -378,6 +378,12 @@
     "name" => "Familia",
     "slug" => "Familias"
     ),
+    array(
+    "url" =>trim(parse_url(route('sub_familia.index'), PHP_URL_PATH) ,'/'),
+    "i18n" => "Sub Familia",
+    "name" => "Sub Familia",
+    "slug" => "Sub Familias"
+    ),
 
     )
     ),

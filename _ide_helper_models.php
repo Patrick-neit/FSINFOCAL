@@ -214,6 +214,14 @@ namespace App\Models{
 /**
  * App\Models\Familia
  *
+ * @property int $id
+ * @property string $nombre_familia
+ * @property int $estado
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\SubFamilia> $sub_familias
+ * @property-read int|null $sub_familias_count
  * @method static \Illuminate\Database\Eloquent\Builder|Familia newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Familia newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Familia onlyTrashed()
@@ -615,6 +623,28 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|PuntoVentaCufd query()
  */
 	class PuntoVentaCufd extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\SubFamilia
+ *
+ * @property int $id
+ * @property int $familia_id
+ * @property string $nombre_sub_familia
+ * @property int $estado
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \App\Models\Familia|null $familia
+ * @method static \Illuminate\Database\Eloquent\Builder|SubFamilia newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|SubFamilia newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|SubFamilia onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|SubFamilia query()
+ * @method static \Illuminate\Database\Eloquent\Builder|SubFamilia withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|SubFamilia withoutTrashed()
+ */
+	class SubFamilia extends \Eloquent {}
 }
 
 namespace App\Models{

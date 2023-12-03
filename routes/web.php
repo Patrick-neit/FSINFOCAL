@@ -21,6 +21,7 @@ use App\Http\Controllers\MediaController;
 use App\Http\Controllers\MiscController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PuntoVentaController;
+use App\Http\Controllers\SubFamiliaController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserProfileController;
 use Illuminate\Support\Facades\Route;
@@ -300,6 +301,18 @@ Route::group([
     Route::post('store', 'store')->name('familia.store');
     Route::delete('destroy', 'destroy')->name('familia.destroy');
 });
+Route::group([
+    'prefix' => 'sub_familia',
+    'controller' => SubFamiliaController::class,
+], function () {
+    Route::get('index', 'index')->name('sub_familia.index');
+    Route::get('create', 'create')->name('sub_familia.create');
+    Route::get('/edit/{id}', 'edit')->name('sub_familia.edit');
+    Route::post('store', 'store')->name('sub_familia.store');
+    Route::delete('destroy', 'destroy')->name('sub_familia.destroy');
+});
+
+
 Route::group([
     'prefix' => 'marca',
     'controller' => MarcaController::class,
