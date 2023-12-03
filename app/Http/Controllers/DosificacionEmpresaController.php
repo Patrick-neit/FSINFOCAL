@@ -10,13 +10,15 @@ use App\Models\ImpuestoTipoDocumentoSector;
 use App\Models\ImpuestoTipoFactura;
 use Auth;
 use Carbon\Carbon;
+use DB;
 use Illuminate\Http\Request;
-use PhpParser\Node\Stmt\TryCatch;
 
 class DosificacionEmpresaController extends Controller
 {
     public function index(){
-        return view('dosificaciones_empresas.index');
+        $dosificacionesEmpresas = DosificacionEmpresa::where('empresa_id', Auth::user()->empresas[0]->id)->get();
+
+        return view('dosificaciones_empresas.index',compact('dosificacionesEmpresas') );
     }
 
     public function create(){
@@ -28,11 +30,12 @@ class DosificacionEmpresaController extends Controller
     public function store(Request $request){
         try {
             $fechaAsignacion = Carbon::now()->toDateString();
+            DB::beginTransaction();
             $dosificacion_empresa = new DosificacionEmpresa();
             $dosificacion_empresa->fecha_asignacion = $fechaAsignacion;
             $dosificacion_empresa->cafc = $request->empresa_cafc;
-            $dosificacion_empresa->inicio_nro_factura = $request->inicio_nro_factura;
-            $dosificacion_empresa->fin_nro_factura = $request->fin_nro_factura;
+            $dosificacion_empresa->inicio_nro_factura = $request->nro_inicio_factura;
+            $dosificacion_empresa->fin_nro_factura = $request->nro_fin_factura;
             $dosificacion_empresa->empresa_id = $request->empresa_id;
             $dosificacion_empresa->estado = 1;
             $dosificacion_empresa->save();
@@ -40,22 +43,33 @@ class DosificacionEmpresaController extends Controller
                 foreach (session('dosificaciones_sucursales_detalle') as $key => $value) {
                 $detalle_dosificacion = new DetalleDosificacionEmpresa();
                 $detalle_dosificacion->descripcion_documento_sector = $value['descripcion_ds'];
-                $detalle_dosificacion->descripcion_documento_sector = $value['codigo_clasificador_ds'];
-                $detalle_dosificacion->descripcion_documento_sector = $value['tipo_factura_cc'];
-                $detalle_dosificacion->descripcion_documento_sector = $value['codigo_clasificador_ds'];
-                $detalle_dosificacion->descripcion_documento_sector = $value['empresa_id'];
+                $detalle_dosificacion->codigo_actividad_documento_sector = $value['codigo_actividad_ds'];
+                $detalle_dosificacion->tipo_factura_documento_sector = $value['tipo_factura_cc'];
+                $detalle_dosificacion->documento_sector_id = $value['codigo_clasificador_ds'];
+                $detalle_dosificacion->dosificacion_empresa_id = $value['empresa_id'];
                 $detalle_dosificacion->save();
                 }
 
+                DB::commit();
+                session()->forget('dosificaciones_sucursales_detalle');
+                return responseJson('Asignado Exitosamente', $dosificacion_empresa ,200);
+
             }
-            return responseJson('Asignado Exitosamente', $dosificacion_empresa ,200);
+
+
 
         } catch (\Exception $e) {
+            DB::rollBack();
             return responseJson('Server Error', [
                 'message' => $e->getMessage(),
                 'code' => $e->getCode(),
             ], 500);
         }
+    }
+
+    public function edit($id){
+        $dosificacionEmpresa = DosificacionEmpresa::find($id);
+        return view('dosificaciones_empresas.edit', compact('dosificacionEmpresa'));
     }
 
     public function getDataDocumentoSector(Request $request){
@@ -69,6 +83,7 @@ class DosificacionEmpresaController extends Controller
             if ($tipoDocumentoSector == null || $tipoFacturaDocumentoSector == null || $documentoSector == null) {
                 return responseJson('No se pudo Obtener Informacion Impuesto', null , 400);
             }
+
             $dataDocumentoSector = [
                 'empresa_id' => $request->empresa_id,
                 'empresa_nombre' =>$request->empresa_nombre,
@@ -87,8 +102,6 @@ class DosificacionEmpresaController extends Controller
             }
 
             return responseJson('DS Ya esta Agregado', session()->get('dosificaciones_sucursales_detalle') , 400);
-
-
 
 
         } catch (\Exception $e) {
@@ -111,7 +124,7 @@ class DosificacionEmpresaController extends Controller
     function verificarDocumentoSectorAgregado($documentoSectorID){
         if (!empty(session()->get('dosificaciones_sucursales_detalle')) ) {
             foreach (session('dosificaciones_sucursales_detalle') as $key => $value) {
-                if (in_array($value['codigo_clasificador_ds'], $documentoSectorID)) {
+                if ($value['codigo_clasificador_ds'] == $documentoSectorID) {
                     return true;
                 }
             }

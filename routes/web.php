@@ -297,6 +297,7 @@ Route::group([
     Route::get('index', 'index')->name('dosificaciones_empresas.index');
     Route::get('create', 'create')->name('dosificaciones_empresas.create');
     Route::post('store', 'store')->name('dosificaciones_empresas.store');
+    Route::get('edit/{id}',  'edit')->name('dosificaciones_empresas.edit');
     Route::post('eliminarDetalle', 'eliminarDetalle')->name('dosificaciones_empresas.eliminarDetalle');
     Route::post('getDataDocumentoSector', 'getDataDocumentoSector')->name('dosificaciones_empresas.getDataDocumentoSector');
 

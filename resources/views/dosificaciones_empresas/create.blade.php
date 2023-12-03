@@ -143,7 +143,7 @@
                                 </div>
 
                                 <div class="col s12 display-flex justify-content-end mt-3">
-                                    <button id="asignarEmpresaButton" class="btn indigo">
+                                    <button id="storeDosificacionButton" class="btn indigo">
                                         Asignar Dosificacion</button>
                                     <button type="button" class="btn btn-light">Cancel</button>
                                 </div>
@@ -291,8 +291,9 @@
     <script>
         let ruta_eliminar_detalle_dosificacion = "{{ route('dosificaciones_empresas.eliminarDetalle') }}";
         let ruta_dosificacion_empresa = "{{ route('dosificaciones_empresas.getDataDocumentoSector') }}";
-
         let ruta_index_dosificacion = "{{ route('dosificaciones_empresas.index') }}";
+        let ruta_store_dosificacion = "{{ route('dosificaciones_empresas.store') }}";
+
 
     </script>
 @endsection

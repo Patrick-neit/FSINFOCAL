@@ -135,9 +135,6 @@ function setChangeDSInput(){
     let documento_sector_id = document.getElementById('documento_sector_id');
     let empresa_nombre = document.getElementById('empresa_nombre');
     let empresa_id = document.getElementById('empresa_id');
-    /* let empresa_cafc = document.getElementById('empresa_cafc'); */
-    /* let nro_inicio_factura = document.getElementById('nro_inicio_factura'); */
-    /* let nro_fin_factura = document.getElementById('nro_fin_factura'); */
 
         fetch(ruta_dosificacion_empresa, {
             method: "POST",
@@ -165,7 +162,7 @@ function setChangeDSInput(){
                     }) */
                 } else {
                     M.toast({
-                        html: 'Algo salio Mal!',
+                        html: 'Error:' + data.description,
                         classes: 'rounded', displayLength: 3000, classes: 'blue lighten-1'
                     })
                 }
@@ -200,6 +197,53 @@ function createTableDS(data) {
     }
     document.getElementById("tbody").innerHTML = opciones;
 }
+
+function storeDosificacion(){
+    let empresa_id = document.getElementById('empresa_id');
+    let empresa_cafc = document.getElementById('empresa_cafc');
+    let nro_inicio_factura = document.getElementById('nro_inicio_factura');
+    let nro_fin_factura = document.getElementById('nro_fin_factura');
+    fetch(ruta_store_dosificacion, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-Token": csrfToken,
+        },
+        body: JSON.stringify({
+            empresa_id: empresa_id.value,
+            empresa_cafc: empresa_cafc.value,
+            nro_inicio_factura: nro_inicio_factura.value,
+            nro_fin_factura: nro_fin_factura.value
+        }),
+
+    }).then(response => response.json())
+        .then(data => {
+            console.log(data);
+            if (data.status == 200) {
+                M.toast({
+                    html: data.description,
+                    classes: 'rounded', displayLength: 2000,
+                    completeCallback: function () {
+                        window.location.href = ruta_index_dosificacion
+                    }
+                })
+            } else {
+                M.toast({
+                    html: 'Error!' + data.description,
+                    classes: 'rounded', displayLength: 3000, classes: 'blue lighten-1'
+                })
+            }
+    })
+
+}
+let storeDosificacionButton = document.getElementById('storeDosificacionButton');
+storeDosificacionButton.addEventListener("click", function (event) {
+    event.preventDefault();
+    storeDosificacion();
+
+})
+
+
 
 function eliminar(i) {
     fetch(ruta_eliminar_detalle_dosificacion, {
@@ -241,55 +285,7 @@ function eliminar(i) {
     });
 }
 
-let asignarEmpresaButton = document.getElementById('asignarEmpresaButton');
-let user_id = document.getElementById('user_id')
-let empresas = document.querySelectorAll('.empresa-checkbox');
 
-
-asignarEmpresaButton.addEventListener("click", function (event) {
-    event.preventDefault();
-
-    let empresasSeleccionadas = [];
-
-
-    empresas.forEach(empresa => {
-        if (empresa.checked) {
-            empresasSeleccionadas.push(empresa.value);
-        }
-    });
-
-
-    fetch(ruta_asignar_empresa_usuario, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "X-CSRF-Token": csrfToken,
-        },
-        body: JSON.stringify({
-            user_id: user_id.value,
-            empresas: empresasSeleccionadas,
-
-        }),
-
-    }).then(response => response.json())
-        .then(data => {
-            console.log(data);
-            if (data.status == 200) {
-                M.toast({
-                    html: data.description,
-                    classes: 'rounded', displayLength: 2000,
-                    completeCallback: function () {
-                        window.location.href = ruta_index_user
-                    }
-                })
-            } else {
-                M.toast({
-                    html: 'Algo salio Mal!',
-                    classes: 'rounded', displayLength: 3000, classes: 'blue lighten-1'
-                })
-            }
-        })
-})
 
 
 

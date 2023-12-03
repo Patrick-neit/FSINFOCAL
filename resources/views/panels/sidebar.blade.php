@@ -192,7 +192,7 @@
     "slug" => "configuraciones"
     ),
     array(
-    "url" =>trim( parse_url(route('dosificaciones_empresas.create'), PHP_URL_PATH) ,'/'),
+    "url" =>trim( parse_url(route('dosificaciones_empresas.index'), PHP_URL_PATH) ,'/'),
     "i18n" => "Configuracion Dosificacion",
     "name" => "Configuracion Dosificacion",
     "slug" => "dosificaciones"

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ImpuestoCuis;
 use App\Models\ImpuestoTipoPuntoVenta;
 use App\Models\PuntoVenta;
 use App\Models\PuntoVentaCufd;
@@ -48,15 +49,15 @@ class PuntoVentaController extends Controller
         try {
             $userID = Auth::user()->id;
             $empresaID = Auth::user()->empresas[0]->id;
-            $verificarPuntoVenta = verificarSiPuntoVenta($empresaID);
+            $verificarPuntoVenta = verificarSiPuntoVenta($empresaID); //? Verifica si ya existe mas de 1 PV Registrado
             /* if (!$verificarPuntoVenta) { */
             $resPuntoVenta = $this->storePuntoVenta($request);
-            if ($resPuntoVenta) {
-                return responseJson('Punto Venta Sincronizado Exitosamente', $resPuntoVenta, 200);
-            } else {
-                return responseJson('Error al Sincronizar Punto Venta ', $resPuntoVenta, 500);
-            }
-            /* } else {
+                if ($resPuntoVenta) {
+                    return responseJson('Punto Venta Sincronizado Exitosamente', $resPuntoVenta, 200);
+                } else {
+                    return responseJson('Error al Sincronizar Punto Venta ', $resPuntoVenta, 500);
+                }
+           /*  } else {
                 return responseJson('Ya Existe PV A Personal Asociado', $verificarPuntoVenta, 500);
             } */
         } catch (\Exception $e) {
@@ -87,16 +88,23 @@ class PuntoVentaController extends Controller
 
             $resCufd = $this->cufdService->obtenerCufdImpuestos($dataService, $resCodigoCuis);
 
-            if ($resCuis->content->mensajesList[0]->codigo != 980 || $resCufd->content->RespuestaCufd->transaccion != true) {
+            if ($resCuis->content->mensajesList[0]->codigo != 980 || $resCufd->content->transaccion != true) {
                 return responseJson('Error al Consumir Servicio', $resCuis->content->mensajesList->descripcion, 500);
             }
             $resExistePV = verificarPuntoVentaSucursal0($empresaID);
             if ($resExistePV) { //Si ya existe 1 PV creado
+                $resCuisBD = ImpuestoCuis::where([
+                    ['sucursal_id', $dataService->sucursal_id],
+                    ['empresa_id', $empresaID]
+                ])->orderBy('fecha_vencimiento', 'DESC')
+                ->first();
 
-                $resRegistroPV = $this->registrarPVImpuesto->registrarPVImpuesto($dataService, $resCodigoCuis);
+                $resRegistroPV = $this->registrarPVImpuesto->registrarPVImpuesto($dataService, $resCuisBD->codigo_cuis);
+                if ($resRegistroPV->status != 200) {
+                    if ($resRegistroPV->content->mensajesList[0]->codigo != 980 || $resRegistroPV->content->transaccion != true) {
+                        return responseJson('Algo salio mal', $resRegistroPV->content->mensajesList[0]->descripcion, 500);
+                    }
 
-                if ($resRegistroPV->content->mensajesList[0]->codigo != 980 || $resRegistroPV->content->transaccion != true) {
-                    return responseJson('Algo salio mal', $resRegistroPV->content->mensajesList[0]->descripcion, 500);
                 }
             }
 
