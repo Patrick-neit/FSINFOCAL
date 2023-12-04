@@ -21,6 +21,7 @@ use App\Http\Controllers\MarcaController;
 use App\Http\Controllers\MediaController;
 use App\Http\Controllers\MiscController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\ProveedorController;
 use App\Http\Controllers\PuntoVentaController;
 use App\Http\Controllers\SubFamiliaController;
 use App\Http\Controllers\UserController;
@@ -282,6 +283,17 @@ Route::group([
     Route::post('saveAsignarEmpresaUser', 'saveAsignarEmpresaUser')->name('users.saveAsignarEmpresaUser');
     Route::post('save/user', 'store')->name('users.store');
     Route::delete('user/delete', 'deleteUser')->name('users.deleteUser');
+});
+
+Route::group([
+    'prefix' => 'proveedor',
+    'controller' => ProveedorController::class,
+], function () {
+    Route::get('index', 'index')->name('proveedor.index');
+    Route::get('create', 'create')->name('proveedor.create');
+    Route::get('/edit/{id}', 'edit')->name('proveedor.edit');
+    Route::post('store', 'store')->name('proveedor.store');
+    Route::delete('destroy', 'destroy')->name('proveedor.destroy');
 });
 
 Route::group([

@@ -82,6 +82,12 @@ namespace App\Models{
 /**
  * App\Models\Categoria
  *
+ * @property int $id
+ * @property string $nombre_categoria
+ * @property int $estado
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
  * @method static \Illuminate\Database\Eloquent\Builder|Categoria newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Categoria newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Categoria onlyTrashed()
@@ -595,6 +601,35 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * App\Models\Proveedor
+ *
+ * @property int $id
+ * @property string $nombre_proveedor
+ * @property string $direccion
+ * @property string $telefono
+ * @property string $rubro
+ * @property string $numero_nit
+ * @property string $correo
+ * @property string $contacto
+ * @property int $tipo_documento
+ * @property int $sucursal_id
+ * @property int $estado
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \App\Models\Sucursal|null $sucursal
+ * @method static \Illuminate\Database\Eloquent\Builder|Proveedor newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Proveedor newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Proveedor onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Proveedor query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Proveedor withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Proveedor withoutTrashed()
+ */
+	class Proveedor extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\PuntoVenta
  *
  * @property int $id
@@ -677,6 +712,8 @@ namespace App\Models{
  * @property-read \App\Models\Empresa|null $empresa
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ImpuestoCuis> $impuestos_cuis
  * @property-read int|null $impuestos_cuis_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Proveedor> $proveedores
+ * @property-read int|null $proveedores_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\PuntoVenta> $puntos_ventas
  * @property-read int|null $puntos_ventas_count
  * @method static \Illuminate\Database\Eloquent\Builder|Sucursal newModelQuery()
