@@ -16,7 +16,7 @@ class SubFamiliaController extends Controller
     public function index()
     {
         return view('sub_familia.index', [
-            'sub_familias' => SubFamilia::with('familia')->get()
+            'sub_familias' => SubFamilia::with('familia')->get(),
         ]);
     }
 
@@ -35,13 +35,12 @@ class SubFamiliaController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         try {
-            if (!empty($request->sub_familia_id)) {
+            if (! empty($request->sub_familia_id)) {
                 return $this->update($request);
             }
             $subFamilia = new SubFamilia();
@@ -59,7 +58,6 @@ class SubFamiliaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\SubFamilia  $subFamilia
      * @return \Illuminate\Http\Response
      */
     public function show(SubFamilia $subFamilia)
@@ -77,7 +75,7 @@ class SubFamiliaController extends Controller
     {
         return view('sub_familia.create', [
             'sub_familia' => SubFamilia::find($id)->load('familia'),
-            'familias' => Familia::all()
+            'familias' => Familia::all(),
         ]);
     }
 

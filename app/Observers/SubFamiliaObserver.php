@@ -9,7 +9,6 @@ class SubFamiliaObserver
     /**
      * Handle the SubFamilia "created" event.
      *
-     * @param  \App\Models\SubFamilia  $subFamilia
      * @return void
      */
     public function created(SubFamilia $subFamilia)
@@ -20,7 +19,6 @@ class SubFamiliaObserver
     /**
      * Handle the SubFamilia "updated" event.
      *
-     * @param  \App\Models\SubFamilia  $subFamilia
      * @return void
      */
     public function updated(SubFamilia $subFamilia)
@@ -31,7 +29,6 @@ class SubFamiliaObserver
     /**
      * Handle the SubFamilia "deleted" event.
      *
-     * @param  \App\Models\SubFamilia  $subFamilia
      * @return void
      */
     public function deleted(SubFamilia $subFamilia)
@@ -42,7 +39,6 @@ class SubFamiliaObserver
     /**
      * Handle the SubFamilia "restored" event.
      *
-     * @param  \App\Models\SubFamilia  $subFamilia
      * @return void
      */
     public function restored(SubFamilia $subFamilia)
@@ -53,7 +49,6 @@ class SubFamiliaObserver
     /**
      * Handle the SubFamilia "force deleted" event.
      *
-     * @param  \App\Models\SubFamilia  $subFamilia
      * @return void
      */
     public function forceDeleted(SubFamilia $subFamilia)

@@ -367,6 +367,12 @@
     "class"=> "collapsible-header waves-effect waves-cyan",
     "submenu" => array(
     array(
+    "url" =>trim(parse_url(route('categoria.index'), PHP_URL_PATH) ,'/'),
+    "i18n" => "Categoria",
+    "name" => "Categoria",
+    "slug" => "Categorias"
+    ),
+    array(
     "url" =>trim(parse_url(route('marca.index'), PHP_URL_PATH) ,'/'),
     "i18n" => "Marca",
     "name" => "Marca",

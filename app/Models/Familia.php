@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Familia extends Model
@@ -15,7 +14,7 @@ class Familia extends Model
 
     public $fillable = [
         'nombre_familia',
-        'estado'
+        'estado',
     ];
 
     public function sub_familias()

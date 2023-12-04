@@ -27,13 +27,12 @@ class FamiliaController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         try {
-            if (!empty($request->familia_id)) {
+            if (! empty($request->familia_id)) {
                 return $this->update($request);
             }
             $familia = new Familia();

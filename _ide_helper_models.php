@@ -80,6 +80,20 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * App\Models\Categoria
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|Categoria newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Categoria newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Categoria onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Categoria query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Categoria withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Categoria withoutTrashed()
+ */
+	class Categoria extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\ConfiguracionImpuesto
  *
  * @property int $id

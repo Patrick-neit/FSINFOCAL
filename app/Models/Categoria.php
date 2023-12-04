@@ -6,14 +6,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Marca extends Model
+class Categoria extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $table = 'marcas';
+    public $table = 'categorias';
 
-    protected $fillable = [
-        'nombre_marca',
+    public $fillable = [
+        'nombre_categoria',
         'estado',
     ];
 }

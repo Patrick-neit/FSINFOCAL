@@ -10,6 +10,7 @@ class MarcaController extends Controller
     public function index()
     {
         $marcas = Marca::where('estado', 1)->get();
+
         return view('marca.index', compact('marcas'));
     }
 
@@ -28,13 +29,14 @@ class MarcaController extends Controller
     public function store(Request $request)
     {
         try {
-            if (!empty($request->marca_id)) {
+            if (! empty($request->marca_id)) {
                 return $this->update($request);
             }
             $marca = new Marca();
             $marca->nombre_marca = $request->nombre_marca;
             $marca->estado = $request->estado;
             $marca->save();
+
             return responseJson('Guardado Exitosamente', $marca, 200);
         } catch (\Exception $e) {
             return responseJson('Server Error', $e->getMessage(), 500);
@@ -48,6 +50,7 @@ class MarcaController extends Controller
             $marca->nombre_marca = $request->nombre_marca;
             $marca->estado = $request->estado;
             $marca->save();
+
             return responseJson('Actualizado Exitosamente', $marca, 200);
         } catch (\Exception $e) {
             return responseJson('Server Error', $e->getMessage(), 500);

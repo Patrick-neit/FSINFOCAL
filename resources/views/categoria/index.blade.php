@@ -73,10 +73,10 @@
                             <div class="right-align">
                                 <!-- create invoice button-->
                                 <div class="invoice-create-btn">
-                                    <a href="{{ route('marca.create') }}"
+                                    <a href="{{ route('categoria.create') }}"
                                         class="btn waves-effect waves-light invoice-create border-round z-depth-4">
                                         <i class="material-icons">add</i>
-                                        <span class="hide-on-small-only">Crear Marca</span>
+                                        <span class="hide-on-small-only">Crear categoria</span>
                                     </a>
                                 </div> <br>
                             </div>
@@ -86,19 +86,19 @@
                     <table id="enterprice-list-datatable" class="table">
                         <thead>
                             <tr>
-                                <th>Nombre Marca</th>
+                                <th>Nombre categoria</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($marcas as $marca)
+                            @forelse ($categorias as $categoria)
                             <tr>
-                                <td>{{ $marca->nombre_marca }}</td>
+                                <td>{{ $categoria->nombre_categoria }}</td>
                                 <td class="text-center">
-                                    <a href="{{ route('marca.edit', $marca->id)}}">
+                                    <a href="{{ route('categoria.edit', $categoria->id)}}">
                                         <i class="material-icons">edit</i>
                                     </a>
-                                    <span><a style="cursor: pointer;" onclick="eliminar('{{ $marca->id }}')"><i
+                                    <span><a style="cursor: pointer;" onclick="eliminar('{{ $categoria->id }}')"><i
                                                 class="material-icons">delete_outline</i></a></span>
                                 </td>
                                 {{-- <td><a href="{{ asset('page-users-view') }}"><i
@@ -130,9 +130,9 @@
 
 {{-- page script --}}
 @section('page-script')
-<script src="{{ asset('js/scripts/marca/index,js') }}"></script>
+<script src="{{ asset('js/scripts/categoria/index.js') }}"></script>
 <script>
-    let ruta_index_marca = "{{ route('marca.index') }}";
-    let ruta_eliminar_marca = "{{ route('marca.destroy') }}";
+    let ruta_index_categoria = "{{ route('categoria.index') }}";
+    let ruta_eliminar_categoria = "{{ route('categoria.destroy') }}";
 </script>
 @endsection

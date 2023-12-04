@@ -7,6 +7,7 @@ use App\Http\Controllers\BasicTableController;
 use App\Http\Controllers\BasicUiController;
 use App\Http\Controllers\CardController;
 use App\Http\Controllers\CatalogosController;
+use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ChartController;
 use App\Http\Controllers\CssController;
 use App\Http\Controllers\DashboardController;
@@ -301,6 +302,18 @@ Route::group([
     Route::post('store', 'store')->name('familia.store');
     Route::delete('destroy', 'destroy')->name('familia.destroy');
 });
+
+Route::group([
+    'prefix' => 'categoria',
+    'controller' => CategoriaController::class,
+], function () {
+    Route::get('index', 'index')->name('categoria.index');
+    Route::get('create', 'create')->name('categoria.create');
+    Route::get('/edit/{id}', 'edit')->name('categoria.edit');
+    Route::post('store', 'store')->name('categoria.store');
+    Route::delete('destroy', 'destroy')->name('categoria.destroy');
+});
+
 Route::group([
     'prefix' => 'sub_familia',
     'controller' => SubFamiliaController::class,
@@ -311,7 +324,6 @@ Route::group([
     Route::post('store', 'store')->name('sub_familia.store');
     Route::delete('destroy', 'destroy')->name('sub_familia.destroy');
 });
-
 
 Route::group([
     'prefix' => 'marca',
