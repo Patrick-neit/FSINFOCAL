@@ -80,6 +80,26 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * App\Models\Categoria
+ *
+ * @property int $id
+ * @property string $nombre_categoria
+ * @property int $estado
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Categoria newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Categoria newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Categoria onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Categoria query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Categoria withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Categoria withoutTrashed()
+ */
+	class Categoria extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\ConfiguracionImpuesto
  *
  * @property int $id
@@ -208,6 +228,28 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Empresa withoutTrashed()
  */
 	class Empresa extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\Familia
+ *
+ * @property int $id
+ * @property string $nombre_familia
+ * @property int $estado
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\SubFamilia> $sub_familias
+ * @property-read int|null $sub_familias_count
+ * @method static \Illuminate\Database\Eloquent\Builder|Familia newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Familia newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Familia onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Familia query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Familia withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Familia withoutTrashed()
+ */
+	class Familia extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -539,6 +581,55 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * App\Models\Marca
+ *
+ * @property int $id
+ * @property string $nombre_marca
+ * @property int $estado
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Marca newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Marca newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Marca onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Marca query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Marca withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Marca withoutTrashed()
+ */
+	class Marca extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\Proveedor
+ *
+ * @property int $id
+ * @property string $nombre_proveedor
+ * @property string $direccion
+ * @property string $telefono
+ * @property string $rubro
+ * @property string $numero_nit
+ * @property string $correo
+ * @property string $contacto
+ * @property int $tipo_documento
+ * @property int $sucursal_id
+ * @property int $estado
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \App\Models\Sucursal|null $sucursal
+ * @method static \Illuminate\Database\Eloquent\Builder|Proveedor newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Proveedor newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Proveedor onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Proveedor query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Proveedor withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Proveedor withoutTrashed()
+ */
+	class Proveedor extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\PuntoVenta
  *
  * @property int $id
@@ -585,6 +676,28 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * App\Models\SubFamilia
+ *
+ * @property int $id
+ * @property int $familia_id
+ * @property string $nombre_sub_familia
+ * @property int $estado
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \App\Models\Familia|null $familia
+ * @method static \Illuminate\Database\Eloquent\Builder|SubFamilia newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|SubFamilia newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|SubFamilia onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|SubFamilia query()
+ * @method static \Illuminate\Database\Eloquent\Builder|SubFamilia withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|SubFamilia withoutTrashed()
+ */
+	class SubFamilia extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\Sucursal
  *
  * @property int $id
@@ -599,6 +712,8 @@ namespace App\Models{
  * @property-read \App\Models\Empresa|null $empresa
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ImpuestoCuis> $impuestos_cuis
  * @property-read int|null $impuestos_cuis_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Proveedor> $proveedores
+ * @property-read int|null $proveedores_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\PuntoVenta> $puntos_ventas
  * @property-read int|null $puntos_ventas_count
  * @method static \Illuminate\Database\Eloquent\Builder|Sucursal newModelQuery()

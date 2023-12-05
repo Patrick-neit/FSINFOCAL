@@ -7,6 +7,7 @@ use App\Http\Controllers\BasicTableController;
 use App\Http\Controllers\BasicUiController;
 use App\Http\Controllers\CardController;
 use App\Http\Controllers\CatalogosController;
+use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ChartController;
 use App\Http\Controllers\CssController;
 use App\Http\Controllers\DashboardController;
@@ -14,12 +15,16 @@ use App\Http\Controllers\DataTableController;
 use App\Http\Controllers\DosificacionEmpresaController;
 use App\Http\Controllers\EjemploController;
 use App\Http\Controllers\ExtraComponentsController;
+use App\Http\Controllers\FamiliaController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\MarcaController;
 use App\Http\Controllers\MediaController;
 use App\Http\Controllers\MiscController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\ProveedorController;
 use App\Http\Controllers\PuntoVentaController;
+use App\Http\Controllers\SubFamiliaController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserProfileController;
 use Illuminate\Support\Facades\Route;
@@ -282,12 +287,66 @@ Route::group([
 });
 
 Route::group([
+    'prefix' => 'proveedor',
+    'controller' => ProveedorController::class,
+], function () {
+    Route::get('index', 'index')->name('proveedor.index');
+    Route::get('create', 'create')->name('proveedor.create');
+    Route::get('/edit/{id}', 'edit')->name('proveedor.edit');
+    Route::post('store', 'store')->name('proveedor.store');
+    Route::delete('destroy', 'destroy')->name('proveedor.destroy');
+});
+
+Route::group([
     'prefix' => 'puntos_ventas',
     'controller' => PuntoVentaController::class,
 ], function () {
     Route::get('index', 'index')->name('puntos_ventas.index');
     Route::get('create', 'create')->name('puntos_ventas.create');
     Route::post('store', 'store')->name('puntos_ventas.store');
+});
+Route::group([
+    'prefix' => 'familia',
+    'controller' => FamiliaController::class,
+], function () {
+    Route::get('index', 'index')->name('familia.index');
+    Route::get('create', 'create')->name('familia.create');
+    Route::get('/edit/{id}', 'edit')->name('familia.edit');
+    Route::post('store', 'store')->name('familia.store');
+    Route::delete('destroy', 'destroy')->name('familia.destroy');
+});
+
+Route::group([
+    'prefix' => 'categoria',
+    'controller' => CategoriaController::class,
+], function () {
+    Route::get('index', 'index')->name('categoria.index');
+    Route::get('create', 'create')->name('categoria.create');
+    Route::get('/edit/{id}', 'edit')->name('categoria.edit');
+    Route::post('store', 'store')->name('categoria.store');
+    Route::delete('destroy', 'destroy')->name('categoria.destroy');
+});
+
+Route::group([
+    'prefix' => 'sub_familia',
+    'controller' => SubFamiliaController::class,
+], function () {
+    Route::get('index', 'index')->name('sub_familia.index');
+    Route::get('create', 'create')->name('sub_familia.create');
+    Route::get('/edit/{id}', 'edit')->name('sub_familia.edit');
+    Route::post('store', 'store')->name('sub_familia.store');
+    Route::delete('destroy', 'destroy')->name('sub_familia.destroy');
+});
+
+Route::group([
+    'prefix' => 'marca',
+    'controller' => MarcaController::class,
+], function () {
+    Route::get('index', 'index')->name('marca.index');
+    Route::get('create', 'create')->name('marca.create');
+    Route::get('/edit/{id}', 'edit')->name('marca.edit');
+    Route::post('store', 'store')->name('marca.store');
+    Route::delete('destroy', 'destroy')->name('marca.destroy');
 });
 
 Route::group([

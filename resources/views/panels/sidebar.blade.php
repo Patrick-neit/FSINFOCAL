@@ -201,7 +201,7 @@
     )
     ),
     array(
-    "navheader"=> "Sincronizacion de Catalogos",
+    "navheader"=> "Sinc. de Catalogos",
     "icon"=> "more_horiz"
     ),
     array(
@@ -361,6 +361,51 @@
     "i18n" => "Puntos Ventas ",
     "name" => "Puntos Ventas ",
     "slug" => "Puntos Ventas"
+    ),
+    )
+    ),
+    //
+    array(
+    "navheader"=> "Modulo Productos",
+    "icon"=> "more_horiz"
+    ),
+    array(
+    "url" => "javascript:void(0)",
+    "i18n" => "Productos",
+    "name" => "Productos",
+    "icon" => "filter_none",
+    "slug" => "Productos",
+    "class"=> "collapsible-header waves-effect waves-cyan",
+    "submenu" => array(
+    array(
+    "url" =>trim(parse_url(route('proveedor.index'), PHP_URL_PATH) ,'/'),
+    "i18n" => "Proveedor",
+    "name" => "Proveedor",
+    "slug" => "Proveedores"
+    ),
+    array(
+    "url" =>trim(parse_url(route('categoria.index'), PHP_URL_PATH) ,'/'),
+    "i18n" => "Categoria",
+    "name" => "Categoria",
+    "slug" => "Categorias"
+    ),
+    array(
+    "url" =>trim(parse_url(route('marca.index'), PHP_URL_PATH) ,'/'),
+    "i18n" => "Marca",
+    "name" => "Marca",
+    "slug" => "marcas"
+    ),
+    array(
+    "url" =>trim(parse_url(route('familia.index'), PHP_URL_PATH) ,'/'),
+    "i18n" => "Familia",
+    "name" => "Familia",
+    "slug" => "Familias"
+    ),
+    array(
+    "url" =>trim(parse_url(route('sub_familia.index'), PHP_URL_PATH) ,'/'),
+    "i18n" => "Sub Familia",
+    "name" => "Sub Familia",
+    "slug" => "Sub Familias"
     ),
 
     )
