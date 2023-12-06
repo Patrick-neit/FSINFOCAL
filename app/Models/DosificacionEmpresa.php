@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class DosificacionEmpresa extends Model
 {
     use HasFactory;
+
     protected $table = 'dosificaciones_empresas';
+
     protected $fillable =
     [
         'fecha_asignacion',
@@ -16,14 +18,16 @@ class DosificacionEmpresa extends Model
         'inicio_nro_factura',
         'fin_nro_factura',
         'empresa_id',
-        'estado'
+        'estado',
     ];
 
-    public function empresa(){
+    public function empresa()
+    {
         return $this->belongsTo(Empresa::class);
     }
 
-    public function detalles_dosificaciones_empresas(){
+    public function detalles_dosificaciones_empresas()
+    {
         return $this->hasMany(DetalleDosificacionEmpresa::class);
     }
 }

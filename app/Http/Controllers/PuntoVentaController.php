@@ -52,14 +52,14 @@ class PuntoVentaController extends Controller
             $verificarPuntoVenta = verificarSiPuntoVenta($empresaID); //? Verifica si ya existe mas de 1 PV Registrado
             /* if (!$verificarPuntoVenta) { */
             $resPuntoVenta = $this->storePuntoVenta($request);
-                if ($resPuntoVenta) {
-                    return responseJson('Punto Venta Sincronizado Exitosamente', $resPuntoVenta, 200);
-                } else {
-                    return responseJson('Error al Sincronizar Punto Venta ', $resPuntoVenta, 500);
-                }
-           /*  } else {
-                return responseJson('Ya Existe PV A Personal Asociado', $verificarPuntoVenta, 500);
-            } */
+            if ($resPuntoVenta) {
+                return responseJson('Punto Venta Sincronizado Exitosamente', $resPuntoVenta, 200);
+            } else {
+                return responseJson('Error al Sincronizar Punto Venta ', $resPuntoVenta, 500);
+            }
+            /*  } else {
+                 return responseJson('Ya Existe PV A Personal Asociado', $verificarPuntoVenta, 500);
+             } */
         } catch (\Exception $e) {
             return responseJson('Server Error', [
                 'message' => $e->getMessage(),
@@ -85,7 +85,6 @@ class PuntoVentaController extends Controller
             $resCuis = $this->cuiService->obtenerCuisImpuestos($dataService);
             $resCodigoCuis = $resCuis->content->codigo;
 
-
             $resCufd = $this->cufdService->obtenerCufdImpuestos($dataService, $resCodigoCuis);
 
             if ($resCuis->content->mensajesList[0]->codigo != 980 || $resCufd->content->transaccion != true) {
@@ -95,9 +94,9 @@ class PuntoVentaController extends Controller
             if ($resExistePV) { //Si ya existe 1 PV creado
                 $resCuisBD = ImpuestoCuis::where([
                     ['sucursal_id', $dataService->sucursal_id],
-                    ['empresa_id', $empresaID]
+                    ['empresa_id', $empresaID],
                 ])->orderBy('fecha_vencimiento', 'DESC')
-                ->first();
+                    ->first();
 
                 $resRegistroPV = $this->registrarPVImpuesto->registrarPVImpuesto($dataService, $resCuisBD->codigo_cuis);
                 if ($resRegistroPV->status != 200) {

@@ -15,7 +15,7 @@ function responseJson($description, $content, $status)
 function verificarSiPuntoVenta($empresaID)
 {
     $puntoVentaUsuario = PuntoVenta::where('empresa_id', $empresaID)
-    ->get();
+        ->get();
 
     return count($puntoVentaUsuario) >= 1 ? true : false;
 }

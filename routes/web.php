@@ -9,6 +9,7 @@ use App\Http\Controllers\CardController;
 use App\Http\Controllers\CatalogosController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ChartController;
+use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\CssController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DataTableController;
@@ -350,15 +351,24 @@ Route::group([
 });
 
 Route::group([
+    'prefix' => 'cliente',
+    'controller' => ClienteController::class,
+], function () {
+    Route::get('index', 'index')->name('cliente.index');
+    Route::get('create', 'create')->name('cliente.create');
+    Route::get('/edit/{id}', 'edit')->name('cliente.edit');
+    Route::post('store', 'store')->name('cliente.store');
+    Route::delete('destroy', 'destroy')->name('cliente.destroy');
+});
+
+Route::group([
     'prefix' => 'dosificaciones_empresas',
     'controller' => DosificacionEmpresaController::class,
 ], function () {
     Route::get('index', 'index')->name('dosificaciones_empresas.index');
     Route::get('create', 'create')->name('dosificaciones_empresas.create');
     Route::post('store', 'store')->name('dosificaciones_empresas.store');
-    Route::get('edit/{id}',  'edit')->name('dosificaciones_empresas.edit');
+    Route::get('edit/{id}', 'edit')->name('dosificaciones_empresas.edit');
     Route::post('eliminarDetalle', 'eliminarDetalle')->name('dosificaciones_empresas.eliminarDetalle');
     Route::post('getDataDocumentoSector', 'getDataDocumentoSector')->name('dosificaciones_empresas.getDataDocumentoSector');
-
-
 });

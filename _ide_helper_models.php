@@ -100,6 +100,36 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * App\Models\Cliente
+ *
+ * @property int $id
+ * @property string $nombre_cliente
+ * @property int $tipo_documento_id
+ * @property string $numero_nit
+ * @property string|null $complemento
+ * @property string|null $direccion
+ * @property string|null $telefono
+ * @property string $correo
+ * @property int $departamento_id
+ * @property string $fecha_cumpleanos
+ * @property string $contacto
+ * @property int $estado
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \App\Models\ImpuestoDocumentoIdentidad|null $impuestos_documentos_identidad
+ * @method static \Illuminate\Database\Eloquent\Builder|Cliente newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Cliente newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Cliente onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Cliente query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Cliente withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Cliente withoutTrashed()
+ */
+	class Cliente extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\ConfiguracionImpuesto
  *
  * @property int $id
@@ -163,6 +193,26 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * App\Models\DetalleDosificacionEmpresa
+ *
+ * @property int $id
+ * @property string $descripcion_documento_sector
+ * @property string $codigo_actividad_documento_sector
+ * @property int $tipo_factura_documento_sector
+ * @property int $documento_sector_id
+ * @property int $dosificacion_empresa_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\DosificacionEmpresa|null $dosificacion_empresa
+ * @method static \Illuminate\Database\Eloquent\Builder|DetalleDosificacionEmpresa newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|DetalleDosificacionEmpresa newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|DetalleDosificacionEmpresa query()
+ */
+	class DetalleDosificacionEmpresa extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\Docente
  *
  * @property int $id
@@ -189,6 +239,29 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * App\Models\DosificacionEmpresa
+ *
+ * @property int $id
+ * @property string $fecha_asignacion
+ * @property string|null $cafc
+ * @property int|null $inicio_nro_factura
+ * @property int|null $fin_nro_factura
+ * @property int $empresa_id
+ * @property int $estado
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\DetalleDosificacionEmpresa> $detalles_dosificaciones_empresas
+ * @property-read int|null $detalles_dosificaciones_empresas_count
+ * @property-read \App\Models\Empresa|null $empresa
+ * @method static \Illuminate\Database\Eloquent\Builder|DosificacionEmpresa newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|DosificacionEmpresa newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|DosificacionEmpresa query()
+ */
+	class DosificacionEmpresa extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\Empresa
  *
  * @property int $id
@@ -210,6 +283,8 @@ namespace App\Models{
  * @property-read \App\Models\ConfiguracionImpuesto|null $configuracion_impuesto
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Docente> $docentes
  * @property-read int|null $docentes_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\DosificacionEmpresa> $dosificaciones_sucursales
+ * @property-read int|null $dosificaciones_sucursales_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ImpuestoCufd> $impuestos_cufds
  * @property-read int|null $impuestos_cufds_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ImpuestoCuis> $impuestos_cuis
@@ -314,6 +389,8 @@ namespace App\Models{
  * @property int $codigo_clasificador
  * @property string $descripcion
  * @property string $transaccion
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Cliente> $clientes
+ * @property-read int|null $clientes_count
  * @method static \Illuminate\Database\Eloquent\Builder|ImpuestoDocumentoIdentidad newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ImpuestoDocumentoIdentidad newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ImpuestoDocumentoIdentidad query()

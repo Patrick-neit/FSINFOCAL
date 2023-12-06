@@ -323,14 +323,14 @@
     ),
 
     array(
-        "url" =>trim( parse_url(route('dosificaciones_empresas.create'), PHP_URL_PATH) ,'/'),
-        "i18n" => "Dosificacion Empresa",
-        "name" => "Dosificacion Empresa",
-        "slug" => "dosificaciones"
-        ),
+    "url" =>trim( parse_url(route('dosificaciones_empresas.create'), PHP_URL_PATH) ,'/'),
+    "i18n" => "Dosificacion Empresa",
+    "name" => "Dosificacion Empresa",
+    "slug" => "dosificaciones"
+    ),
 
-        )
-        ),
+    )
+    ),
     array(
     "navheader"=> "Modulo Empresa",
     "icon"=> "more_horiz"
@@ -377,6 +377,12 @@
     "slug" => "Productos",
     "class"=> "collapsible-header waves-effect waves-cyan",
     "submenu" => array(
+    array(
+    "url" =>trim(parse_url(route('cliente.index'), PHP_URL_PATH) ,'/'),
+    "i18n" => "Clientes",
+    "name" => "Clientes",
+    "slug" => "Clientes"
+    ),
     array(
     "url" =>trim(parse_url(route('proveedor.index'), PHP_URL_PATH) ,'/'),
     "i18n" => "Proveedor",

@@ -69,7 +69,8 @@ class Empresa extends Model
         return $this->morphMany(Binnacle::class, 'binnacleable');
     }
 
-    public function dosificaciones_sucursales(){
+    public function dosificaciones_sucursales()
+    {
         return $this->hasMany(DosificacionEmpresa::class);
     }
 }

@@ -27,4 +27,9 @@ class ImpuestoDocumentoIdentidad extends Model
             get: fn ($value) => $value == 1 ? 'Sincronizado' : 'No sincronizado',
         );
     }
+
+    public function clientes()
+    {
+        return $this->hasMany(Cliente::class);
+    }
 }
