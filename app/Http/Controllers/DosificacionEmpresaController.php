@@ -25,7 +25,8 @@ class DosificacionEmpresaController extends Controller
     public function create()
     {
         $empresa = Empresa::where('id', Auth::user()->empresas[0]->id)->first();
-        $documentoSectores = ImpuestoDocumentoSector::all();
+        $documentoSectores = ImpuestoTipoDocumentoSector::all();
+
 
         return view('dosificaciones_empresas.create', compact('empresa', 'documentoSectores'));
     }
@@ -58,9 +59,7 @@ class DosificacionEmpresaController extends Controller
                 session()->forget('dosificaciones_sucursales_detalle');
 
                 return responseJson('Asignado Exitosamente', $dosificacion_empresa, 200);
-
             }
-
         } catch (\Exception $e) {
             DB::rollBack();
 
@@ -103,14 +102,13 @@ class DosificacionEmpresaController extends Controller
 
             session()->get('dosificaciones_sucursales_detalle');
             $verificarDSAgregado = $this->verificarDocumentoSectorAgregado($documentoSectorID);
-            if (! $verificarDSAgregado) { //? False = No existe ese DS en la session
+            if (!$verificarDSAgregado) { //? False = No existe ese DS en la session
                 session()->push('dosificaciones_sucursales_detalle', $dataDocumentoSector);
 
                 return responseJson('Data DS Encountered', session()->get('dosificaciones_sucursales_detalle'), 200);
             }
 
             return responseJson('DS Ya esta Agregado', session()->get('dosificaciones_sucursales_detalle'), 400);
-
         } catch (\Exception $e) {
             return responseJson('Server Error', [
                 'message' => $e->getMessage(),
@@ -127,12 +125,11 @@ class DosificacionEmpresaController extends Controller
         session()->put('dosificaciones_sucursales_detalle', $detalle_dosificaciones);
 
         return responseJson('Session Actualizada', session()->get('dosificaciones_sucursales_detalle'), 200);
-
     }
 
     public function verificarDocumentoSectorAgregado($documentoSectorID)
     {
-        if (! empty(session()->get('dosificaciones_sucursales_detalle'))) {
+        if (!empty(session()->get('dosificaciones_sucursales_detalle'))) {
             foreach (session('dosificaciones_sucursales_detalle') as $key => $value) {
                 if ($value['codigo_clasificador_ds'] == $documentoSectorID) {
                     return true;

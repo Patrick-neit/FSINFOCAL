@@ -80,6 +80,40 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * App\Models\CabeceraProducto
+ *
+ * @property int $id
+ * @property int $dosificacion_id
+ * @property int $unidad_medida_id
+ * @property int $marca_id
+ * @property int $categoria_id
+ * @property int $tipo_id
+ * @property int $sub_familia_id
+ * @property string $codigo_producto
+ * @property int $codigo_producto_impuestos
+ * @property string $modelo
+ * @property string|null $numero_serie
+ * @property string|null $numero_imei
+ * @property int|null $peso_unitario
+ * @property string|null $codigo_barra
+ * @property string|null $caracteristicas
+ * @property string $stock_minimo
+ * @property int $estado
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @method static \Illuminate\Database\Eloquent\Builder|CabeceraProducto newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|CabeceraProducto newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|CabeceraProducto onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|CabeceraProducto query()
+ * @method static \Illuminate\Database\Eloquent\Builder|CabeceraProducto withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|CabeceraProducto withoutTrashed()
+ */
+	class CabeceraProducto extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\Categoria
  *
  * @property int $id
@@ -209,6 +243,32 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|DetalleDosificacionEmpresa query()
  */
 	class DetalleDosificacionEmpresa extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\DetalleProducto
+ *
+ * @property int $id
+ * @property int $producto_id
+ * @property string $precio_compra
+ * @property string $precio_unitario
+ * @property string $precio_unitario2
+ * @property string $precio_unitario3
+ * @property string $precio_unitario4
+ * @property string $precio_paquete
+ * @property string $precio_venta_dolar
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @method static \Illuminate\Database\Eloquent\Builder|DetalleProducto newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|DetalleProducto newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|DetalleProducto onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|DetalleProducto query()
+ * @method static \Illuminate\Database\Eloquent\Builder|DetalleProducto withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|DetalleProducto withoutTrashed()
+ */
+	class DetalleProducto extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -654,6 +714,50 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|ImpuestoUnidadMedida query()
  */
 	class ImpuestoUnidadMedida extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\InventarioAlmacen
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|InventarioAlmacen newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|InventarioAlmacen newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|InventarioAlmacen onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|InventarioAlmacen query()
+ * @method static \Illuminate\Database\Eloquent\Builder|InventarioAlmacen withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|InventarioAlmacen withoutTrashed()
+ */
+	class InventarioAlmacen extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\KardexProducto
+ *
+ * @property int $id
+ * @property int $producto_id
+ * @property string $fecha
+ * @property string $hora
+ * @property string $doc_soporte
+ * @property string $tipo_movimiento
+ * @property string $cantidad_ingresos
+ * @property string $precio_unitario_ingresos
+ * @property string $total_ingresos
+ * @property string $cantidad_egresos
+ * @property string $precio_unitario_egresos
+ * @property string $total_egresos
+ * @property string $cantidad_saldo_actual
+ * @property string $promedio
+ * @property string $costo_total_saldo
+ * @property int $usuario_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string|null $deleted_at
+ * @method static \Illuminate\Database\Eloquent\Builder|KardexProducto newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|KardexProducto newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|KardexProducto query()
+ */
+	class KardexProducto extends \Eloquent {}
 }
 
 namespace App\Models{

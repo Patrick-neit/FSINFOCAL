@@ -24,6 +24,7 @@ use App\Http\Controllers\MarcaController;
 use App\Http\Controllers\MediaController;
 use App\Http\Controllers\MiscController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\ProveedorController;
 use App\Http\Controllers\PuntoVentaController;
 use App\Http\Controllers\SubFamiliaController;
@@ -361,6 +362,20 @@ Route::group([
     Route::post('store', 'store')->name('cliente.store');
     Route::delete('destroy', 'destroy')->name('cliente.destroy');
 });
+
+Route::group(
+    [
+        'prefix' => 'producto',
+        'controller' => ProductoController::class,
+    ],
+    function () {
+        Route::get('index', 'index')->name('producto.index');
+        Route::get('create', 'create')->name('producto.create');
+        Route::get('/edit/{id}', 'edit')->name('producto.edit');
+        Route::post('store', 'store')->name('producto.store');
+        Route::delete('destroy', 'destroy')->name('producto.destroy');
+    }
+);
 
 Route::group([
     'prefix' => 'dosificaciones_empresas',
