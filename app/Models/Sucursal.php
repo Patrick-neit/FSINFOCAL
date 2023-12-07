@@ -40,4 +40,8 @@ class Sucursal extends Model
     {
         return $this->hasMany(Proveedor::class);
     }
+
+    public function almacen(){
+        return $this->hasOne(Almacen::class);
+    }
 }

@@ -69,4 +69,8 @@ class User extends Authenticatable implements BannableInterface
     {
         return $this->morphMany(Binnacle::class, 'binnacleable');
     }
+
+    public function almacen(){
+        return $this->hasOne(Almacen::class);
+    }
 }

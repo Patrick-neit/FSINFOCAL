@@ -14,6 +14,7 @@ use App\Http\Controllers\CssController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DataTableController;
 use App\Http\Controllers\DosificacionEmpresaController;
+use App\Http\Controllers\AlmacenController;
 use App\Http\Controllers\EjemploController;
 use App\Http\Controllers\ExtraComponentsController;
 use App\Http\Controllers\FamiliaController;
@@ -371,4 +372,15 @@ Route::group([
     Route::get('edit/{id}', 'edit')->name('dosificaciones_empresas.edit');
     Route::post('eliminarDetalle', 'eliminarDetalle')->name('dosificaciones_empresas.eliminarDetalle');
     Route::post('getDataDocumentoSector', 'getDataDocumentoSector')->name('dosificaciones_empresas.getDataDocumentoSector');
+});
+
+Route::group([
+    'prefix' => 'almacenes',
+    'controller' =>  AlmacenController::class ,
+], function () {
+    Route::get('index', 'index')->name('almacenes.index');
+    Route::get('create', 'create')->name('almacenes.create');
+    Route::get('/edit/{id}', 'edit')->name('almacenes.edit');
+    Route::post('store', 'store')->name('almacenes.store');
+    Route::delete('destroy', 'destroy')->name('almacenes.destroy');
 });
