@@ -21,6 +21,6 @@ class DetalleDosificacionEmpresa extends Model
 
     public function dosificacion_empresa()
     {
-        return $this->belongsTo(DosificacionEmpresa::class);
+        return $this->belongsTo(DosificacionEmpresa::class,'dosificacion_empresa_id','id');
     }
 }

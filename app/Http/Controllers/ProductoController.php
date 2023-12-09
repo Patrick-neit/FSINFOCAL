@@ -37,6 +37,8 @@ class ProductoController extends Controller
      */
     public function create()
     {
+        $dosificaciones = DosificacionEmpresa::with('detalles_dosificaciones_empresas')->get();
+        dd($dosificaciones);
         return view('productos.create', [
             'dosificaciones' => DosificacionEmpresa::all(),
             'unidad_medidas' => ImpuestoUnidadMedida::all(),
@@ -62,7 +64,9 @@ class ProductoController extends Controller
         $kardexProducto = new KardexProducto();
 
         //aign valores de productos
-        $cabeceraProducto->dosificacion_id = $request->dosificacion;
+        $cabeceraProducto->codigo_actividad = $request->codigo_actividad;
+        $cabeceraProducto->codigo_producto_sin = $request->codigo_producto_sin;
+
         $cabeceraProducto->unidad_medida_id = $request->unidad_medida;
         $cabeceraProducto->marca_id = $request->marca_id;
         $cabeceraProducto->categoria_id = $request->categoria;

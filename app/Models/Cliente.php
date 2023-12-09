@@ -36,4 +36,8 @@ class Cliente extends Model
     {
         return $this->belongsTo(ImpuestoDocumentoIdentidad::class, 'tipo_documento_id', 'id');
     }
+
+    public function clientes_tipos_precios(){
+        return $this->hasMany(ClienteTipoPrecio::class);
+    }
 }

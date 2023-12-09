@@ -40,11 +40,20 @@
                                 <div class="row">
                                     <div class="col s12 input-field">
                                         <select class="form-control" name="dosificacion" id="dosificacion">
-                                            @forelse ($dosificaciones as $dosificacion)
-                                            <option value="{{ $dosificacion->id }}">{{ $dosificacion->cafc }}</option>
-                                            @empty
-                                            <option value="">No hay opciones</option>
-                                            @endforelse
+                                            <select class="form-control" name="dosificacion" id="dosificacion">
+                                                @forelse ($dosificaciones as $dosificacion)
+                                                    @forelse ($dosificacion->detalles_dosificaciones_empresas as $detalle)
+
+                                                        <option value="{{ $detalle->codigo_actividad_documento_sector }}">
+                                                            {{ $detalle->descripcion_documento_sector }}
+                                                        </option>
+                                                    @empty
+                                                        <option value="">No hay opciones</option>
+                                                    @endforelse
+                                                @empty
+                                                    <option value="">No hay dosificaciones disponibles</option>
+                                                @endforelse
+                                            </select>
                                         </select>
                                         <label>Dosificaci&oacute;n</label>
                                     </div>

@@ -31,7 +31,7 @@
                             <div class="right-align">
                                 <!-- create invoice button-->
                                 <div class="invoice-create-btn">
-                                    <a href="{{ route('puntos_ventas.create') }}"
+                                    <a href="{{ route('almacenes.create') }}"
                                         class="btn waves-effect waves-light invoice-create border-round z-depth-4">
                                         <i class="material-icons">add</i>
                                         <span class="hide-on-small-only">Registrar Nuevo Almacen</span>

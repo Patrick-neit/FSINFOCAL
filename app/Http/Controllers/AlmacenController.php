@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Almacen;
 use App\Models\Sucursal;
+use App\Models\User;
 use Auth;
 use Illuminate\Http\Request;
 
@@ -14,9 +15,12 @@ class AlmacenController extends Controller
         return view('almacenes.index', compact('almacenes'));
     }
     public function create(){
-        $encargado = Auth::user();
-        $sucursales = Sucursal::where('empresa_id', Auth::user()->empresas[0]->id)->get();
-        return view('almacenes.create', compact('sucursales','encargado'));
+        $empresaUserLog = Auth::user()->empresas()->first();
+        $encargados = User::whereHas('empresas', function ($query) use ($empresaUserLog){
+            $query->where('empresa_id', $empresaUserLog->id);
+        })->get();
+        $sucursales = Sucursal::where('empresa_id', $empresaUserLog->id)->get();
+        return view('almacenes.create', compact('sucursales','encargados'));
     }
 
     public function store(Request $request){

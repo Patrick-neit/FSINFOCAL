@@ -92,6 +92,10 @@ if ($("#users-movies-select2").length > 0) {
         width: "100%",
     });
 }
+$(".select2").select2({
+    dropdownAutoWidth: true,
+    width: '100%'
+});
 
 // Input, Select, Textarea validations except submit button validation initialization
 /* if ($(".users-edit").length > 0) {

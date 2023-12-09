@@ -69,13 +69,14 @@
                             <div class="col s12 m6">
                                 <div class="row">
                                     <div class="col s6 input-field">
-                                        <input type="hidden" value="{{$encargado->id}}" id="encargado_id">
-                                        <input id="encargado" name="encargado" type="text"
-                                            class="validate" value="{{ $encargado->name}} "
-                                            data-error=".errorTxt1"
-                                            readonly required>
-                                        <label for="encargado">Encargado Almacen</label>
-                                        <small class="errorTxt1"></small>
+
+                                        <select name="encargado_id" id="encargado_id" class="select2 browser-default">
+                                            @foreach ($encargados as $encargado)
+                                            <option value="{{ $encargado->id }}">{{ $encargado->name }}
+                                            </option>
+                                            @endforeach
+                                        </select>
+                                        <label>Asociar Encargado</label>
                                     </div>
                                 </div>
                             </div>
