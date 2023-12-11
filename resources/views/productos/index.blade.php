@@ -43,14 +43,23 @@
                     <table id="enterprice-list-datatable" class="table">
                         <thead>
                             <tr>
+                                <th>C&oacute;digo Producto</th>
                                 <th>Nombre producto</th>
+                                <th>Caracteristica</th>
+                                <th>Stock Actual</th>
+                                <th>Estado</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             @forelse ($productos as $producto)
                             <tr>
+                                <td>{{ $producto->codigo_producto }}</td>
                                 <td>{{ $producto->nombre_producto }}</td>
+                                <td>{{ empty($producto->caracteristicas) ? 'Ninguno': $producto->caracteristicas }}</td>
+                                <td>{{\App\Models\InventarioAlmacen::where('producto_id',
+                                    $producto->id)->get()[0]->stock_actual}}</td>
+                                <td>{{ $producto->estado }}</td>
                                 <td class="text-center">
                                     <a href="{{ route('producto.edit', $producto->id)}}">
                                         <i class="material-icons">edit</i>
@@ -87,7 +96,7 @@
 
 {{-- page script --}}
 @section('page-script')
-<script src="{{ asset('js/scripts/producto/index,js') }}"></script>
+<script src="{{ asset('js/scripts/productos/index.js') }}"></script>
 <script>
     let ruta_index_producto = "{{ route('producto.index') }}";
     let ruta_eliminar_producto = "{{ route('producto.destroy') }}";

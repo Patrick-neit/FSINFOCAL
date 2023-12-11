@@ -93,6 +93,11 @@ if ($("#users-movies-select2").length > 0) {
     });
 }
 
+$(".select2").select2({
+    dropdownAutoWidth: true,
+    width: "100%",
+});
+
 // Input, Select, Textarea validations except submit button validation initialization
 /* if ($(".users-edit").length > 0) {
       $("#accountForm, #infotabForm").validate({
@@ -145,10 +150,12 @@ let homologacion = document.getElementById("homologacion");
 let modelo = document.getElementById("modelo");
 let numero_serie = document.getElementById("numero_serie");
 let numero_imei = document.getElementById("numero_imei");
-let precio_unitario = document.getElementById("precio_unitario");
+let peso_unitario = document.getElementById("peso_unitario");
 let codigo_barra = document.getElementById("codigo_barra");
 let caracteristica = document.getElementById("caracteristica");
 let stock_minimo = document.getElementById("stock_minimo");
+let stock_actual = document.getElementById("stock_actual");
+let almacen_id = document.getElementById("almacen_id");
 let estado = document.getElementById("estado");
 
 let precio_compra = document.getElementById("precio_compra");
@@ -182,10 +189,12 @@ registrarProductoButton.addEventListener("click", function (event) {
             modelo: modelo.value,
             numero_serie: numero_serie.value,
             numero_imei: numero_imei.value,
-            precio_unitario: precio_unitario.value,
+            peso_unitario: peso_unitario.value,
             codigo_barra: codigo_barra.value,
             caracteristica: caracteristica.value,
             stock_minimo: stock_minimo.value,
+            stock_actual: stock_actual.value,
+            almacen_id: almacen_id.value,
             estado: estado.value,
 
             precio_compra: precio_compra.value,
@@ -211,12 +220,23 @@ registrarProductoButton.addEventListener("click", function (event) {
                     },
                 });
             } else {
-                M.toast({
-                    html: "Algo salio Mal!",
-                    classes: "rounded",
-                    displayLength: 3000,
-                    classes: "blue lighten-1",
-                });
+                if (data.status == 422) {
+                    data.content.forEach((contenido) =>
+                        M.toast({
+                            html: contenido,
+                            classes: "rounded",
+                            displayLength: 3000,
+                            classes: "red lighten-1",
+                        })
+                    );
+                } else {
+                    M.toast({
+                        html: "Algo salio Mal!",
+                        classes: "rounded",
+                        displayLength: 3000,
+                        classes: "blue lighten-1",
+                    });
+                }
             }
         });
 });

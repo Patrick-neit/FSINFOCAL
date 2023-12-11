@@ -10,8 +10,11 @@ class InventarioAlmacen extends Model
 {
     use HasFactory, SoftDeletes;
 
+    public $table = 'inventario_almacenes';
+
     public $fillable = [
         'almacen_id',
-        'producto_id'
+        'producto_id',
+        'stock_actual'
     ];
 }
