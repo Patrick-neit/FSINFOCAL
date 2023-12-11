@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('almacen_id');
             $table->unsignedBigInteger('producto_id');
+            $table->decimal('stock_actual', 10, 5)->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

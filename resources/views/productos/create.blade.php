@@ -276,107 +276,69 @@
     <div class="card">
         <div class="card-content">
             <div class="row">
-                <div class="col s12" id="account2">
-                    <!-- users edit account form start -->
-                    <form>
-                        @csrf
-                        <div class="row">
-                            <div class="col s12 m4">
-                                <div class="row">
-                                    <div class="col s12 input-field">
-                                        <input id="precio_compra" name="precio_compra" type="number" step="0.00001"
-                                            class="validate"
-                                            value="@if (isset($producto)){{ $producto->precio_compra }}@else{{old('precio_compra')}}@endif"
-                                            data-error=".errorTxt1" required>
-                                        <label for="precio_compra">Precio Compra</label>
-                                        <small class="errorTxt1"></small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col s12 m4">
-                                <div class="row">
-                                    <div class="col s12 input-field">
-                                        <input id="precio_unitarioo" name="precio_unitarioo" type="number"
-                                            step="0.00001" class="validate"
-                                            value="@if (isset($producto)){{ $producto->precio_unitario }}@else{{old('precio_unitario')}}@endif"
-                                            data-error=".errorTxt1" required>
-                                        <label for="precio_unitarioo">Precio Unitario</label>
-                                        <small class="errorTxt1"></small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col s12 m4">
-                                <div class="row">
-                                    <div class="col s12 input-field">
-                                        <input id="precio_unitario2" name="precio_unitario2" type="number"
-                                            step="0.00001" class="validate"
-                                            value="@if (isset($producto)){{ $producto->precio_unitario2 }}@else{{old('precio_unitario2')}}@endif"
-                                            data-error=".errorTxt1" required>
-                                        <label for="precio_unitario2">Precio Unitario 2</label>
-                                        <small class="errorTxt1"></small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col s12 m4">
-                                <div class="row">
-                                    <div class="col s12 input-field">
-                                        <input id="precio_unitario3" name="precio_unitario3" type="number"
-                                            step="0.00001" class="validate"
-                                            value="@if (isset($producto)){{ $producto->precio_unitario3 }}@else{{old('precio_unitario3')}}@endif"
-                                            data-error=".errorTxt1" required>
-                                        <label for="precio_unitario3">Precio Unitario 3</label>
-                                        <small class="errorTxt1"></small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col s12 m4">
-                                <div class="row">
-                                    <div class="col s12 input-field">
-                                        <input id="precio_unitario4" name="precio_unitario4" type="number"
-                                            step="0.00001" class="validate"
-                                            value="@if (isset($producto)){{ $producto->precio_unitario4 }}@else{{old('precio_unitario4')}}@endif"
-                                            data-error=".errorTxt1" required>
-                                        <label for="precio_unitario4">Precio Unitario 4</label>
-                                        <small class="errorTxt1"></small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col s12 m4">
-                                <div class="row">
-                                    <div class="col s12 input-field">
-                                        <input id="precio_paquete" name="precio_paquete" type="number" step="0.00001"
-                                            class="validate"
-                                            value="@if (isset($producto)){{ $producto->precio_paquete }}@else{{old('precio_paquete')}}@endif"
-                                            data-error=".errorTxt1" required>
-                                        <label for="precio_paquete">Precio Paquete</label>
-                                        <small class="errorTxt1"></small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col s12 m4">
-                                <div class="row">
-                                    <div class="col s12 input-field">
-                                        <input id="precio_dolar" name="precio_dolar" type="number" step="0.00001"
-                                            class="validate"
-                                            value="@if (isset($producto)){{ $producto->precio_dolar }}@else{{old('precio_dolar')}}@endif"
-                                            data-error=".errorTxt1" required>
-                                        <label for="precio_dolar">Precio Paquete</label>
-                                        <small class="errorTxt1"></small>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col s12 display-flex justify-content-end mt-3">
-                                <button id="registrarProductoButton" class="btn indigo mr-2">Guardar</button>
-                                <button type="button" class="btn btn-light">Cancel</button>
-                            </div>
-                        </div>
-                    </form>
-                    <!-- users edit account form ends -->
+                <div class="col s12 m4 l4 input-field">
+                    <input id="precio_compra" name="precio_compra" type="number" step="0.00001" class="validate"
+                        value="@if (isset($detalle_producto)){{ $detalle_producto->precio_compra }}@else{{old('precio_compra')}}@endif"
+                        data-error=".errorTxt1" required>
+                    <label for="precio_compra">Precio Compra</label>
+                    <small class="errorTxt1"></small>
+                </div>
+                <div class="col s12 m4 l4 input-field">
+                    <input id="precio_unitarioo" name="precio_unitarioo" type="number" step="0.00001" class="validate"
+                        value="@if (isset($detalle_producto)){{ $detalle_producto->precio_unitario }}@else{{old('precio_unitario')}}@endif"
+                        data-error=".errorTxt1" required>
+                    <label for="precio_unitarioo">Precio Unitario</label>
+                    <small class="errorTxt1"></small>
+                </div>
+                <div class="col s12 m4 l4 input-field">
+                    <input id="precio_unitario2" name="precio_unitario2" type="number" step="0.00001" class="validate"
+                        value="@if (isset($detalle_producto)){{ $detalle_producto->precio_unitario2 }}@else{{old('precio_unitario2')}}@endif"
+                        data-error=".errorTxt1" required>
+                    <label for="precio_unitario2">Precio Unitario 2</label>
+                    <small class="errorTxt1"></small>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12 m4 l4 input-field">
+                    <input id="precio_unitario3" name="precio_unitario3" type="number" step="0.00001" class="validate"
+                        value="@if (isset($detalle_producto)){{ $detalle_producto->precio_unitario3 }}@else{{old('precio_unitario3')}}@endif"
+                        data-error=".errorTxt1" required>
+                    <label for="precio_unitario3">Precio Unitario 3</label>
+                    <small class="errorTxt1"></small>
+                </div>
+                <div class="col s12 m4 l4 input-field">
+                    <input id="precio_unitario4" name="precio_unitario4" type="number" step="0.00001" class="validate"
+                        value="@if (isset($detalle_producto)){{ $detalle_producto->precio_unitario4 }}@else{{old('precio_unitario4')}}@endif"
+                        data-error=".errorTxt1" required>
+                    <label for="precio_unitario4">Precio Unitario 4</label>
+                    <small class="errorTxt1"></small>
+                </div>
+                <div class="col s12 m4 l4 input-field">
+                    <input id="precio_paquete" name="precio_paquete" type="number" step="0.00001" class="validate"
+                        value="@if (isset($detalle_producto)){{ $detalle_producto->precio_paquete }}@else{{old('precio_paquete')}}@endif"
+                        data-error=".errorTxt1" required>
+                    <label for="precio_paquete">Precio Paquete</label>
+                    <small class="errorTxt1"></small>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12 m4 l4 input-field">
+                    <input id="precio_dolar" name="precio_dolar" type="number" step="0.00001" class="validate"
+                        value="@if (isset($detalle_producto)){{ $detalle_producto->precio_venta_dolar }}@else{{old('precio_dolar')}}@endif"
+                        data-error=".errorTxt1" required>
+                    <label for="precio_dolar">Precio Dolar</label>
+                    <small class="errorTxt1"></small>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12 display-flex justify-content-end mt-3">
+                    <button id="registrarProductoButton" class="btn indigo mr-2">Guardar</button>
+                    <button type="button" class="btn btn-light">Cancel</button>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 <!-- users edit ends -->
 @endsection

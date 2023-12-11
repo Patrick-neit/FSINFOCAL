@@ -12,6 +12,30 @@
 
 namespace App\Models{
 /**
+ * App\Models\Almacen
+ *
+ * @property int $id
+ * @property string $nombre
+ * @property int $capacidad_almacen
+ * @property int $encargado_id
+ * @property int $sucursal_id
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\User|null $encargado
+ * @property-read \App\Models\Sucursal|null $sucursal
+ * @method static \Illuminate\Database\Eloquent\Builder|Almacen newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Almacen newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Almacen onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Almacen query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Almacen withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Almacen withoutTrashed()
+ */
+	class Almacen extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\Alumno
  *
  * @property int $id
@@ -90,6 +114,7 @@ namespace App\Models{
  * @property int $tipo_id
  * @property int $sub_familia_id
  * @property string $codigo_producto
+ * @property string $nombre_producto
  * @property int $codigo_producto_impuestos
  * @property string $modelo
  * @property string|null $numero_serie
@@ -720,6 +745,12 @@ namespace App\Models{
 /**
  * App\Models\InventarioAlmacen
  *
+ * @property int $id
+ * @property int $almacen_id
+ * @property int $producto_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
  * @method static \Illuminate\Database\Eloquent\Builder|InventarioAlmacen newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|InventarioAlmacen newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|InventarioAlmacen onlyTrashed()
@@ -752,10 +783,13 @@ namespace App\Models{
  * @property int $usuario_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property string|null $deleted_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
  * @method static \Illuminate\Database\Eloquent\Builder|KardexProducto newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|KardexProducto newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|KardexProducto onlyTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|KardexProducto query()
+ * @method static \Illuminate\Database\Eloquent\Builder|KardexProducto withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|KardexProducto withoutTrashed()
  */
 	class KardexProducto extends \Eloquent {}
 }
@@ -890,6 +924,7 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Almacen|null $almacen
  * @property-read \App\Models\Empresa|null $empresa
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ImpuestoCuis> $impuestos_cuis
  * @property-read int|null $impuestos_cuis_count
@@ -928,6 +963,7 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property string|null $banned_at
+ * @property-read \App\Models\Almacen|null $almacen
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Cog\Laravel\Ban\Models\Ban> $bans
  * @property-read int|null $bans_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Binnacle> $binacle
