@@ -24,6 +24,7 @@ return new class extends Migration
             $table->integer('tipo_id'); //1 Producto 2 Servicio
             $table->unsignedBigInteger('sub_familia_id');
             $table->string('codigo_producto', 50);
+            $table->string('nombre_producto', 50);
             $table->unsignedBigInteger('codigo_producto_impuestos');
             $table->string('modelo', 450);
             $table->string('numero_serie', 150)->nullable();

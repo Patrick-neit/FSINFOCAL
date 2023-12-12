@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cliente;
+use App\Models\ClienteTipoPrecio;
 use App\Models\ImpuestoDocumentoIdentidad;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -53,11 +54,22 @@ class ClienteController extends Controller
             $cliente->telefono = $request->telefono;
             $cliente->correo = $request->correo;
             $cliente->departamento_id = $request->departamento_id;
-            $cliente->fecha_cumpleanos = Carbon::parse($request->fecha_cumpleanos)->format('Y-m-d');
+            $cliente->fecha_cumpleanos = Carbon::createFromFormat('d/m/Y', $request->fecha_cumpleanos)->format('Y-m-d');
+
             $cliente->contacto = $request->contacto;
             $cliente->save();
+            if ($cliente->save()) {
+                $tipo_precio = new ClienteTipoPrecio();
+                $tipo_precio->tipo_precio_a = 1;
+                $tipo_precio->tipo_precio_b = 0;
+                $tipo_precio->tipo_precio_c = 0;
+                $tipo_precio->tipo_precio_d = 0;
+                $tipo_precio->cliente_id = $cliente->id;
+                $tipo_precio->save();
 
-            return responseJson('Cliente Guardado', $cliente, 200);
+                return responseJson('Cliente Guardado', $cliente, 200);
+            }
+
         } catch (\Exception $e) {
             return responseJson('Server Error', [
                 'message' => $e->getMessage(),

@@ -38,9 +38,9 @@ class ProductoController extends Controller
     public function create()
     {
         $dosificaciones = DosificacionEmpresa::with('detalles_dosificaciones_empresas')->get();
-        dd($dosificaciones);
+
         return view('productos.create', [
-            'dosificaciones' => DosificacionEmpresa::all(),
+            'dosificaciones' => $dosificaciones,
             'unidad_medidas' => ImpuestoUnidadMedida::all(),
             'marcas' => Marca::all(),
             'categorias' => Categoria::all(),
@@ -57,24 +57,24 @@ class ProductoController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        $requestHeader = $request->all();
         $cabeceraProducto = new CabeceraProducto();
         $detalleProducto = new DetalleProducto();
         $inventarioAlmacen = new InventarioAlmacen();
         $kardexProducto = new KardexProducto();
 
         //aign valores de productos
-        $cabeceraProducto->codigo_actividad = $request->codigo_actividad;
-        $cabeceraProducto->codigo_producto_sin = $request->codigo_producto_sin;
+        $cabeceraProducto->dosificacion_id = 10000 /* $request->codigo_actividad */;
+        /* $cabeceraProducto->codigo_producto_sin = 20000 *//* $request->codigo_producto_sin */;
 
         $cabeceraProducto->unidad_medida_id = $request->unidad_medida;
-        $cabeceraProducto->marca_id = $request->marca_id;
-        $cabeceraProducto->categoria_id = $request->categoria;
-        $cabeceraProducto->tipo_id = $request->tipo_producto;
-        $cabeceraProducto->sub_familia_id = $request->sub_familia;
-        $cabeceraProducto->codigo_producto = $request->codigo_producto;
+        $cabeceraProducto->marca_id = 1/*  $request->marca_id */;
+        $cabeceraProducto->categoria_id = 1/* $request->categoria */;
+        $cabeceraProducto->tipo_id = 1 /* $request->tipo_producto */;
+        $cabeceraProducto->sub_familia_id = 1/*  $request->sub_familia */;
+        $cabeceraProducto->codigo_producto =  10000/* $request->codigo_producto */;
         $cabeceraProducto->nombre_producto = $request->nombre_producto;
-        $cabeceraProducto->codigo_producto_impuestos = $request->homologacion;
+        $cabeceraProducto->codigo_producto_impuestos =  10000/* $request->homologacion */;
         $cabeceraProducto->modelo = $request->modelo;
         $cabeceraProducto->numero_serie = $request->numero_serie;
         $cabeceraProducto->numero_imei = $request->numero_imei;

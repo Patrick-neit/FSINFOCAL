@@ -40,4 +40,8 @@ class Cliente extends Model
     public function clientes_tipos_precios(){
         return $this->hasMany(ClienteTipoPrecio::class);
     }
+
+    public function catalogos_precios_productos(){
+        return $this->hasMany(CatalogoPrecioProducto::class);
+    }
 }
