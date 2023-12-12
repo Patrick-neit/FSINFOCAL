@@ -57,8 +57,9 @@
                                 <td>{{ $producto->codigo_producto }}</td>
                                 <td>{{ $producto->nombre_producto }}</td>
                                 <td>{{ empty($producto->caracteristicas) ? 'Ninguno': $producto->caracteristicas }}</td>
-                                <td>{{\App\Models\InventarioAlmacen::where('producto_id',
-                                    $producto->id)->get()[0]->stock_actual}}</td>
+                                <td>10</td>
+                                {{-- <td>{{\App\Models\InventarioAlmacen::where('producto_id',
+                                    $producto->id)->get()[0]->stock_actual}}</td> --}}
                                 <td>{{ $producto->estado }}</td>
                                 <td class="text-center">
                                     <a href="{{ route('producto.edit', $producto->id)}}">

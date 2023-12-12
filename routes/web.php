@@ -405,8 +405,9 @@ Route::group([
     'prefix' => 'catalogos_productos',
     'controller' => CatalogoPrecioProductoController::class
 ], function () {
-    Route::get('tipo_precio_index', 'tipo_precio_index')->name('catalogos_productos.tipo_precio_index');
+    Route::get('index', 'index')->name('catalogos_productos.index');
     Route::get('create', 'create')->name('catalogos_productos.create');
+    Route::get('tipo_precio_index', 'tipo_precio_index')->name('catalogos_productos.tipo_precio_index');
     Route::get('/edit/{id}', 'edit')->name('catalogos_productos.edit');
     Route::post('store', 'store')->name('catalogos_productos.store');
     Route::delete('destroy', 'destroy')->name('catalogos_productos.destroy');
