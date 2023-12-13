@@ -41,28 +41,17 @@ class CabeceraProductoStoreRequest extends FormRequest
                 'sub_familia' => 'required',
                 'homologacion' => 'required',
                 'estado' => 'required',
-                'stock_minimo' => 'required|decimal:5',
-                'stock_actual' => 'decimal:5',
-                'precio_compra' => 'required|decimal:5',
-                'precio_unitarioo' => 'required|decimal:5',
-                'precio_unitario2' => 'required|decimal:5',
-                'precio_unitario3' => 'required|decimal:5',
-                'precio_unitario4' => 'required|decimal:5',
-                'precio_paquete' => 'required|decimal:5',
-                'precio_dolar' => 'required|decimal:5',
+                'stock_minimo' => 'required',
+                'precio_compra' => 'required',
+                'precio_unitario' => 'required',
+                'precio_unitario2' => 'required',
+                'precio_unitario3' => 'required',
+                'precio_unitario4' => 'required',
+                'precio_paquete' => 'required',
+                'precio_dolar' => 'required',
             ];
         } else {
-            return [
-                'stock_minimo' => 'decimal:5',
-                'stock_actual' => 'decimal:5',
-                'precio_compra' => 'decimal:5',
-                'precio_unitarioo' => 'decimal:5',
-                'precio_unitario2' => 'decimal:5',
-                'precio_unitario3' => 'decimal:5',
-                'precio_unitario4' => 'decimal:5',
-                'precio_paquete' => 'decimal:5',
-                'precio_dolar' => 'decimal:5',
-            ];
+            return [];
         }
     }
 
@@ -70,15 +59,6 @@ class CabeceraProductoStoreRequest extends FormRequest
     {
         return [
             'codigo_producto.unique' => 'El producto ya existe.',
-            'stock_minimo.decimal' => 'El :attribute tiene que tener 5 decimales',
-            'stock_actual.decimal' => 'El :attribute tiene que tener 5 decimales',
-            'precio_compra.decimal' => 'El :attribute tiene que tener 5 decimales',
-            'precio_unitarioo.decimal' => 'El :attribute tiene que tener 5 decimales',
-            'precio_unitario2.decimal' => 'El :attribute tiene que tener 5 decimales',
-            'precio_unitario3.decimal' => 'El :attribute tiene que tener 5 decimales',
-            'precio_unitario4.decimal' => 'El :attribute tiene que tener 5 decimales',
-            'precio_paquete.decimal' => 'El :attribute tiene que tener 5 decimales',
-            'precio_dolar.decimal' => 'El :attribute tiene que tener 5 decimales',
         ];
     }
 }

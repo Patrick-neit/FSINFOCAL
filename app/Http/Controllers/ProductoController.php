@@ -60,19 +60,19 @@ class ProductoController extends Controller
      */
     public function store(CabeceraProductoStoreRequest $request)
     {
-        try {
-            if (!empty($request->producto_id)) {
-                return $this->update($request);
-            }
+        /* try { */
+        if (!empty($request->producto_id)) {
+            return $this->update($request);
+        }
 
-            $cabeceraProducto = new CabeceraProducto();
-            $detalleProducto = new DetalleProducto();
-            $inventarioAlmacen = new InventarioAlmacen();
-            $kardexProducto = new KardexProducto();
+        $cabeceraProducto = new CabeceraProducto();
+        $detalleProducto = new DetalleProducto();
+        $inventarioAlmacen = new InventarioAlmacen();
+        $kardexProducto = new KardexProducto();
 
         //aign valores de productos
         $cabeceraProducto->dosificacion_id = 10000 /* $request->codigo_actividad */;
-        /* $cabeceraProducto->codigo_producto_sin = 20000 *//* $request->codigo_producto_sin */;
+            /* $cabeceraProducto->codigo_producto_sin = 20000 *//* $request->codigo_producto_sin */;
 
         $cabeceraProducto->unidad_medida_id = $request->unidad_medida;
         $cabeceraProducto->marca_id = $request->marca_id;
@@ -85,56 +85,58 @@ class ProductoController extends Controller
         $cabeceraProducto->modelo = $request->modelo;
         $cabeceraProducto->numero_serie = $request->numero_serie;
         $cabeceraProducto->numero_imei = $request->numero_imei;
-        $cabeceraProducto->precio_unitario = $request->precio_unitario;
+        $cabeceraProducto->peso_unitario = $request->peso_unitario;
         $cabeceraProducto->codigo_barra = $request->codigo_barra;
-        $cabeceraProducto->caracteristicas = $request->caracteristicas;
+        $cabeceraProducto->caracteristicas = $request->caracteristica;
         $cabeceraProducto->stock_minimo = $request->stock_minimo;
+        $cabeceraProducto->stock_actual = $request->stock_actual;
         $cabeceraProducto->estado = $request->estado;
         $cabeceraProducto->save();
+        DB::beginTransaction();
+        //asign los valores de detalle producto
+        $detalleProducto->producto_id = $cabeceraProducto->id;
+        $detalleProducto->precio_compra = $request->precio_compra;
+        $detalleProducto->precio_unitario = $request->precio_unitario;
+        $detalleProducto->precio_unitario2 = $request->precio_unitario2;
+        $detalleProducto->precio_unitario3 = $request->precio_unitario3;
+        $detalleProducto->precio_unitario4 = $request->precio_unitario4;
+        $detalleProducto->precio_paquete = $request->precio_paquete;
+        $detalleProducto->precio_venta_dolar = $request->precio_dolar;
+        $detalleProducto->save();
 
-            //asign los valores de detalle producto
-            $detalleProducto->producto_id = $cabeceraProducto->id;
-            $detalleProducto->precio_compra = $request->precio_compra;
-            $detalleProducto->precio_unitario = $request->precio_unitarioo;
-            $detalleProducto->precio_unitario2 = $request->precio_unitario2;
-            $detalleProducto->precio_unitario3 = $request->precio_unitario3;
-            $detalleProducto->precio_unitario4 = $request->precio_unitario4;
-            $detalleProducto->precio_paquete = $request->precio_paquete;
-            $detalleProducto->precio_venta_dolar = $request->precio_dolar;
-            $detalleProducto->save();
+        //asign valores de inventario almacen
+        $inventarioAlmacen->almacen_id = $request->almacen_id;
+        $inventarioAlmacen->producto_id = $cabeceraProducto->id;
+        $inventarioAlmacen->stock_actual = $request->stock_actual;
+        $inventarioAlmacen->save();
 
-            //asign valores de inventario almacen
-            $inventarioAlmacen->almacen_id = $request->almacen_id;
-            $inventarioAlmacen->producto_id = $cabeceraProducto->id;
-            $inventarioAlmacen->stock_actual = $request->stock_actual;
-            $inventarioAlmacen->save();
-
-            if ($request->tipo_producto == 1) {
-                $kardexProducto->producto_id = $cabeceraProducto->id;
-                $kardexProducto->fecha = Carbon::now()->format('Y-m-d');
-                $kardexProducto->hora = Carbon::now()->format('H:m:s');
-                $kardexProducto->doc_soporte = '000';
-                $kardexProducto->tipo_movimiento = 'Ingreso Almacen';
-                $kardexProducto->cantidad_ingresos = 0; //satock actua
-                $kardexProducto->precio_unitario_ingresos = $request->precio_unitarioo;
-                $kardexProducto->total_ingresos = 0; //cantdad * precio
-                $kardexProducto->cantidad_egresos = 0;
-                $kardexProducto->precio_unitario_egresos = 0;
-                $kardexProducto->total_egresos = 0;
-                $kardexProducto->cantidad_saldo_actual = $kardexProducto->cantidad_ingresos - $kardexProducto->cantidad_egresos;
-                $kardexProducto->promedio = 0;
-                $kardexProducto->costo_total_saldo = $kardexProducto->total_ingresos - $kardexProducto->total_egresos;
-                $kardexProducto->usuario_id = auth()->user()->id;
-                $kardexProducto->save();
-            }
-
-            return responseJson('Producto Guardado.', $cabeceraProducto, 200);
-        } catch (\Exception $e) {
+        if ($request->tipo_producto == 1) {
+            $kardexProducto->producto_id = $cabeceraProducto->id;
+            $kardexProducto->fecha = Carbon::now()->format('Y-m-d');
+            $kardexProducto->hora = Carbon::now()->format('H:m:s');
+            $kardexProducto->doc_soporte = '000';
+            $kardexProducto->tipo_movimiento = 'Ingreso Almacen';
+            $kardexProducto->cantidad_ingresos = 0; //satock actua
+            $kardexProducto->precio_unitario_ingresos = $request->precio_unitario;
+            $kardexProducto->total_ingresos = 0; //cantdad * precio
+            $kardexProducto->cantidad_egresos = 0;
+            $kardexProducto->precio_unitario_egresos = 0;
+            $kardexProducto->total_egresos = 0;
+            $kardexProducto->cantidad_saldo_actual = $kardexProducto->cantidad_ingresos - $kardexProducto->cantidad_egresos;
+            $kardexProducto->promedio = 0;
+            $kardexProducto->costo_total_saldo = $kardexProducto->total_ingresos - $kardexProducto->total_egresos;
+            $kardexProducto->usuario_id = auth()->user()->id;
+            $kardexProducto->save();
+        }
+        DB::commit();
+        return responseJson('Producto Guardado.', $cabeceraProducto, 200);
+        /* } catch (\Exception $e) {
+            DB::rollBack();
             return responseJson('Server Error', [
                 'message' => $e->getMessage(),
                 'code' => $e->getCode(),
             ], 500);
-        }
+        } */
     }
 
     public function getNextId()
@@ -176,6 +178,7 @@ class ProductoController extends Controller
     public function update($request)
     {
         try {
+
             $cabeceraProducto = CabeceraProducto::find($request->producto_id);
             $detalleProducto = DetalleProducto::where('producto_id', $request->producto_id)->first();
             //aign valores de productos
@@ -195,20 +198,20 @@ class ProductoController extends Controller
             $cabeceraProducto->codigo_barra = $request->codigo_barra;
             $cabeceraProducto->caracteristicas = $request->caracteristicas;
             $cabeceraProducto->stock_minimo = $request->stock_minimo;
+            $cabeceraProducto->stock_actual = $request->stock_actual;
             $cabeceraProducto->estado = $request->estado;
             $cabeceraProducto->save();
 
             //asign los valores de detalle producto
             $detalleProducto->producto_id = $cabeceraProducto->id;
             $detalleProducto->precio_compra = $request->precio_compra;
-            $detalleProducto->precio_unitario = $request->precio_unitarioo;
+            $detalleProducto->precio_unitario = $request->precio_unitario;
             $detalleProducto->precio_unitario2 = $request->precio_unitario2;
             $detalleProducto->precio_unitario3 = $request->precio_unitario3;
             $detalleProducto->precio_unitario4 = $request->precio_unitario4;
             $detalleProducto->precio_paquete = $request->precio_paquete;
             $detalleProducto->precio_venta_dolar = $request->precio_dolar;
             $detalleProducto->save();
-
             return responseJson('Producto Actualizado.', $cabeceraProducto, 200);
         } catch (\Exception $e) {
             return responseJson('Server Error', [

@@ -30,6 +30,7 @@ class CabeceraProducto extends Model
         'codigo_barra',
         'caracteristicas',
         'stock_minimo',
+        'stock_actual',
         'estado'
     ];
 

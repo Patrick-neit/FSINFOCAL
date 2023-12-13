@@ -159,7 +159,7 @@ let almacen_id = document.getElementById("almacen_id");
 let estado = document.getElementById("estado");
 
 let precio_compra = document.getElementById("precio_compra");
-let precio_unitarioo = document.getElementById("precio_unitarioo");
+let precio_unitarioo = document.getElementById("precio_unitario");
 let precio_unitario2 = document.getElementById("precio_unitario2");
 let precio_unitario3 = document.getElementById("precio_unitario3");
 let precio_unitario4 = document.getElementById("precio_unitario4");
@@ -177,7 +177,7 @@ registrarProductoButton.addEventListener("click", function (event) {
             "X-CSRF-Token": csrfToken,
         },
         body: JSON.stringify({
-            dosificacion: dosificacion.value,
+            dosificacion: 1,
             unidad_medida: unidad_medida.value,
             marca_id: marca_id.value,
             categoria: categoria.value,
@@ -198,7 +198,7 @@ registrarProductoButton.addEventListener("click", function (event) {
             estado: estado.value,
 
             precio_compra: precio_compra.value,
-            precio_unitarioo: precio_unitarioo.value,
+            precio_unitario: precio_unitarioo.value,
             precio_unitario2: precio_unitario2.value,
             precio_unitario3: precio_unitario3.value,
             precio_unitario4: precio_unitario4.value,
