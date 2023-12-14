@@ -39,11 +39,11 @@ class ProductoController extends Controller
      */
     public function create()
     {
-        $dosificaciones = DosificacionEmpresa::with('detalles_dosificaciones_empresas')->get();
 
         return view('productos.create', [
             'almacenes' => Almacen::all(),
-            'dosificaciones' => DosificacionEmpresa::all(),
+            //'dosificaciones' => DosificacionEmpresa::all(),
+            'dosificaciones' => DosificacionEmpresa::with('detalles_dosificaciones_empresas')->get(),
             'unidad_medidas' => ImpuestoUnidadMedida::all(),
             'marcas' => Marca::all(),
             'categorias' => Categoria::all(),
@@ -116,9 +116,9 @@ class ProductoController extends Controller
             $kardexProducto->hora = Carbon::now()->format('H:m:s');
             $kardexProducto->doc_soporte = '000';
             $kardexProducto->tipo_movimiento = 'Ingreso Almacen';
-            $kardexProducto->cantidad_ingresos = 0; //satock actua
+            $kardexProducto->cantidad_ingresos = $request->stock_actual;
             $kardexProducto->precio_unitario_ingresos = $request->precio_unitario;
-            $kardexProducto->total_ingresos = 0; //cantdad * precio
+            $kardexProducto->total_ingresos = $kardexProducto->cantidad_ingresos * $kardexProducto->precio_unitario_ingresos;
             $kardexProducto->cantidad_egresos = 0;
             $kardexProducto->precio_unitario_egresos = 0;
             $kardexProducto->total_egresos = 0;
@@ -245,5 +245,12 @@ class ProductoController extends Controller
                 'code' => $e->getCode(),
             ], 500);
         }
+    }
+
+    public function getActividadProducto(Request $request)
+    {
+        $impuestoProductosServicios = ImpuestoProductoServicio::where('codigo_actividad', $request->dosificacion_id)->get();
+
+        return responseJson('Get Impuestos Productos Servicios', $impuestoProductosServicios, 200);
     }
 }

@@ -373,6 +373,7 @@ Route::group(
         Route::get('index', 'index')->name('producto.index');
         Route::get('create', 'create')->name('producto.create');
         Route::get('/edit/{id}', 'edit')->name('producto.edit');
+        Route::post('/get_actividad/documento_sector', 'getActividadProducto')->name('actividad.getActividad');
         Route::post('store', 'store')->name('producto.store');
         Route::delete('destroy', 'destroy')->name('producto.destroy');
     }
@@ -392,7 +393,7 @@ Route::group([
 
 Route::group([
     'prefix' => 'almacenes',
-    'controller' =>  AlmacenController::class ,
+    'controller' =>  AlmacenController::class,
 ], function () {
     Route::get('index', 'index')->name('almacenes.index');
     Route::get('create', 'create')->name('almacenes.create');
@@ -412,4 +413,3 @@ Route::group([
     Route::post('store', 'store')->name('catalogos_productos.store');
     Route::delete('destroy', 'destroy')->name('catalogos_productos.destroy');
 });
-

@@ -240,3 +240,29 @@ registrarProductoButton.addEventListener("click", function (event) {
             }
         });
 });
+
+function cargarActividad() {
+    let homologacion_select = document.getElementById("homologacion");
+    fetch(ruta_get_actividad, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-Token": csrfToken,
+        },
+        body: JSON.stringify({
+            dosificacion_id: dosificacion.value,
+        }),
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            if (data.status == 200) {
+                for (var i = 0; i < data.content.length; i++) {
+                    var option = document.createElement("option");
+                    option.value = data.content[i].codigo_producto;
+                    option.textContent = data.content[i].descripcion_producto;
+                    homologacion_select.appendChild(option);
+                }
+                M.FormSelect.init(homologacion_select);
+            }
+        });
+}

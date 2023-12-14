@@ -32,21 +32,18 @@
             <div class="divider mb-3"></div>
             <div class="row">
                 <div class="col s12 m4 l4 input-field">
-                    <select class="form-control" name="dosificacion" id="dosificacion">
-                        <select class="form-control" name="dosificacion" id="dosificacion">
-                            @forelse ($dosificaciones as $dosificacion)
-                            @forelse ($dosificacion->detalles_dosificaciones_empresas as $detalle)
+                    <select class="form-control" name="dosificacion" id="dosificacion" onchange="cargarActividad()">
+                        @forelse ($dosificaciones as $dosificacion)
+                        @forelse ($dosificacion->detalles_dosificaciones_empresas as $detalle)
 
-                            <option value="{{ $detalle->codigo_actividad_documento_sector }}">
-                                {{ $detalle->descripcion_documento_sector }}
-                            </option>
-                            @empty
-                            <option value="">No hay opciones</option>
-                            @endforelse
-                            @empty
-                            <option value="">No hay dosificaciones disponibles</option>
-                            @endforelse
-                        </select>
+                        <option value="{{ $detalle->codigo_actividad_documento_sector }}">{{
+                            $detalle->descripcion_documento_sector }}</option>
+                        @empty
+                        <option value="">No hay opciones</option>
+                        @endforelse
+                        @empty
+                        <option value="">No hay dosificaciones disponibles</option>
+                        @endforelse
                     </select>
                     <label>Dosificaci&oacute;n</label>
                 </div>
@@ -81,6 +78,7 @@
                     <label>Marca</label>
                 </div>
             </div>
+            @csrf
             <div class="row">
                 <div class="col s12 m4 l4 input-field">
                     <select class="form-control" name="categoria" id="categoria">
@@ -147,17 +145,6 @@
                 </div>
                 <div class="col s12 m4 l4 input-field">
                     <select class="form-control" name="homologacion" id="homologacion">
-                        @forelse ($produto_servicios as $producto_servicio)
-                        <option value="{{ $producto_servicio->codigo_producto }}" @if (isset($cabecera_producto))
-                            @if($cabecera_producto->codigo_producto_impuestos == $producto_servicio->id)
-                            selected
-                            @endif
-                            @endif
-                            >{{
-                            $producto_servicio->descripcion_producto }}</option>
-                        @empty
-                        <option value="">No hay opciones</option>
-                        @endforelse
                     </select>
                     <label>Homologaci&oacute;n</label>
                 </div>
@@ -343,5 +330,6 @@
     let ruta_guardar_producto = "{{route('producto.store')}}";
     let ruta_index_producto   = "{{route('producto.index')}}";
     let ruta_eliminar_producto = "{{route('producto.destroy')}}";
+    let ruta_get_actividad = "{{route('actividad.getActividad')}}";
 </script>
 @endsection
