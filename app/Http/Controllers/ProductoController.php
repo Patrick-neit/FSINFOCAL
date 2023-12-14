@@ -40,10 +40,10 @@ class ProductoController extends Controller
     public function create()
     {
         $dosificaciones = DosificacionEmpresa::with('detalles_dosificaciones_empresas')->get();
-
+        /* dd($dosificaciones); */
         return view('productos.create', [
             'almacenes' => Almacen::all(),
-            'dosificaciones' => DosificacionEmpresa::all(),
+            'dosificaciones' => $dosificaciones,
             'unidad_medidas' => ImpuestoUnidadMedida::all(),
             'marcas' => Marca::all(),
             'categorias' => Categoria::all(),
@@ -242,5 +242,14 @@ class ProductoController extends Controller
                 'code' => $e->getCode(),
             ], 500);
         }
+    }
+
+    public function getDataProductoServicio(Request $request){
+        $codigo_actividad_ds = $request->codigo_actividad;
+        $productoServicios = ImpuestoProductoServicio::where('codigo_actividad',$codigo_actividad_ds)->get();
+        if (!isset($productoServicios)) {
+            return responseJson('Fallo al Obtener Productos Servicios',$productoServicios ,400);
+        }
+        return responseJson('Productos Servicios',$productoServicios ,200);
     }
 }

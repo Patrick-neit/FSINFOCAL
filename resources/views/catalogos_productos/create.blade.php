@@ -95,32 +95,36 @@
                                             @foreach ($productos as $producto)
                                                 <tr>
                                                     <td>{{$producto->nombre_producto}}</td>
+
+                                                        <input type="hidden" name="productos[]" class="producto-checkbox" value="{{$producto->id}}" />
+
                                                     <td>
                                                         <label>
-                                                            <input type="checkbox" id="productos[]" class="empresa-checkbox" value="{{$producto->id}}" />
+                                                            <input type="checkbox" name="precio_a_{{$producto->id}}" class="precio-checkbox" value="1" />
                                                             <span></span>
                                                         </label>
                                                     </td>
                                                     <td>
                                                         <label>
-                                                            <input type="checkbox" />
+                                                            <input type="checkbox" name="precio_b_{{$producto->id}}" class="precio-checkbox" value="1" />
                                                             <span></span>
                                                         </label>
                                                     </td>
                                                     <td>
                                                         <label>
-                                                            <input type="checkbox" />
+                                                            <input type="checkbox" name="precio_c_{{$producto->id}}" class="precio-checkbox" value="1" />
                                                             <span></span>
                                                         </label>
                                                     </td>
                                                     <td>
                                                         <label>
-                                                            <input type="checkbox"  />
+                                                            <input type="checkbox" name="precio_d_{{$producto->id}}" class="precio-checkbox" value="1" />
                                                             <span></span>
                                                         </label>
                                                     </td>
                                                 </tr>
                                             @endforeach
+
 
                                         </tbody>
                                     </table>
@@ -128,8 +132,8 @@
                                 </div>
 
                                 <div class="col s12 display-flex justify-content-end mt-3">
-                                    <button id="asignarEmpresaButton" class="btn indigo">
-                                        Asignar Empresa</button>
+                                    <button id="asignarPrecioButton" class="btn indigo">
+                                        Asignar Precios</button>
                                     <button type="button" class="btn btn-light">Cancel</button>
                                 </div>
                             </div>
@@ -272,10 +276,17 @@
 
 {{-- page scripts --}}
 @section('page-script')
-    <script src="{{ asset('js/scripts/catalogos_precios/index.js') }}"></script>
+    <script src="{{ asset('js/scripts/catalogos_precios/create.js') }}"></script>
     <script>
-        let ruta_asignar_empresa_usuario = "{{ route('users.saveAsignarEmpresaUser') }}";
-        let ruta_index_user = "{{ route('users.index') }}";
+        let ruta_store_catalogos = "{{ route('catalogos_productos.store') }}";
+        let ruta_index_catalogo = "{{ route('catalogos_productos.index') }}";
 
     </script>
 @endsection
+
+<style>
+    /* CSS para ocultar el primer checkbox en la segunda columna */
+    tbody td:nth-child(2) input[type="checkbox"] {
+        display: none;
+    }
+</style>

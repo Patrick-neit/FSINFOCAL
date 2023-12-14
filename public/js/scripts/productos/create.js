@@ -134,11 +134,17 @@ $(".select2").select2({
       });
     } */
 
+    $(".select2").select2({
+        dropdownAutoWidth: true,
+        width: '100%'
+    });
+
 let registrarProductoButton = document.getElementById(
     "registrarProductoButton"
 );
 
 let dosificacion = document.getElementById("dosificacion");
+let codigo_producto_servicio = document.getElementById("codigo_producto_servicio");
 let unidad_medida = document.getElementById("unidad_medida");
 let marca_id = document.getElementById("marca_id");
 let categoria = document.getElementById("categoria");
@@ -178,6 +184,7 @@ registrarProductoButton.addEventListener("click", function (event) {
         },
         body: JSON.stringify({
             dosificacion: dosificacion.value,
+            codigo_producto_servicio: codigo_producto_servicio.value,
             unidad_medida: unidad_medida.value,
             marca_id: marca_id.value,
             categoria: categoria.value,
@@ -240,3 +247,46 @@ registrarProductoButton.addEventListener("click", function (event) {
             }
         });
 });
+
+function getProductoServicio(){
+    fetch(ruta_obtener_prod_serv, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-Token": csrfToken,
+        },
+        body: JSON.stringify({
+            codigo_actividad: dosificacion.value,
+        }),
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            if (data.status === 200) {
+                console.log(data.content);
+                let homologacion_select = document.getElementById("codigo_producto_servicio");
+                for (var i = 0; i < data.content.length; i++) {
+                    var option = document.createElement("option");
+                    option.value = data.content[i].codigo_producto;
+                    option.textContent = data.content[i].descripcion_producto;
+                    homologacion_select.appendChild(option);
+                }
+                M.FormSelect.init(homologacion_select);
+            } else {
+                if (data.status == 400) {
+                    M.toast({
+                        html: data.description,
+                        classes: "rounded",
+                        displayLength: 2000,
+
+                    });
+                } else {
+                    M.toast({
+                        html: "Algo salio Mal!",
+                        classes: "rounded",
+                        displayLength: 3000,
+                        classes: "blue lighten-1",
+                    });
+                }
+            }
+        });
+}

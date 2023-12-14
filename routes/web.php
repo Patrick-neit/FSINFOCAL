@@ -375,6 +375,8 @@ Route::group(
         Route::get('/edit/{id}', 'edit')->name('producto.edit');
         Route::post('store', 'store')->name('producto.store');
         Route::delete('destroy', 'destroy')->name('producto.destroy');
+        Route::post('getDataProductoServicio', 'getDataProductoServicio')->name('producto.getDataProductoServicio');
+
     }
 );
 

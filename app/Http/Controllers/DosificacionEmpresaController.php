@@ -26,9 +26,10 @@ class DosificacionEmpresaController extends Controller
     {
         $empresa = Empresa::where('id', Auth::user()->empresas[0]->id)->first();
         $documentoSectores = ImpuestoTipoDocumentoSector::all();
+        $tiposFacturas = ImpuestoTipoFactura::all();
 
 
-        return view('dosificaciones_empresas.create', compact('empresa', 'documentoSectores'));
+        return view('dosificaciones_empresas.create', compact('empresa', 'documentoSectores','tiposFacturas'));
     }
 
     public function store(Request $request)
@@ -51,7 +52,7 @@ class DosificacionEmpresaController extends Controller
                     $detalle_dosificacion->codigo_actividad_documento_sector = $value['codigo_actividad_ds'];
                     $detalle_dosificacion->tipo_factura_documento_sector = $value['tipo_factura_cc'];
                     $detalle_dosificacion->documento_sector_id = $value['codigo_clasificador_ds'];
-                    $detalle_dosificacion->dosificacion_empresa_id = $value['empresa_id'];
+                    $detalle_dosificacion->dosificacion_empresa_id = $dosificacion_empresa->id ;
                     $detalle_dosificacion->save();
                 }
 
@@ -82,12 +83,14 @@ class DosificacionEmpresaController extends Controller
         try {
             $dataDocumentoSector = [];
             $documentoSectorID = $request->documento_sector_id;
+            $tipoFacturaID = $request->tipo_factura_id;
             $tipoDocumentoSector = ImpuestoTipoDocumentoSector::where('codigo_clasificador', $documentoSectorID)->first();
+            //TODO hacer select el tipoFactura
+            $tipoFacturaDocumentoSector =  ImpuestoTipoFactura::where('codigo_clasificador', $tipoFacturaID)->first();
 
-            $tipoFacturaDocumentoSector = ImpuestoTipoFactura::where('codigo_clasificador', $documentoSectorID)->first();
             $documentoSector = ImpuestoDocumentoSector::where('codigo_documento_sector', $documentoSectorID)->first();
 
-            if ($tipoDocumentoSector == null || $tipoFacturaDocumentoSector == null || $documentoSector == null) {
+            if ($tipoDocumentoSector == null  || $documentoSector == null) {
                 return responseJson('No se pudo Obtener Informacion Impuesto', null, 400);
             }
 

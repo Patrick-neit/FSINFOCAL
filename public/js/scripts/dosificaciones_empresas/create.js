@@ -135,6 +135,7 @@ function setChangeDSInput(){
     let documento_sector_id = document.getElementById('documento_sector_id');
     let empresa_nombre = document.getElementById('empresa_nombre');
     let empresa_id = document.getElementById('empresa_id');
+    let tipo_factura_id = document.getElementById('tipo_factura_id');
 
         fetch(ruta_dosificacion_empresa, {
             method: "POST",
@@ -146,6 +147,7 @@ function setChangeDSInput(){
                 empresa_id : empresa_id.value,
                 empresa_nombre : empresa_nombre.value,
                 documento_sector_id: documento_sector_id.value,
+                tipo_factura_id: tipo_factura_id.value
             }),
 
         }).then(response => response.json())

@@ -67,14 +67,15 @@
                                             <small class="errorTxt1"></small>
                                         </div>
 
-                                        <div class="col s6 input-field">
-                                            <input id="empresa_cafc" name="empresa_cafc" type="text"
-                                                class="validate"
-                                                data-error=".errorTxt1">
-                                            <label for="empresa_cafc">CAFC</label>
-                                            <small class="errorTxt1"></small>
+                                        <div class="col s12 m6">
+                                            <div class="col s12 input-field">
+                                                <label>Tipos Facturas</label>
+                                                <select name="tipo_factura_id" id="tipo_factura_id" class="select2 browser-default">
+                                                    @foreach ($tiposFacturas as $tipoFactura )
+                                                    <option value="{{$tipoFactura->codigo_clasificador}}">{{$tipoFactura->descripcion}}</option>                                                    @endforeach
+                                                </select>
+                                            </div>
                                         </div>
-
                                     </div>
                                 </div>
                                 <div class="row">
@@ -91,7 +92,7 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col s6 m6">
+                                    <div class="col s6 m4">
                                         <div class="col s12 input-field">
                                             <label>Numeracion Inicio Facturas</label>
                                             <input id="nro_inicio_factura" name="nro_inicio_factura" type="text"
@@ -99,13 +100,20 @@
                                                 data-error=".errorTxt1">
                                         </div>
                                     </div>
-                                    <div class="col s6 m6">
+                                    <div class="col s6 m4">
                                         <div class="col s12 input-field">
                                             <label>Numeracion Fin Facturas</label>
                                             <input id="nro_fin_factura" name="nro_fin_factura" type="text"
                                                 class="validate"
                                                 data-error=".errorTxt1">
                                         </div>
+                                    </div>
+                                    <div class="col s6 m4 input-field">
+                                        <input id="empresa_cafc" name="empresa_cafc" type="text"
+                                            class="validate"
+                                            data-error=".errorTxt1">
+                                        <label for="empresa_cafc">CAFC</label>
+                                        <small class="errorTxt1"></small>
                                     </div>
                                 </div>
 

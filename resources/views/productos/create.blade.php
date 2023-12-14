@@ -38,25 +38,28 @@
                         <div class="row">
                             <div class="col s12 m4">
                                 <div class="row">
-                                    <div class="col s12 input-field">
-                                        <select class="form-control" name="dosificacion" id="dosificacion">
-                                            <select class="form-control" name="dosificacion" id="dosificacion">
-                                                @forelse ($dosificaciones as $dosificacion)
-                                                    @forelse ($dosificacion->detalles_dosificaciones_empresas as $detalle)
-
-                                                        <option value="{{ $detalle->codigo_actividad_documento_sector }}">
-                                                            {{ $detalle->descripcion_documento_sector }}
-                                                        </option>
-                                                    @empty
-                                                        <option value="">No hay opciones</option>
-                                                    @endforelse
+                                    <div class="col s6 input-field">
+                                        <select class="form-control" name="dosificacion" id="dosificacion" onchange="getProductoServicio()">
+                                            @forelse ($dosificaciones as $dosificacion)
+                                                @forelse ($dosificacion->detalles_dosificaciones_empresas as $detalle)
+                                                    <option value="{{ $detalle->codigo_actividad_documento_sector }}">
+                                                        {{ $detalle->descripcion_documento_sector }}
+                                                    </option>
                                                 @empty
-                                                    <option value="">No hay dosificaciones disponibles</option>
+                                                    <option value="">No hay opciones</option>
                                                 @endforelse
-                                            </select>
+                                            @empty
+                                                <option value="">No hay dosificaciones disponibles</option>
+                                            @endforelse
                                         </select>
                                         <label>Dosificaci&oacute;n</label>
                                     </div>
+                                    <div class="col s6 input-field">
+                                        <select class="select2 browser-default" name="codigo_producto_servicio" id="codigo_producto_servicio">
+                                        </select>
+                                        <label>Productos Servicios</label>
+                                    </div>
+
                                 </div>
                             </div>
                             <div class="col s12 m4">
@@ -356,5 +359,7 @@
     let ruta_guardar_producto = "{{route('producto.store')}}";
     let ruta_index_producto   = "{{route('producto.index')}}";
     let ruta_eliminar_producto = "{{route('producto.destroy')}}";
+    let ruta_obtener_prod_serv = "{{route('producto.getDataProductoServicio')}}";
+
 </script>
 @endsection
