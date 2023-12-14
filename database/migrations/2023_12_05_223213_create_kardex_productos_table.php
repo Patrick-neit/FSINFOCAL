@@ -29,6 +29,7 @@ return new class extends Migration
             $table->decimal('cantidad_saldo_actual', 10, 5);
             $table->decimal('promedio', 10, 5);
             $table->decimal('costo_total_saldo', 10, 5);
+            $table->decimal('utilidad', 10, 5);
             $table->unsignedBigInteger('usuario_id');
             $table->timestamps();
             $table->softDeletes();

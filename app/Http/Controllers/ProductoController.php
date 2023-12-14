@@ -115,16 +115,17 @@ class ProductoController extends Controller
             $kardexProducto->fecha = Carbon::now()->format('Y-m-d');
             $kardexProducto->hora = Carbon::now()->format('H:m:s');
             $kardexProducto->doc_soporte = '000';
-            $kardexProducto->tipo_movimiento = 'Ingreso Almacen';
-            $kardexProducto->cantidad_ingresos = $request->stock_actual;
-            $kardexProducto->precio_unitario_ingresos = $request->precio_unitario;
-            $kardexProducto->total_ingresos = $kardexProducto->cantidad_ingresos * $kardexProducto->precio_unitario_ingresos;
+            $kardexProducto->tipo_movimiento = 'Saldo Inicial';
+            $kardexProducto->cantidad_ingresos = 0;
+            $kardexProducto->precio_unitario_ingresos = 0;
+            $kardexProducto->total_ingresos = 0;
             $kardexProducto->cantidad_egresos = 0;
             $kardexProducto->precio_unitario_egresos = 0;
             $kardexProducto->total_egresos = 0;
-            $kardexProducto->cantidad_saldo_actual = $kardexProducto->cantidad_ingresos - $kardexProducto->cantidad_egresos;
-            $kardexProducto->promedio = 0;
-            $kardexProducto->costo_total_saldo = $kardexProducto->total_ingresos - $kardexProducto->total_egresos;
+            $kardexProducto->cantidad_saldo_actual = $request->stock_actual;
+            $kardexProducto->promedio = $request->precio_unitario;
+            $kardexProducto->costo_total_saldo = $request->stock_actual * $request->precio_unitario;
+            $kardexProducto->utilidad = 0;
             $kardexProducto->usuario_id = auth()->user()->id;
             $kardexProducto->save();
         }

@@ -32,7 +32,9 @@
             <div class="divider mb-3"></div>
             <div class="row">
                 <div class="col s12 m4 l4 input-field">
-                    <select class="form-control" name="dosificacion" id="dosificacion" onchange="cargarActividad()">
+                    <select class="select2 browser-default" name="dosificacion" id="dosificacion"
+                        onchange="cargarActividad()">
+                        <option selected value="" disabled>Dosificaci&oacute;n</option>
                         @forelse ($dosificaciones as $dosificacion)
                         @forelse ($dosificacion->detalles_dosificaciones_empresas as $detalle)
 
@@ -45,10 +47,10 @@
                         <option value="">No hay dosificaciones disponibles</option>
                         @endforelse
                     </select>
-                    <label>Dosificaci&oacute;n</label>
                 </div>
                 <div class="col s12 m4 l4 input-field">
-                    <select class="form-control" name="unidad_medida" id="unidad_medida">
+                    <select class="select2 browser-default" name=" unidad_medida" id="unidad_medida">
+                        <option selected value="" disabled>Unidad de Medida</option>
                         @forelse ($unidad_medidas as $unidad_medida)
                         <option value="{{ $unidad_medida->codigo_clasificador }}" @if (isset($cabecera_producto))
                             @if($cabecera_producto->unidad_medida_id == $unidad_medida->id)
@@ -60,7 +62,6 @@
                         <option value="">No hay opciones</option>
                         @endforelse
                     </select>
-                    <label>Unidad Medida</label>
                 </div>
                 <div class="col s12 m4 l4 input-field">
                     <select class="form-control" name="marca_id" id="marca_id">

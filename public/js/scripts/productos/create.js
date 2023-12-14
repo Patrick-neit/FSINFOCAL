@@ -240,7 +240,10 @@ registrarProductoButton.addEventListener("click", function (event) {
             }
         });
 });
-
+$(".select2").select2({
+    dropdownAutoWidth: true,
+    width: "100%",
+});
 function cargarActividad() {
     let homologacion_select = document.getElementById("homologacion");
     fetch(ruta_get_actividad, {

@@ -166,7 +166,6 @@ $(document).ready(function () {
     ).on("click", function () {
         contactOverlay.removeClass("show");
         contactComposeSidebar.removeClass("show");
-        console.log("entro aqui cerrar");
     });
 
     $(".dataTables_scrollBody tr")
@@ -368,7 +367,7 @@ registrarDocenteButton.addEventListener("click", function (event) {
 
 /* Eliminar Docente */
 function eliminar(e) {
-    console.log(e);
+    
     fetch(ruta_eliminar_user, {
         method: "DELETE",
         headers: {

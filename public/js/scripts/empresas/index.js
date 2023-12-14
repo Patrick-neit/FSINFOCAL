@@ -153,7 +153,7 @@ if ($(".users-edit").length > 0) {
 
 /* Eliminar Docente */
 function eliminar(e) {
-    console.log(e);
+
     fetch(ruta_eliminar_empresa, {
         method: "DELETE",
         headers: {
@@ -166,7 +166,6 @@ function eliminar(e) {
     })
         .then((response) => response.json())
         .then((data) => {
-            console.log(data);
             if (data.status == 200) {
                 M.toast({
                     html: data.description,

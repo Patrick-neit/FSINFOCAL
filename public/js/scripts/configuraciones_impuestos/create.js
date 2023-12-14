@@ -164,7 +164,7 @@ registrarConfiguracionImpuestoButton.addEventListener(
         })
             .then((response) => response.json())
             .then((data) => {
-                console.log(data);
+                
                 if (data.status == 200) {
                     M.toast({
                         html: data.description,
