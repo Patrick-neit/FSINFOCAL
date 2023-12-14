@@ -134,17 +134,19 @@ $(".select2").select2({
       });
     } */
 
-    $(".select2").select2({
-        dropdownAutoWidth: true,
-        width: '100%'
-    });
+$(".select2").select2({
+    dropdownAutoWidth: true,
+    width: "100%",
+});
 
 let registrarProductoButton = document.getElementById(
     "registrarProductoButton"
 );
 
 let dosificacion = document.getElementById("dosificacion");
-let codigo_producto_servicio = document.getElementById("codigo_producto_servicio");
+let codigo_producto_servicio = document.getElementById(
+    "codigo_producto_servicio"
+);
 let unidad_medida = document.getElementById("unidad_medida");
 let marca_id = document.getElementById("marca_id");
 let categoria = document.getElementById("categoria");
@@ -165,7 +167,7 @@ let almacen_id = document.getElementById("almacen_id");
 let estado = document.getElementById("estado");
 
 let precio_compra = document.getElementById("precio_compra");
-let precio_unitarioo = document.getElementById("precio_unitarioo");
+let precio_unitarioo = document.getElementById("precio_unitario");
 let precio_unitario2 = document.getElementById("precio_unitario2");
 let precio_unitario3 = document.getElementById("precio_unitario3");
 let precio_unitario4 = document.getElementById("precio_unitario4");
@@ -183,8 +185,7 @@ registrarProductoButton.addEventListener("click", function (event) {
             "X-CSRF-Token": csrfToken,
         },
         body: JSON.stringify({
-            dosificacion: dosificacion.value,
-            codigo_producto_servicio: codigo_producto_servicio.value,
+            dosificacion: 1,
             unidad_medida: unidad_medida.value,
             marca_id: marca_id.value,
             categoria: categoria.value,
@@ -205,7 +206,7 @@ registrarProductoButton.addEventListener("click", function (event) {
             estado: estado.value,
 
             precio_compra: precio_compra.value,
-            precio_unitarioo: precio_unitarioo.value,
+            precio_unitario: precio_unitarioo.value,
             precio_unitario2: precio_unitario2.value,
             precio_unitario3: precio_unitario3.value,
             precio_unitario4: precio_unitario4.value,
@@ -247,23 +248,25 @@ registrarProductoButton.addEventListener("click", function (event) {
             }
         });
 });
-
-function getProductoServicio(){
-    fetch(ruta_obtener_prod_serv, {
+$(".select2").select2({
+    dropdownAutoWidth: true,
+    width: "100%",
+});
+function cargarActividad() {
+    let homologacion_select = document.getElementById("homologacion");
+    fetch(ruta_get_actividad, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
             "X-CSRF-Token": csrfToken,
         },
         body: JSON.stringify({
-            codigo_actividad: dosificacion.value,
+            dosificacion_id: dosificacion.value,
         }),
     })
         .then((response) => response.json())
         .then((data) => {
-            if (data.status === 200) {
-                console.log(data.content);
-                let homologacion_select = document.getElementById("codigo_producto_servicio");
+            if (data.status == 200) {
                 for (var i = 0; i < data.content.length; i++) {
                     var option = document.createElement("option");
                     option.value = data.content[i].codigo_producto;
@@ -277,7 +280,6 @@ function getProductoServicio(){
                         html: data.description,
                         classes: "rounded",
                         displayLength: 2000,
-
                     });
                 } else {
                     M.toast({

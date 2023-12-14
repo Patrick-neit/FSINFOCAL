@@ -32,6 +32,7 @@ return new class extends Migration
             $table->integer('peso_unitario')->nullable();
             $table->string('codigo_barra', 450)->nullable();
             $table->string('caracteristicas', 450)->nullable();
+            $table->decimal('stock_actual', 10, 5);
             $table->decimal('stock_minimo', 10, 5);
             $table->boolean('estado')->default(1);
             $table->timestamps();

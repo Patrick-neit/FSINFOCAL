@@ -152,7 +152,7 @@ function setChangeDSInput(){
 
         }).then(response => response.json())
             .then(data => {
-                console.log(data);
+
                 if (data.status == 200) {
                     createTableDS(data);
                    /*  M.toast({
@@ -172,8 +172,6 @@ function setChangeDSInput(){
 }
 
 function createTableDS(data) {
-    console.log(data);
-    console.log(data.content);
     var opciones = "";
     for (let i in data.content) {
         opciones += "<tr>";
@@ -220,7 +218,6 @@ function storeDosificacion(){
 
     }).then(response => response.json())
         .then(data => {
-            console.log(data);
             if (data.status == 200) {
                 M.toast({
                     html: data.description,

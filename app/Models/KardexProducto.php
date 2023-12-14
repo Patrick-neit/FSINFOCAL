@@ -27,6 +27,7 @@ class KardexProducto extends Model
         'cantidad_saldo_actual',
         'promedio',
         'costo_total_saldo',
+        'utilidad',
         'usuario_id'
     ];
 }
