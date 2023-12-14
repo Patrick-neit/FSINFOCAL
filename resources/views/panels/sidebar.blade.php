@@ -384,6 +384,18 @@
     "slug" => "Almacenes"
     ),
     array(
+    "url" =>trim(parse_url(route('catalogos_productos.index'), PHP_URL_PATH) ,'/'),
+    "i18n" => "Catalogos",
+    "name" => "Catalogos",
+    "slug" => "Catalogos"
+    ),
+    array(
+    "url" =>trim(parse_url(route('catalogos_productos.tipo_precio_index'), PHP_URL_PATH) ,'/'),
+    "i18n" => "Tipo Precio",
+    "name" => "Tipo Precio",
+    "slug" => "Tipo Precio"
+    ),
+    array(
     "url" =>trim(parse_url(route('producto.index'), PHP_URL_PATH) ,'/'),
     "i18n" => "Productos",
     "name" => "Productos",

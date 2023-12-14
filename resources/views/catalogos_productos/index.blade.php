@@ -52,7 +52,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($clientesProductos as $cliente)
+                            @forelse ($clientesProductos as $cliente)
 
                             <tr>
                                 <td>{{ $cliente->catalogos_precios_productos[0]->created_at }}</td>
@@ -65,7 +65,13 @@
                                                 class="material-icons">delete_outline</i></a></span>
                                 </td>
                             </tr>
-                            @endforeach
+                            @empty
+                            <tr>
+                                <td colspan="8" class="text-center">
+                                    No hay registros para mostrar
+                                </td>
+                            </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>
