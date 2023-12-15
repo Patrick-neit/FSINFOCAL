@@ -3433,6 +3433,84 @@
             "install-path": "../league/oauth1-client"
         },
         {
+            "name": "lukepolo/laracart",
+            "version": "2.2.0",
+            "version_normalized": "2.2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/lukepolo/laracart.git",
+                "reference": "870f3a809260e3eb6e042af911bd4bf2bfd4f8aa"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/lukepolo/laracart/zipball/870f3a809260e3eb6e042af911bd4bf2bfd4f8aa",
+                "reference": "870f3a809260e3eb6e042af911bd4bf2bfd4f8aa",
+                "shasum": ""
+            },
+            "require": {
+                "ext-intl": "*",
+                "illuminate/events": "~5.5.0|~5.7.0|~5.8.0|^6.0|^7.0|^8.0|^9.0",
+                "illuminate/session": "~5.5.0|~5.7.0|~5.8.0|^6.0|^7.0|^8.0|^9.0",
+                "illuminate/support": "~5.5.0|~5.7.0|~5.8.0|^6.0|^7.0|^8.0|^9.0",
+                "php": "~7.3 || ~7.4 || ~8.0"
+            },
+            "require-dev": {
+                "codeclimate/php-test-reporter": "dev-master",
+                "mockery/mockery": "^1.0",
+                "orchestra/database": "~3.5.0|~3.7.0|~3.8.0",
+                "orchestra/testbench": "~3.5.0|~3.7.0|~3.8.0",
+                "phpunit/phpunit": "^7.5"
+            },
+            "time": "2022-02-10T19:37:27+00:00",
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "LukePOLO\\LaraCart\\LaraCartServiceProvider"
+                    ],
+                    "aliases": {
+                        "LaraCart": "LukePOLO\\LaraCart\\Facades\\LaraCart"
+                    }
+                }
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "LukePOLO\\LaraCart\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Luke Policinski",
+                    "email": "Luke@LukePOLO.com",
+                    "homepage": "http://LukePOLO.com"
+                }
+            ],
+            "description": "A simple cart for Laravel",
+            "homepage": "https://github.com/lukepolo/laracart",
+            "keywords": [
+                "cart",
+                "laravel",
+                "shopping",
+                "shopping cart"
+            ],
+            "support": {
+                "issues": "https://github.com/lukepolo/laracart/issues",
+                "source": "https://github.com/lukepolo/laracart/tree/2.2.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/lukepolo",
+                    "type": "github"
+                }
+            ],
+            "install-path": "../lukepolo/laracart"
+        },
+        {
             "name": "maximebf/debugbar",
             "version": "v1.19.1",
             "version_normalized": "1.19.1.0",

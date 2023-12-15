@@ -40,4 +40,9 @@ class CabeceraProducto extends Model
             get: fn ($value) => $value == 1 ? 'Activo' : 'Inactivo',
         );
     }
+
+    public function detalle_producto()
+    {
+        return $this->hasOne(DetalleProducto::class, 'producto_id');
+    }
 }

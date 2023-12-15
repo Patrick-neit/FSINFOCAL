@@ -128,6 +128,7 @@ class ComposerStaticInit3ea74f8ba45b7ba0443bbe3ed7a8894a
         ),
         'L' => 
         array (
+            'LukePOLO\\LaraCart\\' => 18,
             'League\\OAuth1\\Client\\' => 21,
             'League\\MimeTypeDetection\\' => 25,
             'League\\Flysystem\\Local\\' => 23,
@@ -434,6 +435,10 @@ class ComposerStaticInit3ea74f8ba45b7ba0443bbe3ed7a8894a
         array (
             0 => __DIR__ . '/..' . '/mockery/mockery/library/Mockery',
         ),
+        'LukePOLO\\LaraCart\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/lukepolo/laracart/src',
+        ),
         'League\\OAuth1\\Client\\' => 
         array (
             0 => __DIR__ . '/..' . '/league/oauth1-client/src',
@@ -686,6 +691,7 @@ class ComposerStaticInit3ea74f8ba45b7ba0443bbe3ed7a8894a
         'App\\Http\\Controllers\\MediaController' => __DIR__ . '/../..' . '/app/Http/Controllers/MediaController.php',
         'App\\Http\\Controllers\\MiscController' => __DIR__ . '/../..' . '/app/Http/Controllers/MiscController.php',
         'App\\Http\\Controllers\\PageController' => __DIR__ . '/../..' . '/app/Http/Controllers/PageController.php',
+        'App\\Http\\Controllers\\PedidoController' => __DIR__ . '/../..' . '/app/Http/Controllers/PedidoController.php',
         'App\\Http\\Controllers\\ProductoController' => __DIR__ . '/../..' . '/app/Http/Controllers/ProductoController.php',
         'App\\Http\\Controllers\\ProveedorController' => __DIR__ . '/../..' . '/app/Http/Controllers/ProveedorController.php',
         'App\\Http\\Controllers\\PuntoVentaController' => __DIR__ . '/../..' . '/app/Http/Controllers/PuntoVentaController.php',
@@ -723,6 +729,7 @@ class ComposerStaticInit3ea74f8ba45b7ba0443bbe3ed7a8894a
         'App\\Models\\Correlativo' => __DIR__ . '/../..' . '/app/Models/Correlativo.php',
         'App\\Models\\Curso' => __DIR__ . '/../..' . '/app/Models/Curso.php',
         'App\\Models\\DetalleDosificacionEmpresa' => __DIR__ . '/../..' . '/app/Models/DetalleDosificacionEmpresa.php',
+        'App\\Models\\DetallePedido' => __DIR__ . '/../..' . '/app/Models/DetallePedido.php',
         'App\\Models\\DetalleProducto' => __DIR__ . '/../..' . '/app/Models/DetalleProducto.php',
         'App\\Models\\Docente' => __DIR__ . '/../..' . '/app/Models/Docente.php',
         'App\\Models\\DosificacionEmpresa' => __DIR__ . '/../..' . '/app/Models/DosificacionEmpresa.php',
@@ -751,6 +758,7 @@ class ComposerStaticInit3ea74f8ba45b7ba0443bbe3ed7a8894a
         'App\\Models\\InventarioAlmacen' => __DIR__ . '/../..' . '/app/Models/InventarioAlmacen.php',
         'App\\Models\\KardexProducto' => __DIR__ . '/../..' . '/app/Models/KardexProducto.php',
         'App\\Models\\Marca' => __DIR__ . '/../..' . '/app/Models/Marca.php',
+        'App\\Models\\Pedido' => __DIR__ . '/../..' . '/app/Models/Pedido.php',
         'App\\Models\\Proveedor' => __DIR__ . '/../..' . '/app/Models/Proveedor.php',
         'App\\Models\\PuntoVenta' => __DIR__ . '/../..' . '/app/Models/PuntoVenta.php',
         'App\\Models\\PuntoVentaCufd' => __DIR__ . '/../..' . '/app/Models/PuntoVentaCufd.php',
@@ -3932,6 +3940,25 @@ class ComposerStaticInit3ea74f8ba45b7ba0443bbe3ed7a8894a
         'League\\OAuth1\\Client\\Signature\\RsaSha1Signature' => __DIR__ . '/..' . '/league/oauth1-client/src/Signature/RsaSha1Signature.php',
         'League\\OAuth1\\Client\\Signature\\Signature' => __DIR__ . '/..' . '/league/oauth1-client/src/Signature/Signature.php',
         'League\\OAuth1\\Client\\Signature\\SignatureInterface' => __DIR__ . '/..' . '/league/oauth1-client/src/Signature/SignatureInterface.php',
+        'LukePOLO\\LaraCart\\Cart' => __DIR__ . '/..' . '/lukepolo/laracart/src/Cart.php',
+        'LukePOLO\\LaraCart\\CartFee' => __DIR__ . '/..' . '/lukepolo/laracart/src/CartFee.php',
+        'LukePOLO\\LaraCart\\CartItem' => __DIR__ . '/..' . '/lukepolo/laracart/src/CartItem.php',
+        'LukePOLO\\LaraCart\\CartSubItem' => __DIR__ . '/..' . '/lukepolo/laracart/src/CartSubItem.php',
+        'LukePOLO\\LaraCart\\Contracts\\CouponContract' => __DIR__ . '/..' . '/lukepolo/laracart/src/Contracts/CouponContract.php',
+        'LukePOLO\\LaraCart\\Contracts\\LaraCartContract' => __DIR__ . '/..' . '/lukepolo/laracart/src/Contracts/LaraCartContract.php',
+        'LukePOLO\\LaraCart\\Coupons\\Fixed' => __DIR__ . '/..' . '/lukepolo/laracart/src/Coupons/Fixed.php',
+        'LukePOLO\\LaraCart\\Coupons\\Percentage' => __DIR__ . '/..' . '/lukepolo/laracart/src/Coupons/Percentage.php',
+        'LukePOLO\\LaraCart\\Exceptions\\CouponException' => __DIR__ . '/..' . '/lukepolo/laracart/src/Exceptions/CouponException.php',
+        'LukePOLO\\LaraCart\\Exceptions\\InvalidPrice' => __DIR__ . '/..' . '/lukepolo/laracart/src/Exceptions/InvalidPrice.php',
+        'LukePOLO\\LaraCart\\Exceptions\\InvalidQuantity' => __DIR__ . '/..' . '/lukepolo/laracart/src/Exceptions/InvalidQuantity.php',
+        'LukePOLO\\LaraCart\\Exceptions\\InvalidTaxableValue' => __DIR__ . '/..' . '/lukepolo/laracart/src/Exceptions/InvalidTaxableValue.php',
+        'LukePOLO\\LaraCart\\Exceptions\\ModelNotFound' => __DIR__ . '/..' . '/lukepolo/laracart/src/Exceptions/ModelNotFound.php',
+        'LukePOLO\\LaraCart\\Facades\\LaraCart' => __DIR__ . '/..' . '/lukepolo/laracart/src/Facades/LaraCart.php',
+        'LukePOLO\\LaraCart\\LaraCart' => __DIR__ . '/..' . '/lukepolo/laracart/src/LaraCart.php',
+        'LukePOLO\\LaraCart\\LaraCartHasher' => __DIR__ . '/..' . '/lukepolo/laracart/src/LaraCartHasher.php',
+        'LukePOLO\\LaraCart\\LaraCartServiceProvider' => __DIR__ . '/..' . '/lukepolo/laracart/src/LaraCartServiceProvider.php',
+        'LukePOLO\\LaraCart\\Traits\\CartOptionsMagicMethodsTrait' => __DIR__ . '/..' . '/lukepolo/laracart/src/Traits/CartOptionsMagicMethodsTrait.php',
+        'LukePOLO\\LaraCart\\Traits\\CouponTrait' => __DIR__ . '/..' . '/lukepolo/laracart/src/Traits/CouponTrait.php',
         'Mockery\\Adapter\\Phpunit\\MockeryPHPUnitIntegration' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery/Adapter/Phpunit/MockeryPHPUnitIntegration.php',
         'Mockery\\Adapter\\Phpunit\\MockeryPHPUnitIntegrationAssertPostConditions' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery/Adapter/Phpunit/MockeryPHPUnitIntegrationAssertPostConditions.php',
         'Mockery\\Adapter\\Phpunit\\MockeryTestCase' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery/Adapter/Phpunit/MockeryTestCase.php',

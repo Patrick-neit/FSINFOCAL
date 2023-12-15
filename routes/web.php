@@ -25,6 +25,7 @@ use App\Http\Controllers\MarcaController;
 use App\Http\Controllers\MediaController;
 use App\Http\Controllers\MiscController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\ProveedorController;
 use App\Http\Controllers\PuntoVentaController;
@@ -32,6 +33,7 @@ use App\Http\Controllers\SubFamiliaController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserProfileController;
 use Illuminate\Support\Facades\Route;
+use LukePOLO\LaraCart\Facades\LaraCart;
 
 /*
 |--------------------------------------------------------------------------
@@ -366,18 +368,38 @@ Route::group([
 
 Route::group(
     [
+        'prefix' => 'pedidos',
+        'controller' => PedidoController::class,
+    ],
+    function () {
+        Route::get('index', 'index')->name('pedido.index');
+        Route::get('create', 'create')->name('pedido.create');
+        Route::get('/edit/{id}', 'edit')->name('pedido.edit');
+        Route::post('store', 'store')->name('pedido.store');
+        Route::delete('destroy', 'destroy')->name('pedido.destroy');
+    }
+);
+
+Route::group(
+    [
         'prefix' => 'producto',
         'controller' => ProductoController::class,
     ],
     function () {
         Route::get('index', 'index')->name('producto.index');
+        Route::post('producto/get/name', 'getProductoNombre')->name('producto.get.name');
         Route::get('create', 'create')->name('producto.create');
         Route::get('/edit/{id}', 'edit')->name('producto.edit');
         Route::post('/get_actividad/documento_sector', 'getActividadProducto')->name('actividad.getActividad');
         Route::post('store', 'store')->name('producto.store');
         Route::delete('destroy', 'destroy')->name('producto.destroy');
         Route::post('getDataProductoServicio', 'getDataProductoServicio')->name('producto.getDataProductoServicio');
-
+        Route::get('/ver_cart', function () {
+            dd(LaraCart::getItems());
+        });
+        Route::get('/vaciar_cart', function () {
+            dd(LaraCart::emptyCart());
+        });
     }
 );
 

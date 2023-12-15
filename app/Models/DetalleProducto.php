@@ -22,4 +22,9 @@ class DetalleProducto extends Model
         'precio_paquete',
         'precio_venta_dolar'
     ];
+
+    public function cabecera_producto()
+    {
+        return $this->belongsTo(CabeceraProducto::class);
+    }
 }

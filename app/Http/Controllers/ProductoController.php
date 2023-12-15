@@ -17,6 +17,7 @@ use App\Models\SubFamilia;
 use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;
+use LukePOLO\LaraCart\Facades\LaraCart;
 
 class ProductoController extends Controller
 {
@@ -39,7 +40,6 @@ class ProductoController extends Controller
      */
     public function create()
     {
-
         return view('productos.create', [
             'almacenes' => Almacen::all(),
             //'dosificaciones' => DosificacionEmpresa::all(),
@@ -257,5 +257,33 @@ class ProductoController extends Controller
         }
 
         return responseJson('Productos Servicios', $impuestoProductosServicios, 200);
+    }
+
+    public function getProductoNombre(Request $request)
+    {
+        $productoFound = CabeceraProducto::find($request->search)->load('detalle_producto');
+
+        $productoFound->unidad_medida_id = ImpuestoUnidadMedida::where('codigo_clasificador', $productoFound->unidad_medida_id)->first()->descripcion;
+
+        $productoFound->bandera = 0;
+
+
+        if (isset($productoFound) && LaraCart::find(['id' => $productoFound->codigo_producto]) == null) {
+            LaraCart::add(
+                $productoFound->codigo_producto,
+                $productoFound->nombre_producto,
+                "1.00000",
+                $productoFound->detalle_producto->precio_compra,
+                [
+                    'subtotal' => 0,
+                    'unidad_medida_literal' => $productoFound->unidad_medida_id,
+                ],
+                false,
+                false
+            );
+            $productoFound->bandera = 1;
+        }
+
+        return responseJson('Producto', $productoFound, 200);
     }
 }

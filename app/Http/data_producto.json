@@ -1,0 +1,42 @@
+{
+    "status": 200,
+    "description": "Producto",
+    "content": {
+        "id": 1,
+        "dosificacion_id": 10000,
+        "unidad_medida_id": 38,
+        "marca_id": 1,
+        "categoria_id": 1,
+        "tipo_id": 1,
+        "sub_familia_id": 1,
+        "codigo_producto": "codigo producto1",
+        "nombre_producto": "nombreproducto1",
+        "codigo_producto_impuestos": 99500,
+        "modelo": "modelo1",
+        "numero_serie": null,
+        "numero_imei": null,
+        "peso_unitario": 1,
+        "codigo_barra": null,
+        "caracteristicas": null,
+        "stock_minimo": "1.00000",
+        "stock_actual": "0.00000",
+        "estado": "Activo",
+        "created_at": "2023-12-14T03:08:12.000000Z",
+        "updated_at": "2023-12-14T03:08:12.000000Z",
+        "deleted_at": null,
+        "detalle_producto": {
+            "id": 1,
+            "producto_id": 1,
+            "precio_compra": "1.00000",
+            "precio_unitario": "2.00000",
+            "precio_unitario2": "3.00000",
+            "precio_unitario3": "4.00000",
+            "precio_unitario4": "5.00000",
+            "precio_paquete": "6.00000",
+            "precio_venta_dolar": "7.00000",
+            "created_at": "2023-12-14T03:08:12.000000Z",
+            "updated_at": "2023-12-14T03:08:12.000000Z",
+            "deleted_at": null
+        }
+    }
+}
