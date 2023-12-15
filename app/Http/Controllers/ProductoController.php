@@ -259,6 +259,21 @@ class ProductoController extends Controller
         return responseJson('Productos Servicios', $impuestoProductosServicios, 200);
     }
 
+    public function updateProductCart(Request $request)
+    {
+        $product = LaraCart::find(['id' => $request->codigo_producto]);
+
+        if (LaraCart::find(['id' => $request->codigo_producto]) == null) {
+            return responseJson('No se encontro el producto', $product, 400);
+        }
+
+        $product->qty = $request->cantidad;
+        $product->price = $request->precio_unitario;
+        $product->subtotal = $request->subtotal;
+
+        return responseJson('Producto', LaraCart::subTotal(false), 200);
+    }
+
     public function getProductoNombre(Request $request)
     {
         $productoFound = CabeceraProducto::find($request->search)->load('detalle_producto');
@@ -275,7 +290,7 @@ class ProductoController extends Controller
                 "1.00000",
                 $productoFound->detalle_producto->precio_compra,
                 [
-                    'subtotal' => 0,
+                    'subtotal' => $productoFound->detalle_producto->precio_compra * 1,
                     'unidad_medida_literal' => $productoFound->unidad_medida_id,
                 ],
                 false,

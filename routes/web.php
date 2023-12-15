@@ -394,8 +394,9 @@ Route::group(
         Route::post('store', 'store')->name('producto.store');
         Route::delete('destroy', 'destroy')->name('producto.destroy');
         Route::post('getDataProductoServicio', 'getDataProductoServicio')->name('producto.getDataProductoServicio');
+        Route::post('/update/product/cart', 'updateProductCart')->name('update.product.cart');
         Route::get('/ver_cart', function () {
-            dd(LaraCart::getItems());
+            dd(LaraCart::subTotal());
         });
         Route::get('/vaciar_cart', function () {
             dd(LaraCart::emptyCart());

@@ -102,7 +102,9 @@
                                     step="0.00001" oninput='calcularSubTotal(this.name)'>
                             </td>
                             <td>
-                                <span id="subtotal{{ $item->id }}" name="{{ $item->id }}">{{ $item->subtotal }}</span>
+                                <span id="subtotal{{ $item->id }}" name="{{ $item->id }}">
+                                    {{ number_format($item->subtotal, 5, '.', '') }}
+                                </span>
                             </td>
                         </tr>
                         @empty
@@ -121,9 +123,16 @@
                     <h6>Total Dolar:</h6>
                 </div>
                 <div class="col s12 m2 l2 input-field right-align">
-                    <h6 id="subTotal">{{ \LukePOLO\LaraCart\Facades\LaraCart::subTotal() }}</h6>
+                    <h6 id="subTotal">Bs.&nbsp;{{
+                        number_format((float)\LukePOLO\LaraCart\Facades\LaraCart::subTotal(false),
+                        5, '.',
+                        '') }}
+                    </h6>
                     <h6>6.96</h6>
-                    <h6 id="totalDolar">7.18390</h6>
+                    <h6 id="totalDolar">Bs.&nbsp;{{
+                        number_format((float)(\LukePOLO\LaraCart\Facades\LaraCart::subTotal(false)) * 6.96, 5, '.', '')
+                        }}
+                    </h6>
                 </div>
 
             </div>
@@ -156,5 +165,6 @@
     let ruta_index_marca   = "{{route('marca.index')}}";
     let ruta_eliminar_marca = "{{route('marca.destroy')}}";
     let ruta_obtener_producto = "{{route('producto.get.name')}}";
+    let ruta_actualizar_cart = "{{ route('update.product.cart') }}"
 </script>
 @endsection

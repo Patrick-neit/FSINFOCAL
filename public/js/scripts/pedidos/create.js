@@ -111,8 +111,45 @@ function calcularSubTotal(codigo_producto) {
     );
     let resultado = inputPrecioUnitario.value * inputCantidad.value;
 
-    document.getElementById("subtotal" + codigo_producto).innerHTML =
-        parseFloat(resultado).toFixed(5).toString();
+    //-------------------------------------
+
+    fetch(ruta_actualizar_cart, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-Token": csrfToken,
+        },
+        body: JSON.stringify({
+            codigo_producto: codigo_producto,
+            cantidad: inputCantidad.value,
+            precio_unitario: inputPrecioUnitario.value,
+            subtotal: resultado,
+        }),
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            if (data.status == 200) {
+                //subtotal de cada producto
+                document.getElementById(
+                    "subtotal" + codigo_producto
+                ).innerHTML = parseFloat(resultado).toFixed(5).toString();
+                document.getElementById("subTotal").innerHTML =
+                    "Bs. " + parseFloat(data.content).toFixed(5).toString();
+                document.getElementById("totalDolar").innerHTML =
+                    "Bs. " +
+                    parseFloat(data.content * 6.96)
+                        .toFixed(5)
+                        .toString();
+            } else {
+                M.toast({
+                    html: "Algo salio Mal!",
+                    classes: "rounded",
+                    displayLength: 2000,
+                });
+            }
+        });
+
+    //-----------------------------------
 }
 function cargarProducto() {
     let table_producto = document.getElementById("tableDetalleProducto");
@@ -171,17 +208,16 @@ function cargarProducto() {
                     c6.innerHTML =
                         "<span id='subtotal" +
                         data.content.codigo_producto +
-                        "'>1.00000</span>";
+                        "'>" +
+                        parseFloat(
+                            data.content.detalle_producto.precio_compra * 1
+                        )
+                            .toFixed(5)
+                            .toString() +
+                        "</span>";
+                    //insertando datos al subtotal y total
+                    calcularSubTotal(data.content.codigo_producto);
                 }
-
-                M.toast({
-                    html: "Producto añadido",
-                    classes: "rounded",
-                    displayLength: 2000,
-                    completeCallback: function () {
-                        /* window.location.href = ruta_index_pedidos; */
-                    },
-                });
             } else {
                 M.toast({
                     html: "Algo salio Mal!",
