@@ -153,14 +153,14 @@ if ($(".users-edit").length > 0) {
 
 /* Eliminar Docente */
 function eliminar(e) {
-    fetch(ruta_eliminar_marca, {
+    fetch(ruta_eliminar_pedido, {
         method: "DELETE",
         headers: {
             "Content-Type": "application/json",
             "X-CSRF-Token": csrfToken,
         },
         body: JSON.stringify({
-            marca_id: e,
+            pedido_id: e,
         }),
     })
         .then((response) => response.json())
@@ -171,7 +171,7 @@ function eliminar(e) {
                     classes: "rounded",
                     displayLength: 2000,
                     completeCallback: function () {
-                        window.location.href = ruta_index_marca;
+                        window.location.href = ruta_index_pedido;
                     },
                 });
             } else {

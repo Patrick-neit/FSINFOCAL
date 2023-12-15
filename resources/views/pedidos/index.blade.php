@@ -51,14 +51,17 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {{-- @forelse ($marcas as $marca)
+                            @forelse ($pedidos as $pedido)
                             <tr>
-                                <td>{{ $marca->nombre_marca }}</td>
+                                <td>{{ $pedido->id }}</td>
+                                <td>{{ $pedido->nota }}</td>
+                                <td>{{ $pedido->aprobado }}</td>
+                                <td>{{ $pedido->total }}</td>
                                 <td class="text-center">
-                                    <a href="{{ route('marca.edit', $marca->id)}}">
+                                    <a href="{{ route('marca.edit', $pedido->id)}}">
                                         <i class="material-icons">edit</i>
                                     </a>
-                                    <span><a style="cursor: pointer;" onclick="eliminar('{{ $marca->id }}')"><i
+                                    <span><a style="cursor: pointer;" onclick="eliminar('{{ $pedido->id }}')"><i
                                                 class="material-icons">delete_outline</i></a></span>
                                 </td>
                             </tr>
@@ -68,7 +71,7 @@
                                     No hay registros para mostrar
                                 </td>
                             </tr>
-                            @endforelse --}}
+                            @endforelse
                         </tbody>
                     </table>
                 </div>
@@ -90,7 +93,7 @@
 @section('page-script')
 <script src="{{ asset('js/scripts/pedidos/index.js') }}"></script>
 <script>
-    let ruta_index_marca = "{{ route('marca.index') }}";
-    let ruta_eliminar_marca = "{{ route('marca.destroy') }}";
+    let ruta_index_pedido = "{{ route('pedido.index') }}";
+    let ruta_eliminar_pedido = "{{ route('pedido.destroy') }}";
 </script>
 @endsection

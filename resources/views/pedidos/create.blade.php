@@ -94,12 +94,12 @@
                             <td>{{ $item->name }}</td>
                             <td>{{ $item->unidad_medida_literal }}</td>
                             <td><input id="inputCantidad{{ $item->id }}" name="{{ $item->id }}" value="{{ $item->qty }}"
-                                    type="number" min="0.00001" step="0.00001" oninput="calcularSubTotal(this.name);">
+                                    type="number" min="0.00001" step="0.00001" onchange="calcularSubTotal(this.name);">
                             </td>
                             <td>
                                 <input id="inputPrecioUnitario{{ $item->id }}" name="{{ $item->id }}"
                                     value="{{ number_format($item->price, 5, '.', '') }}" type="number" min="0.00001"
-                                    step="0.00001" oninput='calcularSubTotal(this.name)'>
+                                    step="0.00001" onchange='calcularSubTotal(this.name)'>
                             </td>
                             <td>
                                 <span id="subtotal{{ $item->id }}" name="{{ $item->id }}">
@@ -114,7 +114,7 @@
             </div>
             <div class="row">
                 <div class="col s12 m8 l8 input-field">
-                    <textarea id="textarea1" class="materialize-textarea"></textarea>
+                    <textarea id="nota" name="nota" class="materialize-textarea"></textarea>
                     <label for="textarea1">Nota/Descripci&oacute;n</label>
                 </div>
                 <div class="col s12 m2 l2 input-field">
@@ -137,10 +137,10 @@
 
             </div>
             <div class="row">
-                <input type="hidden" id="id_marca" name="id_marca" value="@if(isset($marca)){{ $marca->id }}@endif">
+                <input type="hidden" id="id_pedido" name="id_pedido" value="@if(isset($marca)){{ $marca->id }}@endif">
 
                 <div class="col s12 display-flex justify-content-end mt-3">
-                    <button id="registrarMarcaButton" class="btn indigo mr-2">Guardar</button>
+                    <button id="registrarPedidoButton" class="btn indigo mr-2">Guardar</button>
                     <button type="button" class="btn btn-light">Cancel</button>
                 </div>
             </div>
@@ -161,8 +161,8 @@
 @section('page-script')
 <script src="{{asset('js/scripts/pedidos/create.js')}}"></script>
 <script>
-    let ruta_guardar_marca = "{{route('marca.store')}}";
-    let ruta_index_marca   = "{{route('marca.index')}}";
+    let ruta_guardar_pedido = "{{route('pedido.store')}}";
+    let ruta_index_pedido   = "{{route('pedido.index')}}";
     let ruta_eliminar_marca = "{{route('marca.destroy')}}";
     let ruta_obtener_producto = "{{route('producto.get.name')}}";
     let ruta_actualizar_cart = "{{ route('update.product.cart') }}"

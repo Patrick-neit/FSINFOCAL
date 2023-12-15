@@ -19,4 +19,9 @@ class DetallePedido extends Model
         'precio_unitario',
         'sub_total'
     ];
+
+    public function pedido()
+    {
+        return $this->belongsTo(Pedido::class);
+    }
 }

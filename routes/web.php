@@ -396,7 +396,7 @@ Route::group(
         Route::post('getDataProductoServicio', 'getDataProductoServicio')->name('producto.getDataProductoServicio');
         Route::post('/update/product/cart', 'updateProductCart')->name('update.product.cart');
         Route::get('/ver_cart', function () {
-            dd(LaraCart::subTotal());
+            dd(LaraCart::getItems());
         });
         Route::get('/vaciar_cart', function () {
             dd(LaraCart::emptyCart());

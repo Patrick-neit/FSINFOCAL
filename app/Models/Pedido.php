@@ -29,4 +29,9 @@ class Pedido extends Model
             get: fn ($value) => $value == 1 ? 'Aprobado' : 'Pendiente',
         );
     }
+
+    public function detalle_pedido()
+    {
+        return $this->hasMany(DetallePedido::class, 'pedido_id');
+    }
 }

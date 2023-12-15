@@ -185,7 +185,7 @@ function cargarProducto() {
                     inputCantidad.type = "number";
                     inputCantidad.min = "0.00001";
                     inputCantidad.step = "0.00001";
-                    inputCantidad.oninput = function () {
+                    inputCantidad.onchange = function () {
                         calcularSubTotal(data.content.codigo_producto);
                     };
 
@@ -196,7 +196,7 @@ function cargarProducto() {
                     inputPrecioUnitario.step = "0.00001";
                     inputPrecioUnitario.value =
                         data.content.detalle_producto.precio_compra;
-                    inputPrecioUnitario.oninput = function () {
+                    inputPrecioUnitario.onchange = function () {
                         calcularSubTotal(data.content.codigo_producto);
                     };
 
@@ -234,35 +234,40 @@ searchInput.addEventListener("keypress", function (event) {
     }
 });
 
-let registrarMarcaButton = document.getElementById("registrarMarcaButton");
-let nombre_marca = document.getElementById("nombre_marca");
-let estado = document.getElementById("estado");
-let marca_id = document.getElementById("id_marca");
+let registrarPedidoButton = document.getElementById("registrarPedidoButton");
+let proveedor_id = document.getElementById("proveedor_id");
+let fecha_pedido = document.getElementById("fecha_pedido");
+let hora_pedido = document.getElementById("hora_pedido");
+let nota = document.getElementById("nota");
+let pedido_id = document.getElementById("id_pedido");
 
-registrarMarcaButton.addEventListener("click", function (event) {
+registrarPedidoButton.addEventListener("click", function (event) {
     event.preventDefault();
 
-    fetch(ruta_guardar_marca, {
+    fetch(ruta_guardar_pedido, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
             "X-CSRF-Token": csrfToken,
         },
         body: JSON.stringify({
-            nombre_marca: nombre_marca.value,
-            estado: estado.value,
-            marca_id: marca_id.value,
+            proveedor_id: proveedor_id.value,
+            fecha_pedido: fecha_pedido.value,
+            hora_pedido: hora_pedido.value,
+            nota: nota.value,
+            pedido_id: pedido_id.value,
         }),
     })
         .then((response) => response.json())
         .then((data) => {
             if (data.status == 200) {
+                console.log(data.content);
                 M.toast({
                     html: data.description,
                     classes: "rounded",
                     displayLength: 2000,
                     completeCallback: function () {
-                        window.location.href = ruta_index_marca;
+                        window.location.href = ruta_index_pedido;
                     },
                 });
             } else {
