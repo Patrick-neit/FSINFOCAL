@@ -24,4 +24,9 @@ class DetallePedido extends Model
     {
         return $this->belongsTo(Pedido::class);
     }
+
+    public function producto()
+    {
+        return $this->belongsTo(CabeceraProducto::class);
+    }
 }

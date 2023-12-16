@@ -6,6 +6,7 @@ use App\Http\Requests\CabeceraProductoStoreRequest;
 use App\Models\Almacen;
 use App\Models\CabeceraProducto;
 use App\Models\Categoria;
+use App\Models\DetallePedido;
 use App\Models\DetalleProducto;
 use App\Models\DosificacionEmpresa;
 use App\Models\ImpuestoProductoServicio;
@@ -13,6 +14,7 @@ use App\Models\ImpuestoUnidadMedida;
 use App\Models\InventarioAlmacen;
 use App\Models\KardexProducto;
 use App\Models\Marca;
+use App\Models\Pedido;
 use App\Models\SubFamilia;
 use Carbon\Carbon;
 use DB;
@@ -272,6 +274,24 @@ class ProductoController extends Controller
         $product->subtotal = $request->subtotal;
 
         return responseJson('Producto', LaraCart::subTotal(false), 200);
+    }
+
+    public function getAllDetalle()
+    {
+    }
+
+    public function getAllCart(Request $request)
+    {
+        //cart_id es codigo de producto
+        $detalle_cart = LaraCart::find(['id' => $request->cart_id]);
+
+        $producto = CabeceraProducto::select('id')->where('codigo_producto', $detalle_cart->id)->first();
+
+        $detalle_pedido = DetallePedido::where('producto_id', $producto->id)->first()->load('pedido', 'producto');
+
+        LaraCart::removeItem($detalle_cart->getHash());
+
+        return responseJson('Get all detalle', LaraCart::getItems(), 200);
     }
 
     public function getProductoNombre(Request $request)

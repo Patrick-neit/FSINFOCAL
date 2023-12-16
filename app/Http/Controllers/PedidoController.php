@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\CabeceraProducto;
 use App\Models\DetallePedido;
+use App\Models\ImpuestoUnidadMedida;
 use App\Models\Pedido;
 use App\Models\Proveedor;
 use Illuminate\Http\Request;
@@ -66,6 +67,7 @@ class PedidoController extends Controller
             $detalle_pedido->sub_total = $item->subtotal;
             $detalle_pedido->save();
         }
+        LaraCart::destroyCart();
         return responseJson('Guardado', $pedido, 200);
     }
 
@@ -87,7 +89,29 @@ class PedidoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $pedido = Pedido::find($id)->load('detalle_pedido', 'detalle_pedido.producto', 'detalle_pedido.producto.detalle_producto');
+
+        LaraCart::emptyCart();
+        foreach ($pedido->detalle_pedido as $detalle) {
+            LaraCart::add(
+                $detalle->producto->codigo_producto,
+                $detalle->producto->nombre_producto,
+                $detalle->cantidad,
+                $detalle->producto->detalle_producto->precio_compra,
+                [
+                    'subtotal' => $detalle->producto->detalle_producto->precio_compra * $detalle->cantidad,
+                    'unidad_medida_literal' => ImpuestoUnidadMedida::where('codigo_clasificador', $detalle->producto->unidad_medida_id)->first()->descripcion,
+                ],
+                false,
+                false
+            );
+        }
+
+        return view('pedidos.create', [
+            'pedido' => $pedido,
+            'proveedores' => Proveedor::all(),
+            'cabecera_productos' => CabeceraProducto::all(),
+        ]);
     }
 
     /**

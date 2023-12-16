@@ -45,4 +45,9 @@ class CabeceraProducto extends Model
     {
         return $this->hasOne(DetalleProducto::class, 'producto_id');
     }
+
+    public function detalle_pedido()
+    {
+        return $this->hasOne(DetallePedido::class, 'producto_id');
+    }
 }

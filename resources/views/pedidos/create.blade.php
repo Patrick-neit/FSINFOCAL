@@ -36,8 +36,8 @@
                     <select class="select2 browser-default" name="proveedor_id" id="proveedor_id">
                         <option selected value="" disabled>Seleccione proveedor</option>
                         @forelse ($proveedores as $proveedor)
-                        <option value="{{ $proveedor->id }}" @if (isset($cabecera_producto)) @if($cabecera_producto->
-                            unidad_medida_id == $unidad_medida->id)
+                        <option value="{{ $proveedor->id }}" @if (isset($pedido)) @if($pedido->proveedor_id ==
+                            $proveedor->id)
                             selected
                             @endif
                             @endif
@@ -49,14 +49,17 @@
                 </div>
                 <div class="input-field col s12 m4 offset-l4">
                     <i class="material-icons prefix">date_range</i>
-                    <input id="fecha_pedido" name="fecha_pedido" type="text" class="datepicker">
+                    <input id="fecha_pedido" name="fecha_pedido" type="text" class="datepicker" value="@if (isset($pedido))
+{{ $pedido->fecha }}
+                        @endif">
                     <label for="fecha_pedido">Fecha Pedido</label>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12 m4 offset-m8 l4 offset-l8">
                     <i class="material-icons prefix">date_range</i>
-                    <input id="hora_pedido" name="hora_pedido" type="text" class="timepicker">
+                    <input id="hora_pedido" name="hora_pedido" type="text" class="timepicker"
+                        value="@if(isset($pedido)){{ $pedido->hora }}@endif">
                     <label for="hora_pedido">Hora Pedido</label>
                 </div>
             </div>
@@ -84,12 +87,14 @@
                             <th>Cantidad</th>
                             <th>Precio Unitario</th>
                             <th>Subtotal</th>
+                            <th>Acciones</th>
                         </tr>
                     </thead>
 
                     <tbody>
+                        @if (isset($pedido))
                         @forelse (\LukePOLO\LaraCart\Facades\LaraCart::getItems() as $item)
-                        <tr>
+                        <tr id="{{ $item->id }}">
                             <td>{{ $item->id }}</td>
                             <td>{{ $item->name }}</td>
                             <td>{{ $item->unidad_medida_literal }}</td>
@@ -106,15 +111,22 @@
                                     {{ number_format($item->subtotal, 5, '.', '') }}
                                 </span>
                             </td>
+                            <td>
+                                <button id="{{ $item->id }}" name="{{ $item->id }}" onclick='cambiarTabla(this.name)'>
+                                    <i class='material-icons prefix'>delete</i>
+                                </button>
+                            </td>
                         </tr>
                         @empty
                         @endforelse
+                        @endif
                     </tbody>
                 </table>
             </div>
             <div class="row">
                 <div class="col s12 m8 l8 input-field">
-                    <textarea id="nota" name="nota" class="materialize-textarea"></textarea>
+                    <textarea id="nota" name="nota" class="materialize-textarea">@if(isset($pedido)){{ $pedido->nota
+                        }}@endif</textarea>
                     <label for="textarea1">Nota/Descripci&oacute;n</label>
                 </div>
                 <div class="col s12 m2 l2 input-field">
@@ -123,21 +135,31 @@
                     <h6>Total Dolar:</h6>
                 </div>
                 <div class="col s12 m2 l2 input-field right-align">
-                    <h6 id="subTotal">Bs.&nbsp;{{
+                    <h6 id="subTotal">Bs.&nbsp;
+                        @if (isset($pedido))
+                        {{ $pedido->total }}
+                        @else
+                        {{
                         number_format((float)\LukePOLO\LaraCart\Facades\LaraCart::subTotal(false),
                         5, '.',
                         '') }}
+                        @endif
                     </h6>
                     <h6>6.96</h6>
-                    <h6 id="totalDolar">Bs.&nbsp;{{
+                    <h6 id="totalDolar">Bs.&nbsp;
+                        @if (isset($pedido))
+                        {{ number_format((float)$pedido->total * 6.96, 5, '.', '') }}
+                        @else
+                        {{
                         number_format((float)(\LukePOLO\LaraCart\Facades\LaraCart::subTotal(false)) * 6.96, 5, '.', '')
                         }}
+                        @endif
                     </h6>
                 </div>
 
             </div>
             <div class="row">
-                <input type="hidden" id="id_pedido" name="id_pedido" value="@if(isset($marca)){{ $marca->id }}@endif">
+                <input type="hidden" id="id_pedido" name="id_pedido" value="@if(isset($pedido)){{ $pedido->id }}@endif">
 
                 <div class="col s12 display-flex justify-content-end mt-3">
                     <button id="registrarPedidoButton" class="btn indigo mr-2">Guardar</button>
@@ -163,6 +185,7 @@
 <script>
     let ruta_guardar_pedido = "{{route('pedido.store')}}";
     let ruta_index_pedido   = "{{route('pedido.index')}}";
+    let rutal_all_cart = "{{ route('get.all.cart') }}";
     let ruta_eliminar_marca = "{{route('marca.destroy')}}";
     let ruta_obtener_producto = "{{route('producto.get.name')}}";
     let ruta_actualizar_cart = "{{ route('update.product.cart') }}"

@@ -58,7 +58,7 @@
                                 <td>{{ $pedido->aprobado }}</td>
                                 <td>{{ $pedido->total }}</td>
                                 <td class="text-center">
-                                    <a href="{{ route('marca.edit', $pedido->id)}}">
+                                    <a href="{{ route('pedido.edit', $pedido->id)}}">
                                         <i class="material-icons">edit</i>
                                     </a>
                                     <span><a style="cursor: pointer;" onclick="eliminar('{{ $pedido->id }}')"><i

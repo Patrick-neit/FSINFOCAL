@@ -395,9 +395,11 @@ Route::group(
         Route::delete('destroy', 'destroy')->name('producto.destroy');
         Route::post('getDataProductoServicio', 'getDataProductoServicio')->name('producto.getDataProductoServicio');
         Route::post('/update/product/cart', 'updateProductCart')->name('update.product.cart');
-        Route::get('/ver_cart', function () {
-            dd(LaraCart::getItems());
-        });
+        Route::post('/ver_cart', 'getAllCart')->name('get.all.cart');
+
+        Route::get('/ver_carrito', function () {
+            return responseJson('LaraCart', LaraCart::getItems(), 200);
+        })->name('ver.carrito');
         Route::get('/vaciar_cart', function () {
             dd(LaraCart::emptyCart());
         });
