@@ -47,6 +47,9 @@ class PedidoController extends Controller
      */
     public function store(Request $request)
     {
+        if (!empty($request->pedido_id)) {
+            return $this->update($request);
+        }
         $pedido = new Pedido();
 
         $pedido->fecha = Carbon::now()->format('Y-m-d');
@@ -121,9 +124,10 @@ class PedidoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($request)
     {
-        //
+        dd($request);
+        
     }
 
     /**
