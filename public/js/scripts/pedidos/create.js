@@ -96,7 +96,9 @@ $(".select2").select2({
     dropdownAutoWidth: true,
     width: "100%",
 });
+
 $(document).ready(function () {
+    /* $(".modal").modal(); */
     $(".timepicker").timepicker();
 });
 
@@ -104,6 +106,7 @@ var searchInput = document.getElementById("search_pedido");
 var table_producto = document.getElementById("tableDetalleProducto");
 var pedido_id = document.getElementById("id_pedido");
 function calcularSubTotal(codigo_producto) {
+    console.log("verificando codigo" + codigo_producto);
     let inputPrecioUnitario = document.getElementById(
         "inputPrecioUnitario" + codigo_producto
     );
@@ -130,6 +133,7 @@ function calcularSubTotal(codigo_producto) {
         .then((response) => response.json())
         .then((data) => {
             if (data.status == 200) {
+                console.log(resultado);
                 //subtotal de cada producto
                 document.getElementById(
                     "subtotal" + codigo_producto
@@ -234,7 +238,6 @@ function cargarProducto() {
 }
 //TODO: SEGUIR CON LOFICA PERO ADEMAS AÑADIR LA ACTUALIZACION Y REMOCION DE L ITEM
 function cambiarTabla(item_id) {
-    console.log(item_id);
     /* table_producto.innerHTML = ""; */
     var tableRows = table_producto.getElementsByTagName("tr");
     var rowCount = tableRows.length;
@@ -256,60 +259,70 @@ function cambiarTabla(item_id) {
         .then((data) => {
             if (data.status == 200) {
                 let claves = Object.keys(data.content);
-                for (let i = 0; i < claves.length; i++) {
-                    let clave = claves[i];
-                    let dataObject = data.content[clave].options;
-                    let row = table_producto.insertRow(-1);
-                    row.id = dataObject.codigo_producto;
-                    let c1 = row.insertCell(0);
-                    let c2 = row.insertCell(1);
-                    let c3 = row.insertCell(2);
-                    let c4 = row.insertCell(3);
-                    let c5 = row.insertCell(4);
-                    let c6 = row.insertCell(5);
-                    let c7 = row.insertCell(6);
+                if (claves.length == 0) {
+                    document.getElementById("subTotal").innerHTML =
+                        "Bs. 0.00000";
+                    document.getElementById("totalDolar").innerHTML =
+                        "Bs. 0.00000";
+                } else {
+                    for (let i = 0; i <= claves.length; i++) {
+                        let clave = claves[i];
+                        let dataObject = data.content[clave].options;
+                        let row = table_producto.insertRow(-1);
+                        row.id = dataObject.codigo_producto;
+                        let c1 = row.insertCell(0);
+                        let c2 = row.insertCell(1);
+                        let c3 = row.insertCell(2);
+                        let c4 = row.insertCell(3);
+                        let c5 = row.insertCell(4);
+                        let c6 = row.insertCell(5);
+                        let c7 = row.insertCell(6);
 
-                    var inputCantidad = document.createElement("input");
-                    var inputPrecioUnitario = document.createElement("input");
+                        var inputCantidad = document.createElement("input");
+                        var inputPrecioUnitario =
+                            document.createElement("input");
 
-                    inputCantidad.id = "inputCantidad" + dataObject.id;
-                    inputCantidad.value = "1.00000";
-                    inputCantidad.type = "number";
-                    inputCantidad.min = "0.00001";
-                    inputCantidad.step = "0.00001";
-                    inputCantidad.onchange = function () {
+                        inputCantidad.id = "inputCantidad" + dataObject.id;
+                        inputCantidad.value = dataObject.qty;
+                        inputCantidad.type = "number";
+                        inputCantidad.min = "0.00001";
+                        inputCantidad.step = "0.00001";
+                        inputCantidad.onchange = function () {
+                            calcularSubTotal(dataObject.id);
+                        };
+
+                        inputPrecioUnitario.id =
+                            "inputPrecioUnitario" + dataObject.id;
+                        inputPrecioUnitario.type = "number";
+                        inputPrecioUnitario.min = "0.00001";
+                        inputPrecioUnitario.step = "0.00001";
+                        inputPrecioUnitario.value = dataObject.price;
+                        inputPrecioUnitario.onchange = function () {
+                            calcularSubTotal(dataObject.id);
+                        };
+
+                        c1.innerText = dataObject.id;
+                        c2.innerText = dataObject.name;
+                        c3.innerText = dataObject.unidad_medida_literal;
+                        c4.appendChild(inputCantidad);
+                        c5.appendChild(inputPrecioUnitario);
+                        c6.innerHTML =
+                            "<span id='subtotal" +
+                            dataObject.id +
+                            "'>" +
+                            parseFloat(dataObject.price * 1)
+                                .toFixed(5)
+                                .toString() +
+                            "</span>";
+
+                        c7.innerHTML =
+                            "<button id='" +
+                            dataObject.id +
+                            "' name='" +
+                            dataObject.id +
+                            "' class='waves-effect waves-light btn' onclick='cambiarTabla(this.name)'><i class='material-icons prefix'>delete</i></button>";
                         calcularSubTotal(dataObject.id);
-                    };
-
-                    inputPrecioUnitario.id =
-                        "inputPrecioUnitario" + dataObject.id;
-                    inputPrecioUnitario.type = "number";
-                    inputPrecioUnitario.min = "0.00001";
-                    inputPrecioUnitario.step = "0.00001";
-                    inputPrecioUnitario.value = dataObject.price;
-                    inputPrecioUnitario.onchange = function () {
-                        calcularSubTotal(dataObject.id);
-                    };
-
-                    c1.innerText = dataObject.id;
-                    c2.innerText = dataObject.name;
-                    c3.innerText = dataObject.unidad_medida_literal;
-                    c4.appendChild(inputCantidad);
-                    c5.appendChild(inputPrecioUnitario);
-                    c6.innerHTML =
-                        "<span id='subtotal" +
-                        dataObject.id +
-                        "'>" +
-                        parseFloat(dataObject.price * 1)
-                            .toFixed(5)
-                            .toString() +
-                        "</span>";
-                    c7.innerHTML =
-                        "<button id='" +
-                        dataObject.id +
-                        "' name='" +
-                        dataObject.id +
-                        "' onclick='cambiarTabla(this.name)'><i class='material-icons prefix'>delete</i></button>";
+                    }
                 }
             } else {
                 M.toast({
@@ -320,6 +333,7 @@ function cambiarTabla(item_id) {
             }
         });
 }
+
 function deleteRow(posicion) {
     console.log(posicion);
     var table = document.getElementById("tableDetalleProducto");
