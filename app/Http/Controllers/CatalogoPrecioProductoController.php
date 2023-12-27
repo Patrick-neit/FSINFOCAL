@@ -63,6 +63,9 @@ class CatalogoPrecioProductoController extends Controller
                 $catalogo_precio->tipo_precio_b = $producto['precio_b'];
                 $catalogo_precio->tipo_precio_c = $producto['precio_c'];
                 $catalogo_precio->tipo_precio_d = $producto['precio_d'];
+                $catalogo_precio->tipo_precio_e = $producto['precio_e'];
+                $catalogo_precio->tipo_precio_f = $producto['precio_f'];
+                $catalogo_precio->tipo_precio_g = $producto['precio_g'];
                 $catalogo_precio->producto_id = $producto['producto_id'];
                 $catalogo_precio->cliente_id = $clienteID;
                 $catalogo_precio->save();

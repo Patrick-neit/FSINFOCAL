@@ -15,15 +15,20 @@ class CatalogoPrecioProducto extends Model
         'tipo_precio_b',
         'tipo_precio_c',
         'tipo_precio_d',
+        'tipo_precio_e',
+        'tipo_precio_f',
+        'tipo_precio_g',
         'producto_id',
         'cliente_id',
     ];
 
-    public function producto(){
+    public function producto()
+    {
         return $this->belongsTo(CabeceraProducto::class);
     }
 
-    public function cliente(){
+    public function cliente()
+    {
         return $this->belongsTo(Cliente::class);
     }
 }
