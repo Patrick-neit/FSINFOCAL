@@ -11,28 +11,49 @@ use Illuminate\Http\Request;
 
 class CatalogoPrecioProductoController extends Controller
 {
-    public function tipo_precio_index(){
-        $tipoPreciosClientes = ClienteTipoPrecio::all();
-        return view('catalogos_productos.tipo_precio_index', compact('tipoPreciosClientes'));
+    public function tipo_precio_index()
+    {
+        return view('catalogos_productos.tipo_precio_index', [
+            'clientes' => Cliente::where('estado', 1)->get()
+        ]);
     }
 
-    public function tipo_precio_create(){
-        $clientes = Cliente::where('estado',1)->get();
+    public function tipo_precio_create()
+    {
+        $clientes = Cliente::where('estado', 1)->get();
         return view('catalogos_productos.tipo_precio_create', compact('clientes'));
     }
 
-    public function index(){
-        $clientesProductos = Cliente::whereHas('catalogos_precios_productos')->get();
-        return view('catalogos_productos.index', compact('clientesProductos'));
+    public function tipo_precio_edit(Cliente $cliente)
+    {
+        return view('catalogos_productos.tipo_precio_edit', compact('cliente'));
     }
 
-    public function create(){
+    public function tipo_precio_store(Request $request)
+    {
+        $cliente = Cliente::find($request->cliente_id);
+        $cliente->tipo_precio = $request->tipos_precios;
+        $cliente->save();
+        return responseJson('Actualizado', $cliente, 200);
+    }
+
+    public function index()
+    {
+        $clientes = Cliente::where('estado', 1)->get();
+        $clientesProductos = Cliente::whereHas('catalogos_precios_productos')->get();
+        $productos = CabeceraProducto::all();
+        return view('catalogos_productos.index', compact('clientesProductos', 'clientes', 'productos'));
+    }
+
+    public function create()
+    {
         $clientes = Cliente::all();
         $productos = CabeceraProducto::all();
-        return view('catalogos_productos.create', compact('clientes','productos'));
+        return view('catalogos_productos.create', compact('clientes', 'productos'));
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         try {
             $clienteID = $request->cliente_id;
             DB::beginTransaction();
@@ -47,7 +68,7 @@ class CatalogoPrecioProductoController extends Controller
                 $catalogo_precio->save();
             }
             DB::commit();
-            return responseJson('Catalogo Precio Aasignado',$catalogo_precio ,200);
+            return responseJson('Catalogo Precio Aasignado', $catalogo_precio, 200);
         } catch (\Exception $e) {
             DB::rollBack();
             return responseJson('Server Error', [
@@ -55,6 +76,4 @@ class CatalogoPrecioProductoController extends Controller
             ], 500);
         }
     }
-
-
 }

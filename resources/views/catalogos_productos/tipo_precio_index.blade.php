@@ -26,21 +26,6 @@
             <div class="card-content">
                 <!-- datatable start -->
                 <div class="responsive-table">
-                    <div class="row">
-                        <div class="col s12">
-                            <div class="right-align">
-                                <!-- create invoice button-->
-                                <div class="invoice-create-btn">
-                                    <a href="{{ route('puntos_ventas.create') }}"
-                                        class="btn waves-effect waves-light invoice-create border-round z-depth-4">
-                                        <i class="material-icons">add</i>
-                                        <span class="hide-on-small-only">Nuevo Tipo Precio</span>
-                                    </a>
-                                </div> <br>
-                            </div>
-                        </div>
-                    </div>
-
                     <table id="users-list-datatable" class="table">
                         <thead>
                             <tr>
@@ -51,28 +36,22 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($tipoPreciosClientes as $tipoPrecio)
+                            @foreach ($clientes as $cliente)
                             <tr>
-                                <td>{{ $tipoPrecio->created_at }}</td>
-                                <td> <span class="green-text">{{ $tipoPrecio->cliente->nombre_cliente }}</span>
+                                <td>{{ $cliente->created_at }}</td>
+                                <td> <span class="green-text">{{ $cliente->nombre_cliente }}</span>
                                     </span> </td>
 
                                 <td>
-                                    @if ($tipoPrecio->tipo_precio_a = 1)
-                                        <span class="red-text">TIPO PRECIO A</span>
-                                    @elseif ($tipoPrecio->tipo_precio_b = 1)
-                                        <span class="red-text">TIPO PRECIO B</span>
-                                    @elseif ($tipoPrecio->tipo_precio_c = 1)
-                                        <span class="red-text">TIPO PRECIO C</span>
-                                    @else
-                                    <span class="red-text">TIPO PRECIO D</span>
+                                    @foreach (\App\Enums\TiposPrecios::cases() as $case)
+                                    @if ($case->value == $cliente->tipo_precio)
+                                    <span class="red-text">{{ $case->name }}</span>
                                     @endif
+                                    @endforeach
                                 </td>
-
                                 <td>
-                                    <a href="{{ asset('page-users-view') }}"><i class="material-icons">cached</i></a>
-                                    <span><a onclick="eliminar('{{ $tipoPrecio->id }}')"><i
-                                                class="material-icons">delete_outline</i></a></span>
+                                    <a href="{{ route('catalogos_productos.tipo_precio_edit', $cliente) }}"><i
+                                            class="material-icons">cached</i></a>
                                 </td>
                             </tr>
                             @endforeach

@@ -150,3 +150,47 @@ if ($(".users-edit").length > 0) {
         errorElement: "div",
     });
 }
+
+let actualizarTipoPrecioButton = document.getElementById(
+    "actualizarTipoPrecio"
+);
+let tipoPrecio = document.getElementById("tipos_precios");
+let idCliente = document.getElementById("id_cliente");
+
+actualizarTipoPrecioButton.addEventListener("click", (event) => {
+    event.preventDefault();
+    // console.log("actualizar");
+
+    fetch(ruta_guardar_tipo_precio, {
+        method: "POST",
+        body: JSON.stringify({
+            cliente_id: idCliente.value,
+            tipos_precios: tipoPrecio.value,
+        }),
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-Token": csrfToken,
+        },
+        credentials: "same-origin",
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            if (data.status == 200) {
+                M.toast({
+                    html: data.description,
+                    classes: "rounded",
+                    displayLength: 2000,
+                    completeCallback: function () {
+                        window.location.href = ruta_index_tipo_precio;
+                    },
+                });
+            } else {
+                M.toast({
+                    html: "Algo salio Mal!",
+                    classes: "rounded",
+                    displayLength: 3000,
+                    classes: "blue lighten-1",
+                });
+            }
+        });
+});

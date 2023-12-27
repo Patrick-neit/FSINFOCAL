@@ -24,23 +24,97 @@
     <div class="users-list-table">
         <div class="card">
             <div class="card-content">
-                <!-- datatable start -->
-                <div class="responsive-table">
-                    <div class="row">
-                        <div class="col s12">
-                            <div class="right-align">
-                                <!-- create invoice button-->
-                                <div class="invoice-create-btn">
-                                    <a href="{{ route('catalogos_productos.create') }}"
-                                        class="btn waves-effect waves-light invoice-create border-round z-depth-4">
-                                        <i class="material-icons">add</i>
-                                        <span class="hide-on-small-only">Asignar Precios</span>
-                                    </a>
-                                </div> <br>
-                            </div>
-                        </div>
+                <div class="row">
+                    <div class="col s12 m6 l6 input-field">
+                        <select name="cliente_id" id="cliente_id" class="form-select">
+                            @foreach ($clientes as $cliente)
+                            <option value="{{ $cliente->id }}">{{ $cliente->nombre_cliente }}
+                            </option>
+                            @endforeach
+                        </select>
+                        <label>Asociar Cliente</label>
                     </div>
-
+                </div>
+                <div class="row">
+                    <div class="col s12 m12 l12">
+                        <table class="mt-1">
+                            <thead>
+                                <tr>
+                                    <th>Productos Activas</th>
+                                    <th>Precio A</th>
+                                    <th>Precio B</th>
+                                    <th>Precio C</th>
+                                    <th>Precio D</th>
+                                    <th>Precio E</th>
+                                    <th>Precio F</th>
+                                    <th>Precio G</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($productos as $producto)
+                                <tr>
+                                    <td>{{$producto->nombre_producto}}</td>
+                                    <input type="hidden" name="productos[]" class="producto-checkbox"
+                                        value="{{$producto->id}}" />
+                                    <td>
+                                        <label>
+                                            <input type="checkbox" name="precio_a_{{$producto->id}}"
+                                                class="precio-checkbox" value="1" />
+                                            <span></span>
+                                        </label>
+                                    </td>
+                                    <td>
+                                        <label>
+                                            <input type="checkbox" name="precio_b_{{$producto->id}}"
+                                                class="precio-checkbox" value="1" />
+                                            <span></span>
+                                        </label>
+                                    </td>
+                                    <td>
+                                        <label>
+                                            <input type="checkbox" name="precio_c_{{$producto->id}}"
+                                                class="precio-checkbox" value="1" />
+                                            <span></span>
+                                        </label>
+                                    </td>
+                                    <td>
+                                        <label>
+                                            <input type="checkbox" name="precio_d_{{$producto->id}}"
+                                                class="precio-checkbox" value="1" />
+                                            <span></span>
+                                        </label>
+                                    </td>
+                                    <td>
+                                        <label>
+                                            <input type="checkbox" name="precio_e_{{$producto->id}}"
+                                                class="precio-checkbox" value="1" />
+                                            <span></span>
+                                        </label>
+                                    </td>
+                                    <td>
+                                        <label>
+                                            <input type="checkbox" name="precio_f_{{$producto->id}}"
+                                                class="precio-checkbox" value="1" />
+                                            <span></span>
+                                        </label>
+                                    </td>
+                                    <td>
+                                        <label>
+                                            <input type="checkbox" name="precio_g_{{$producto->id}}"
+                                                class="precio-checkbox" value="1" />
+                                            <span></span>
+                                        </label>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                        <!-- </div> -->
+                    </div>
+                </div>
+                <!-- datatable start -->
+                {{-- <div class="responsive-table">
+                    <br>
                     <table id="users-list-datatable" class="table">
 
                         <thead>
@@ -74,7 +148,7 @@
                             @endforelse
                         </tbody>
                     </table>
-                </div>
+                </div> --}}
                 <!-- datatable ends -->
             </div>
         </div>

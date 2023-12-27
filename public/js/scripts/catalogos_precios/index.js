@@ -177,6 +177,73 @@ asignarEmpresaButton.addEventListener("click", function (event) {
         })
 })
 
+let asignarPrecioButton = document.getElementById("asignarPrecioButton");
+let productos = document.querySelectorAll(".producto-checkbox");
+let cliente_id = document.getElementById("cliente_id");
 
+asignarPrecioButton.addEventListener("click", function (event) {
+    event.preventDefault();
+
+    let productosSeleccionados = [];
+
+    productos.forEach((producto) => {
+        let productoID = producto.value;
+
+        let precioA = document.querySelector(
+            `input[name=precio_a_${productoID}]:checked`
+        );
+        let precioB = document.querySelector(
+            `input[name=precio_b_${productoID}]:checked`
+        );
+        let precioC = document.querySelector(
+            `input[name=precio_c_${productoID}]:checked`
+        );
+        let precioD = document.querySelector(
+            `input[name=precio_d_${productoID}]:checked`
+        );
+
+        let precioData = {
+            producto_id: productoID,
+            precio_a: precioA ? 1 : 0,
+            precio_b: precioB ? 1 : 0,
+            precio_c: precioC ? 1 : 0,
+            precio_d: precioD ? 1 : 0,
+        };
+
+        productosSeleccionados.push(precioData);
+    });
+
+    fetch(ruta_store_catalogos, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-Token": csrfToken,
+        },
+        body: JSON.stringify({
+            cliente_id: cliente_id.value,
+            productos: productosSeleccionados,
+        }),
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            if (data.status == 200) {
+                M.toast({
+                    html: data.description,
+                    classes: "rounded",
+                    displayLength: 2000,
+                    completeCallback: function () {
+                        window.location.href = ruta_index_catalogo;
+                    },
+                });
+            } else {
+                M.toast({
+                    html: "Algo salio Mal!",
+                    classes: "rounded",
+                    displayLength: 3000,
+                    classes: "blue lighten-1",
+                });
+            }
+        });
+});
 
 
