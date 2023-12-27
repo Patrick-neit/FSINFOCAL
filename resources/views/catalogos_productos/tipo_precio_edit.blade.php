@@ -75,7 +75,7 @@
 @section('page-script')
 <script src="{{ asset('js/scripts/tipos_precios/index.js') }}"></script>
 <script>
-    let ruta_guardar_tipo_precio = "{{ route('catalogos_productos.tipo_precio_store') }}";
+    let ruta_actualizar_tipo_precio    = "{{ route('catalogos_productos.cliente_tipo_precio') }}";
     let ruta_index_tipo_precio = "{{ route('catalogos_productos.tipo_precio_index') }}";
 </script>
 @endsection

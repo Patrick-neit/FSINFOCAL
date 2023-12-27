@@ -181,6 +181,6 @@
 @section('page-script')
 <script src="{{ asset('js/scripts/catalogos_precios/index.js') }}"></script>
 <script>
-    let ruta_store_catalogos = "{{ route('catalogos_productos.store') }}"
+    let ruta_store_catalogos = "{{ route('catalogos_productos.tipo_precio_store') }}"
 </script>
 @endsection

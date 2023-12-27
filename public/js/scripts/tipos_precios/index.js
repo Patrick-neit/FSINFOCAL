@@ -161,7 +161,7 @@ actualizarTipoPrecioButton.addEventListener("click", (event) => {
     event.preventDefault();
     // console.log("actualizar");
 
-    fetch(ruta_guardar_tipo_precio, {
+    fetch(ruta_actualizar_tipo_precio, {
         method: "POST",
         body: JSON.stringify({
             cliente_id: idCliente.value,
