@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit3ea74f8ba45b7ba0443bbe3ed7a8894a
+class ComposerStaticInit53b53af0ef33d0cf9bf64c5ffa801e7b
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -1043,6 +1043,7 @@ class ComposerStaticInit3ea74f8ba45b7ba0443bbe3ed7a8894a
         'DebugBar\\Bridge\\SlimCollector' => __DIR__ . '/..' . '/maximebf/debugbar/src/DebugBar/Bridge/SlimCollector.php',
         'DebugBar\\Bridge\\SwiftMailer\\SwiftLogCollector' => __DIR__ . '/..' . '/maximebf/debugbar/src/DebugBar/Bridge/SwiftMailer/SwiftLogCollector.php',
         'DebugBar\\Bridge\\SwiftMailer\\SwiftMailCollector' => __DIR__ . '/..' . '/maximebf/debugbar/src/DebugBar/Bridge/SwiftMailer/SwiftMailCollector.php',
+        'DebugBar\\Bridge\\Symfony\\SymfonyMailCollector' => __DIR__ . '/..' . '/maximebf/debugbar/src/DebugBar/Bridge/Symfony/SymfonyMailCollector.php',
         'DebugBar\\Bridge\\TwigProfileCollector' => __DIR__ . '/..' . '/maximebf/debugbar/src/DebugBar/Bridge/TwigProfileCollector.php',
         'DebugBar\\Bridge\\Twig\\TimeableTwigExtensionProfiler' => __DIR__ . '/..' . '/maximebf/debugbar/src/DebugBar/Bridge/Twig/TimeableTwigExtensionProfiler.php',
         'DebugBar\\Bridge\\Twig\\TraceableTwigEnvironment' => __DIR__ . '/..' . '/maximebf/debugbar/src/DebugBar/Bridge/Twig/TraceableTwigEnvironment.php',
@@ -2030,6 +2031,7 @@ class ComposerStaticInit3ea74f8ba45b7ba0443bbe3ed7a8894a
         'Faker\\Provider\\nl_NL\\PhoneNumber' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/Provider/nl_NL/PhoneNumber.php',
         'Faker\\Provider\\nl_NL\\Text' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/Provider/nl_NL/Text.php',
         'Faker\\Provider\\pl_PL\\Address' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/Provider/pl_PL/Address.php',
+        'Faker\\Provider\\pl_PL\\Color' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/Provider/pl_PL/Color.php',
         'Faker\\Provider\\pl_PL\\Company' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/Provider/pl_PL/Company.php',
         'Faker\\Provider\\pl_PL\\Internet' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/Provider/pl_PL/Internet.php',
         'Faker\\Provider\\pl_PL\\LicensePlate' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/Provider/pl_PL/LicensePlate.php',
@@ -3911,6 +3913,7 @@ class ComposerStaticInit3ea74f8ba45b7ba0443bbe3ed7a8894a
         'League\\Flysystem\\Visibility' => __DIR__ . '/..' . '/league/flysystem/src/Visibility.php',
         'League\\Flysystem\\WhitespacePathNormalizer' => __DIR__ . '/..' . '/league/flysystem/src/WhitespacePathNormalizer.php',
         'League\\MimeTypeDetection\\EmptyExtensionToMimeTypeMap' => __DIR__ . '/..' . '/league/mime-type-detection/src/EmptyExtensionToMimeTypeMap.php',
+        'League\\MimeTypeDetection\\ExtensionLookup' => __DIR__ . '/..' . '/league/mime-type-detection/src/ExtensionLookup.php',
         'League\\MimeTypeDetection\\ExtensionMimeTypeDetector' => __DIR__ . '/..' . '/league/mime-type-detection/src/ExtensionMimeTypeDetector.php',
         'League\\MimeTypeDetection\\ExtensionToMimeTypeMap' => __DIR__ . '/..' . '/league/mime-type-detection/src/ExtensionToMimeTypeMap.php',
         'League\\MimeTypeDetection\\FinfoMimeTypeDetector' => __DIR__ . '/..' . '/league/mime-type-detection/src/FinfoMimeTypeDetector.php',
@@ -4210,13 +4213,16 @@ class ComposerStaticInit3ea74f8ba45b7ba0443bbe3ed7a8894a
         'Nette\\Utils\\Html' => __DIR__ . '/..' . '/nette/utils/src/Utils/Html.php',
         'Nette\\Utils\\IHtmlString' => __DIR__ . '/..' . '/nette/utils/src/compatibility.php',
         'Nette\\Utils\\Image' => __DIR__ . '/..' . '/nette/utils/src/Utils/Image.php',
+        'Nette\\Utils\\ImageColor' => __DIR__ . '/..' . '/nette/utils/src/Utils/ImageColor.php',
         'Nette\\Utils\\ImageException' => __DIR__ . '/..' . '/nette/utils/src/Utils/exceptions.php',
+        'Nette\\Utils\\ImageType' => __DIR__ . '/..' . '/nette/utils/src/Utils/ImageType.php',
         'Nette\\Utils\\Json' => __DIR__ . '/..' . '/nette/utils/src/Utils/Json.php',
         'Nette\\Utils\\JsonException' => __DIR__ . '/..' . '/nette/utils/src/Utils/exceptions.php',
         'Nette\\Utils\\ObjectHelpers' => __DIR__ . '/..' . '/nette/utils/src/Utils/ObjectHelpers.php',
         'Nette\\Utils\\Paginator' => __DIR__ . '/..' . '/nette/utils/src/Utils/Paginator.php',
         'Nette\\Utils\\Random' => __DIR__ . '/..' . '/nette/utils/src/Utils/Random.php',
         'Nette\\Utils\\Reflection' => __DIR__ . '/..' . '/nette/utils/src/Utils/Reflection.php',
+        'Nette\\Utils\\ReflectionMethod' => __DIR__ . '/..' . '/nette/utils/src/Utils/ReflectionMethod.php',
         'Nette\\Utils\\RegexpException' => __DIR__ . '/..' . '/nette/utils/src/Utils/exceptions.php',
         'Nette\\Utils\\Strings' => __DIR__ . '/..' . '/nette/utils/src/Utils/Strings.php',
         'Nette\\Utils\\Type' => __DIR__ . '/..' . '/nette/utils/src/Utils/Type.php',
@@ -5083,6 +5089,7 @@ class ComposerStaticInit3ea74f8ba45b7ba0443bbe3ed7a8894a
         'Psy\\CodeCleaner\\ValidFunctionNamePass' => __DIR__ . '/..' . '/psy/psysh/src/CodeCleaner/ValidFunctionNamePass.php',
         'Psy\\Command\\BufferCommand' => __DIR__ . '/..' . '/psy/psysh/src/Command/BufferCommand.php',
         'Psy\\Command\\ClearCommand' => __DIR__ . '/..' . '/psy/psysh/src/Command/ClearCommand.php',
+        'Psy\\Command\\CodeArgumentParser' => __DIR__ . '/..' . '/psy/psysh/src/Command/CodeArgumentParser.php',
         'Psy\\Command\\Command' => __DIR__ . '/..' . '/psy/psysh/src/Command/Command.php',
         'Psy\\Command\\DocCommand' => __DIR__ . '/..' . '/psy/psysh/src/Command/DocCommand.php',
         'Psy\\Command\\DumpCommand' => __DIR__ . '/..' . '/psy/psysh/src/Command/DumpCommand.php',
@@ -5219,6 +5226,7 @@ class ComposerStaticInit3ea74f8ba45b7ba0443bbe3ed7a8894a
         'Psy\\Sudo' => __DIR__ . '/..' . '/psy/psysh/src/Sudo.php',
         'Psy\\Sudo\\SudoVisitor' => __DIR__ . '/..' . '/psy/psysh/src/Sudo/SudoVisitor.php',
         'Psy\\SuperglobalsEnv' => __DIR__ . '/..' . '/psy/psysh/src/SuperglobalsEnv.php',
+        'Psy\\SystemEnv' => __DIR__ . '/..' . '/psy/psysh/src/SystemEnv.php',
         'Psy\\TabCompletion\\AutoCompleter' => __DIR__ . '/..' . '/psy/psysh/src/TabCompletion/AutoCompleter.php',
         'Psy\\TabCompletion\\Matcher\\AbstractContextAwareMatcher' => __DIR__ . '/..' . '/psy/psysh/src/TabCompletion/Matcher/AbstractContextAwareMatcher.php',
         'Psy\\TabCompletion\\Matcher\\AbstractDefaultParametersMatcher' => __DIR__ . '/..' . '/psy/psysh/src/TabCompletion/Matcher/AbstractDefaultParametersMatcher.php',
@@ -5264,8 +5272,10 @@ class ComposerStaticInit3ea74f8ba45b7ba0443bbe3ed7a8894a
         'Ramsey\\Collection\\CollectionInterface' => __DIR__ . '/..' . '/ramsey/collection/src/CollectionInterface.php',
         'Ramsey\\Collection\\DoubleEndedQueue' => __DIR__ . '/..' . '/ramsey/collection/src/DoubleEndedQueue.php',
         'Ramsey\\Collection\\DoubleEndedQueueInterface' => __DIR__ . '/..' . '/ramsey/collection/src/DoubleEndedQueueInterface.php',
+        'Ramsey\\Collection\\Exception\\CollectionException' => __DIR__ . '/..' . '/ramsey/collection/src/Exception/CollectionException.php',
         'Ramsey\\Collection\\Exception\\CollectionMismatchException' => __DIR__ . '/..' . '/ramsey/collection/src/Exception/CollectionMismatchException.php',
         'Ramsey\\Collection\\Exception\\InvalidArgumentException' => __DIR__ . '/..' . '/ramsey/collection/src/Exception/InvalidArgumentException.php',
+        'Ramsey\\Collection\\Exception\\InvalidPropertyOrMethod' => __DIR__ . '/..' . '/ramsey/collection/src/Exception/InvalidPropertyOrMethod.php',
         'Ramsey\\Collection\\Exception\\NoSuchElementException' => __DIR__ . '/..' . '/ramsey/collection/src/Exception/NoSuchElementException.php',
         'Ramsey\\Collection\\Exception\\OutOfBoundsException' => __DIR__ . '/..' . '/ramsey/collection/src/Exception/OutOfBoundsException.php',
         'Ramsey\\Collection\\Exception\\UnsupportedOperationException' => __DIR__ . '/..' . '/ramsey/collection/src/Exception/UnsupportedOperationException.php',
@@ -5280,6 +5290,7 @@ class ComposerStaticInit3ea74f8ba45b7ba0443bbe3ed7a8894a
         'Ramsey\\Collection\\Queue' => __DIR__ . '/..' . '/ramsey/collection/src/Queue.php',
         'Ramsey\\Collection\\QueueInterface' => __DIR__ . '/..' . '/ramsey/collection/src/QueueInterface.php',
         'Ramsey\\Collection\\Set' => __DIR__ . '/..' . '/ramsey/collection/src/Set.php',
+        'Ramsey\\Collection\\Sort' => __DIR__ . '/..' . '/ramsey/collection/src/Sort.php',
         'Ramsey\\Collection\\Tool\\TypeTrait' => __DIR__ . '/..' . '/ramsey/collection/src/Tool/TypeTrait.php',
         'Ramsey\\Collection\\Tool\\ValueExtractorTrait' => __DIR__ . '/..' . '/ramsey/collection/src/Tool/ValueExtractorTrait.php',
         'Ramsey\\Collection\\Tool\\ValueToStringTrait' => __DIR__ . '/..' . '/ramsey/collection/src/Tool/ValueToStringTrait.php',
@@ -5595,6 +5606,27 @@ class ComposerStaticInit3ea74f8ba45b7ba0443bbe3ed7a8894a
         'SebastianBergmann\\Type\\UnknownType' => __DIR__ . '/..' . '/sebastian/type/src/type/UnknownType.php',
         'SebastianBergmann\\Type\\VoidType' => __DIR__ . '/..' . '/sebastian/type/src/type/VoidType.php',
         'SebastianBergmann\\Version' => __DIR__ . '/..' . '/sebastian/version/src/Version.php',
+        'Spatie\\Backtrace\\Arguments\\ArgumentReducers' => __DIR__ . '/..' . '/spatie/backtrace/src/Arguments/ArgumentReducers.php',
+        'Spatie\\Backtrace\\Arguments\\ProvidedArgument' => __DIR__ . '/..' . '/spatie/backtrace/src/Arguments/ProvidedArgument.php',
+        'Spatie\\Backtrace\\Arguments\\ReduceArgumentPayloadAction' => __DIR__ . '/..' . '/spatie/backtrace/src/Arguments/ReduceArgumentPayloadAction.php',
+        'Spatie\\Backtrace\\Arguments\\ReduceArgumentsAction' => __DIR__ . '/..' . '/spatie/backtrace/src/Arguments/ReduceArgumentsAction.php',
+        'Spatie\\Backtrace\\Arguments\\ReducedArgument\\ReducedArgument' => __DIR__ . '/..' . '/spatie/backtrace/src/Arguments/ReducedArgument/ReducedArgument.php',
+        'Spatie\\Backtrace\\Arguments\\ReducedArgument\\ReducedArgumentContract' => __DIR__ . '/..' . '/spatie/backtrace/src/Arguments/ReducedArgument/ReducedArgumentContract.php',
+        'Spatie\\Backtrace\\Arguments\\ReducedArgument\\TruncatedReducedArgument' => __DIR__ . '/..' . '/spatie/backtrace/src/Arguments/ReducedArgument/TruncatedReducedArgument.php',
+        'Spatie\\Backtrace\\Arguments\\ReducedArgument\\UnReducedArgument' => __DIR__ . '/..' . '/spatie/backtrace/src/Arguments/ReducedArgument/UnReducedArgument.php',
+        'Spatie\\Backtrace\\Arguments\\ReducedArgument\\VariadicReducedArgument' => __DIR__ . '/..' . '/spatie/backtrace/src/Arguments/ReducedArgument/VariadicReducedArgument.php',
+        'Spatie\\Backtrace\\Arguments\\Reducers\\ArgumentReducer' => __DIR__ . '/..' . '/spatie/backtrace/src/Arguments/Reducers/ArgumentReducer.php',
+        'Spatie\\Backtrace\\Arguments\\Reducers\\ArrayArgumentReducer' => __DIR__ . '/..' . '/spatie/backtrace/src/Arguments/Reducers/ArrayArgumentReducer.php',
+        'Spatie\\Backtrace\\Arguments\\Reducers\\BaseTypeArgumentReducer' => __DIR__ . '/..' . '/spatie/backtrace/src/Arguments/Reducers/BaseTypeArgumentReducer.php',
+        'Spatie\\Backtrace\\Arguments\\Reducers\\ClosureArgumentReducer' => __DIR__ . '/..' . '/spatie/backtrace/src/Arguments/Reducers/ClosureArgumentReducer.php',
+        'Spatie\\Backtrace\\Arguments\\Reducers\\DateTimeArgumentReducer' => __DIR__ . '/..' . '/spatie/backtrace/src/Arguments/Reducers/DateTimeArgumentReducer.php',
+        'Spatie\\Backtrace\\Arguments\\Reducers\\DateTimeZoneArgumentReducer' => __DIR__ . '/..' . '/spatie/backtrace/src/Arguments/Reducers/DateTimeZoneArgumentReducer.php',
+        'Spatie\\Backtrace\\Arguments\\Reducers\\EnumArgumentReducer' => __DIR__ . '/..' . '/spatie/backtrace/src/Arguments/Reducers/EnumArgumentReducer.php',
+        'Spatie\\Backtrace\\Arguments\\Reducers\\MinimalArrayArgumentReducer' => __DIR__ . '/..' . '/spatie/backtrace/src/Arguments/Reducers/MinimalArrayArgumentReducer.php',
+        'Spatie\\Backtrace\\Arguments\\Reducers\\SensitiveParameterArrayReducer' => __DIR__ . '/..' . '/spatie/backtrace/src/Arguments/Reducers/SensitiveParameterArrayReducer.php',
+        'Spatie\\Backtrace\\Arguments\\Reducers\\StdClassArgumentReducer' => __DIR__ . '/..' . '/spatie/backtrace/src/Arguments/Reducers/StdClassArgumentReducer.php',
+        'Spatie\\Backtrace\\Arguments\\Reducers\\StringableArgumentReducer' => __DIR__ . '/..' . '/spatie/backtrace/src/Arguments/Reducers/StringableArgumentReducer.php',
+        'Spatie\\Backtrace\\Arguments\\Reducers\\SymphonyRequestArgumentReducer' => __DIR__ . '/..' . '/spatie/backtrace/src/Arguments/Reducers/SymphonyRequestArgumentReducer.php',
         'Spatie\\Backtrace\\Backtrace' => __DIR__ . '/..' . '/spatie/backtrace/src/Backtrace.php',
         'Spatie\\Backtrace\\CodeSnippet' => __DIR__ . '/..' . '/spatie/backtrace/src/CodeSnippet.php',
         'Spatie\\Backtrace\\File' => __DIR__ . '/..' . '/spatie/backtrace/src/File.php',
@@ -5637,6 +5669,7 @@ class ComposerStaticInit3ea74f8ba45b7ba0443bbe3ed7a8894a
         'Spatie\\FlareClient\\Truncation\\AbstractTruncationStrategy' => __DIR__ . '/..' . '/spatie/flare-client-php/src/Truncation/AbstractTruncationStrategy.php',
         'Spatie\\FlareClient\\Truncation\\ReportTrimmer' => __DIR__ . '/..' . '/spatie/flare-client-php/src/Truncation/ReportTrimmer.php',
         'Spatie\\FlareClient\\Truncation\\TrimContextItemsStrategy' => __DIR__ . '/..' . '/spatie/flare-client-php/src/Truncation/TrimContextItemsStrategy.php',
+        'Spatie\\FlareClient\\Truncation\\TrimStackFrameArgumentsStrategy' => __DIR__ . '/..' . '/spatie/flare-client-php/src/Truncation/TrimStackFrameArgumentsStrategy.php',
         'Spatie\\FlareClient\\Truncation\\TrimStringsStrategy' => __DIR__ . '/..' . '/spatie/flare-client-php/src/Truncation/TrimStringsStrategy.php',
         'Spatie\\FlareClient\\Truncation\\TruncationStrategy' => __DIR__ . '/..' . '/spatie/flare-client-php/src/Truncation/TruncationStrategy.php',
         'Spatie\\FlareClient\\View' => __DIR__ . '/..' . '/spatie/flare-client-php/src/View.php',
@@ -5652,6 +5685,11 @@ class ComposerStaticInit3ea74f8ba45b7ba0443bbe3ed7a8894a
         'Spatie\\Ignition\\ErrorPage\\ErrorPageViewModel' => __DIR__ . '/..' . '/spatie/ignition/src/ErrorPage/ErrorPageViewModel.php',
         'Spatie\\Ignition\\ErrorPage\\Renderer' => __DIR__ . '/..' . '/spatie/ignition/src/ErrorPage/Renderer.php',
         'Spatie\\Ignition\\Ignition' => __DIR__ . '/..' . '/spatie/ignition/src/Ignition.php',
+        'Spatie\\Ignition\\Solutions\\OpenAi\\DummyCache' => __DIR__ . '/..' . '/spatie/ignition/src/Solutions/OpenAi/DummyCache.php',
+        'Spatie\\Ignition\\Solutions\\OpenAi\\OpenAiPromptViewModel' => __DIR__ . '/..' . '/spatie/ignition/src/Solutions/OpenAi/OpenAiPromptViewModel.php',
+        'Spatie\\Ignition\\Solutions\\OpenAi\\OpenAiSolution' => __DIR__ . '/..' . '/spatie/ignition/src/Solutions/OpenAi/OpenAiSolution.php',
+        'Spatie\\Ignition\\Solutions\\OpenAi\\OpenAiSolutionProvider' => __DIR__ . '/..' . '/spatie/ignition/src/Solutions/OpenAi/OpenAiSolutionProvider.php',
+        'Spatie\\Ignition\\Solutions\\OpenAi\\OpenAiSolutionResponse' => __DIR__ . '/..' . '/spatie/ignition/src/Solutions/OpenAi/OpenAiSolutionResponse.php',
         'Spatie\\Ignition\\Solutions\\SolutionProviders\\BadMethodCallSolutionProvider' => __DIR__ . '/..' . '/spatie/ignition/src/Solutions/SolutionProviders/BadMethodCallSolutionProvider.php',
         'Spatie\\Ignition\\Solutions\\SolutionProviders\\MergeConflictSolutionProvider' => __DIR__ . '/..' . '/spatie/ignition/src/Solutions/SolutionProviders/MergeConflictSolutionProvider.php',
         'Spatie\\Ignition\\Solutions\\SolutionProviders\\SolutionProviderRepository' => __DIR__ . '/..' . '/spatie/ignition/src/Solutions/SolutionProviders/SolutionProviderRepository.php',
@@ -6871,10 +6909,10 @@ class ComposerStaticInit3ea74f8ba45b7ba0443bbe3ed7a8894a
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit3ea74f8ba45b7ba0443bbe3ed7a8894a::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit3ea74f8ba45b7ba0443bbe3ed7a8894a::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit3ea74f8ba45b7ba0443bbe3ed7a8894a::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit3ea74f8ba45b7ba0443bbe3ed7a8894a::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit53b53af0ef33d0cf9bf64c5ffa801e7b::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit53b53af0ef33d0cf9bf64c5ffa801e7b::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit53b53af0ef33d0cf9bf64c5ffa801e7b::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit53b53af0ef33d0cf9bf64c5ffa801e7b::$classMap;
 
         }, null, ClassLoader::class);
     }

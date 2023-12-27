@@ -34,6 +34,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserProfileController;
 use Illuminate\Support\Facades\Route;
 use LukePOLO\LaraCart\Facades\LaraCart;
+use LukePOLO\LaraCart\LaraCartServiceProvider;
 
 /*
 |--------------------------------------------------------------------------
@@ -398,6 +399,7 @@ Route::group(
         Route::post('/ver_cart', 'getAllCart')->name('get.all.cart');
 
         Route::get('/ver_carrito', function () {
+
             return responseJson('LaraCart', LaraCart::getItems(), 200);
         })->name('ver.carrito');
         Route::get('/vaciar_cart', function () {

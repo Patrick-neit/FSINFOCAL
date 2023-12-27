@@ -19,6 +19,9 @@ return new class extends Migration
             $table->integer('tipo_precio_b');
             $table->integer('tipo_precio_c');
             $table->integer('tipo_precio_d');
+            $table->integer('tipo_precio_e');
+            $table->integer('tipo_precio_f');
+            $table->integer('tipo_precio_g');
             $table->unsignedBigInteger('cliente_id');
             $table->timestamps();
         });

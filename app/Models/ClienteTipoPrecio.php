@@ -15,9 +15,13 @@ class ClienteTipoPrecio extends Model
         'tipo_precio_b',
         'tipo_precio_c',
         'tipo_precio_d',
+        'tipo_precio_e',
+        'tipo_precio_f',
+        'tipo_precio_g',
         'cliente_id',
     ];
-    public function cliente(){
+    public function cliente()
+    {
         return $this->belongsTo(Cliente::class);
     }
 }

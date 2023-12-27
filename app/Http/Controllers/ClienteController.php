@@ -42,7 +42,7 @@ class ClienteController extends Controller
     public function store(Request $request)
     {
         try {
-            if (! empty($request->cliente_id)) {
+            if (!empty($request->cliente_id)) {
                 return $this->update($request);
             }
             $cliente = new Cliente();
@@ -53,23 +53,18 @@ class ClienteController extends Controller
             $cliente->direccion = $request->direccion;
             $cliente->telefono = $request->telefono;
             $cliente->correo = $request->correo;
+            $cliente->tipo_precio = $request->tipos_precios;
             $cliente->departamento_id = $request->departamento_id;
             $cliente->fecha_cumpleanos = Carbon::createFromFormat('d/m/Y', $request->fecha_cumpleanos)->format('Y-m-d');
 
             $cliente->contacto = $request->contacto;
             $cliente->save();
             if ($cliente->save()) {
-                $tipo_precio = new ClienteTipoPrecio();
-                $tipo_precio->tipo_precio_a = 1;
-                $tipo_precio->tipo_precio_b = 0;
-                $tipo_precio->tipo_precio_c = 0;
-                $tipo_precio->tipo_precio_d = 0;
-                $tipo_precio->cliente_id = $cliente->id;
-                $tipo_precio->save();
+
+                selectTipoPrecio($request->tipos_precios, $cliente->id);
 
                 return responseJson('Cliente Guardado', $cliente, 200);
             }
-
         } catch (\Exception $e) {
             return responseJson('Server Error', [
                 'message' => $e->getMessage(),

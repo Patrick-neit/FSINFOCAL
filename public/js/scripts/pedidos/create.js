@@ -106,7 +106,6 @@ var searchInput = document.getElementById("search_pedido");
 var table_producto = document.getElementById("tableDetalleProducto");
 var pedido_id = document.getElementById("id_pedido");
 function calcularSubTotal(codigo_producto) {
-    console.log("verificando codigo" + codigo_producto);
     let inputPrecioUnitario = document.getElementById(
         "inputPrecioUnitario" + codigo_producto
     );
@@ -133,7 +132,6 @@ function calcularSubTotal(codigo_producto) {
         .then((response) => response.json())
         .then((data) => {
             if (data.status == 200) {
-                console.log(resultado);
                 //subtotal de cada producto
                 document.getElementById(
                     "subtotal" + codigo_producto
@@ -265,8 +263,9 @@ function cambiarTabla(item_id) {
                     document.getElementById("totalDolar").innerHTML =
                         "Bs. 0.00000";
                 } else {
-                    for (let i = 0; i <= claves.length; i++) {
+                    for (let i = 0; i < claves.length; i++) {
                         let clave = claves[i];
+
                         let dataObject = data.content[clave].options;
                         let row = table_producto.insertRow(-1);
                         row.id = dataObject.codigo_producto;
@@ -296,7 +295,9 @@ function cambiarTabla(item_id) {
                         inputPrecioUnitario.type = "number";
                         inputPrecioUnitario.min = "0.00001";
                         inputPrecioUnitario.step = "0.00001";
-                        inputPrecioUnitario.value = dataObject.price;
+                        inputPrecioUnitario.value = parseFloat(
+                            dataObject.price
+                        ).toFixed(5);
                         inputPrecioUnitario.onchange = function () {
                             calcularSubTotal(dataObject.id);
                         };
@@ -316,11 +317,11 @@ function cambiarTabla(item_id) {
                             "</span>";
 
                         c7.innerHTML =
-                            "<button id='" +
+                            "<a id='" +
                             dataObject.id +
                             "' name='" +
                             dataObject.id +
-                            "' class='waves-effect waves-light btn' onclick='cambiarTabla(this.name)'><i class='material-icons prefix'>delete</i></button>";
+                            "' class='waves-effect waves-light btn' onclick='cambiarTabla(this.name)'><i class='material-icons prefix'>delete</i></a>";
                         calcularSubTotal(dataObject.id);
                     }
                 }
@@ -335,10 +336,8 @@ function cambiarTabla(item_id) {
 }
 
 function deleteRow(posicion) {
-    console.log(posicion);
     var table = document.getElementById("tableDetalleProducto");
     var row = document.getElementById(posicion);
-    console.log(row);
     table.deleteRow(row.rowIndex + 1);
 }
 
@@ -374,7 +373,6 @@ registrarPedidoButton.addEventListener("click", function (event) {
         .then((response) => response.json())
         .then((data) => {
             if (data.status == 200) {
-                console.log(data.content);
                 M.toast({
                     html: data.description,
                     classes: "rounded",

@@ -140,6 +140,7 @@ let correo = document.getElementById("correo");
 let departamento_id = document.getElementById("departamento_id");
 let fecha_cumpleanos = document.getElementById("fecha_cumpleanos");
 let contacto = document.getElementById("contacto");
+let tipos_precios = document.getElementById("tipos_precios");
 let estado = document.getElementById("estado");
 let cliente_id = document.getElementById("id_cliente");
 
@@ -163,6 +164,7 @@ registrarClienteButton.addEventListener("click", function (event) {
             departamento_id: departamento_id.value,
             fecha_cumpleanos: fecha_cumpleanos.value,
             contacto: contacto.value,
+            tipos_precios: tipos_precios.value,
             estado: estado.value,
             cliente_id: cliente_id.value,
         }),

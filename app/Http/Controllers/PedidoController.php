@@ -10,6 +10,7 @@ use App\Models\Pedido;
 use App\Models\Proveedor;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
 use LukePOLO\LaraCart\Facades\LaraCart;
 
 class PedidoController extends Controller
@@ -126,8 +127,79 @@ class PedidoController extends Controller
      */
     public function update($request)
     {
-        dd($request);
-        
+        $pedido = Pedido::find($request->pedido_id)->load('detalle_pedido');
+
+        $pedido->update([
+            'fecha' => Carbon::createFromDate($request->fecha)->format('Y-m-d'),
+            'hora' => Carbon::createFromDate($request->hora)->format('H:m:s'),
+            'proveedor_id' => $request->proveedor_id,
+            'usuario_id' => auth()->user()->id,
+            'total' => number_format((float)\LukePOLO\LaraCart\Facades\LaraCart::subTotal(false), 5, '.', '')
+        ]);
+
+        $copia_detalle = $pedido->detalle_pedido;
+
+        if (count($copia_detalle) > count(LaraCart::getItems())) {
+            foreach ($copia_detalle as $detalle) {
+
+                $producto = CabeceraProducto::find($detalle->producto_id);
+
+                $carrito_encontrado = LaraCart::find(['id' => $producto->codigo_producto]);
+
+                if ($carrito_encontrado == null) {
+                    $detalle->delete();
+                } else {
+
+                    $detalle_pedido = DetallePedido::where('producto_id', $producto->id)->first();
+
+                    if (empty($detalle_pedido)) {
+                        $detalle_pedido = new DetallePedido();
+                        $detalle_pedido->pedido_id = $pedido->id;
+                        $detalle_pedido->producto_id = $producto->id;
+                        $detalle_pedido->cantidad = $carrito_encontrado->qty;
+                        $detalle_pedido->precio_unitario = $carrito_encontrado->price;
+                        $detalle_pedido->sub_total = $carrito_encontrado->subtotal;
+                        $detalle_pedido->save();
+                    } else {
+                        $detalle_pedido->update([
+                            'pedido_id' => $pedido->id,
+                            'producto_id' => $producto->id,
+                            'cantidad' => $carrito_encontrado->qty,
+                            'precio_unitario' => $carrito_encontrado->price,
+                            'sub_total' => $carrito_encontrado->subtotal,
+                        ]);
+                    }
+                }
+            }
+        } else {
+
+            foreach (LaraCart::getItems() as $item) {
+
+                $producto = CabeceraProducto::select('id')->where('codigo_producto', $item->id)->first();
+
+                $detalle = DetallePedido::where('producto_id', $producto->id)->first();
+
+                if (empty($detalle)) {
+                    $detalle_pedido = new DetallePedido();
+                    $detalle_pedido->pedido_id = $pedido->id;
+                    $detalle_pedido->producto_id = $producto->id;
+                    $detalle_pedido->cantidad = $item->qty;
+                    $detalle_pedido->precio_unitario = $item->price;
+                    $detalle_pedido->sub_total = $item->subtotal;
+                    $detalle_pedido->save();
+                } else {
+                    $detalle->update([
+                        'pedido_id' => $pedido->id,
+                        'producto_id' => $producto->id,
+                        'cantidad' => $item->qty,
+                        'precio_unitario' => $item->price,
+                        'sub_total' => $item->subtotal,
+                    ]);
+                }
+            }
+        }
+        LaraCart::destroyCart();
+        return responseJson('Actualizado', $pedido, 200);
     }
 
     /**

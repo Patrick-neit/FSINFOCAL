@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('complemento', 5)->nullable();
             $table->string('direccion', 450)->nullable();
             $table->string('telefono', 50)->nullable();
+            $table->integer('tipo_precio')->default(1);
             $table->string('correo');
             $table->integer('departamento_id');
             $table->dateTime('fecha_cumpleanos');
