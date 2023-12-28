@@ -8,6 +8,7 @@ $baseDir = dirname($vendorDir);
 return array(
     'App\\Console\\Commands\\SincronizarCatalogos' => $baseDir . '/app/Console/Commands/SincronizarCatalogos.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
+    'App\\Enums\\TiposPrecios' => $baseDir . '/app/Enums/TiposPrecios.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Helpers\\Helpers' => $baseDir . '/app/Helpers/Helpers.php',
     'App\\Http\\Controllers\\AdvanceUiController' => $baseDir . '/app/Http/Controllers/AdvanceUiController.php',

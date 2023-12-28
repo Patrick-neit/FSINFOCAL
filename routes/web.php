@@ -16,6 +16,7 @@ use App\Http\Controllers\DataTableController;
 use App\Http\Controllers\DosificacionEmpresaController;
 use App\Http\Controllers\AlmacenController;
 use App\Http\Controllers\CatalogoPrecioProductoController;
+use App\Http\Controllers\ComprasController;
 use App\Http\Controllers\EjemploController;
 use App\Http\Controllers\ExtraComponentsController;
 use App\Http\Controllers\FamiliaController;
@@ -429,6 +430,13 @@ Route::group([
     Route::get('/edit/{id}', 'edit')->name('almacenes.edit');
     Route::post('store', 'store')->name('almacenes.store');
     Route::delete('destroy', 'destroy')->name('almacenes.destroy');
+});
+Route::group([
+    'prefix' => 'compras',
+    'controller' => ComprasController::class
+], function () {
+    Route::get('/aprobar/pedido/index/{pedido}', 'compras_index')->name('compras.aprobar_index');
+    Route::post('/aprobar/pedido', 'aprobar_pedido')->name('compras.aprobar_pedido');
 });
 
 Route::group([

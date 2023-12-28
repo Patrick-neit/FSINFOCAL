@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\CabeceraProducto;
 use App\Models\DetallePedido;
 use App\Models\ImpuestoUnidadMedida;
+use App\Models\KardexProducto;
 use App\Models\Pedido;
 use App\Models\Proveedor;
 use Illuminate\Http\Request;
@@ -63,13 +64,19 @@ class PedidoController extends Controller
         $pedido->save();
 
         foreach (LaraCart::getItems() as $item) {
+            $producto_id = CabeceraProducto::select('id')->where('codigo_producto', $item->id)->first()->id;
             $detalle_pedido = new DetallePedido();
             $detalle_pedido->pedido_id = $pedido->id;
-            $detalle_pedido->producto_id = CabeceraProducto::select('id')->where('codigo_producto', $item->id)->first()->id;
+            $detalle_pedido->producto_id = $producto_id;
             $detalle_pedido->cantidad = $item->qty;
             $detalle_pedido->precio_unitario = $item->price;
             $detalle_pedido->sub_total = $item->subtotal;
             $detalle_pedido->save();
+            $kardex_producto = KardexProducto::where('producto_id', $producto_id)->get();
+            $kardex_producto->fecha = Carbon::now()->format('Y-m-d');
+            $kardex_producto->hora = Carbon::now()->format('H:m:s');
+            $kardex_producto->cantidad_ingresos = $item->qty;
+            $kardex_producto->save();
         }
         LaraCart::destroyCart();
         return responseJson('Guardado', $pedido, 200);

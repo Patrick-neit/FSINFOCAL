@@ -6,42 +6,20 @@ const csrfToken = document.head.querySelector(
 var usersTable;
 var usersDataArray = [];
 // datatable initialization
-if ($("#enterprice-list-datatable").length > 0) {
-    usersTable = $("#enterprice-list-datatable").DataTable({
-        lengthChange: false,
+if ($("#users-list-datatable").length > 0) {
+    usersTable = $("#users-list-datatable").DataTable({
         responsive: true,
-        autoWidth: false,
-        searching: false,
-        language: {
-            decimal: "",
-            emptyTable: "No hay información",
-            info: "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
-            infoEmpty: "Mostrando 0 to 0 of 0 Entradas",
-            infoFiltered: "(Filtrado de _MAX_ total entradas)",
-            infoPostFix: "",
-            thousands: ",",
-            lengthMenu: "Mostrar _MENU_ Entradas",
-            loadingRecords: "Cargando...",
-            processing: "Procesando...",
-            search: "Buscar:",
-            zeroRecords: "Sin resultados encontrados",
-            paginate: {
-                first: "Primero",
-                last: "Ultimo",
-                next: "Siguiente",
-                previous: "Anterior",
-            },
-        },
         columnDefs: [
             {
                 orderable: false,
+                targets: [0, 8, 9],
             },
         ],
     });
 }
 // on click selected users data from table(page named page-users-list)
 // to store into local storage to get rendered on second page named page-users-view
-$(document).on("click", "#enterprice-list-datatable tr", function () {
+$(document).on("click", "#users-list-datatable tr", function () {
     $(this)
         .find("td")
         .each(function () {
@@ -114,53 +92,69 @@ if ($("#users-movies-select2").length > 0) {
         width: "100%",
     });
 }
+$(".select2").select2({
+    dropdownAutoWidth: true,
+    width: "100%",
+});
 
-// Input, Select, Textarea validations except submit button validation initialization
-if ($(".users-edit").length > 0) {
-    $("#accountForm, #infotabForm").validate({
-        rules: {
-            username: {
-                required: true,
-                minlength: 5,
-            },
-            name: {
-                required: true,
-            },
-            email: {
-                required: true,
-            },
-            datepicker: {
-                required: true,
-            },
-            address: {
-                required: true,
-            },
-        },
-        errorElement: "div",
-    });
-    $("#infotabForm").validate({
-        rules: {
-            datepicker: {
-                required: true,
-            },
-            address: {
-                required: true,
-            },
-        },
-        errorElement: "div",
-    });
-}
+$(document).ready(function () {
+    /* $(".modal").modal(); */
+    $(".timepicker").timepicker();
+});
 
-/* Eliminar Docente */
-function eliminar(e) {
-    fetch(ruta_eliminar_pedido, {
-        method: "DELETE",
+$(document).ready(function () {
+    $(".datepicker").datepicker({
+        format: "dd-mm-yyyy",
+        autoClose: true,
+    });
+});
+
+let registroAprobacionButton = document.getElementById(
+    "registrarAprobacionButton"
+);
+let lote = document.getElementById("lote");
+let tipoDocumento = document.getElementById("tipo_documento_id");
+let numeroDocumento = document.getElementById("numero_documento");
+let metodoPago = document.getElementById("metodo_pago_id");
+let pedido_id = document.getElementById("id_pedido");
+
+let productos = document.querySelectorAll(".producto-checkbox");
+registroAprobacionButton.addEventListener("click", function (event) {
+    event.preventDefault();
+
+    let productosSeleccionados = [];
+
+    productos.forEach((producto) => {
+        let productoID = producto.value;
+
+        let fecha_vencimiento = document.querySelector(
+            `input[name=fecha_v_${productoID}]`
+        );
+
+        console.log(fecha_vencimiento);
+
+        let precioData = {
+            producto_id: productoID,
+            fecha_vencimiento: fecha_vencimiento.value,
+        };
+
+        productosSeleccionados.push(precioData);
+        console.log(productosSeleccionados);
+    });
+
+    fetch(ruta_aprobar_pedido, {
+        method: "POST",
         headers: {
             "Content-Type": "application/json",
             "X-CSRF-Token": csrfToken,
         },
         body: JSON.stringify({
-            pedido_id: e,
+            lote: lote.value,
+            tipo_documento: tipoDocumento.value,
+            numero_documento: numeroDocumento.value,
+            metodo_pago: metodoPago.value,
+            productos: productosSeleccionados,
+            pedido_id: pedido_id.value,
         }),
     })
         .then((response) => response.json())
@@ -170,9 +164,9 @@ function eliminar(e) {
                     html: data.description,
                     classes: "rounded",
                     displayLength: 2000,
-                    completeCallback: function () {
-                        window.location.href = ruta_index_pedido;
-                    },
+                });
+                setTimeout(function () {
+                    window.location.href = ruta_pedidos_index;
                 });
             } else {
                 M.toast({
@@ -181,44 +175,5 @@ function eliminar(e) {
                     displayLength: 2000,
                 });
             }
-        })
-        .catch((error) => {
-            M.toast({
-                html: error,
-                classes: "rounded",
-                displayLength: 2000,
-            });
         });
-}
-function aprobar_pedido(id){
-fetch(ruta_aprobar_pedido, {
-    method: "POST",
-    headers: {
-        "Content-Type": "application/json",
-        "X-CSRF-Token": csrfToken,
-    },
-    body: JSON.stringify({
-        pedido_id: id,
-    }),
-})
-    .then((response) => response.json())
-    .then((data) => {
-        if (data.status == 200) {
-            M.toast({
-                html: data.description,
-                classes: "rounded",
-                displayLength: 2000,
-                completeCallback: function () {
-                    window.location.href = ruta_index_pedido;
-                },
-            });
-        } else {
-            M.toast({
-                html: data.description,
-                classes: "rounded",
-                displayLength: 2000,
-            });
-        }
-    })
-
-}
+});

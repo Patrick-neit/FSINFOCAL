@@ -649,6 +649,7 @@ class ComposerStaticInit53b53af0ef33d0cf9bf64c5ffa801e7b
     public static $classMap = array (
         'App\\Console\\Commands\\SincronizarCatalogos' => __DIR__ . '/../..' . '/app/Console/Commands/SincronizarCatalogos.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
+        'App\\Enums\\TiposPrecios' => __DIR__ . '/../..' . '/app/Enums/TiposPrecios.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Helpers\\Helpers' => __DIR__ . '/../..' . '/app/Helpers/Helpers.php',
         'App\\Http\\Controllers\\AdvanceUiController' => __DIR__ . '/../..' . '/app/Http/Controllers/AdvanceUiController.php',

@@ -391,3 +391,8 @@ registrarPedidoButton.addEventListener("click", function (event) {
             }
         });
 });
+$(document).ready(function () {
+    $(".datepicker").datepicker();
+});
+
+

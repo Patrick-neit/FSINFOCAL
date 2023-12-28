@@ -52,12 +52,16 @@
                         </thead>
                         <tbody>
                             @forelse ($pedidos as $pedido)
+                            @if ($pedido->aprobado == 'Pendiente')
                             <tr>
                                 <td>{{ $pedido->id }}</td>
                                 <td>{{ $pedido->nota }}</td>
                                 <td>{{ $pedido->aprobado }}</td>
                                 <td>{{ $pedido->total }}</td>
                                 <td class="text-center">
+                                    <a href="{{ route('compras.aprobar_index', $pedido) }}">
+                                        <i class="material-icons">call_merge</i>
+                                    </a>
                                     <a href="{{ route('pedido.edit', $pedido->id)}}">
                                         <i class="material-icons">edit</i>
                                     </a>
@@ -65,6 +69,7 @@
                                                 class="material-icons">delete_outline</i></a></span>
                                 </td>
                             </tr>
+                            @endif
                             @empty
                             <tr>
                                 <td colspan="8" class="text-center">
@@ -95,5 +100,6 @@
 <script>
     let ruta_index_pedido = "{{ route('pedido.index') }}";
     let ruta_eliminar_pedido = "{{ route('pedido.destroy') }}";
+    let ruta_aprobar_pedido = "{{ route('compras.aprobar_pedido') }}";
 </script>
 @endsection
