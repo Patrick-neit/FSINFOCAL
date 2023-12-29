@@ -125,8 +125,8 @@ class ProductoController extends Controller
             $kardexProducto->precio_unitario_egresos = 0;
             $kardexProducto->total_egresos = 0;
             $kardexProducto->cantidad_saldo_actual = $request->stock_actual;
-            $kardexProducto->promedio = $request->precio_unitario;
-            $kardexProducto->costo_total_saldo = $request->stock_actual * $request->precio_unitario;
+            $kardexProducto->promedio = $request->precio_compra;
+            $kardexProducto->costo_total_saldo = $request->stock_actual * $request->precio_compra;
             $kardexProducto->utilidad = 0;
             $kardexProducto->usuario_id = auth()->user()->id;
             $kardexProducto->save();
