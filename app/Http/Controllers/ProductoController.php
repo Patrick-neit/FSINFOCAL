@@ -73,8 +73,7 @@ class ProductoController extends Controller
         $kardexProducto = new KardexProducto();
 
         //aign valores de productos
-        $cabeceraProducto->dosificacion_id = 10000 /* $request->codigo_actividad */;
-            /* $cabeceraProducto->codigo_producto_sin = 20000 *//* $request->codigo_producto_sin */;
+        $cabeceraProducto->codigo_actividad =  $request->dosificacion;
 
         $cabeceraProducto->unidad_medida_id = $request->unidad_medida;
         $cabeceraProducto->marca_id = $request->marca_id;

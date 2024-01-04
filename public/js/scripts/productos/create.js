@@ -144,6 +144,7 @@ let registrarProductoButton = document.getElementById(
 );
 
 let dosificacion = document.getElementById("dosificacion");
+console.log(dosificacion.value);
 let codigo_producto_servicio = document.getElementById(
     "codigo_producto_servicio"
 );
@@ -185,7 +186,7 @@ registrarProductoButton.addEventListener("click", function (event) {
             "X-CSRF-Token": csrfToken,
         },
         body: JSON.stringify({
-            dosificacion: 1,
+            dosificacion: dosificacion.value,
             unidad_medida: unidad_medida.value,
             marca_id: marca_id.value,
             categoria: categoria.value,
@@ -253,6 +254,7 @@ $(".select2").select2({
     width: "100%",
 });
 function cargarActividad() {
+    console.log(dosificacion.value);
     let homologacion_select = document.getElementById("homologacion");
     fetch(ruta_get_actividad, {
         method: "POST",

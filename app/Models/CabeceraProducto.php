@@ -14,7 +14,7 @@ class CabeceraProducto extends Model
     public $table = 'cabecera_productos';
 
     public $fillable = [
-        'dosificacion_id',
+        'codigo_actividad',
         'unidad_medida_id',
         'marca_id',
         'categoria_id',

@@ -65,7 +65,7 @@ class ComprasController extends Controller
             $kardex_nuevo->precio_unitario_egresos = 0;
             $kardex_nuevo->total_egresos = 0;
             $kardex_nuevo->cantidad_saldo_actual = $kardex_producto->cantidad_saldo_actual + $detalle->cantidad;
-            $kardex_nuevo->promedio = ($kardex_producto->costo_total_saldo + ($detalle->cantidad * $detalle->precio_unitario)) / $kardex_nuevo->cantidad_saldo_actual;
+            $kardex_nuevo->promedio = ($kardex_producto->costo_total_saldo + ($detalle->cantidad * $detalle->precio_unitario)) / $kardex_nuevo->cantidad_saldo_actual; // ?????
             $kardex_nuevo->costo_total_saldo = $kardex_nuevo->cantidad_saldo_actual * $kardex_nuevo->promedio;
             $kardex_nuevo->utilidad = 0;
             $kardex_nuevo->usuario_id = auth()->user()->id;

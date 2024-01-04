@@ -15,8 +15,7 @@ return new class extends Migration
     {
         Schema::create('cabecera_productos', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('codigo_actividad'); //tabla dosificaciones
-            $table->unsignedBigInteger('codigo_producto_sin'); //Otros productos alcanzados por el Iva
+            $table->unsignedBigInteger('codigo_actividad'); // tabla dosificaciones
 
             $table->unsignedBigInteger('unidad_medida_id'); //tabla impuestos unidad medida
             $table->unsignedBigInteger('marca_id');
@@ -25,7 +24,9 @@ return new class extends Migration
             $table->unsignedBigInteger('sub_familia_id');
             $table->string('codigo_producto', 50);
             $table->string('nombre_producto', 450);
+
             $table->unsignedBigInteger('codigo_producto_impuestos');
+
             $table->string('modelo', 450);
             $table->string('numero_serie', 150)->nullable();
             $table->string('numero_imei', 150)->nullable();

@@ -135,7 +135,7 @@ class CatalogosController extends Controller
         $dataSincronizar = json_decode(json_encode([
             'codigoSucursal' => 0,
             'codigoPuntoVenta' => 0,
-            'cuis' => '5141470F',
+            'cuis' => '49DC0A17',
         ]));
         $dataSincronizar = $this->sincService->sincronizarServices($dataSincronizar, $accion);
 

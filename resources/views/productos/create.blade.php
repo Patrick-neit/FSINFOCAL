@@ -147,7 +147,7 @@
                 <div class="col s12 m4 l4 input-field">
                     <select class="select2 browser-default" name="homologacion" id="homologacion">
                     </select>
-                    <label>Homologaci&oacute;n</label>
+
                 </div>
             </div>
             <div class="row">

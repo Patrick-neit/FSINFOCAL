@@ -37,7 +37,7 @@ class CatalogoPrecioProductoController extends Controller
                 $catalogo = CatalogoPrecioProducto::where('cliente_id', $request->cliente_id)
                     ->where('producto_id', $producto["producto_id"])
                     ->first();
-
+                
                 $catalogo->update([
                     'tipo_precio_a' => $producto["precio_a"],
                     'tipo_precio_b' => $producto["precio_b"],
