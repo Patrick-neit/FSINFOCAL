@@ -37,7 +37,7 @@ class CatalogoPrecioProductoController extends Controller
                 $catalogo = CatalogoPrecioProducto::where('cliente_id', $request->cliente_id)
                     ->where('producto_id', $producto["producto_id"])
                     ->first();
-                
+
                 $catalogo->update([
                     'tipo_precio_a' => $producto["precio_a"],
                     'tipo_precio_b' => $producto["precio_b"],
@@ -62,7 +62,7 @@ class CatalogoPrecioProductoController extends Controller
     public function index()
     {
         $clientes = Cliente::where('estado', 1)->get();
-        $clientesProductos = Cliente::whereHas('catalogos_precios_productos')->get();
+        $clientesProductos = Cliente::with('clientes_tipos_precios')->get();
         $productos = CabeceraProducto::all();
         return view('catalogos_productos.index', compact('clientesProductos', 'clientes', 'productos'));
     }
