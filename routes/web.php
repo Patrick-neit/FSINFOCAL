@@ -35,6 +35,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserProfileController;
 use Illuminate\Support\Facades\Route;
 use LukePOLO\LaraCart\Facades\LaraCart;
+use App\Http\Controllers\VentasController;
 use LukePOLO\LaraCart\LaraCartServiceProvider;
 
 /*
@@ -329,6 +330,17 @@ Route::group([
     'controller' => CategoriaController::class,
 ], function () {
     Route::get('index', 'index')->name('categoria.index');
+    Route::get('create', 'create')->name('categoria.create');
+    Route::get('/edit/{id}', 'edit')->name('categoria.edit');
+    Route::post('store', 'store')->name('categoria.store');
+    Route::delete('destroy', 'destroy')->name('categoria.destroy');
+});
+
+Route::group([
+                 'prefix' => 'ventas',
+                 'controller' => VentasController::class,
+             ], function () {
+    Route::get('index', 'index')->name('ventas.index');
     Route::get('create', 'create')->name('categoria.create');
     Route::get('/edit/{id}', 'edit')->name('categoria.edit');
     Route::post('store', 'store')->name('categoria.store');

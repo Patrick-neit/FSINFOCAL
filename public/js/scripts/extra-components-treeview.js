@@ -36,7 +36,7 @@ $(document).ready(function () {
             { text: 'app.js', icon: 'jstree-file' },
           ],
         },
-        { text: 'index.html', icon: 'jstree-file' },
+        { text: 'index.blade.php', icon: 'jstree-file' },
         { text: 'page-one.html', icon: 'jstree-file' },
         { text: 'page-two.html', icon: 'jstree-file' }
       ],

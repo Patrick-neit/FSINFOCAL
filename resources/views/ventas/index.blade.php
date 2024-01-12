@@ -25,46 +25,66 @@
             <ul class="tabs mb-2 row">
                 <li class="tab">
                     <a class="display-flex align-items-center active" id="account-tab" href="#account">
-                        <i class="material-icons mr-1">person_outline</i><span>Gestión Pedido</span>
+                        <i class="material-icons mr-1">add_shopping_cart</i><span>Ventas</span>
                     </a>
                 </li>
             </ul>
             <div class="divider mb-3"></div>
             @csrf
             <div class="row">
-                <div class="col s12 m8 l4 input-field">
+                <div class="col s12 m8 l6 input-field">
                     <select class="select2 browser-default" name="proveedor_id" id="proveedor_id">
-                        <option selected value="" disabled>Seleccione proveedor</option>
-                        @forelse ($proveedores as $proveedor)
-                        <option value="{{ $proveedor->id }}" @if (isset($pedido)) @if($pedido->proveedor_id ==
-                            $proveedor->id)
-                            selected
-                            @endif
-                            @endif
-                            >{{ $proveedor->nombre_proveedor }}</option>
+                        <option selected value="" disabled>Seleccione Cliente</option>
+                        @forelse ($clientes as $cliente)
+                        <option value="{{ $cliente->id }}">
+                            {{ $cliente->nombre_cliente }}</option>
+                        @empty
+                        <option value="">No hay opciones</option>
+                        @endforelse
+                    </select>
+                    <a class="waves-effect waves-light btn disabled">NIT: 12470538</a>
+                    <a class="waves-effect waves-light btn disabled">Correo: naybor9817@gmail.com</a>
+                </div>
+                <div class="col s12 m8 l3 input-field">
+                    <select class="select2 browser-default" name="tipo_moneda" id="tipo_moneda_id">
+                        <option selected value="" disabled>Seleccione Moneda</option>
+                        @forelse ($tipo_moneda as $moneda)
+                        <option value="{{ $moneda->codigo_clasificador }}">
+                            {{ $moneda->descripcion }}</option>
                         @empty
                         <option value="">No hay opciones</option>
                         @endforelse
                     </select>
                 </div>
-                <div class="input-field col s12 m4 offset-l4">
-                    <i class="material-icons prefix">date_range</i>
-                    <input id="fecha_pedido" name="fecha_pedido" type="text" class="datepicker" value="@if (isset($pedido))
-{{ $pedido->fecha }}
-                        @endif">
-                    <label for="fecha_pedido">Fecha Pedido</label>
+                <div class="col s12 m8 l3 input-field">
+                    <select class="select2 browser-default" name="tipo_pago" id="tipo_pago_id">
+                        <option selected value="" disabled>Seleccione Tipo Pago</option>
+                        @forelse ($tipo_pago as $pago)
+                        <option value="{{ $pago->codigo_clasificador }}">
+                            {{ $pago->descripcion }}</option>
+                        @empty
+                        <option value="">No hay opciones</option>
+                        @endforelse
+                    </select>
                 </div>
             </div>
             <div class="row">
-                <div class="input-field col s12 m4 offset-m8 l4 offset-l8">
-                    <i class="material-icons prefix">date_range</i>
-                    <input id="hora_pedido" name="hora_pedido" type="text" class="timepicker"
-                        value="@if(isset($pedido)){{ $pedido->hora }}@endif">
-                    <label for="hora_pedido">Hora Pedido</label>
+                <div class="input-field col s12 m2 offset-m8 l2">
+                    <h6>Numero de tarjeta:</h6>
                 </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s12 m4 offset-m8 l4 offset-l8">
+                <div class="input-field col s12 m2 offset-m8 l1">
+                    <input name="tarjeta_numero_1" type="number">
+                </div>
+                <div class="input-field col s12 m2 offset-m8 l1">
+                    <input name="tarjeta_numero_2" type="number">
+                </div>
+                <div class="input-field col s12 m2 offset-m8 l1">
+                    <input name="tarjeta_numero_3" type="number">
+                </div>
+                <div class="input-field col s12 m2 offset-m8 l1">
+                    <input name="tarjeta_numero_4" type="number">
+                </div>
+                <div class="input-field col s12 m4 offset-m8 l4 offset-l2">
                     <select class="select2 browser-default" name="search_pedido" id="search_pedido"
                         onchange="cargarProducto()">
                         <option selected value="" disabled>Buscar Producto</option>
@@ -96,6 +116,7 @@
                             <th>Unidad Medida</th>
                             <th>Cantidad</th>
                             <th>Precio Unitario</th>
+                            <th>Descuento X item</th>
                             <th>Subtotal</th>
                             <th>Acciones</th>
                         </tr>
@@ -103,6 +124,7 @@
 
                     <tbody>
                         @if (isset($pedido))
+                        //aqui es donde se lista los producto de detalle
                         @forelse (\LukePOLO\LaraCart\Facades\LaraCart::getItems() as $item)
                         <tr id="{{ $item->id }}">
                             <td>{{ $item->id }}</td>
@@ -115,6 +137,9 @@
                                 <input id="inputPrecioUnitario{{ $item->id }}" name="{{ $item->id }}"
                                     value="{{ number_format($item->price, 5, '.', '') }}" type="number" min="0.00001"
                                     step="0.00001" onchange='calcularSubTotal(this.name)'>
+                            </td>
+                            <td>
+                                <span>Aqui va el descuento por item patrick</span>
                             </td>
                             <td>
                                 <span id="subtotal{{ $item->id }}" name="{{ $item->id }}">
@@ -141,11 +166,22 @@
                     <label for="textarea1">Nota/Descripci&oacute;n</label>
                 </div>
                 <div class="col s12 m2 l2 input-field">
+                    <h6>Importe Total:</h6>
+                    <h6>Total D. Adicional:</h6>
+                    <br>
+                    <h6>SubTotal:</h6>
+                    <br>
+                    <h6>GiftCard:</h6>
                     <h6>Total:</h6>
                     <h6>Tipo Cambio:</h6>
                     <h6>Total Dolar:</h6>
                 </div>
                 <div class="col s12 m2 l2 input-field right-align">
+                    <h6 id="importeTotal">187.5 Bs.</h6>
+                    <input name="descuento_adicional" id="descuento_adicional" type="number" min="0.00001"
+                        step="0.00001">
+                    <h6 id="subTotalVerdadero">187.5 Bs.</h6>
+                    <input name="monto_giftcard" id="monto_giftcard" type="number" min="0.00001" step="0.00001">
                     <h6 id="subTotal">Bs.&nbsp;
                         @if (isset($pedido))
                         {{ $pedido->total }}
