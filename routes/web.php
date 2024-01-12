@@ -453,3 +453,6 @@ Route::group([
     Route::post('store', 'store')->name('catalogos_productos.store');
     Route::delete('destroy', 'destroy')->name('catalogos_productos.destroy');
 });
+
+
+//

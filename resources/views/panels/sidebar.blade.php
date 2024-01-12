@@ -40,441 +40,424 @@
     @php
     $dataconvertido = array(
     "menu" => array(
+    // array(
+    // "url" => "javascript:void(0)",
+    // "i18n" => "Dashboard",
+    // "name" => "Dashboard",
+    // "slug" => "dashboard",
+    // "icon" => "dashboard",
+    // "class"=> "collapsible-header waves-effect waves-cyan",
+    // "tag"=> "3",
+    // "tagcustom"=> "badge pill orange float-right mr-10",
+    // "submenu" => array(
+    // array(
+    // "url" => "ejemplo",
+    // "i18n" => "Modern",
+    // "name" => "Ejemplo 1",
+    // "slug" => "modern"
+    // ),
+    // array(
+    // "url" => "ecommerce",
+    // "i18n" => "eCommerce",
+    // "name" => "Ejemplo 2",
+    // "slug" => "ecommerce"
+    // ),
+    // )
+    // ),
+    // array(
+    // "navheader"=> "Modulo Alumnos",
+    // "icon"=> "more_horiz"
+    // ),
+    // array(
+    // "url" => "javascript:void(0)",
+    // "i18n" => "Alumnos",
+    // "name" => "Alumnos",
+    // "icon" => "person_pin",
+    // "slug" => "Alumnos",
+    // "class"=> "collapsible-header waves-effect waves-cyan",
+    // "submenu" => array(
+    // array(
+    // "url" =>trim( parse_url(route('alumnos.index'), PHP_URL_PATH) ,'/'),
+    // "i18n" => "Alumnos Registrados",
+    // "name" => "Alumnos Registrados",
+    // "slug" => "alumnos"
+    // ),
+    // array(
+    // "url" => "alumnos.create",
+    // "i18n" => "Cards Advance",
+    // "name" => "Alumnos Matriculados",
+    // "slug" => "cards-advance"
+    // ),
+    // array(
+    // "url" => "alumnos.create",
+    // "i18n" => "Cards Extended",
+    // "name" => "Alumnos Inactivos",
+    // "slug" => "cards-extended"
+    // )
+    // )
+    // ),
+    // array(
+    // "navheader"=> "Modulo Docentes",
+    // "icon"=> "more_horiz"
+    // ),
+    // array(
+    // "url" => "javascript:void(0)",
+    // "i18n" => "Docentes",
+    // "name" => "Docentes",
+    // "icon" => "collections_bookmark",
+    // "slug" => "Docentes",
+    // "class"=> "collapsible-header waves-effect waves-cyan",
+    // "submenu" => array(
+    // array(
+    // "url" =>trim( parse_url(route('docentes.index'), PHP_URL_PATH) ,'/'),
+    // "i18n" => "Docentes Registrados",
+    // "name" => "Docentes Registrados",
+    // "slug" => "docentes"
+    // ),
+    // array(
+    // "url" => "alumnos.create",
+    // "i18n" => "Cards Advance",
+    // "name" => "Alumnos Matriculados",
+    // "slug" => "cards-advance"
+    // ),
+    // array(
+    // "url" => "alumnos.create",
+    // "i18n" => "Cards Extended",
+    // "name" => "Alumnos Inactivos",
+    // "slug" => "cards-extended"
+    // )
+    // )
+    // ),
+    // array(
+    // "navheader"=> "Sinc. de Catalogos",
+    // "icon"=> "more_horiz"
+    // ),
+    // array(
+    // "url" => "javascript:void(0)",
+    // "i18n" => "Catalogos",
+    // "name" => "Catalogos",
+    // "icon" => "cached",
+    // "slug" => "Catalogos",
+    // "class"=> "collapsible-header waves-effect waves-cyan",
+    // "submenu" => array(
+    // array(
+    // "url" =>trim( parse_url(route('catalogos.index', 'sincronizacion_fecha_hora'), PHP_URL_PATH) ,'/'),
+    // "i18n" => "Sinc. Fecha y Hora",
+    // "name" => "Sinc. Fecha y Hora",
+    // "slug" => "Sinc. Fecha y Hora"
+    // ),
+    // array(
+    // "url" =>trim( parse_url(route('catalogos.index', 'sincronizacion_motivo_anulaciones'), PHP_URL_PATH)
+    // ,'/'),
+    // "i18n" => "Sinc. Motivo Anulaciones",
+    // "name" => "Sinc. Motivo Anulaciones",
+    // "slug" => "Sinc. Motivo Anulaciones"
+    // ),
+    // array(
+    // "url" =>trim( parse_url(route('catalogos.index', 'sincronizacion_tipo_habitacion'), PHP_URL_PATH) ,'/'),
+    // "i18n" => "Sinc. Tipo Habitacion",
+    // "name" => "Sinc. Tipo Habitacion",
+    // "slug" => "Sinc. Tipo Habitacion"
+    // ),
+    // array(
+    // "url" =>trim( parse_url(route('catalogos.index', 'sincronizacion_paises_origen'), PHP_URL_PATH) ,'/'),
+    // "i18n" => "Sinc. Origen Paises",
+    // "name" => "Sinc. Origen Paises",
+    // "slug" => "Sinc. Origen Paises"
+    // ),
+    // array(
+    // "url" =>trim( parse_url(route('catalogos.index', 'sincronizacion_tipo_documento_sector'), PHP_URL_PATH) ,'/'),
+    // "i18n" => "Sinc. Tipo Doc Sector",
+    // "name" => "Sinc. Tipo Doc Sector",
+    // "slug" => "Sinc. Tipo Doc Sector"
+    // ),
+    // array(
+    // "url" =>trim( parse_url(route('catalogos.index', 'sincronizacion_documento_sector'), PHP_URL_PATH) ,'/'),
+    // "i18n" => "Sinc. Doc Sector",
+    // "name" => "Sinc. Doc Sector",
+    // "slug" => "Sinc. Doc Sector"
+    // ),
+    // array(
+    // "url" =>trim( parse_url(route('catalogos.index', 'sincronizacion_mensajes_servicios'), PHP_URL_PATH) ,'/'),
+    // "i18n" => "Sinc. Mensajes Servicios",
+    // "name" => "Sinc. Mensajes Servicios",
+    // "slug" => "Sinc. Mensajes Servicios"
+    // ),
+    // array(
+    // "url" =>trim( parse_url(route('catalogos.index', 'sincronizacion_eventos_significativos'), PHP_URL_PATH) ,'/'),
+    // "i18n" => "Sinc. Eventos Sig.",
+    // "name" => "Sinc. Eventos Sig.",
+    // "slug" => "Sinc. Eventos Sig."
+    // ),
+    // array(
+    // "url" =>trim( parse_url(route('catalogos.index', 'sincronizacion_productos_servicios'), PHP_URL_PATH) ,'/'),
+    // "i18n" => "Sinc. Prod. Serv.",
+    // "name" => "Sinc. Prod. Serv.",
+    // "slug" => "Sinc. Prod. Serv."
+    // ),
+    // array(
+    // "url" =>trim( parse_url(route('catalogos.index', 'sincronizacion_unidades_medida'), PHP_URL_PATH) ,'/'),
+    // "i18n" => "Sinc. Unidades Medida",
+    // "name" => "Sinc. Unidades Medida",
+    // "slug" => "Sinc. Unidades Medida"
+    // ),
+    // array(
+    // "url" =>trim( parse_url(route('catalogos.index', 'sincronizacion_leyendas_factura'), PHP_URL_PATH) ,'/'),
+    // "i18n" => "Sinc. Leyendas",
+    // "name" => "Sinc. Leyendas",
+    // "slug" => "Sinc. Leyendas"
+    // ),
+    // array(
+    // "url" =>trim( parse_url(route('catalogos.index', 'sincronizacion_actividades'), PHP_URL_PATH) ,'/'),
+    // "i18n" => "Sinc. Actividades",
+    // "name" => "Sinc. Actividades",
+    // "slug" => "Sinc. Actividades"
+    // ),
+    // array(
+    // "url" =>trim( parse_url(route('catalogos.index', 'sincronizacion_metodos_pago'), PHP_URL_PATH) ,'/'),
+    // "i18n" => "Sinc. Tipos Metodos Pago",
+    // "name" => "Sinc. Tipos Metodos Pago",
+    // "slug" => "Sinc. Tipos Metodos Pago"
+    // ),
+    // array(
+    // "url" =>trim( parse_url(route('catalogos.index', 'sincronizacion_tipos_factura'), PHP_URL_PATH) ,'/'),
+    // "i18n" => "Sinc. Tipos Facturas",
+    // "name" => "Sinc. Tipos Facturas",
+    // "slug" => "Sinc. Tipos Facturas"
+    // ),
+    // array(
+    // "url" =>trim( parse_url(route('catalogos.index', 'sincronizacion_tipo_puntoventa'), PHP_URL_PATH) ,'/'),
+    // "i18n" => "Sinc. Tipos PV",
+    // "name" => "Sinc. Tipos PV",
+    // "slug" => "Sinc. Tipos PV"
+    // ),
+    // array(
+    // "url" =>trim( parse_url(route('catalogos.index', 'sincronizacion_tipo_moneda'), PHP_URL_PATH) ,'/'),
+    // "i18n" => "Sinc. Tipo Monedas",
+    // "name" => "Sinc. Tipo Monedas",
+    // "slug" => "Sinc. Tipo Monedas"
+    // ),
+    // array(
+    // "url" =>trim( parse_url(route('catalogos.index', 'sincronizacion_tipo_emision'), PHP_URL_PATH) ,'/'),
+    // "i18n" => "Sinc. Tipo Emision",
+    // "name" => "Sinc. Tipo Emision",
+    // "slug" => "Sinc. Tipo Emision"
+    // ),
+    // array(
+    // "url" =>trim( parse_url(route('catalogos.index', 'sincronizacion_tipo_documento_identidad'), PHP_URL_PATH) ,'/'),
+    // "i18n" => "Sinc. Tipo Documento I.",
+    // "name" => "Sinc. Tipo Documento I.",
+    // "slug" => "Sinc. Tipo Documento I."
+    // ),
+
+    // array(
+    // "url" =>trim( parse_url(route('dosificaciones_empresas.create'), PHP_URL_PATH) ,'/'),
+    // "i18n" => "Dosificacion Empresa",
+    // "name" => "Dosificacion Empresa",
+    // "slug" => "dosificaciones"
+    // ),
+    // )
+    // ),
+    // array(
+    // "navheader"=> "Modulo Productos",
+    // "icon"=> "more_horiz"
+    // ),
+    // array(
+    // "url" => "javascript:void(0)",
+    // "i18n" => "Productos",
+    // "name" => "Productos",
+    // "icon" => "filter_none",
+    // "slug" => "Productos",
+    // "class"=> "collapsible-header waves-effect waves-cyan",
+    // "submenu" => array(
+    // array(
+    // "url" =>trim(parse_url(route('pedido.index'), PHP_URL_PATH) ,'/'),
+    // "i18n" => "Pedidos",
+    // "name" => "Pedidos",
+    // "slug" => "Pedidos"
+    // ),
+    // array(
+    // "url" =>trim(parse_url(route('almacenes.index'), PHP_URL_PATH) ,'/'),
+    // "i18n" => "Almacenes",
+    // "name" => "Almacenes",
+    // "slug" => "Almacenes"
+    // ),
+    // array(
+    // "url" =>trim(parse_url(route('catalogos_productos.index'), PHP_URL_PATH) ,'/'),
+    // "i18n" => "Catalogos",
+    // "name" => "Catalogos",
+    // "slug" => "Catalogos"
+    // ),
+    // array(
+    // "url" =>trim(parse_url(route('catalogos_productos.tipo_precio_index'), PHP_URL_PATH) ,'/'),
+    // "i18n" => "Tipo Precio",
+    // "name" => "Tipo Precio",
+    // "slug" => "Tipo Precio"
+    // ),
+    // array(
+    // "url" =>trim(parse_url(route('producto.index'), PHP_URL_PATH) ,'/'),
+    // "i18n" => "Productos",
+    // "name" => "Productos",
+    // "slug" => "Productos"
+    // ),
+    // array(
+    // "url" =>trim(parse_url(route('cliente.index'), PHP_URL_PATH) ,'/'),
+    // "i18n" => "Clientes",
+    // "name" => "Clientes",
+    // "slug" => "Clientes"
+    // ),
+    // array(
+    // "url" =>trim(parse_url(route('proveedor.index'), PHP_URL_PATH) ,'/'),
+    // "i18n" => "Proveedor",
+    // "name" => "Proveedor",
+    // "slug" => "Proveedores"
+    // ),
+    // array(
+    // "url" =>trim(parse_url(route('categoria.index'), PHP_URL_PATH) ,'/'),
+    // "i18n" => "Categoria",
+    // "name" => "Categoria",
+    // "slug" => "Categorias"
+    // ),
+    // array(
+    // "url" =>trim(parse_url(route('marca.index'), PHP_URL_PATH) ,'/'),
+    // "i18n" => "Marca",
+    // "name" => "Marca",
+    // "slug" => "marcas"
+    // ),
+    // array(
+    // "url" =>trim(parse_url(route('familia.index'), PHP_URL_PATH) ,'/'),
+    // "i18n" => "Familia",
+    // "name" => "Familia",
+    // "slug" => "Familias"
+    // ),
+    // array(
+    // "url" =>trim(parse_url(route('sub_familia.index'), PHP_URL_PATH) ,'/'),
+    // "i18n" => "Sub Familia",
+    // "name" => "Sub Familia",
+    // "slug" => "Sub Familias"
+    // ),
+    // )
+    // ),
     array(
-    "url" => "javascript:void(0)",
-    "i18n" => "Dashboard",
-    "name" => "Dashboard",
-    "slug" => "dashboard",
-    "icon" => "dashboard",
-    "class"=> "collapsible-header waves-effect waves-cyan",
-    "tag"=> "3",
-    "tagcustom"=> "badge pill orange float-right mr-10",
-    "submenu" => array(
-    array(
-    "url" => "ejemplo",
-    "i18n" => "Modern",
-    "name" => "Ejemplo 1",
-    "slug" => "modern"
-    ),
-    array(
-    "url" => "ecommerce",
-    "i18n" => "eCommerce",
-    "name" => "Ejemplo 2",
-    "slug" => "ecommerce"
-    ),
-    )
-    ),
-    array(
-    "navheader"=> "Modulo Alumnos",
+    "navheader"=> "Administracion",
     "icon"=> "more_horiz"
     ),
     array(
     "url" => "javascript:void(0)",
-    "i18n" => "Alumnos",
-    "name" => "Alumnos",
-    "icon" => "person_pin",
-    "slug" => "Alumnos",
-    "class"=> "collapsible-header waves-effect waves-cyan",
-    "submenu" => array(
-    array(
-    "url" =>trim( parse_url(route('alumnos.index'), PHP_URL_PATH) ,'/'),
-    "i18n" => "Alumnos Registrados",
-    "name" => "Alumnos Registrados",
-    "slug" => "alumnos"
-    ),
-    array(
-    "url" => "alumnos.create",
-    "i18n" => "Cards Advance",
-    "name" => "Alumnos Matriculados",
-    "slug" => "cards-advance"
-    ),
-    array(
-    "url" => "alumnos.create",
-    "i18n" => "Cards Extended",
-    "name" => "Alumnos Inactivos",
-    "slug" => "cards-extended"
-    )
-    )
-    ),
-    array(
-    "navheader"=> "Modulo Docentes",
-    "icon"=> "more_horiz"
-    ),
-    array(
-    "url" => "javascript:void(0)",
-    "i18n" => "Docentes",
-    "name" => "Docentes",
-    "icon" => "collections_bookmark",
-    "slug" => "Docentes",
-    "class"=> "collapsible-header waves-effect waves-cyan",
-    "submenu" => array(
-    array(
-    "url" =>trim( parse_url(route('docentes.index'), PHP_URL_PATH) ,'/'),
-    "i18n" => "Docentes Registrados",
-    "name" => "Docentes Registrados",
-    "slug" => "docentes"
-    ),
-    array(
-    "url" => "alumnos.create",
-    "i18n" => "Cards Advance",
-    "name" => "Alumnos Matriculados",
-    "slug" => "cards-advance"
-    ),
-    array(
-    "url" => "alumnos.create",
-    "i18n" => "Cards Extended",
-    "name" => "Alumnos Inactivos",
-    "slug" => "cards-extended"
-    )
-    )
-    ),
-    array(
-    "navheader"=> "Modulo Ventas",
-    "icon"=> "more_horiz"
-    ),
-    array(
-    "url" => "javascript:void(0)",
-    "i18n" => "Ventas",
-    "name" => "Ventas",
-    "icon" => "add_shopping_cart",
-    "slug" => "Ventas",
-    "class"=> "collapsible-header waves-effect waves-cyan",
-    "submenu" => array(
-    array(
-    "url" =>trim( parse_url(route('alumnos.index'), PHP_URL_PATH) ,'/'),
-    "i18n" => "Alumnos Registrados",
-    "name" => "Alumnos Registrados",
-    "slug" => "alumnos"
-    ),
-    array(
-    "url" =>trim( parse_url(route('ventas.registrar_alumnos'), PHP_URL_PATH) ,'/'),
-    "i18n" => "Registrar Ventas",
-    "name" => "Registrar Ventas",
-    "slug" => "ventas"
-    ),
-    array(
-    "url" => "alumnos.create",
-    "i18n" => "Cards Advance",
-    "name" => "Alumnos Matriculados",
-    "slug" => "cards-advance"
-    ),
-    array(
-    "url" => "alumnos.create",
-    "i18n" => "Cards Extended",
-    "name" => "Alumnos Inactivos",
-    "slug" => "cards-extended"
-    )
-    )
-    ),
-    array(
-    "navheader"=> "Modulo Configuraciones",
-    "icon"=> "more_horiz"
-    ),
-    array(
-    "url" => "javascript:void(0)",
-    "i18n" => "Configuraciones",
-    "name" => "Configuraciones",
-    "icon" => "storage",
-    "slug" => "Configuraciones",
+    "i18n" => "Administracion",
+    "name" => "Administracion",
+    "icon" => "verified_user",
+    "slug" => "Administracion",
     "class"=> "collapsible-header waves-effect waves-cyan",
     "submenu" => array(
     array(
     "url" =>trim( parse_url(route('users.index'), PHP_URL_PATH) ,'/'),
-    "i18n" => "Usuarios Sistema",
-    "name" => "Usuarios Sistema",
+    "i18n" => "Usuarios",
+    "name" => "Usuarios",
     "slug" => "usuarios"
     ),
-
-    array(
-    "url" =>trim( parse_url(route('configuraciones_impuestos.index'), PHP_URL_PATH) ,'/'),
-    "i18n" => "Configuracion impuesto",
-    "name" => "Configuracion impuesto",
-    "slug" => "configuraciones"
-    ),
-    array(
-    "url" =>trim( parse_url(route('dosificaciones_empresas.index'), PHP_URL_PATH) ,'/'),
-    "i18n" => "Configuracion Dosificacion",
-    "name" => "Configuracion Dosificacion",
-    "slug" => "dosificaciones"
-    ),
-
     )
     ),
     array(
-    "navheader"=> "Sinc. de Catalogos",
+    "navheader"=> "CATALOGO",
     "icon"=> "more_horiz"
     ),
     array(
     "url" => "javascript:void(0)",
     "i18n" => "Catalogos",
     "name" => "Catalogos",
-    "icon" => "cached",
+    "icon" => "view_list",
     "slug" => "Catalogos",
     "class"=> "collapsible-header waves-effect waves-cyan",
     "submenu" => array(
     array(
-    "url" =>trim( parse_url(route('catalogos.index', 'sincronizacion_fecha_hora'), PHP_URL_PATH) ,'/'),
-    "i18n" => "Sinc. Fecha y Hora",
-    "name" => "Sinc. Fecha y Hora",
-    "slug" => "Sinc. Fecha y Hora"
-    ),
-    array(
-    "url" =>trim( parse_url(route('catalogos.index', 'sincronizacion_motivo_anulaciones'), PHP_URL_PATH)
-    ,'/'),
-    "i18n" => "Sinc. Motivo Anulaciones",
-    "name" => "Sinc. Motivo Anulaciones",
-    "slug" => "Sinc. Motivo Anulaciones"
-    ),
-    array(
-    "url" =>trim( parse_url(route('catalogos.index', 'sincronizacion_tipo_habitacion'), PHP_URL_PATH) ,'/'),
-    "i18n" => "Sinc. Tipo Habitacion",
-    "name" => "Sinc. Tipo Habitacion",
-    "slug" => "Sinc. Tipo Habitacion"
-    ),
-    array(
-    "url" =>trim( parse_url(route('catalogos.index', 'sincronizacion_paises_origen'), PHP_URL_PATH) ,'/'),
-    "i18n" => "Sinc. Origen Paises",
-    "name" => "Sinc. Origen Paises",
-    "slug" => "Sinc. Origen Paises"
-    ),
-    array(
-    "url" =>trim( parse_url(route('catalogos.index', 'sincronizacion_tipo_documento_sector'), PHP_URL_PATH) ,'/'),
-    "i18n" => "Sinc. Tipo Doc Sector",
-    "name" => "Sinc. Tipo Doc Sector",
-    "slug" => "Sinc. Tipo Doc Sector"
-    ),
-    array(
-    "url" =>trim( parse_url(route('catalogos.index', 'sincronizacion_documento_sector'), PHP_URL_PATH) ,'/'),
-    "i18n" => "Sinc. Doc Sector",
-    "name" => "Sinc. Doc Sector",
-    "slug" => "Sinc. Doc Sector"
-    ),
-    array(
-    "url" =>trim( parse_url(route('catalogos.index', 'sincronizacion_mensajes_servicios'), PHP_URL_PATH) ,'/'),
-    "i18n" => "Sinc. Mensajes Servicios",
-    "name" => "Sinc. Mensajes Servicios",
-    "slug" => "Sinc. Mensajes Servicios"
-    ),
-    array(
-    "url" =>trim( parse_url(route('catalogos.index', 'sincronizacion_eventos_significativos'), PHP_URL_PATH) ,'/'),
-    "i18n" => "Sinc. Eventos Sig.",
-    "name" => "Sinc. Eventos Sig.",
-    "slug" => "Sinc. Eventos Sig."
-    ),
-    array(
-    "url" =>trim( parse_url(route('catalogos.index', 'sincronizacion_productos_servicios'), PHP_URL_PATH) ,'/'),
-    "i18n" => "Sinc. Prod. Serv.",
-    "name" => "Sinc. Prod. Serv.",
-    "slug" => "Sinc. Prod. Serv."
-    ),
-    array(
-    "url" =>trim( parse_url(route('catalogos.index', 'sincronizacion_unidades_medida'), PHP_URL_PATH) ,'/'),
-    "i18n" => "Sinc. Unidades Medida",
-    "name" => "Sinc. Unidades Medida",
-    "slug" => "Sinc. Unidades Medida"
-    ),
-    array(
-    "url" =>trim( parse_url(route('catalogos.index', 'sincronizacion_leyendas_factura'), PHP_URL_PATH) ,'/'),
-    "i18n" => "Sinc. Leyendas",
-    "name" => "Sinc. Leyendas",
-    "slug" => "Sinc. Leyendas"
-    ),
-    array(
-    "url" =>trim( parse_url(route('catalogos.index', 'sincronizacion_actividades'), PHP_URL_PATH) ,'/'),
-    "i18n" => "Sinc. Actividades",
-    "name" => "Sinc. Actividades",
-    "slug" => "Sinc. Actividades"
-    ),
-    array(
-    "url" =>trim( parse_url(route('catalogos.index', 'sincronizacion_metodos_pago'), PHP_URL_PATH) ,'/'),
-    "i18n" => "Sinc. Tipos Metodos Pago",
-    "name" => "Sinc. Tipos Metodos Pago",
-    "slug" => "Sinc. Tipos Metodos Pago"
-    ),
-    array(
-    "url" =>trim( parse_url(route('catalogos.index', 'sincronizacion_tipos_factura'), PHP_URL_PATH) ,'/'),
-    "i18n" => "Sinc. Tipos Facturas",
-    "name" => "Sinc. Tipos Facturas",
-    "slug" => "Sinc. Tipos Facturas"
-    ),
-    array(
-    "url" =>trim( parse_url(route('catalogos.index', 'sincronizacion_tipo_puntoventa'), PHP_URL_PATH) ,'/'),
-    "i18n" => "Sinc. Tipos PV",
-    "name" => "Sinc. Tipos PV",
-    "slug" => "Sinc. Tipos PV"
-    ),
-    array(
-    "url" =>trim( parse_url(route('catalogos.index', 'sincronizacion_tipo_moneda'), PHP_URL_PATH) ,'/'),
-    "i18n" => "Sinc. Tipo Monedas",
-    "name" => "Sinc. Tipo Monedas",
-    "slug" => "Sinc. Tipo Monedas"
-    ),
-    array(
-    "url" =>trim( parse_url(route('catalogos.index', 'sincronizacion_tipo_emision'), PHP_URL_PATH) ,'/'),
-    "i18n" => "Sinc. Tipo Emision",
-    "name" => "Sinc. Tipo Emision",
-    "slug" => "Sinc. Tipo Emision"
-    ),
-    array(
-    "url" =>trim( parse_url(route('catalogos.index', 'sincronizacion_tipo_documento_identidad'), PHP_URL_PATH) ,'/'),
-    "i18n" => "Sinc. Tipo Documento I.",
-    "name" => "Sinc. Tipo Documento I.",
-    "slug" => "Sinc. Tipo Documento I."
+    "url" =>trim( parse_url(route('familia.index'), PHP_URL_PATH) ,'/'),
+    "i18n" => "Familias",
+    "name" => "Familias",
+    "slug" => "familias"
     ),
 
     array(
-    "url" =>trim( parse_url(route('dosificaciones_empresas.create'), PHP_URL_PATH) ,'/'),
-    "i18n" => "Dosificacion Empresa",
-    "name" => "Dosificacion Empresa",
-    "slug" => "dosificaciones"
+    "url" =>trim( parse_url(route('sub_familia.index'), PHP_URL_PATH) ,'/'),
+    "i18n" => "Sub Familias",
+    "name" => "Sub Familias",
+    "slug" => "subfamilias"
     ),
-
+    array(
+    "url" =>trim( parse_url(route('categoria.index'), PHP_URL_PATH) ,'/'),
+    "i18n" => "Categorias",
+    "name" => "Categorias",
+    "slug" => "categorias"
+    ),
+    array(
+    "url" =>trim( parse_url(route('marca.index'), PHP_URL_PATH) ,'/'),
+    "i18n" => "Marcas",
+    "name" => "Marcas",
+    "slug" => "marcas"
+    ),
+    array(
+    "url" =>trim( parse_url(route('catalogos_productos.index'), PHP_URL_PATH) ,'/'),
+    "i18n" => "Catalogos de Precios",
+    "name" => "Catalogos de Precios",
+    "slug" => "catalogos_productos"
+    ),
     )
     ),
     array(
-    "navheader"=> "Modulo Empresa",
+    "navheader"=> "Inventario",
     "icon"=> "more_horiz"
     ),
     array(
     "url" => "javascript:void(0)",
-    "i18n" => "Empresas",
-    "name" => "Empresas",
+    "i18n" => "Inventario",
+    "name" => "Inventario",
     "icon" => "business_center",
-    "slug" => "Empresas",
+    "slug" => "Inventario",
     "class"=> "collapsible-header waves-effect waves-cyan",
     "submenu" => array(
-    array(
-    "url" =>trim(parse_url(route('empresas.index'), PHP_URL_PATH) ,'/'),
-    "i18n" => "Empresas ",
-    "name" => "Empresas ",
-    "slug" => "empresas"
-    ),
-
-    array(
-    "url" =>trim( parse_url(route('sucursales.index'), PHP_URL_PATH) ,'/'),
-    "i18n" => "Sucursales ",
-    "name" => "Sucursales ",
-    "slug" => "sucursales"
-    ),
-    array(
-    "url" =>trim( parse_url(route('puntos_ventas.index'), PHP_URL_PATH) ,'/'),
-    "i18n" => "Puntos Ventas ",
-    "name" => "Puntos Ventas ",
-    "slug" => "Puntos Ventas"
-    ),
-    )
-    ),
-    //
-    array(
-    "navheader"=> "Modulo Productos",
-    "icon"=> "more_horiz"
-    ),
-    array(
-    "url" => "javascript:void(0)",
-    "i18n" => "Productos",
-    "name" => "Productos",
-    "icon" => "filter_none",
-    "slug" => "Productos",
-    "class"=> "collapsible-header waves-effect waves-cyan",
-    "submenu" => array(
-    array(
-    "url" =>trim(parse_url(route('pedido.index'), PHP_URL_PATH) ,'/'),
-    "i18n" => "Pedidos",
-    "name" => "Pedidos",
-    "slug" => "Pedidos"
-    ),
-    array(
-    "url" =>trim(parse_url(route('almacenes.index'), PHP_URL_PATH) ,'/'),
-    "i18n" => "Almacenes",
-    "name" => "Almacenes",
-    "slug" => "Almacenes"
-    ),
-    array(
-    "url" =>trim(parse_url(route('catalogos_productos.index'), PHP_URL_PATH) ,'/'),
-    "i18n" => "Catalogos",
-    "name" => "Catalogos",
-    "slug" => "Catalogos"
-    ),
-    array(
-    "url" =>trim(parse_url(route('catalogos_productos.tipo_precio_index'), PHP_URL_PATH) ,'/'),
-    "i18n" => "Tipo Precio",
-    "name" => "Tipo Precio",
-    "slug" => "Tipo Precio"
-    ),
     array(
     "url" =>trim(parse_url(route('producto.index'), PHP_URL_PATH) ,'/'),
     "i18n" => "Productos",
     "name" => "Productos",
-    "slug" => "Productos"
+    "slug" => "productos"
     ),
     array(
-    "url" =>trim(parse_url(route('cliente.index'), PHP_URL_PATH) ,'/'),
-    "i18n" => "Clientes",
-    "name" => "Clientes",
-    "slug" => "Clientes"
+    "url" =>trim( parse_url(route('almacenes.index'), PHP_URL_PATH) ,'/'),
+    "i18n" => "Almacenes ",
+    "name" => "Almacenes ",
+    "slug" => "almacenes"
     ),
-    array(
-    "url" =>trim(parse_url(route('proveedor.index'), PHP_URL_PATH) ,'/'),
-    "i18n" => "Proveedor",
-    "name" => "Proveedor",
-    "slug" => "Proveedores"
-    ),
-    array(
-    "url" =>trim(parse_url(route('categoria.index'), PHP_URL_PATH) ,'/'),
-    "i18n" => "Categoria",
-    "name" => "Categoria",
-    "slug" => "Categorias"
-    ),
-    array(
-    "url" =>trim(parse_url(route('marca.index'), PHP_URL_PATH) ,'/'),
-    "i18n" => "Marca",
-    "name" => "Marca",
-    "slug" => "marcas"
-    ),
-    array(
-    "url" =>trim(parse_url(route('familia.index'), PHP_URL_PATH) ,'/'),
-    "i18n" => "Familia",
-    "name" => "Familia",
-    "slug" => "Familias"
-    ),
-    array(
-    "url" =>trim(parse_url(route('sub_familia.index'), PHP_URL_PATH) ,'/'),
-    "i18n" => "Sub Familia",
-    "name" => "Sub Familia",
-    "slug" => "Sub Familias"
-    ),
-
     )
     ),
     array(
-    "navheader"=> "Modulo Reportes",
+    "navheader"=> "OPERACION",
     "icon"=> "more_horiz"
     ),
     array(
     "url" => "javascript:void(0)",
-    "i18n" => "Reportes",
-    "name" => "Reportes",
+    "i18n" => "Operaciones",
+    "name" => "Operaciones",
     "icon" => "markunread_mailbox",
-    "slug" => "Reportes",
+    "slug" => "Operaciones",
     "class"=> "collapsible-header waves-effect waves-cyan",
     "submenu" => array(
     array(
-    "url" =>trim( parse_url(route('alumnos.index'), PHP_URL_PATH) ,'/'),
-    "i18n" => "Alumnos Registrados",
-    "name" => "Alumnos Registrados",
-    "slug" => "alumnos"
+    "url" =>trim( parse_url(route('pedido.index'), PHP_URL_PATH) ,'/'),
+    "i18n" => "Pedidos",
+    "name" => "Pedidos",
+    "slug" => "pedidos"
     ),
     array(
-    "url" => "alumnos.create",
-    "i18n" => "Cards Advance",
-    "name" => "Alumnos Matriculados",
-    "slug" => "cards-advance"
+    "url" => "cliente.index",
+    "i18n" => "Clientes",
+    "name" => "Clientes",
+    "slug" => "clientes"
     ),
     array(
-    "url" => "alumnos.create",
-    "i18n" => "Cards Extended",
-    "name" => "Alumnos Inactivos",
-    "slug" => "cards-extended"
+    "url" => "proveedor.create",
+    "i18n" => "Proveedores",
+    "name" => "Proveedores",
+    "slug" => "proveedores"
     )
     )
     ),

@@ -23,9 +23,10 @@ class UserController extends Controller
             $user->email = $request->email;
             $user->password = Hash::make($request->password);
             $user->ci = $request->ci;
-            $user->fecha_nacimiento = Carbon::parse($request->fecha_nacimiento)->format('Y-m-d'); //$request->fecha_nacimiento;
-            $user->departamento_id = $request->departamento_id;
-            $user->fotografia = '/storage/'.$path;
+            // $user->fecha_nacimiento = Carbon::parse($request->fecha_nacimiento)->format('Y-m-d'); //$request->fecha_nacimiento;
+            $user->fecha_nacimiento = Carbon::createFromFormat('d/m/Y', $request->fecha_nacimiento)->format('Y-m-d'); //$request->fecha_nacimiento;
+            $user->departamento_id = 1;
+            $user->fotografia = '/storage/' . $path;
             //$user->estado = $request->estado;
             $user->save();
             if ($user->save()) {
@@ -52,8 +53,8 @@ class UserController extends Controller
             $user->password = empty($request->password) ? Hash::make($request->password) : $user->password;
             $user->ci = $request->ci;
             $user->fecha_nacimiento = Carbon::parse($request->fecha_nacimiento)->format('Y-m-d'); //$request->fecha_nacimiento;
-            $user->departamento_id = $request->departamento_id;
-            $user->fotografia = $request->hasFile('avatar') ? '/storage/'.$path : $user->fotografia;
+            // $user->departamento_id = $request->departamento_id;
+            $user->fotografia = $request->hasFile('avatar') ? '/storage/' . $path : $user->fotografia;
             //$user->estado = $request->estado;
             $user->save();
             if ($user->save()) {
