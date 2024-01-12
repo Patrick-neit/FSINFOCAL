@@ -42,6 +42,6 @@ class Cliente extends Model
     }
 
     public function catalogos_precios_productos(){
-        return $this->hasMany(CatalogoPrecioProducto::class);
+        return $this->hasOne(CatalogoPrecioProducto::class);
     }
 }

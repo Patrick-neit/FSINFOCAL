@@ -7,6 +7,7 @@ use App\Models\ClienteTipoPrecio;
 use App\Models\ImpuestoDocumentoIdentidad;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use DB;
 
 class ClienteController extends Controller
 {
@@ -45,6 +46,7 @@ class ClienteController extends Controller
             if (!empty($request->cliente_id)) {
                 return $this->update($request);
             }
+            DB::beginTransaction();
             $cliente = new Cliente();
             $cliente->nombre_cliente = $request->nombre_cliente;
             $cliente->tipo_documento_id = $request->documento;
@@ -62,10 +64,11 @@ class ClienteController extends Controller
             if ($cliente->save()) {
 
                 selectTipoPrecio($request->tipos_precios, $cliente->id);
-
+                DB::commit();
                 return responseJson('Cliente Guardado', $cliente, 200);
             }
         } catch (\Exception $e) {
+            DB::rollBack();
             return responseJson('Server Error', [
                 'message' => $e->getMessage(),
                 'code' => $e->getCode(),

@@ -62,8 +62,9 @@ class CatalogoPrecioProductoController extends Controller
     public function index()
     {
         $clientes = Cliente::where('estado', 1)->get();
-        $clientesProductos = Cliente::with('clientes_tipos_precios')->get();
-        $productos = CabeceraProducto::all();
+        $clientesProductos = Cliente::with('catalogos_precios_productos')->get();
+        $productos = CabeceraProducto::with('catalogos_precios_productos')->get();
+
         return view('catalogos_productos.index', compact('clientesProductos', 'clientes', 'productos'));
     }
 

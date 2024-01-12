@@ -31,4 +31,8 @@ class CatalogoPrecioProducto extends Model
     {
         return $this->belongsTo(Cliente::class);
     }
+
+    public function cabecera_producto(){
+        return $this->hasMany(CabeceraProducto::class);
+    }
 }

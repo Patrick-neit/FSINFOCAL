@@ -50,4 +50,8 @@ class CabeceraProducto extends Model
     {
         return $this->hasOne(DetallePedido::class, 'producto_id');
     }
+
+    public function catalogos_precios_productos(){
+        return $this->belongsTo(CatalogoPrecioProducto::class);
+    }
 }

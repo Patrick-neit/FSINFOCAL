@@ -274,61 +274,113 @@ function blockCheck(id) {
     let check7 = document.getElementById("check_g_" + id);
 
     if (check1.checked) {
+        console.log("el 1 es checked");
+        check2.checked = false;
         check2.disabled = true;
+        check3.checked = false;
         check3.disabled = true;
+        check4.checked = false;
         check4.disabled = true;
+        check5.checked = false;
         check5.disabled = true;
+        check6.checked = false;
         check6.disabled = true;
+        check7.checked = false;
         check7.disabled = true;
     } else if (check2.checked) {
+        console.log("check2");
+        check1.checked = false;
         check1.disabled = true;
+        check3.checked = false;
         check3.disabled = true;
+        check4.checked = false;
         check4.disabled = true;
+        check5.checked = false;
         check5.disabled = true;
+        check6.checked = false;
         check6.disabled = true;
+        check7.checked = false;
         check7.disabled = true;
     } else if (check3.checked) {
+        check1.checked = false;
         check1.disabled = true;
+        check2.checked = false;
         check2.disabled = true;
+        check4.checked = false;
         check4.disabled = true;
+        check5.checked = false;
         check5.disabled = true;
+        check6.checked = false;
         check6.disabled = true;
+        check7.checked = false;
         check7.disabled = true;
     } else if (check4.checked) {
+        check1.checked = false;
         check1.disabled = true;
+        check2.checked = false;
         check2.disabled = true;
+        check3.checked = false;
         check3.disabled = true;
+        check5.checked = false;
         check5.disabled = true;
+        check6.checked = false;
         check6.disabled = true;
+        check7.checked = false;
         check7.disabled = true;
     } else if (check5.checked) {
+        check1.checked = false;
         check1.disabled = true;
+        check2.checked = false;
         check2.disabled = true;
+        check3.checked = false;
         check3.disabled = true;
+        check4.checked = false;
         check4.disabled = true;
+        check6.checked = false;
         check6.disabled = true;
+        check7.checked = false;
         check7.disabled = true;
     } else if (check6.checked) {
+        check1.checked = false;
         check1.disabled = true;
+        check2.checked = false;
         check2.disabled = true;
+        check3.checked = false;
         check3.disabled = true;
+        check4.checked = false;
         check4.disabled = true;
+        check5.checked = false;
         check5.disabled = true;
+        check7.checked = false;
         check7.disabled = true;
     } else if (check7.checked) {
+        check1.checked = false;
         check1.disabled = true;
+        check2.checked = false;
         check2.disabled = true;
+        check3.checked = false;
         check3.disabled = true;
+        check4.checked = false;
         check4.disabled = true;
+        check5.checked = false;
         check5.disabled = true;
+        check6.checked = false;
         check6.disabled = true;
     } else {
+        console.log("No hay nada");
+        check1.checked = false;
         check1.disabled = false;
+        check2.checked = false;
         check2.disabled = false;
+        check3.checked = false;
         check3.disabled = false;
+        check4.checked = false;
         check4.disabled = false;
+        check5.checked = false;
         check5.disabled = false;
+        check6.checked = false;
         check6.disabled = false;
+        check7.checked = false;
         check7.disabled = false;
     }
 }
