@@ -54,4 +54,9 @@ class CabeceraProducto extends Model
     public function catalogos_precios_productos(){
         return $this->belongsTo(CatalogoPrecioProducto::class);
     }
+
+    public function detalles_ventas()
+    {
+        return $this->hasMany(DetalleVenta::class, 'producto_id');
+    }
 }

@@ -2,7 +2,7 @@
 @extends('layouts.contentLayoutMaster')
 
 {{-- page title --}}
-@section('title','Nueva marca')
+@section('title','Gestion de Ventas')
 
 {{-- vendor styles --}}
 @section('vendor-style')
@@ -30,11 +30,11 @@
                 </li>
             </ul>
             <div class="divider mb-3"></div>
-            @csrf
+            @csrfs
             <div class="row">
                 <div class="col s12 m8 l6 input-field">
-                    <select class="select2 browser-default" name="proveedor_id" id="proveedor_id">
-                        <option selected value="" disabled>Seleccione Cliente</option>
+                    <select class="select2 browser-default" name="cliente_id" id="cliente_id" onchange="getDataCliente()">
+                        <option selected value="x">Seleccione Cliente</option>
                         @forelse ($clientes as $cliente)
                         <option value="{{ $cliente->id }}">
                             {{ $cliente->nombre_cliente }}</option>
@@ -42,8 +42,8 @@
                         <option value="">No hay opciones</option>
                         @endforelse
                     </select>
-                    <a class="waves-effect waves-light btn disabled">NIT: 12470538</a>
-                    <a class="waves-effect waves-light btn disabled">Correo: naybor9817@gmail.com</a>
+                    <a class="waves-effect waves-light btn disabled" id="nit_cliente_visual">NIT: 12470538</a>
+                    <a class="waves-effect waves-light btn disabled" id="correo_cliente_visual" >Correo: patricio@rda-consult.com</a>
                 </div>
                 <div class="col s12 m8 l3 input-field">
                     <select class="select2 browser-default" name="tipo_moneda" id="tipo_moneda_id">
@@ -57,7 +57,7 @@
                     </select>
                 </div>
                 <div class="col s12 m8 l3 input-field">
-                    <select class="select2 browser-default" name="tipo_pago" id="tipo_pago_id">
+                    <select class="select2 browser-default" name="tipo_pago" id="tipo_pago_id" onchange="getTipoPagoInputs(this)">
                         <option selected value="" disabled>Seleccione Tipo Pago</option>
                         @forelse ($tipo_pago as $pago)
                         <option value="{{ $pago->codigo_clasificador }}">
@@ -69,21 +69,24 @@
                 </div>
             </div>
             <div class="row">
-                <div class="input-field col s12 m2 offset-m8 l2">
-                    <h6>Numero de tarjeta:</h6>
+                <div id="numero-tarjeta-input">
+                    <div class="input-field col s12 m2 offset-m8 l2">
+                        <h6>Numero de tarjeta:</h6>
+                    </div>
+                    <div class="input-field col s12 m2 offset-m8 l1">
+                        <input name="tarjeta_numero_1" type="number">
+                    </div>
+                    <div class="input-field col s12 m2 offset-m8 l1">
+                        <input name="tarjeta_numero_2" type="number">
+                    </div>
+                    <div class="input-field col s12 m2 offset-m8 l1">
+                        <input name="tarjeta_numero_3" type="number">
+                    </div>
+                    <div class="input-field col s12 m2 offset-m8 l1">
+                        <input name="tarjeta_numero_4" type="number">
+                    </div>
                 </div>
-                <div class="input-field col s12 m2 offset-m8 l1">
-                    <input name="tarjeta_numero_1" type="number">
-                </div>
-                <div class="input-field col s12 m2 offset-m8 l1">
-                    <input name="tarjeta_numero_2" type="number">
-                </div>
-                <div class="input-field col s12 m2 offset-m8 l1">
-                    <input name="tarjeta_numero_3" type="number">
-                </div>
-                <div class="input-field col s12 m2 offset-m8 l1">
-                    <input name="tarjeta_numero_4" type="number">
-                </div>
+
                 <div class="input-field col s12 m4 offset-m8 l4 offset-l2">
                     <select class="select2 browser-default" name="search_pedido" id="search_pedido"
                         onchange="cargarProducto()">
@@ -138,8 +141,9 @@
                                     value="{{ number_format($item->price, 5, '.', '') }}" type="number" min="0.00001"
                                     step="0.00001" onchange='calcularSubTotal(this.name)'>
                             </td>
-                            <td>
-                                <span>Aqui va el descuento por item patrick</span>
+
+                            <td><input id="inputDescuento{{ $item->id }}" name="{{ $item->id }}" value="{{ $item->desc }}"
+                                type="number" min="0.00000" step="0.00001" onchange="calcularSubTotal(this.name);">
                             </td>
                             <td>
                                 <span id="subtotal{{ $item->id }}" name="{{ $item->id }}">
@@ -171,7 +175,7 @@
                     <br>
                     <h6>SubTotal:</h6>
                     <br>
-                    <h6>GiftCard:</h6>
+                    <h6 id="monto-giftcard-name">GiftCard:</h6>
                     <h6>Total:</h6>
                     <h6>Tipo Cambio:</h6>
                     <h6>Total Dolar:</h6>
@@ -181,7 +185,9 @@
                     <input name="descuento_adicional" id="descuento_adicional" type="number" min="0.00001"
                         step="0.00001">
                     <h6 id="subTotalVerdadero">187.5 Bs.</h6>
-                    <input name="monto_giftcard" id="monto_giftcard" type="number" min="0.00001" step="0.00001">
+                    <div id="monto-giftcard-input">
+                        <input name="monto_giftcard" id="monto_giftcard" type="number" min="0.00001" step="0.00001">
+                    </div>
                     <h6 id="subTotal">Bs.&nbsp;
                         @if (isset($pedido))
                         {{ $pedido->total }}
@@ -228,13 +234,14 @@
 
 {{-- page scripts --}}
 @section('page-script')
-<script src="{{asset('js/scripts/pedidos/create.js')}}"></script>
+<script src="{{asset('js/scripts/ventas/index.js')}}"></script>
 <script>
-    let ruta_guardar_pedido = "{{route('pedido.store')}}";
+    let ruta_obtener_cliente = "{{route('ventas.getDataCliente')}}";
+  /*   let ruta_guardar_pedido = "{{route('pedido.store')}}";
     let ruta_index_pedido   = "{{route('pedido.index')}}";
     let rutal_all_cart = "{{ route('get.all.cart') }}";
-    let ruta_eliminar_marca = "{{route('marca.destroy')}}";
+    let ruta_eliminar_marca = "{{route('marca.destroy')}}";*/
     let ruta_obtener_producto = "{{route('producto.get.name')}}";
-    let ruta_actualizar_cart = "{{ route('update.product.cart') }}"
+    /* let ruta_actualizar_cart = "{{ route('update.product.cart') }}" */
 </script>
 @endsection

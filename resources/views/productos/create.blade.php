@@ -34,7 +34,7 @@
                 <div class="col s12 m4 l4 input-field">
                     <select class="select2 browser-default" name="dosificacion" id="dosificacion"
                         onchange="cargarActividad()">
-                        <option selected value="" disabled>Dosificaci&oacute;n</option>
+                        <option selected value="">Dosificaci&oacute;n</option>
                         @forelse ($dosificaciones as $dosificacion)
                         @forelse ($dosificacion->detalles_dosificaciones_empresas as $detalle)
 

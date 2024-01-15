@@ -345,6 +345,8 @@ Route::group([
     Route::get('/edit/{id}', 'edit')->name('categoria.edit');
     Route::post('store', 'store')->name('categoria.store');
     Route::delete('destroy', 'destroy')->name('categoria.destroy');
+
+    Route::post('getDataCliente', 'getDataCliente')->name('ventas.getDataCliente');
 });
 
 Route::group([
