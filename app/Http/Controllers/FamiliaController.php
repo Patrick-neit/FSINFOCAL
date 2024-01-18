@@ -14,9 +14,21 @@ class FamiliaController extends Controller
      */
     public function index()
     {
+        $breadcrumbs = [
+            ['link' => 'home', 'name' => 'Home'],
+            ['link' => 'javascript:void(0)', 'name' => 'Familias'],
+        ];
+        $pageConfigs = [
+            'pageHeader' => true,
+            'isFabButton' => true
+        ];
         $familias = Familia::all();
 
-        return view('familia.index', compact('familias'));
+        return view('familia.index', [
+            'familias' => $familias,
+            'pageConfigs' => $pageConfigs,
+            'breadcrumbs' => $breadcrumbs
+        ]);
     }
 
     public function create()
@@ -32,7 +44,7 @@ class FamiliaController extends Controller
     public function store(Request $request)
     {
         try {
-            if (! empty($request->familia_id)) {
+            if (!empty($request->familia_id)) {
                 return $this->update($request);
             }
             $familia = new Familia();
@@ -66,7 +78,7 @@ class FamiliaController extends Controller
      * @param  \App\Models\Familia  $familia
      * @return \Illuminate\Http\Response
      */
-    public function update($request)
+    public function update(Request $request)
     {
         try {
             $familia = Familia::find($request->familia_id);

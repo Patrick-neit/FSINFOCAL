@@ -16,9 +16,10 @@ class AlmacenController extends Controller
     }
     public function create(){
         $empresaUserLog = Auth::user()->empresas()->first();
-        $encargados = User::whereHas('empresas', function ($query) use ($empresaUserLog){
-            $query->where('empresa_id', $empresaUserLog->id);
-        })->get();
+        // $encargados = User::whereHas('empresas', function ($query) use ($empresaUserLog){
+        //     $query->where('empresa_id', $empresaUserLog->id);
+        // })->get();
+        $encargados = User::all();
         $sucursales = Sucursal::where('empresa_id', $empresaUserLog->id)->get();
         return view('almacenes.create', compact('sucursales','encargados'));
     }

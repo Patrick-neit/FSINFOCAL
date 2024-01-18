@@ -15,6 +15,7 @@
 {{-- page styles --}}
 @section('page-style')
 <link rel="stylesheet" type="text/css" href="{{asset('css/pages/app-invoice.css')}}">
+
 @endsection
 
 @section('content')
@@ -23,7 +24,7 @@
         <a href="#modalCrearUsuario" id="crearUser"
             class="btn waves-effect waves-light invoice-create border-round z-depth-4 modal-trigger">
             <i class="material-icons">add</i>
-            <span class="hide-on-small-only">Crear Usuario</span>
+            <span class="hide-on-small-only" >Crear Usuario</span>
         </a>
     </div>
     <div class="filter-btn">
@@ -53,6 +54,7 @@
                     <th>Correo</th>
                     <th>CI</th>
                     <th>Fecha de Nacimiento</th>
+                    <th>Departamento</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -70,13 +72,14 @@
                     <td>{{ $user->email }}</td>
                     <td>{{ $user->ci }}</td>
                     <td>{{ $user->fecha_nacimiento }}</td>
+                    <td>{{ $user->departamento_id }}</td>
                     <td>
                         <a href="#modalCrearUsuario" id="editarUser" class="btn btn-floating orange modal-trigger"
                             data-user="{{ $user }}" title="Editar Usuario">
                             <i class="material-icons">edit</i>
                         </a>
-                        <a href="#" id="eliminarUser" class="btn btn-floating red" data-user="{{ $user }}"
-                            title="Eliminar Usuario">
+                        <a href="#modalEliminar" id="eliminarUser" class="btn btn-floating red modal-trigger"
+                            data-id="{{ $user->id }}" title="Eliminar Usuario">
                             <i class="material-icons delete">delete</i>
                         </a>
                     </td>
@@ -85,6 +88,7 @@
             </tbody>
         </table>
     </div>
+    @include('common.modalConfirmDelete')
     @include('users.modals.form')
 </section>
 

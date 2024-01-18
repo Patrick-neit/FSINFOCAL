@@ -34,19 +34,34 @@
                 </div>
             </div>
             <div class="row">
-                <div class="input-field col s12">
-                    <div class="file-field input-field">
-                        <div class="btn">
-                            <span>File</span>
+                <div class="input-field col m6 s12">
+                    <select id="departamento_id">
+                        <option value="" disabled selected>Escoga una opcion</option>
+                        <option value="1">Santa Cruz</option>
+                        <option value="2">Beni</option>
+                        <option value="3">Pado</option>
+                        <option value="4">La Paz</option>
+                        <option value="5">Cochabamba</option>
+                        <option value="6">Oruro</option>
+                        <option value="7">Potosi</option>
+                        <option value="8">Chuquisaca</option>
+                        <option value="9">Tarija</option>
+                    </select>
+                    <label>Seleccione un Departamento</label>
+                </div>
+                <div class="row">
+                    <div class="col m6 s12 file-field input-field">
+                        <div class="btn float-right">
+                            <span>Foto de Perfil</span>
                             <input class="autocomplete" id="avatar" type="file">
                         </div>
                         <div class="file-path-wrapper">
-                            <i class="material-icons prefix"> attach_file </i>
                             <input class="file-path validate" name="avatar" type="text">
                         </div>
                     </div>
                 </div>
             </div>
+            {{-- Departamentos estaticos--}}
         </form>
     </div>
     <div class="modal-footer">

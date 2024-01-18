@@ -4,6 +4,7 @@ namespace App\Observers;
 
 use App\Models\Binnacle;
 use App\Models\Empresa;
+use Auth;
 
 class EmpresaObserver
 {
@@ -14,9 +15,11 @@ class EmpresaObserver
      */
     public function created(Empresa $empresa)
     {
+        // dd(Auth::id());
         Binnacle::create([
-            'user_id' => auth()->user()->id,
-            'ip' => request()->ip(),
+            'user_id' => Auth::id(),
+            // 'ip' => request()->ip(),
+            'ip' => '1',
             'action' => 'create',
             'binnacleable_id' => $empresa->id,
             'binnacleable_type' => 'App\Models\Empresa',
@@ -35,7 +38,8 @@ class EmpresaObserver
     {
         Binnacle::create([
             'user_id' => auth()->user()->id,
-            'ip' => request()->ip(),
+            // 'ip' => request()->ip(),
+            'ip' => 'fa',
             'action' => 'update',
             'binnacleable_id' => $empresa->id,
             'binnacleable_type' => 'App\Models\Empresa',
@@ -52,7 +56,8 @@ class EmpresaObserver
     {
         Binnacle::create([
             'user_id' => auth()->user()->id,
-            'ip' => request()->ip(),
+            // 'ip' => request()->ip(),
+            'ip' => 'fa',
             'action' => 'delete',
             'binnacleable_id' => $empresa->id,
             'binnacleable_type' => 'App\Models\Empresa',

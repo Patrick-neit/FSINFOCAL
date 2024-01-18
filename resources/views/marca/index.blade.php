@@ -1,138 +1,97 @@
-{{-- layout --}}
 @extends('layouts.contentLayoutMaster')
 
-{{-- page title --}}
-@section('title', 'Listado Empresas')
+@section('title', 'Marcas')
 
-{{-- vendors styles --}}
 @section('vendor-style')
-<link rel="stylesheet" type="text/css" href="{{ asset('vendors/data-tables/css/jquery.dataTables.min.css') }}">
+<link rel="stylesheet" type="text/css" href="{{asset('vendors/data-tables/css/jquery.dataTables.min.css')}}">
 <link rel="stylesheet" type="text/css"
-    href="{{ asset('vendors/data-tables/extensions/responsive/css/responsive.dataTables.min.css') }}">
+    href="{{asset('vendors/data-tables/extensions/responsive/css/responsive.dataTables.min.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('vendors/data-tables/css/dataTables.checkboxes.css')}}">
 @endsection
 
-{{-- page styles --}}
 @section('page-style')
-<link rel="stylesheet" type="text/css" href="{{ asset('css/pages/page-users.css') }}">
+<link rel="stylesheet" type="text/css" href="{{asset('css/pages/app-invoice.css')}}">
 @endsection
 
-{{-- page content --}}
 @section('content')
-<!-- users list start -->
-<section class="users-list-wrapper section">
-    {{-- <div class="users-list-filter">
-        <div class="card-panel">
-            <div class="row">
-                <form>
-                    <div class="col s12 m6 l3">
-                        <label for="users-list-verified">Verified</label>
-                        <div class="input-field">
-                            <select class="form-control" id="users-list-verified">
-                                <option value="">Any</option>
-                                <option value="Yes">Yes</option>
-                                <option value="No">No</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col s12 m6 l3">
-                        <label for="users-list-role">Role</label>
-                        <div class="input-field">
-                            <select class="form-control" id="users-list-role">
-                                <option value="">Any</option>
-                                <option value="User">User</option>
-                                <option value="Staff">Staff</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col s12 m6 l3">
-                        <label for="users-list-status">Status</label>
-                        <div class="input-field">
-                            <select class="form-control" id="users-list-status">
-                                <option value="">Any</option>
-                                <option value="Active">Active</option>
-                                <option value="Close">Close</option>
-                                <option value="Banned">Banned</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col s12 m6 l3 display-flex align-items-center show-btn">
-                        <button type="submit" class="btn btn-block indigo waves-effect waves-light">Show</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div> --}}
-
-    <div class="users-list-table">
-        <div class="card">
-            <div class="card-content">
-                <!-- datatable start -->
-                <div class="responsive-table">
-                    <div class="row">
-                        <div class="col s12">
-                            <div class="right-align">
-                                <!-- create invoice button-->
-                                <div class="invoice-create-btn">
-                                    <a href="{{ route('marca.create') }}"
-                                        class="btn waves-effect waves-light invoice-create border-round z-depth-4">
-                                        <i class="material-icons">add</i>
-                                        <span class="hide-on-small-only">Crear Marca</span>
-                                    </a>
-                                </div> <br>
-                            </div>
-                        </div>
-                    </div>
-
-                    <table id="enterprice-list-datatable" class="table">
-                        <thead>
-                            <tr>
-                                <th>Nombre Marca</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @forelse ($marcas as $marca)
-                            <tr>
-                                <td>{{ $marca->nombre_marca }}</td>
-                                <td class="text-center">
-                                    <a href="{{ route('marca.edit', $marca->id)}}">
-                                        <i class="material-icons">edit</i>
-                                    </a>
-                                    <span><a style="cursor: pointer;" onclick="eliminar('{{ $marca->id }}')"><i
-                                                class="material-icons">delete_outline</i></a></span>
-                                </td>
-                                {{-- <td><a href="{{ asset('page-users-view') }}"><i
-                                            class="material-icons">remove_red_eye</i></a></td> --}}
-                            </tr>
-                            @empty
-                            <tr>
-                                <td colspan="8" class="text-center">
-                                    No hay registros para mostrar
-                                </td>
-                            </tr>
-                            @endforelse
-                        </tbody>
-                    </table>
-                </div>
-                <!-- datatable ends -->
-            </div>
-        </div>
+<section class="invoice-list-wrapper section">
+    <div class="invoice-create-btn">
+        <a href="#modalCrearMarca" id="crearMarca"
+            class="btn waves-effect waves-light invoice-create border-round z-depth-4 modal-trigger">
+            <i class="material-icons">add</i>
+            <span class="hide-on-small-only">Crear Marca</span>
+        </a>
     </div>
+    <div class="responsive-table">
+        <table class="table invoice-data-table white border-radius-4 pt-1">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th>Nombre Marca</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse ($marcas as $marca)
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>{{ $marca->nombre_marca }}</td>
+                    <td>
+                        @if ($marca->estado)
+                        <span class="badge badge pill green">Activo</span>
+                        @else
+                        <span class="badge badge pill red">Inactivo</span>
+                        @endif
+                    </td>
+                    <td>
+                        <a href="#modalCrearMarca" id="editarMarca" class="btn btn-floating orange modal-trigger"
+                            data-marca="{{ $marca }}" title="Editar Marca">
+                            <i class="material-icons">edit</i>
+                        </a>
+                        <a href="#modalEliminar" id="eliminarMarca" class="btn btn-floating red modal-trigger"
+                            data-id="{{ $marca->id }}" title="Eliminar Marca">
+                            <i class="material-icons delete">delete</i>
+                        </a>
+                    </td>
+                </tr>
+                @empty
+                <tr>
+                    <td colspan="8" class="text-center">
+                        No hay registros para mostrar
+                    </td>
+                </tr>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
+    @include('common.modalConfirmDelete')
+    @include('marca.modals.form')
 </section>
+
 <!-- users list ends -->
 @endsection
 
 {{-- vendor scripts --}}
 @section('vendor-script')
-<script src="{{ asset('vendors/data-tables/js/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('vendors/data-tables/extensions/responsive/js/dataTables.responsive.min.js') }}"></script>
+<script src="{{asset('vendors/data-tables/js/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('vendors/data-tables/extensions/responsive/js/dataTables.responsive.min.js')}}"></script>
+<script src="{{asset('vendors/data-tables/js/datatables.checkboxes.min.js')}}"></script>
 @endsection
 
 {{-- page script --}}
 @section('page-script')
-<script src="{{ asset('js/scripts/marca/index,js') }}"></script>
 <script>
     let ruta_index_marca = "{{ route('marca.index') }}";
+    let ruta_update_marca = "{{ route('marca.update', 'marca_id' ) }}";
+    let ruta_guardar_marca = "{{ route('marca.store') }}";
     let ruta_eliminar_marca = "{{ route('marca.destroy') }}";
 </script>
+<script src="{{asset('js/scripts/advance-ui-modals.js')}}"></script>
+<script src="{{ asset('js/scripts/marca/index.js') }}"></script>
+<script src="{{ asset('js/scripts/marca/create.js') }}"></script>
+<script src="{{ asset('js/scripts/marca/edit.js') }}"></script>
+<script src="{{ asset('js/scripts/marca/destroy.js') }}"></script>
 @endsection

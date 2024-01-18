@@ -18,14 +18,14 @@ $(document).ready(function () {
           targets: [0, 1],
           orderable: false
         },
-        { "orderable": false, "targets": 8 },
+        { "orderable": false, "targets": 9 },
       ],
       order: [2, 'asc'],
       dom:
         '<"top display-flex  mb-2"<"action-filters"f><"actions action-btns display-flex align-items-center">><"clear">rt<"bottom"p>',
       language: {
         search: "",
-        searchPlaceholder: "Search Invoice"
+        searchPlaceholder: "Buscar Usuario"
       },
       select: {
         style: "multi",

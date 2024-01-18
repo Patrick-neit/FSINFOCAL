@@ -1,22 +1,24 @@
 $(document).ready(function () {
+    $('select').formSelect()
     const registrarUserButton = $("#registrarUser")
     const actualizarUserButton = $("#actualizarUser")
     const titleModalUser = $("#title-modal-user")
-    
+
     let user_id = null;
     $('tbody').on('click', '#editarUser', function (e) {
+        const user = $(this).data('user');
+
         titleModalUser.html('Actualizar Usuario')
         actualizarUserButton.removeClass('display-none')
         registrarUserButton.addClass('display-none')
-
-        const user = $(this).data('user');
         user_id = user.id;
+
         $("#nombres").val(user.name);
         $("#apellidos").val(user.apellidos);
         $("#fecha_nacimiento").val(user.fecha_nacimiento);
         $("#ci").val(user.ci);
         $("#email").val(user.email);
-
+        $("#departamento_id").val(user.departamento_id).change();
         $('#modalCrearUsuario').show();
     });
 
@@ -31,6 +33,7 @@ $(document).ready(function () {
         formData.append("password", password.value);
         formData.append("avatar", avatar.files[0]);
         formData.append("user_id", user_id);
+        formData.append("departamento_id", departamento_id.value);
 
         fetch(ruta_update_user, {
             method: "POST",

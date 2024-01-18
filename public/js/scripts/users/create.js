@@ -2,6 +2,17 @@ const csrfToken = document.head.querySelector(
     "[name~=csrf-token][content]"
 ).content;
 
+let nombres = document.getElementById("nombres");
+let apellidos = document.getElementById("apellidos");
+let ci = document.getElementById("ci");
+let fecha_nacimiento = document.getElementById("fecha_nacimiento");
+let email = document.getElementById("email");
+let password = document.getElementById("password");
+let avatar = document.getElementById("avatar");
+let departamento_id = document.getElementById("departamento_id");
+
+let registrarUserButton = document.getElementById("registrarUser");
+
 $(document).ready(function () {
     const registrarUserButton = $("#registrarUser")
     const actualizarUserButton = $("#actualizarUser")
@@ -15,18 +26,9 @@ $(document).ready(function () {
         $("#fecha_nacimiento").val('');
         $("#ci").val('');
         $("#email").val('');
+        $("#departamento_id").val('');
     });
 });
-
-let nombres = document.getElementById("nombres");
-let apellidos = document.getElementById("apellidos");
-let ci = document.getElementById("ci");
-let fecha_nacimiento = document.getElementById("fecha_nacimiento");
-let email = document.getElementById("email");
-let password = document.getElementById("password");
-let avatar = document.getElementById("avatar");
-
-let registrarUserButton = document.getElementById("registrarUser");
 
 registrarUserButton.addEventListener("click", function (event) {
     event.preventDefault();
@@ -38,7 +40,7 @@ registrarUserButton.addEventListener("click", function (event) {
     formData.append("email", email.value);
     formData.append("password", password.value);
     formData.append("avatar", avatar.files[0]);
-    formData.append("estado", 1);
+    formData.append("departamento_id", departamento_id.value);
 
     fetch(ruta_guardar_user, {
         method: "POST",

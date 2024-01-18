@@ -338,10 +338,10 @@
     // ),
     // )
     // ),
-    array(
-    "navheader"=> "Administracion",
-    "icon"=> "more_horiz"
-    ),
+    // array(
+    // "navheader"=> "Administracion",
+    // "icon"=> "more_horiz"
+    // ),
     array(
     "url" => "javascript:void(0)",
     "i18n" => "Administracion",
@@ -359,9 +359,43 @@
     )
     ),
     array(
-    "navheader"=> "CATALOGO",
-    "icon"=> "more_horiz"
+    "url" => "javascript:void(0)",
+    "i18n" => "Facturacion",
+    "name" => "Facturacion",
+    "icon" => "monetization_on",
+    "slug" => "Facturacion",
+    "class"=> "collapsible-header waves-effect waves-cyan",
+    "submenu" => array(
+    array(
+    "url" =>trim( parse_url(route('empresas.index'), PHP_URL_PATH) ,'/'),
+    "i18n" => "Empresas",
+    "name" => "Empresas",
+    "slug" => "empresas"
     ),
+    array(
+    "url" =>trim( parse_url(route('sucursales.index'), PHP_URL_PATH) ,'/'),
+    "i18n" => "Sucursales",
+    "name" => "Sucursales",
+    "slug" => "sucursales"
+    ),
+    array(
+    "url" =>trim( parse_url(route('sucursales.index'), PHP_URL_PATH) ,'/'),
+    "i18n" => "Puntos de Ventas",
+    "name" => "Puntos de Ventas",
+    "slug" => "puntos de ventas"
+    ),
+    array(
+    "url" =>trim( parse_url(route('sucursales.index'), PHP_URL_PATH) ,'/'),
+    "i18n" => "Catalogos de Imp.",
+    "name" => "Catalogos de Imp.",
+    "slug" => "catalogos"
+    ),
+    )
+    ),
+    // array(
+    // "navheader"=> "CATALOGO",
+    // "icon"=> "more_horiz"
+    // ),
     array(
     "url" => "javascript:void(0)",
     "i18n" => "Catalogos",
@@ -403,10 +437,10 @@
     ),
     )
     ),
-    array(
-    "navheader"=> "Inventario",
-    "icon"=> "more_horiz"
-    ),
+    // array(
+    // "navheader"=> "Inventario",
+    // "icon"=> "more_horiz"
+    // ),
     array(
     "url" => "javascript:void(0)",
     "i18n" => "Inventario",
@@ -429,10 +463,10 @@
     ),
     )
     ),
-    array(
-    "navheader"=> "OPERACION",
-    "icon"=> "more_horiz"
-    ),
+    // array(
+    // "navheader"=> "OPERACION",
+    // "icon"=> "more_horiz"
+    // ),
     array(
     "url" => "javascript:void(0)",
     "i18n" => "Operaciones",
@@ -448,13 +482,13 @@
     "slug" => "pedidos"
     ),
     array(
-    "url" => "cliente.index",
+    "url" => trim( parse_url(route('cliente.index'), PHP_URL_PATH) ,'/'),
     "i18n" => "Clientes",
     "name" => "Clientes",
     "slug" => "clientes"
     ),
     array(
-    "url" => "proveedor.create",
+    "url" => trim( parse_url(route('proveedor.index'), PHP_URL_PATH) ,'/'),
     "i18n" => "Proveedores",
     "name" => "Proveedores",
     "slug" => "proveedores"
