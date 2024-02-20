@@ -30,8 +30,18 @@ class ProductoController extends Controller
      */
     public function index()
     {
+        $breadcrumbs = [
+            ['link' => 'home', 'name' => 'Home'],
+            ['link' => 'javascript:void(0)', 'name' => 'Productos'],
+        ];
+        $pageConfigs = [
+            'pageHeader' => true,
+            'isFabButton' => true
+        ];
         return view('productos.index', [
-            'productos' => CabeceraProducto::all()
+            'pageConfigs' => $pageConfigs,
+            'breadcrumbs' => $breadcrumbs,
+            'productos' => CabeceraProducto::all(),
         ]);
     }
 
@@ -42,7 +52,18 @@ class ProductoController extends Controller
      */
     public function create()
     {
+        $breadcrumbs = [
+            ['link' => 'home', 'name' => 'Home'],
+            ['link' => 'producto/index', 'name' => 'Productos'],
+            ['name' => 'Nuevo Producto'],
+        ];
+        $pageConfigs = [
+            'pageHeader' => true,
+            'isFabButton' => true
+        ];
         return view('productos.create', [
+            'pageConfigs' => $pageConfigs,
+            'breadcrumbs' => $breadcrumbs,
             'almacenes' => Almacen::all(),
             //'dosificaciones' => DosificacionEmpresa::all(),
             'dosificaciones' => DosificacionEmpresa::with('detalles_dosificaciones_empresas')->get(),
@@ -156,7 +177,19 @@ class ProductoController extends Controller
      */
     public function edit($id)
     {
+        $breadcrumbs = [
+            ['link' => 'home', 'name' => 'Home'],
+            ['link' => 'producto/index', 'name' => 'Productos'],
+            ['name' => 'Editar Producto'],
+        ];
+        $pageConfigs = [
+            'pageHeader' => true,
+            'isFabButton' => true
+        ];
+
         return view('productos.create', [
+            'pageConfigs' => $pageConfigs,
+            'breadcrumbs' => $breadcrumbs,
             'cabecera_producto' => CabeceraProducto::find($id),
             'detalle_producto' => DetalleProducto::where('producto_id', $id)->first(),
             'inventario_almacen' => InventarioAlmacen::where('producto_id', $id)->first(),
@@ -177,14 +210,14 @@ class ProductoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update($request)
+    public function update(Request $request)
     {
         try {
 
             $cabeceraProducto = CabeceraProducto::find($request->producto_id);
             $detalleProducto = DetalleProducto::where('producto_id', $request->producto_id)->first();
             //aign valores de productos
-            $cabeceraProducto->dosificacion_id = 1/* $request->dosificacion */;
+            // $cabeceraProducto->dosificacion_id = 1/* $request->dosificacion */;
             $cabeceraProducto->unidad_medida_id = $request->unidad_medida;
             $cabeceraProducto->marca_id = $request->marca_id;
             $cabeceraProducto->categoria_id = $request->categoria;
@@ -198,7 +231,7 @@ class ProductoController extends Controller
             $cabeceraProducto->numero_imei = $request->numero_imei;
             $cabeceraProducto->peso_unitario = $request->peso_unitario;
             $cabeceraProducto->codigo_barra = $request->codigo_barra;
-            $cabeceraProducto->caracteristicas = $request->caracteristicas;
+            $cabeceraProducto->caracteristicas = $request->caracteristica;
             $cabeceraProducto->stock_minimo = $request->stock_minimo;
             $cabeceraProducto->stock_actual = $request->stock_actual;
             $cabeceraProducto->estado = $request->estado;
@@ -319,5 +352,15 @@ class ProductoController extends Controller
         }
 
         return responseJson('Producto', $productoFound, 200);
+    }
+
+    public function destroyProducto(Request $request)
+    {
+        $producto = LaraCart::find(['id' => $request->codigo_producto]);
+        if ($producto) {
+            LaraCart::removeItem($producto->getHash());
+        }
+
+        return responseJson('Producto', LaraCart::subTotal(false), 200);
     }
 }

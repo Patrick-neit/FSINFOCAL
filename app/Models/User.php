@@ -55,6 +55,18 @@ class User extends Authenticatable implements BannableInterface
         'email_verified_at' => 'datetime',
     ];
 
+    protected $departamentos = [
+        '1' => 'Santa Cruz',
+        '2' => 'Beni',
+        '3' => 'Pando',
+        '4' => 'La Paz',
+        '5' => 'Cochabamba',
+        '6' => 'Oruro',
+        '7' => 'Potosi',
+        '8' => 'Chuquisaca',
+        '9' => 'Tarija',
+    ];
+
     public function empresas()
     {
         return $this->belongsToMany(Empresa::class);
@@ -70,7 +82,13 @@ class User extends Authenticatable implements BannableInterface
         return $this->morphMany(Binnacle::class, 'binnacleable');
     }
 
-    public function almacen(){
+    public function almacen()
+    {
         return $this->hasOne(Almacen::class);
+    }
+
+    public function departamento()
+    {
+        return $this->departamentos[$this->departamento_id];
     }
 }

@@ -8,6 +8,7 @@ use App\Models\DetallePedido;
 use App\Models\ImpuestoUnidadMedida;
 use App\Models\Pedido;
 use App\Models\Proveedor;
+use Auth;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
@@ -22,8 +23,20 @@ class PedidoController extends Controller
      */
     public function index()
     {
+        $breadcrumbs = [
+            ['link' => 'home', 'name' => 'Home'],
+            ['link' => 'javascript:void(0)', 'name' => 'Pedidos'],
+        ];
+        $pageConfigs = [
+            'pageHeader' => true,
+            'isFabButton' => true
+        ];
         return view('pedidos.index', [
             'pedidos' => Pedido::with('detalle_pedido')->get(),
+            'proveedores' => Proveedor::all(),
+            'cabecera_productos' => CabeceraProducto::all(),
+            'pageConfigs' => $pageConfigs,
+            'breadcrumbs' => $breadcrumbs
         ]);
     }
 
@@ -34,9 +47,20 @@ class PedidoController extends Controller
      */
     public function create()
     {
+        $breadcrumbs = [
+            ['link' => 'home', 'name' => 'Home'],
+            ['link' => 'javascript:void(0)', 'name' => 'Pedidos'],
+            ['name' => 'Crear Pedido'],
+        ];
+        $pageConfigs = [
+            'pageHeader' => true,
+            'isFabButton' => true
+        ];
         return view('pedidos.create', [
             'proveedores' => Proveedor::all(),
             'cabecera_productos' => CabeceraProducto::all(),
+            'pageConfigs' => $pageConfigs,
+            'breadcrumbs' => $breadcrumbs
         ]);
     }
 
@@ -57,7 +81,7 @@ class PedidoController extends Controller
         $pedido->hora = Carbon::now()->format('H:m:s');
         $pedido->proveedor_id = $request->proveedor_id;
         $pedido->aprobado = 0;
-        $pedido->usuario_id = auth()->user()->id;
+        $pedido->usuario_id = Auth::id();
         $pedido->total = LaraCart::subTotal(false);
         $pedido->nota = $request->nota;
         $pedido->save();
@@ -93,6 +117,15 @@ class PedidoController extends Controller
      */
     public function edit($id)
     {
+        $breadcrumbs = [
+            ['link' => 'home', 'name' => 'Home'],
+            ['link' => 'javascript:void(0)', 'name' => 'Pedidos'],
+            ['name' => 'Editar Pedido'],
+        ];
+        $pageConfigs = [
+            'pageHeader' => true,
+            'isFabButton' => true
+        ];
         $pedido = Pedido::find($id)->load('detalle_pedido', 'detalle_pedido.producto', 'detalle_pedido.producto.detalle_producto');
 
         LaraCart::emptyCart();
@@ -115,6 +148,8 @@ class PedidoController extends Controller
             'pedido' => $pedido,
             'proveedores' => Proveedor::all(),
             'cabecera_productos' => CabeceraProducto::all(),
+            'breadcrumbs' => $breadcrumbs,
+            'pageConfigs' => $pageConfigs,
         ]);
     }
 
@@ -150,7 +185,10 @@ class PedidoController extends Controller
                     $detalle->delete();
                 } else {
 
-                    $detalle_pedido = DetallePedido::where('producto_id', $producto->id)->first();
+                    $detalle_pedido = DetallePedido::where([
+                        'producto_id' => $producto->id,
+                        'pedido_id' => $pedido->id
+                    ])->first();
 
                     if (empty($detalle_pedido)) {
                         $detalle_pedido = new DetallePedido();
@@ -177,7 +215,10 @@ class PedidoController extends Controller
 
                 $producto = CabeceraProducto::select('id')->where('codigo_producto', $item->id)->first();
 
-                $detalle = DetallePedido::where('producto_id', $producto->id)->first();
+                $detalle = DetallePedido::where([
+                    'producto_id' => $producto->id,
+                    'pedido_id' => $pedido->id
+                ])->first();
 
                 if (empty($detalle)) {
                     $detalle_pedido = new DetallePedido();

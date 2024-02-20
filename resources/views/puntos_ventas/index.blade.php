@@ -1,92 +1,84 @@
-{{-- layout --}}
-@extends('layouts.contentLayoutMaster')
+@extends('layouts.page')
 
-{{-- page title --}}
-@section('title', 'Listado Puntos Ventas')
+@section('title', 'Puntos de Ventas')
 
-{{-- vendors styles --}}
-@section('vendor-style')
-<link rel="stylesheet" type="text/css" href="{{ asset('vendors/data-tables/css/jquery.dataTables.min.css') }}">
-<link rel="stylesheet" type="text/css"
-    href="{{ asset('vendors/data-tables/extensions/responsive/css/responsive.dataTables.min.css') }}">
+@section('create-action-content')
+<a href="#modalCrearPuntoVenta" id="crearPuntoVenta"
+    class="btn waves-effect waves-light invoice-create border-round z-depth-4 modal-trigger">
+    <i class="material-icons">add</i>
+    <span class="hide-on-small-only">Crear Punto de Venta</span>
+</a>
 @endsection
 
-{{-- page styles --}}
-@section('page-style')
-<link rel="stylesheet" type="text/css" href="{{ asset('css/pages/page-users.css') }}">
+@section('table-content')
+<table aria-describedby="puntos_ventas" class="table invoice-data-table white border-radius-4 pt-1">
+    <thead>
+        <tr>
+            <th></th>
+            <th></th>
+            <th>Nombre Punto Venta</th>
+            <th>Tipo Punto Venta</th>
+            <th>Codigo Punto Venta</th>
+            <th>Sucursal Asociada</th>
+            <th>Empresa Asociada</th>
+            <th>Descripcion Punto Venta</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach ($puntosVentas as $puntoVenta)
+        <tr>
+            <td></td>
+            <td></td>
+            <td>{{ $puntoVenta->nombre_punto_venta }}</td>
+            <td>{{ $puntoVenta->tipo_punto_venta }}</td>
+            <td> <span class="green-text"> {{ $puntoVenta->codigo_punto_venta }}</span> </td>
+            <td> <span class="red-text">{{$puntoVenta->sucursal->nombre_sucursal}}</span> </td>
+            <td> <span class="red-text">{{$puntoVenta->empresa->nombre_empresa}}</span> </td>
+            <td> {{ $puntoVenta->descripcion_punto_venta }} </td>
+            <td>
+                <a href="#modalCrearPuntoVenta" id="editarPuntoVenta" class="btn btn-floating orange modal-trigger"
+                    data-punto_venta="{{ $puntoVenta }}" title="Editar PuntoVenta">
+                    <i class="material-icons">edit</i>
+                </a>
+                <a href="#modalEliminar" id="eliminar" class="btn btn-floating red modal-trigger"
+                    data-id="{{ $puntoVenta->id }}" title="Eliminar PuntoVenta">
+                    <i class="material-icons delete">delete</i>
+                </a>
+            </td>
+        </tr>
+        @endforeach
+    </tbody>
+</table>
 @endsection
 
-{{-- page content --}}
-@section('content')
-<!-- users list start -->
-<section class="users-list-wrapper section">
-
-    <div class="users-list-table">
-        <div class="card">
-            <div class="card-content">
-                <!-- datatable start -->
-                <div class="responsive-table">
-                    <div class="row">
-                        <div class="col s12">
-                            <div class="right-align">
-                                <!-- create invoice button-->
-                                <div class="invoice-create-btn">
-                                    <a href="{{ route('puntos_ventas.create') }}"
-                                        class="btn waves-effect waves-light invoice-create border-round z-depth-4">
-                                        <i class="material-icons">add</i>
-                                        <span class="hide-on-small-only">Sincronizar Nuevo PV</span>
-                                    </a>
-                                </div> <br>
-                            </div>
-                        </div>
-                    </div>
-
-                    <table id="users-list-datatable" class="table">
-                        <thead>
-                            <tr>
-                                <th>Tipo Punto Venta</th>
-                                <th>Descripcion Punto Venta</th>
-
-                                <th>Sucursal Asociada</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($puntosVentas as $puntoVenta)
-                            <tr>
-                                <td>{{ $puntoVenta->codigo_punto_venta }}</td>
-                                <td> <span class="green-text">{{ $puntoVenta->descripcion_punto_venta }}</span>
-                                    </span> </td>
-
-                                <td> <span class="red-text">{{$puntoVenta->sucursal->nombre_sucursal}}</span> </td>
-                                <td>
-                                    <a href="{{ asset('page-users-view') }}"><i class="material-icons">cached</i></a>
-                                    <span><a onclick="eliminar('{{ $puntoVenta->id }}')"><i
-                                                class="material-icons">delete_outline</i></a></span>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-                <!-- datatable ends -->
-            </div>
-        </div>
-    </div>
-</section>
-<!-- users list ends -->
+@section('additional-components')
+@include('puntos_ventas.modals.form')
 @endsection
 
-{{-- vendor scripts --}}
-@section('vendor-script')
-<script src="{{ asset('vendors/data-tables/js/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('vendors/data-tables/extensions/responsive/js/dataTables.responsive.min.js') }}"></script>
-@endsection
-
-{{-- page script --}}
-@section('page-script')
-<script src="{{ asset('js/scripts/puntos_ventas/index.js') }}"></script>
+@section('page-custom-scripts')
 <script>
-
+    //For Table
+    let numberColumns = 9;
+    let searchString = 'Buscar Punto de Venta';
+    //For Destroy
+    let key_id ='punto_venta_id';
+    //For Edit
+    let punto_venta_id = null;
 </script>
+<script>
+    let ruta_guardar_punto_venta = "{{ route('puntos_ventas.store') }}"
+    let ruta_update_punto_venta = ""
+    let ruta_index = "{{ route('puntos_ventas.index') }}";
+    let ruta_eliminar = "";
+</script>
+<script>
+    let nombre_punto_venta = document.getElementById("nombre_punto_venta");
+    let descripcion_punto_venta = document.getElementById("descripcion_punto_venta");
+    let tipo_punto_venta = document.getElementById("tipo_punto_venta");
+    let sucursal_id = document.getElementById("sucursal_id");
+</script>
+<script src="{{ asset('js/scripts/puntos_ventas/submitForm.js') }}"></script>
+<script src="{{ asset('js/scripts/puntos_ventas/create.js') }}"></script>
+<script src="{{ asset('js/scripts/puntos_ventas/edit.js') }}"></script>
 @endsection

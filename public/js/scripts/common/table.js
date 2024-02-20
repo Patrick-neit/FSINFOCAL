@@ -18,14 +18,15 @@ $(document).ready(function () {
                     targets: [0, 1],
                     orderable: false
                 },
-                { "orderable": false, "targets": 5 },
+                { "orderable": false, "targets": numberColumns - 1 },
             ],
             order: [2, 'asc'],
             dom:
                 '<"top display-flex  mb-2"<"action-filters"f><"actions action-btns display-flex align-items-center">><"clear">rt<"bottom"p>',
             language: {
+                emptyTable: "No hay registros para mostrar",
                 search: "",
-                searchPlaceholder: "Buscar SubFamilia"
+                searchPlaceholder: searchString
             },
             select: {
                 style: "multi",

@@ -379,16 +379,28 @@
     "slug" => "sucursales"
     ),
     array(
-    "url" =>trim( parse_url(route('sucursales.index'), PHP_URL_PATH) ,'/'),
+    "url" =>trim( parse_url(route('puntos_ventas.index'), PHP_URL_PATH) ,'/'),
     "i18n" => "Puntos de Ventas",
     "name" => "Puntos de Ventas",
     "slug" => "puntos de ventas"
     ),
     array(
-    "url" =>trim( parse_url(route('sucursales.index'), PHP_URL_PATH) ,'/'),
+    "url" =>trim( parse_url(route('catalogos.index2'), PHP_URL_PATH) ,'/'),
     "i18n" => "Catalogos de Imp.",
     "name" => "Catalogos de Imp.",
     "slug" => "catalogos"
+    ),
+    array(
+    "url" =>trim( parse_url(route('configuraciones_impuestos.index'), PHP_URL_PATH) ,'/'),
+    "i18n" => "Configuracion Impuesto",
+    "name" => "Configuracion Impuesto",
+    "slug" => "configuraciones"
+    ),
+    array(
+    "url" =>trim( parse_url(route('dosificaciones_empresas.index'), PHP_URL_PATH) ,'/'),
+    "i18n" => "Configuracion Dosificacion",
+    "name" => "Configuracion Dosificacion",
+    "slug" => "dosificaciones"
     ),
     )
     ),

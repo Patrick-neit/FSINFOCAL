@@ -17,8 +17,19 @@ class ClienteController extends Controller
      */
     public function index()
     {
+        $breadcrumbs = [
+            ['link' => 'home', 'name' => 'Home'],
+            ['link' => 'javascript:void(0)', 'name' => 'Clientes'],
+        ];
+        $pageConfigs = [
+            'pageHeader' => true,
+            'isFabButton' => true
+        ];
         return view('cliente.index', [
             'clientes' => Cliente::all(),
+            'documentos' => ImpuestoDocumentoIdentidad::all(),
+            'pageConfigs' => $pageConfigs,
+            'breadcrumbs' => $breadcrumbs
         ]);
     }
 
@@ -55,7 +66,7 @@ class ClienteController extends Controller
             $cliente->correo = $request->correo;
             $cliente->tipo_precio = $request->tipos_precios;
             $cliente->departamento_id = $request->departamento_id;
-            $cliente->fecha_cumpleanos = Carbon::createFromFormat('d/m/Y', $request->fecha_cumpleanos)->format('Y-m-d');
+            $cliente->fecha_cumpleanos = Carbon::parse($request->fecha_cumpleanos)->format('Y-m-d');
 
             $cliente->contacto = $request->contacto;
             $cliente->save();
@@ -104,7 +115,7 @@ class ClienteController extends Controller
      * @param  \App\Models\Cliente  $cliente
      * @return \Illuminate\Http\Response
      */
-    public function update($request)
+    public function update(Request $request)
     {
         try {
             $cliente = Cliente::find($request->cliente_id);

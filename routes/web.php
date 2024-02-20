@@ -277,6 +277,7 @@ Route::group(['middleware' => 'web'], function () {
 });
 
 //sincronizacion de catalogos
+Route::get('/catalogos/index', [CatalogosController::class, 'index2'])->name('catalogos.index2');
 Route::get('/catalogos/{sincronizacion}', [CatalogosController::class, 'index'])->name('catalogos.index');
 Route::get('/catalogos/sincronizarCatalogos/{accion}', [CatalogosController::class, 'sincronizarCatalogos'])->name('sincronizar');
 
@@ -302,6 +303,7 @@ Route::group([
     Route::get('create', 'create')->name('proveedor.create');
     Route::get('/edit/{id}', 'edit')->name('proveedor.edit');
     Route::post('store', 'store')->name('proveedor.store');
+    Route::post('update', 'update')->name('proveedor.update');
     Route::delete('destroy', 'destroy')->name('proveedor.destroy');
 });
 
@@ -369,6 +371,7 @@ Route::group([
     Route::get('create', 'create')->name('cliente.create');
     Route::get('/edit/{id}', 'edit')->name('cliente.edit');
     Route::post('store', 'store')->name('cliente.store');
+    Route::post('update', 'update')->name('cliente.update');
     Route::delete('destroy', 'destroy')->name('cliente.destroy');
 });
 
@@ -394,10 +397,12 @@ Route::group(
     function () {
         Route::get('index', 'index')->name('producto.index');
         Route::post('producto/get/name', 'getProductoNombre')->name('producto.get.name');
+        Route::post('producto/destroyProducto', 'destroyProducto')->name('producto.destroyProducto');
         Route::get('create', 'create')->name('producto.create');
         Route::get('/edit/{id}', 'edit')->name('producto.edit');
         Route::post('/get_actividad/documento_sector', 'getActividadProducto')->name('actividad.getActividad');
         Route::post('store', 'store')->name('producto.store');
+        Route::post('update', 'update')->name('producto.update');
         Route::delete('destroy', 'destroy')->name('producto.destroy');
         Route::post('getDataProductoServicio', 'getDataProductoServicio')->name('producto.getDataProductoServicio');
         Route::post('/update/product/cart', 'updateProductCart')->name('update.product.cart');

@@ -44,7 +44,7 @@ class EmpresaController extends Controller
     public function store(Request $request)
     {
         if (!empty($request->id_empresa)) {
-            return $this->update($request);
+            return $this->update($request, $request->id_empresa);
         }
         if ($request->hasFile('logo_empresa')) {
             $path = Storage::disk('public')->put($request->nro_nit_empresa . '/logo', $request->file('logo_empresa'));
@@ -92,14 +92,14 @@ class EmpresaController extends Controller
         // }
     }
 
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
         try {
             if ($request->hasFile('logo_empresa')) {
 
                 $path = Storage::disk('public')->put($request->nro_nit_empresa . '/logo', $request->file('logo_empresa'));
             }
-            $enterprise = Empresa::find($request->id_empresa);
+            $enterprise = Empresa::find($id);
             $enterprise->nombre_empresa = $request->nombre_empresa;
             $enterprise->nro_nit_empresa = $request->nro_nit_empresa;
             $enterprise->direccion = $request->direccion;

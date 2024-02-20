@@ -32,6 +32,58 @@ class CatalogosController extends Controller
         $this->sincService = new ImpuestoSincronizarService();
     }
 
+    public function index2()
+    {
+        $breadcrumbs = [
+            ['link' => 'home', 'name' => 'Home'],
+            ['link' => 'javascript:void(0)', 'name' => 'Catalogos de Impuestos'],
+        ];
+        $pageConfigs = [
+            'pageHeader' => true,
+            'isFabButton' => true
+        ];
+        $motivoAnulaciones = ImpuestoMotivoAnulacion::all();
+        $impuestosFechaHora = ImpuestoFechaHora::all();
+        $tipoDocumentoSector = ImpuestoTipoDocumentoSector::all();
+        $documentoSector = ImpuestoDocumentoSector::all();
+        $tiposFactura = ImpuestoTipoFactura::all();
+        $mensajesServicios = ImpuestoMensajeServicio::all();
+        $eventosSignificativos = ImpuestoEventoSignificativo::all();
+        $tipoPuntoVenta = ImpuestoTipoPuntoVenta::all();
+        $productosServicios = ImpuestoProductoServicio::all();
+        $tipoMonedas = ImpuestoTipoMoneda::all();
+        $actividades = ImpuestoListadoActividad::all();
+        $tipoEmisiones = ImpuestoTipoEmision::all();
+        $tipoDocumentoIdentidad = ImpuestoDocumentoIdentidad::all();
+        $leyendasFactura = ImpuestoLeyendaFactura::all();
+        $metodosPagos = ImpuestoMetodoPago::all();
+        $unidadMedida = ImpuestoUnidadMedida::all();
+        $paises = ImpuestoListadoPais::all();
+        $tipoHabitacion = ImpuestoTipoHabitacion::all();
+        return view('sincronizacion.index', [
+            'impuestosFechaHora' => $impuestosFechaHora,
+            'motivoAnulaciones' => $motivoAnulaciones,
+            'tipoDocumentoSector' => $tipoDocumentoSector,
+            'documentoSector' => $documentoSector,
+            'tiposFactura' => $tiposFactura,
+            'mensajesServicios' => $mensajesServicios,
+            'eventosSignificativos' => $eventosSignificativos,
+            'tipoPuntoVenta' => $tipoPuntoVenta,
+            'productosServicios' => $productosServicios,
+            'tipoMonedas' => $tipoMonedas,
+            'actividades' => $actividades,
+            'tipoEmisiones' => $tipoEmisiones,
+            'tipoDocumentoIdentidad' => $tipoDocumentoIdentidad,
+            'leyendasFactura' => $leyendasFactura,
+            'metodosPagos' => $metodosPagos,
+            'unidadMedida' => $unidadMedida,
+            'paises' => $paises,
+            'tipoHabitacion' => $tipoHabitacion,
+            'pageConfigs' => $pageConfigs,
+            'breadcrumbs' => $breadcrumbs,
+        ]);
+    }
+
     public function index($sincronizacion)
     {
         switch ($sincronizacion) {
@@ -138,9 +190,7 @@ class CatalogosController extends Controller
             'cuis' => '49DC0A17',
         ]));
         $dataSincronizar = $this->sincService->sincronizarServices($dataSincronizar, $accion);
-
         if ($dataSincronizar->content->transaccion) {
-
             switch ($accion) {
                 case config('sistema.sincMotivoAnulacion'):
                     ImpuestoMotivoAnulacion::truncate();

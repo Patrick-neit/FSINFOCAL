@@ -10,21 +10,40 @@ use Illuminate\Http\Request;
 
 class AlmacenController extends Controller
 {
-    public function index(){
+    public function index()
+    {
+        $breadcrumbs = [
+            ['link' => 'home', 'name' => 'Home'],
+            ['link' => 'javascript:void(0)', 'name' => 'Almacenes'],
+        ];
+        $pageConfigs = [
+            'pageHeader' => true,
+            'isFabButton' => true
+        ];
         $almacenes = Almacen::all();
-        return view('almacenes.index', compact('almacenes'));
+        $encargados = User::all();
+        $sucursales = Sucursal::all();
+        return view('almacenes.index', [
+            'almacenes' => $almacenes,
+            'encargados' => $encargados,
+            'sucursales' => $sucursales,
+            'pageConfigs' => $pageConfigs,
+            'breadcrumbs' => $breadcrumbs
+        ]);
     }
-    public function create(){
+    public function create()
+    {
         $empresaUserLog = Auth::user()->empresas()->first();
         // $encargados = User::whereHas('empresas', function ($query) use ($empresaUserLog){
         //     $query->where('empresa_id', $empresaUserLog->id);
         // })->get();
         $encargados = User::all();
         $sucursales = Sucursal::where('empresa_id', $empresaUserLog->id)->get();
-        return view('almacenes.create', compact('sucursales','encargados'));
+        return view('almacenes.create', compact('sucursales', 'encargados'));
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         try {
             $almacen = new Almacen();
             $almacen->nombre = $request->nombre_almacen;
@@ -33,10 +52,9 @@ class AlmacenController extends Controller
             $almacen->sucursal_id = $request->sucursal_id;
             $almacen->save();
             if ($almacen->save()) {
-                return responseJson('Almacen Guardado Exitosamente', $almacen,200);
+                return responseJson('Almacen Guardado Exitosamente', $almacen, 200);
             }
-            return responseJson('Algo salio Mal', $almacen,400);
-
+            return responseJson('Algo salio Mal', $almacen, 400);
         } catch (\Exception $e) {
             return responseJson('Server Error', [
                 'message' => $e->getMessage(),

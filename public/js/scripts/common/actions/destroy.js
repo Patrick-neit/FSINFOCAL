@@ -1,33 +1,36 @@
 $(document).ready(function () {
-    let categoria_id = null;
-    $('tbody').on('click', '#eliminarCategoria', function (e) {
-        categoria_id = $(this).data('id');
+    let id = null;
+    let data = {};
+    $('tbody').on('click', '#eliminar', function (e) {
+        id = $(this).data('id');
+        data[key_id] = id;
     });
+
     $('#confirmEliminar').on('click', function (e) {
-        fetch(ruta_eliminar_categoria, {
+        fetch(`ruta_eliminar/${id}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
                 "X-CSRF-Token": csrfToken,
             },
-            body: JSON.stringify({
-                categoria_id: categoria_id,
-            }),
+            body: JSON.stringify(data),
         })
             .then((response) => response.json())
             .then((data) => {
                 if (data.status == 200) {
+                    console.log(data)
                     M.toast({
-                        html: data.description,
+                        html: 'Eliminado Satisfactoriamente',
                         classes: "rounded",
                         displayLength: 2000,
                         completeCallback: function () {
-                            window.location.href = ruta_index_categoria;
+                            window.location.href = ruta_index;
                         },
                     });
                 } else {
+                    console.log(data)
                     M.toast({
-                        html: data.description,
+                        html: 'Error Inesperado',
                         classes: "rounded",
                         displayLength: 2000,
                     });
@@ -35,8 +38,9 @@ $(document).ready(function () {
                 $('#modalEliminar').hide();
             })
             .catch((error) => {
+                console.log(error)
                 M.toast({
-                    html: error,
+                    html: 'Error Inesperado',
                     classes: "rounded",
                     displayLength: 2000,
                 });

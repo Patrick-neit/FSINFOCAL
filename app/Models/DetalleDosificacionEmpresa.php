@@ -23,4 +23,14 @@ class DetalleDosificacionEmpresa extends Model
     {
         return $this->belongsTo(DosificacionEmpresa::class);
     }
+
+    public function documento_sector()
+    {
+        return $this->belongsTo(ImpuestoDocumentoSector::class);
+    }
+
+    public function tipo_factura_documento_sector()
+    {
+        return $this->belongsTo(ImpuestoTipoFactura::class, 'tipo_factura_documento_sector');
+    }
 }

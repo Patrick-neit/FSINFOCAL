@@ -2,7 +2,7 @@
 @extends('layouts.contentLayoutMaster')
 
 {{-- page title --}}
-@section('title','Nueva marca')
+@section('title',$breadcrumbs[2]['name'])
 
 {{-- vendor styles --}}
 @section('vendor-style')
@@ -20,165 +20,178 @@
 <!-- users edit start -->
 <div class="section users-edit">
     <div class="card">
-        <div class="card-content">
-            <!-- <div class="card-body"> -->
-            <ul class="tabs mb-2 row">
-                <li class="tab">
-                    <a class="display-flex align-items-center active" id="account-tab" href="#account">
-                        <i class="material-icons mr-1">person_outline</i><span>Gestión marca</span>
-                    </a>
-                </li>
-            </ul>
-            <div class="divider mb-3"></div>
-            @csrf
-            <div class="row">
-                <div class="col s12 m8 l4 input-field">
-                    <select class="select2 browser-default" name="proveedor_id" id="proveedor_id">
-                        <option selected value="" disabled>Seleccione proveedor</option>
-                        @forelse ($proveedores as $proveedor)
-                        <option value="{{ $proveedor->id }}" @if (isset($pedido)) @if($pedido->proveedor_id ==
-                            $proveedor->id)
-                            selected
-                            @endif
-                            @endif
-                            >{{ $proveedor->nombre_proveedor }}</option>
-                        @empty
-                        <option value="">No hay opciones</option>
-                        @endforelse
-                    </select>
+        <form id="formPedido">
+            <div class="card-content">
+                <h4 class="card-title">Datos Generales</h4>
+                <div class="divider mb-1 mt-1"></div>
+                <div class="row">
+                    <div class="col s12 m6 l6">
+                        <div class="input-field">
+                            <input placeholder="Fecha Pedido" id="fecha_pedido" name="fecha_pedido" type="text"
+                                class="datepicker" value="@if (isset($pedido)) {{ $pedido->fecha }}@endif">
+                            <label for="fecha_pedido">Fecha Pedido</label>
+                        </div>
+                    </div>
+                    <div class="col s12 m6 l6">
+                        <div class="input-field">
+                            <input placeholder="Hora Pedido" id="hora_pedido" name="hora_pedido" type="text"
+                                class="timepicker" value="@if(isset($pedido)){{ $pedido->hora }}@endif">
+                            <label for="hora_pedido">Hora Pedido</label>
+                        </div>
+                    </div>
+                    <div class="col s12 m6 l6">
+                        <label for="">Proveedor</label>
+                        <div class="input-field">
+                            <select class="select2 browser-default" name="proveedor_id" id="proveedor_id">
+                                <option selected value="" disabled>Seleccione proveedor</option>
+                                @forelse ($proveedores as $proveedor)
+                                <option value="{{ $proveedor->id }}" @if (isset($pedido)) @if($pedido->proveedor_id ==
+                                    $proveedor->id)
+                                    selected
+                                    @endif
+                                    @endif
+                                    >{{ $proveedor->nombre_proveedor }}</option>
+                                @empty
+                                <option value="">No hay opciones</option>
+                                @endforelse
+                            </select>
+                        </div>
+                    </div>
                 </div>
-                <div class="input-field col s12 m4 offset-l4">
-                    <i class="material-icons prefix">date_range</i>
-                    <input id="fecha_pedido" name="fecha_pedido" type="text" class="datepicker" value="@if (isset($pedido))
-{{ $pedido->fecha }}
-                        @endif">
-                    <label for="fecha_pedido">Fecha Pedido</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s12 m4 offset-m8 l4 offset-l8">
-                    <i class="material-icons prefix">date_range</i>
-                    <input id="hora_pedido" name="hora_pedido" type="text" class="timepicker"
-                        value="@if(isset($pedido)){{ $pedido->hora }}@endif">
-                    <label for="hora_pedido">Hora Pedido</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s12 m4 offset-m8 l4 offset-l8">
-                    <select class="select2 browser-default" name="search_pedido" id="search_pedido"
-                        onchange="cargarProducto()">
-                        <option selected value="" disabled>Buscar Producto</option>
-                        @forelse ($cabecera_productos as $cabecera_proveedor)
-                        <option value="{{ $cabecera_proveedor->id }}">{{ $cabecera_proveedor->nombre_producto }}
-                        </option>
-                        @empty
-                        <option value="">No hay opciones</option>
-                        @endforelse
-                    </select>
-                </div>
-            </div>
-            {{-- <div id="modal1" class="modal modal-fixed-footer">
-                <div class="modal-content">
-                    <h4>Modal Header</h4>
-                    <p>A bunch of text</p>
-                </div>
-                <div class="modal-footer">
-                    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cerrar</a>
-                    <a class="waves-effect waves-green btn-flat" onclick="cambiarTabla()">Agree</a>
-                </div>
-            </div> --}}
-            <div class="row">
-                <table id="tableDetalleProducto" class="striped centered">
-                    <thead>
-                        <tr>
-                            <th>C&oacute;digo Producto</th>
-                            <th>Producto</th>
-                            <th>Unidad Medida</th>
-                            <th>Cantidad</th>
-                            <th>Precio Unitario</th>
-                            <th>Subtotal</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
+                <br>
+                <h4 class="card-title">Detalle del Pedido</h4>
+                <div class="divider mb-1 mt-1"></div>
+                <div class="row">
+                    <div class="col s12 m12 l12">
+                        <label for="">Adicione el Producto</label>
+                        <div class="input-field">
+                            <select class="select2 browser-default" name="search_pedido" id="search_pedido"
+                                onchange="cargarProducto()">
+                                <option selected value="" disabled>Buscar Producto</option>
+                                @forelse ($cabecera_productos as $cabecera_proveedor)
+                                <option value="{{ $cabecera_proveedor->id }}">{{ $cabecera_proveedor->nombre_producto }}
+                                </option>
+                                @empty
+                                <option value="">No hay opciones</option>
+                                @endforelse
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col s12 m12 l12">
+                        <table aria-describedby="detalle_pedido" id="tableDetalleProducto" class="responsive-table">
+                            <thead class=" ">
+                                <tr>
+                                    <th style="color: white;background-color:blue">C&oacute;digo Producto</th>
+                                    <th style="color: white;background-color:blue">Producto</th>
+                                    <th style="color: white;background-color:blue">Unidad Medida</th>
+                                    <th style="color: white;background-color:blue">Cantidad</th>
+                                    <th style="color: white;background-color:blue">Precio Unitario</th>
+                                    <th style="color: white;background-color:blue">Subtotal</th>
+                                    <th style="color: white;background-color:blue">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @forelse (\LukePOLO\LaraCart\Facades\LaraCart::getItems() as $item)
+                                <tr id="{{ $item->id }}">
+                                    <td>{{ $item->id }}</td>
+                                    <td>{{ $item->name }}</td>
+                                    <td>{{ $item->unidad_medida_literal }}</td>
+                                    <td><input id="inputCantidad{{ $item->id }}" name="{{ $item->id }}"
+                                            value="{{ $item->qty }}" type="number" min="0.00001" step="0.00001"
+                                            onchange="calcularSubTotal(this.name);">
+                                    </td>
+                                    <td>
+                                        <input id="inputPrecioUnitario{{ $item->id }}" name="{{ $item->id }}"
+                                            value="{{ number_format($item->price, 5, '.', '') }}" type="number"
+                                            min="0.00001" step="0.00001" onchange='calcularSubTotal(this.name)'>
+                                    </td>
+                                    <td>
+                                        <span id="subtotal{{ $item->id }}" name="{{ $item->id }}">
+                                            {{ number_format($item->subtotal, 5, '.', '') }}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <button type="button" id="{{ $item->id }}" name="{{ $item->id }}"
+                                            class='btn btn-floating red' onclick="deleteRowCustom('{{ $item->id }}')">
+                                            <i class='material-icons prefix'>delete</i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                @empty
+                                @endforelse
+                            </tbody>
+                        </table>
+                    </div>
 
-                    <tbody>
-                        @if (isset($pedido))
-                        @forelse (\LukePOLO\LaraCart\Facades\LaraCart::getItems() as $item)
-                        <tr id="{{ $item->id }}">
-                            <td>{{ $item->id }}</td>
-                            <td>{{ $item->name }}</td>
-                            <td>{{ $item->unidad_medida_literal }}</td>
-                            <td><input id="inputCantidad{{ $item->id }}" name="{{ $item->id }}" value="{{ $item->qty }}"
-                                    type="number" min="0.00001" step="0.00001" onchange="calcularSubTotal(this.name);">
-                            </td>
-                            <td>
-                                <input id="inputPrecioUnitario{{ $item->id }}" name="{{ $item->id }}"
-                                    value="{{ number_format($item->price, 5, '.', '') }}" type="number" min="0.00001"
-                                    step="0.00001" onchange='calcularSubTotal(this.name)'>
-                            </td>
-                            <td>
-                                <span id="subtotal{{ $item->id }}" name="{{ $item->id }}">
-                                    {{ number_format($item->subtotal, 5, '.', '') }}
-                                </span>
-                            </td>
-                            <td>
-                                <a id="{{ $item->id }}" name="{{ $item->id }}" class="waves-effect waves-light btn"
-                                    onclick="cambiarTabla(this.name)">
-                                    <i class='material-icons prefix'>delete</i>
-                                </a>
-                            </td>
-                        </tr>
-                        @empty
-                        @endforelse
-                        @endif
-                    </tbody>
-                </table>
-            </div>
-            <div class="row">
-                <div class="col s12 m8 l8 input-field">
-                    <textarea id="nota" name="nota" class="materialize-textarea">@if(isset($pedido)){{ $pedido->nota
-                        }}@endif</textarea>
-                    <label for="textarea1">Nota/Descripci&oacute;n</label>
                 </div>
-                <div class="col s12 m2 l2 input-field">
-                    <h6>Total:</h6>
-                    <h6>Tipo Cambio:</h6>
-                    <h6>Total Dolar:</h6>
-                </div>
-                <div class="col s12 m2 l2 input-field right-align">
-                    <h6 id="subTotal">Bs.&nbsp;
-                        @if (isset($pedido))
-                        {{ $pedido->total }}
-                        @else
-                        {{
-                        number_format((float)\LukePOLO\LaraCart\Facades\LaraCart::subTotal(false),
-                        5, '.',
-                        '') }}
-                        @endif
-                    </h6>
-                    <h6>6.96</h6>
-                    <h6 id="totalDolar">Bs.&nbsp;
-                        @if (isset($pedido))
-                        {{ number_format((float)$pedido->total * 6.96, 5, '.', '') }}
-                        @else
-                        {{
-                        number_format((float)(\LukePOLO\LaraCart\Facades\LaraCart::subTotal(false)) * 6.96, 5, '.', '')
-                        }}
-                        @endif
-                    </h6>
-                </div>
+                <br>
+                <br>
+                <h4 class="card-title ">Descripcion y Totales</h4>
+                <div class="divider mb-1 mt-1"></div>
+                <div class="row ">
+                    <div class="col s6 m6 l6">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <textarea data-length="120" id="nota" name="nota" class="materialize-textarea"
+                                    placeholder="Nota">
+                                @if(isset($pedido)){{$pedido->nota}}@endif
+                            </textarea>
+                                <label for="nota">Nota/Descripci&oacute;n</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s6 m6 l6 ">
+                        <table aria-describedby="totales" class=" bordered">
+                            <tbody>
+                                <tr>
+                                    <th class="teal lighten-2" style="color: white">Tipo Cambio:</th>
+                                    <td>Bs.&nbsp; 6.96</td>
+                                </tr>
+                                <tr>
+                                    <th class="teal lighten-2" style="color: white">Total Dolar:</th>
+                                    <td id="totalDolar">Bs.&nbsp;
+                                        @if (isset($pedido))
+                                        {{ number_format((float)$pedido->total * 6.96, 5, '.', '') }}
+                                        @else
+                                        {{
+                                        number_format((float)(\LukePOLO\LaraCart\Facades\LaraCart::subTotal(false)) *
+                                        6.96,
+                                        5,
+                                        '.',
+                                        '')
+                                        }}
+                                        @endif
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="teal lighten-2" style="color: white">Total:</th>
+                                    <td id="subTotal">Bs.&nbsp;
+                                        @if (isset($pedido))
+                                        {{ $pedido->total }}
+                                        @else
+                                        {{
+                                        number_format((float)\LukePOLO\LaraCart\Facades\LaraCart::subTotal(false),
+                                        5, '.',
+                                        '') }}
+                                        @endif
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-            </div>
-            <div class="row">
-                <input type="hidden" id="id_pedido" name="id_pedido" value="@if(isset($pedido)){{ $pedido->id }}@endif">
+                </div>
+                <div class="row">
+                    <input type="hidden" id="id_pedido" name="id_pedido"
+                        value="@if(isset($pedido)){{ $pedido->id }}@endif">
 
-                <div class="col s12 display-flex justify-content-end mt-3">
-                    <button id="registrarPedidoButton" class="btn indigo mr-2">Guardar</button>
-                    <button type="button" class="btn btn-light">Cancel</button>
+                    <div class="col s12 display-flex justify-content-end mt-3">
+                        <button type="submit" class="btn indigo mr-2">Guardar</button>
+                        <a href="{{ route('pedido.index') }}" class="btn btn-light">Cancelar</a>
+                    </div>
                 </div>
             </div>
-            <!-- </div> -->
-        </div>
+        </form>
     </div>
 </div>
 <!-- users edit ends -->
@@ -186,12 +199,22 @@
 
 {{-- vendor scripts --}}
 @section('vendor-script')
-<script src="{{asset('vendors/select2/select2.full.min.js')}}"></script>
-<script src="{{asset('vendors/jquery-validation/jquery.validate.min.js')}}"></script>
+<script src="{{asset('vendors/data-tables/js/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('vendors/data-tables/extensions/responsive/js/dataTables.responsive.min.js')}}"></script>
+<script src="{{asset('vendors/data-tables/js/datatables.checkboxes.min.js')}}"></script>
+<script src="{{asset('vendors/select2/select2.full.min.js') }}"></script>
+<script src="{{asset('vendors/jquery-validation/jquery.validate.min.js') }}"></script>
+<script src="{{asset('vendors/jquery-validation/jquery.validate.js') }}"></script>
+<script src="{{asset('vendors/jquery-validation/additional-methods.js') }}"></script>
+<script src="{{asset('vendors/jquery-validation/additional-methods.min.js') }}"></script>
+<script src="{{asset('vendors/jquery-validation/localization/messages_es.js') }}"></script>
 @endsection
 
 {{-- page scripts --}}
 @section('page-script')
+<script type="text/javascript">
+    let pedido = @json($pedido??'');
+</script>
 <script src="{{asset('js/scripts/pedidos/create.js')}}"></script>
 <script>
     let ruta_guardar_pedido = "{{route('pedido.store')}}";
@@ -200,5 +223,6 @@
     let ruta_eliminar_marca = "{{route('marca.destroy')}}";
     let ruta_obtener_producto = "{{route('producto.get.name')}}";
     let ruta_actualizar_cart = "{{ route('update.product.cart') }}"
+    let ruta_remove_item_cart = "{{ route('producto.destroyProducto') }}"
 </script>
 @endsection

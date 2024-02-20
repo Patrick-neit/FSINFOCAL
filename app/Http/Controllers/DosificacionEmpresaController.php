@@ -17,9 +17,33 @@ class DosificacionEmpresaController extends Controller
 {
     public function index()
     {
-        $dosificacionesEmpresas = DosificacionEmpresa::where('empresa_id', Auth::user()->empresas[0]->id)->get();
-
-        return view('dosificaciones_empresas.index', compact('dosificacionesEmpresas'));
+        $breadcrumbs = [
+            ['link' => 'home', 'name' => 'Home'],
+            ['link' => 'javascript:void(0)', 'name' => 'Dosificaciones'],
+        ];
+        $pageConfigs = [
+            'pageHeader' => true,
+            'isFabButton' => true
+        ];
+        // $dosificacionesEmpresas = DosificacionEmpresa::where('empresa_id', Auth::user()->empresas[0]->id)->get();
+        $dosificacionesEmpresas = DosificacionEmpresa::with([
+            'detalles_dosificaciones_empresas' => [
+                'documento_sector',
+                'tipo_factura_documento_sector',
+                'dosificacion_empresa.empresa'
+            ]
+        ])->get();
+        $empresa = Empresa::where('id', Auth::user()->empresas[0]->id)->first();
+        $documentoSectores = ImpuestoTipoDocumentoSector::all();
+        $tiposFacturas = ImpuestoTipoFactura::all();
+        return view('dosificaciones_empresas.index', [
+            'dosificacionesEmpresas' => $dosificacionesEmpresas,
+            'empresa' => $empresa,
+            'documentoSectores' => $documentoSectores,
+            'tiposFacturas' => $tiposFacturas,
+            'pageConfigs' => $pageConfigs,
+            'breadcrumbs' => $breadcrumbs
+        ]);
     }
 
     public function create()
@@ -29,7 +53,7 @@ class DosificacionEmpresaController extends Controller
         $tiposFacturas = ImpuestoTipoFactura::all();
 
 
-        return view('dosificaciones_empresas.create', compact('empresa', 'documentoSectores','tiposFacturas'));
+        return view('dosificaciones_empresas.create', compact('empresa', 'documentoSectores', 'tiposFacturas'));
     }
 
     public function store(Request $request)
@@ -52,7 +76,7 @@ class DosificacionEmpresaController extends Controller
                     $detalle_dosificacion->codigo_actividad_documento_sector = $value['codigo_actividad_ds'];
                     $detalle_dosificacion->tipo_factura_documento_sector = $value['tipo_factura_cc'];
                     $detalle_dosificacion->documento_sector_id = $value['codigo_clasificador_ds'];
-                    $detalle_dosificacion->dosificacion_empresa_id = $dosificacion_empresa->id ;
+                    $detalle_dosificacion->dosificacion_empresa_id = $dosificacion_empresa->id;
                     $detalle_dosificacion->save();
                 }
 

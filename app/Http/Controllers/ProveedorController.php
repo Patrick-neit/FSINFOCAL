@@ -16,8 +16,20 @@ class ProveedorController extends Controller
      */
     public function index()
     {
+        $breadcrumbs = [
+            ['link' => 'home', 'name' => 'Home'],
+            ['link' => 'javascript:void(0)', 'name' => 'Proveedores'],
+        ];
+        $pageConfigs = [
+            'pageHeader' => true,
+            'isFabButton' => true
+        ];
         return view('proveedor.index', [
             'proveedores' => Proveedor::with('sucursal')->get(),
+            'sucursales' => Sucursal::all(),
+            'tipoDocumentos' => ImpuestoDocumentoIdentidad::all(),
+            'pageConfigs' => $pageConfigs,
+            'breadcrumbs' => $breadcrumbs
         ]);
     }
 
@@ -41,7 +53,7 @@ class ProveedorController extends Controller
      */
     public function store(Request $request)
     {
-        if (! empty($request->proveedor_id)) {
+        if (!empty($request->proveedor_id)) {
             return $this->update($request);
         }
         $proveedor = new Proveedor();
@@ -92,7 +104,7 @@ class ProveedorController extends Controller
      * @param  \App\Models\Proveedor  $proveedor
      * @return \Illuminate\Http\Response
      */
-    public function update($request)
+    public function update(Request $request)
     {
         $proveedor = Proveedor::find($request->proveedor_id);
         $proveedor->nombre_proveedor = $request->nombre_proveedor;

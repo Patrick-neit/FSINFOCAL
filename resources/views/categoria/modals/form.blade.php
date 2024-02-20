@@ -1,26 +1,26 @@
 <div id="modalCrearCategoria" class="modal">
-    <div class="modal-content">
-        <h4 id="title-modal-categoria">Crear Categoria</h4>
-        <form>
+    <form id="formCategoria">
+        <div class="modal-content">
+            <h4 id="title-modal-categoria">Crear Categoria</h4>
             <div class="row">
                 <div class="input-field col m12 s12">
                     <label for="nombre_categoria">Nombre</label>
-                    <input type="text" class="autocomplete" id="nombre_categoria" placeholder="Nombre">
+                    <input type="text" class="autocomplete" id="nombre_categoria" name="nombre_categoria"
+                        placeholder="Nombre">
                 </div>
                 <div class="input-field col m12 s12">
-                    <select id="estado">
-                        <option value="" disabled selected>Escoge una opcion</option>
+                    <select id="estado" name="estado" required>
+                        <option value="" required disabled selected>Escoge una opcion</option>
                         <option value="0">Inactivo</option>
                         <option value="1">Activo</option>
                     </select>
-                    <label>Estado</label>
+                    <label for="estado">Estado</label>
                 </div>
             </div>
-        </form>
-    </div>
-    <div class="modal-footer">
-        <a href="#!" class="modal-action modal-close waves-effect red btn  ">Cancelar</a>
-        <button id="registrarCategoria" class="modal-action waves-effect blue btn ">Guardar</button>
-        <button id="actualizarCategoria" class="modal-action waves-effect blue btn display-none">Actualizar</button>
-    </div>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-action modal-close waves-effect red btn  ">Cancelar</a>
+            <button type="submit" class="modal-action waves-effect blue btn ">Guardar</button>
+        </div>
+    </form>
 </div>

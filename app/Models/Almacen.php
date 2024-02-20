@@ -19,11 +19,18 @@ class Almacen extends Model
         'sucursal_id'
     ];
 
-    public function encargado(){ //TODO verify if this relation works
+    public function encargado()
+    { //TODO verify if this relation works
         return $this->belongsTo(User::class);
     }
 
-    public function sucursal(){
+    public function sucursal()
+    {
         return $this->belongsTo(Sucursal::class);
+    }
+
+    public function cabeceraProductos()
+    {
+        return $this->belongsToMany(CabeceraProducto::class, 'inventario_almacenes', 'almacen_id', 'producto_id');
     }
 }

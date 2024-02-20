@@ -1,4 +1,4 @@
-<x-layouts.sincronizacion>
+<x-layouts.sincronizacion2>
     <x-slot name="table_header">
         <tr>
             <th>C&oacute;digo Clasificador</th>
@@ -10,4 +10,4 @@
     <x-slot name="accion">
         {{ config('sistema.sincTipoHabitacion') }}
     </x-slot>
-</x-layouts.sincronizacion>
+</x-layouts.sincronizacion2>

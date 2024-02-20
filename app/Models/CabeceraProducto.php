@@ -50,4 +50,9 @@ class CabeceraProducto extends Model
     {
         return $this->hasOne(DetallePedido::class, 'producto_id');
     }
+
+    public function almacenes()
+    {
+        return $this->belongsToMany(Almacen::class, 'inventario_almacenes', 'producto_id', 'almacen_id');
+    }
 }

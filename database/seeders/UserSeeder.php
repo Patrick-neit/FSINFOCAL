@@ -26,7 +26,7 @@ class UserSeeder extends Seeder
             'password' => bcrypt('123456'),
         ])->assignRole('Administrador');
         User::firstOrCreate([
-            'name' => 'Angel Espinoza',
+            'name' => 'Angel Espinozta',
             'apellidos' => 'Ibañez',
             'departamento_id' => 1,
             'fecha_nacimiento' => '1999-01-01',

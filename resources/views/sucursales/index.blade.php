@@ -1,97 +1,82 @@
-{{-- layout --}}
-@extends('layouts.contentLayoutMaster')
+@extends('layouts.page')
 
-{{-- page title --}}
-@section('title', 'Listado Sucursales')
+@section('title', 'Sucursales')
 
-{{-- vendors styles --}}
-@section('vendor-style')
-<link rel="stylesheet" type="text/css" href="{{ asset('vendors/data-tables/css/jquery.dataTables.min.css') }}">
-<link rel="stylesheet" type="text/css"
-    href="{{ asset('vendors/data-tables/extensions/responsive/css/responsive.dataTables.min.css') }}">
+@section('create-action-content')
+<a href="#modalCrearSucursal" id="crearSucursal"
+    class="btn waves-effect waves-light invoice-create border-round z-depth-4 modal-trigger">
+    <i class="material-icons">add</i>
+    <span class="hide-on-small-only">Crear Sucursal</span>
+</a>
 @endsection
 
-{{-- page styles --}}
-@section('page-style')
-<link rel="stylesheet" type="text/css" href="{{ asset('css/pages/page-users.css') }}">
+@section('table-content')
+<table aria-describedby="sucursales" class="table invoice-data-table white border-radius-4 pt-1">
+    <thead>
+        <tr>
+            <th></th>
+            <th></th>
+            <th>Nombre Sucursal</th>
+            <th>Direccion</th>
+            <th>Codigo Sucursal</th>
+            <th>Telefono</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach ($branches as $branch)
+        <tr>
+            <td></td>
+            <td></td>
+            <td>{{ $branch->nombre_sucursal }}</a></td>
+            <td>{{ $branch->direccion }}</td>
+            <td>{{ $branch->codigo_sucursal == 0 ? 'Casa Matriz' : 'Sucursal ' .
+                $branch->codigo_sucursal }}</td>
+            <td>+ 591 {{ $branch->telefono }}</td>
+            <td>
+                <a href="#modalCrearSucursal" id="editarSucursal" class="btn btn-floating orange modal-trigger"
+                    data-sucursal="{{ $branch }}" title="Editar Sucursal">
+                    <i class="material-icons">edit</i>
+                </a>
+                <a href="#modalEliminar" id="eliminar" class="btn btn-floating red modal-trigger"
+                    data-id="{{ $branch->id }}" title="Eliminar Sucursal">
+                    <i class="material-icons delete">delete</i>
+                </a>
+            </td>
+        </tr>
+        @endforeach
+    </tbody>
+</table>
 @endsection
 
-{{-- page content --}}
-@section('content')
-<!-- users list start -->
-<section class="users-list-wrapper section">
-
-    <div class="users-list-table">
-        <div class="card">
-            <div class="card-content">
-                <!-- datatable start -->
-                <div class="responsive-table">
-                    <div class="row">
-                        <div class="col s12">
-                            <div class="right-align">
-                                <!-- create invoice button-->
-                                <div class="invoice-create-btn">
-                                    <a href="{{ route('sucursales.create') }}"
-                                        class="btn waves-effect waves-light invoice-create border-round z-depth-4">
-                                        <i class="material-icons">add</i>
-                                        <span class="hide-on-small-only">Crear Sucursal</span>
-                                    </a>
-                                </div> <br>
-                            </div>
-                        </div>
-                    </div>
-
-                    <table id="users-list-datatable" class="table">
-
-                        <thead>
-                            <tr>
-
-                                <th>Nombre Sucursal</th>
-                                <th>Direccion</th>
-                                <th>Codigo Sucursal</th>
-                                <th>Telefono</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($branches as $branch)
-                            <tr>
-                                <td><a href="{{ asset('page-users-view') }}">{{ $branch->nombre_sucursal }}</a></td>
-                                <td>{{ $branch->direccion }}</td>
-                                <td>{{ $branch->codigo_sucursal == 0 ? 'Casa Matriz' : 'Sucursal ' .
-                                    $branch->codigo_sucursal }}</td>
-                                <td>+ 591 {{ $branch->telefono }}</td>
-
-                                <td>
-                                    <a href="{{ route('sucursales.edit', $branch->id) }}"><i
-                                            class="material-icons">edit</i></a>
-                                    <span><a style="cursor: pointer" onclick="eliminar('{{ $branch->id }}')"><i
-                                                class="material-icons">delete_outline</i></a></span>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-                <!-- datatable ends -->
-            </div>
-        </div>
-    </div>
-</section>
-<!-- users list ends -->
+@section('additional-components')
+@include('sucursales.modals.form')
 @endsection
 
-{{-- vendor scripts --}}
-@section('vendor-script')
-<script src="{{ asset('vendors/data-tables/js/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('vendors/data-tables/extensions/responsive/js/dataTables.responsive.min.js') }}"></script>
-@endsection
-
-{{-- page script --}}
-@section('page-script')
-<script src="{{ asset('js/scripts/sucursales/index.js') }}"></script>
+@section('page-custom-scripts')
 <script>
-    let ruta_index_sucursal = "{{ route('sucursales.index') }}";
-        let ruta_eliminar_sucursal = "{{ route('sucursales.destroy') }}";
+    //For Table
+    let numberColumns = 7;
+    let searchString = 'Buscar Sucursal';
+    //For Destroy
+    let key_id ='sucursal_id';
+    //For Edit
+    let sucursal_id = null;
 </script>
+<script>
+    let ruta_guardar_sucursal = "{{ route('sucursales.store') }}"
+    let ruta_update_sucursal = "{{ route('sucursales.update','sucursal_id') }}";
+    let ruta_index = "{{ route('sucursales.index') }}";
+    let ruta_eliminar = "{{ route('sucursales.destroy') }}";
+</script>
+<script>
+    let nombre_sucursal = document.getElementById("nombre_sucursal");
+    let direccion = document.getElementById("direccion");
+    let codigo_sucursal = document.getElementById("codigo_sucursal");
+    let telefono = document.getElementById("telefono");
+    let empresa_id = document.getElementById("empresa_id");
+</script>
+<script src="{{ asset('js/scripts/sucursales/create.js') }}"></script>
+<script src="{{ asset('js/scripts/sucursales/edit.js') }}"></script>
+<script src="{{ asset('js/scripts/sucursales/submitForm.js') }}"></script>
 @endsection
