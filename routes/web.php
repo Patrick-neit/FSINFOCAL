@@ -278,6 +278,7 @@ Route::group(['middleware' => 'web'], function () {
 });
 
 //sincronizacion de catalogos
+Route::get('/catalogos/index', [CatalogosController::class, 'index2'])->name('catalogos.index2');
 Route::get('/catalogos/{sincronizacion}', [CatalogosController::class, 'index'])->name('catalogos.index');
 Route::get('/catalogos/sincronizarCatalogos/{accion}', [CatalogosController::class, 'sincronizarCatalogos'])->name('sincronizar');
 
@@ -303,6 +304,7 @@ Route::group([
     Route::get('create', 'create')->name('proveedor.create');
     Route::get('/edit/{id}', 'edit')->name('proveedor.edit');
     Route::post('store', 'store')->name('proveedor.store');
+    Route::post('update', 'update')->name('proveedor.update');
     Route::delete('destroy', 'destroy')->name('proveedor.destroy');
 });
 
@@ -321,6 +323,7 @@ Route::group([
     Route::get('index', 'index')->name('familia.index');
     Route::get('create', 'create')->name('familia.create');
     Route::get('/edit/{id}', 'edit')->name('familia.edit');
+    Route::post('udpate', 'update')->name('familia.update');
     Route::post('store', 'store')->name('familia.store');
     Route::delete('destroy', 'destroy')->name('familia.destroy');
 });
@@ -332,6 +335,7 @@ Route::group([
     Route::get('index', 'index')->name('categoria.index');
     Route::get('create', 'create')->name('categoria.create');
     Route::get('/edit/{id}', 'edit')->name('categoria.edit');
+    Route::post('udpate', 'update')->name('categoria.update');
     Route::post('store', 'store')->name('categoria.store');
     Route::delete('destroy', 'destroy')->name('categoria.destroy');
 });
@@ -355,6 +359,7 @@ Route::group([
 ], function () {
     Route::get('index', 'index')->name('sub_familia.index');
     Route::get('create', 'create')->name('sub_familia.create');
+    Route::post('udpate', 'update')->name('sub_familia.update');
     Route::get('/edit/{id}', 'edit')->name('sub_familia.edit');
     Route::post('store', 'store')->name('sub_familia.store');
     Route::delete('destroy', 'destroy')->name('sub_familia.destroy');
@@ -366,6 +371,7 @@ Route::group([
 ], function () {
     Route::get('index', 'index')->name('marca.index');
     Route::get('create', 'create')->name('marca.create');
+    Route::put('update/{id}', 'update')->name('marca.update');
     Route::get('/edit/{id}', 'edit')->name('marca.edit');
     Route::post('store', 'store')->name('marca.store');
     Route::delete('destroy', 'destroy')->name('marca.destroy');
@@ -379,6 +385,7 @@ Route::group([
     Route::get('create', 'create')->name('cliente.create');
     Route::get('/edit/{id}', 'edit')->name('cliente.edit');
     Route::post('store', 'store')->name('cliente.store');
+    Route::post('update', 'update')->name('cliente.update');
     Route::delete('destroy', 'destroy')->name('cliente.destroy');
 });
 
@@ -404,10 +411,12 @@ Route::group(
     function () {
         Route::get('index', 'index')->name('producto.index');
         Route::post('producto/get/name', 'getProductoNombre')->name('producto.get.name');
+        Route::post('producto/destroyProducto', 'destroyProducto')->name('producto.destroyProducto');
         Route::get('create', 'create')->name('producto.create');
         Route::get('/edit/{id}', 'edit')->name('producto.edit');
         Route::post('/get_actividad/documento_sector', 'getActividadProducto')->name('actividad.getActividad');
         Route::post('store', 'store')->name('producto.store');
+        Route::post('update', 'update')->name('producto.update');
         Route::delete('destroy', 'destroy')->name('producto.destroy');
         Route::post('getDataProductoServicio', 'getDataProductoServicio')->name('producto.getDataProductoServicio');
         Route::post('/update/product/cart', 'updateProductCart')->name('update.product.cart');

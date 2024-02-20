@@ -9,7 +9,7 @@
   <!-- END: Header-->
 
   <!-- BEGIN: SideNav-->
-  @include('panels.sidebar')
+  @include('panels.sidebar') 
   <!-- END: SideNav-->
 
   <!-- BEGIN: Page Main-->

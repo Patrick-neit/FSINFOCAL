@@ -12,7 +12,8 @@ class AlumnoController extends Controller
     public function index()
     {
 
-        $alumnos = Alumno::where('empresa_id', Auth::user()->empresas[0]->id)->get();
+        // $alumnos = Alumno::where('empresa_id', Auth::user()->empresas[0]->id)->get();
+        $alumnos = Alumno::all();
         $alumnosTotales = Alumno::withTrashed()->count();
         $alumnosInactivos = Alumno::onlyTrashed()->count();
 

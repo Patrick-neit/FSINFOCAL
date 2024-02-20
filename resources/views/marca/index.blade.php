@@ -1,138 +1,80 @@
-{{-- layout --}}
-@extends('layouts.contentLayoutMaster')
+@extends('layouts.page')
 
-{{-- page title --}}
-@section('title', 'Listado Empresas')
+@section('title', 'Marcas')
 
-{{-- vendors styles --}}
-@section('vendor-style')
-<link rel="stylesheet" type="text/css" href="{{ asset('vendors/data-tables/css/jquery.dataTables.min.css') }}">
-<link rel="stylesheet" type="text/css"
-    href="{{ asset('vendors/data-tables/extensions/responsive/css/responsive.dataTables.min.css') }}">
+@section('create-action-content')
+<a href="#modalCrearMarca" id="crearMarca"
+    class="btn waves-effect waves-light invoice-create border-round z-depth-4 modal-trigger">
+    <i class="material-icons">add</i>
+    <span class="hide-on-small-only">Crear Marca</span>
+</a>
 @endsection
 
-{{-- page styles --}}
-@section('page-style')
-<link rel="stylesheet" type="text/css" href="{{ asset('css/pages/page-users.css') }}">
+@section('table-content')
+<table aria-describedby="Marcas" class="table invoice-data-table white border-radius-4 pt-1">
+    <thead>
+        <tr>
+            <th></th>
+            <th></th>
+            <th>Nombre Marca</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach ($marcas as $marca)
+        <tr>
+            <td></td>
+            <td></td>
+            <td>{{ $marca->nombre_marca }}</td>
+            <td>
+                @if ($marca->estado)
+                <span class="badge badge pill green">Activo</span>
+                @else
+                <span class="badge badge pill red">Inactivo</span>
+                @endif
+            </td>
+            <td>
+                <a href="#modalCrearMarca" id="editarMarca" class="btn btn-floating orange modal-trigger"
+                    data-marca="{{ $marca }}" title="Editar Marca">
+                    <i class="material-icons">edit</i>
+                </a>
+                <a href="#modalEliminar" id="eliminar" class="btn btn-floating red modal-trigger"
+                    data-id="{{ $marca->id }}" title="Eliminar Marca">
+                    <i class="material-icons delete">delete</i>
+                </a>
+            </td>
+        </tr>
+        @endforeach
+    </tbody>
+</table>
 @endsection
 
-{{-- page content --}}
-@section('content')
-<!-- users list start -->
-<section class="users-list-wrapper section">
-    {{-- <div class="users-list-filter">
-        <div class="card-panel">
-            <div class="row">
-                <form>
-                    <div class="col s12 m6 l3">
-                        <label for="users-list-verified">Verified</label>
-                        <div class="input-field">
-                            <select class="form-control" id="users-list-verified">
-                                <option value="">Any</option>
-                                <option value="Yes">Yes</option>
-                                <option value="No">No</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col s12 m6 l3">
-                        <label for="users-list-role">Role</label>
-                        <div class="input-field">
-                            <select class="form-control" id="users-list-role">
-                                <option value="">Any</option>
-                                <option value="User">User</option>
-                                <option value="Staff">Staff</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col s12 m6 l3">
-                        <label for="users-list-status">Status</label>
-                        <div class="input-field">
-                            <select class="form-control" id="users-list-status">
-                                <option value="">Any</option>
-                                <option value="Active">Active</option>
-                                <option value="Close">Close</option>
-                                <option value="Banned">Banned</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col s12 m6 l3 display-flex align-items-center show-btn">
-                        <button type="submit" class="btn btn-block indigo waves-effect waves-light">Show</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div> --}}
-
-    <div class="users-list-table">
-        <div class="card">
-            <div class="card-content">
-                <!-- datatable start -->
-                <div class="responsive-table">
-                    <div class="row">
-                        <div class="col s12">
-                            <div class="right-align">
-                                <!-- create invoice button-->
-                                <div class="invoice-create-btn">
-                                    <a href="{{ route('marca.create') }}"
-                                        class="btn waves-effect waves-light invoice-create border-round z-depth-4">
-                                        <i class="material-icons">add</i>
-                                        <span class="hide-on-small-only">Crear Marca</span>
-                                    </a>
-                                </div> <br>
-                            </div>
-                        </div>
-                    </div>
-
-                    <table id="enterprice-list-datatable" class="table">
-                        <thead>
-                            <tr>
-                                <th>Nombre Marca</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @forelse ($marcas as $marca)
-                            <tr>
-                                <td>{{ $marca->nombre_marca }}</td>
-                                <td class="text-center">
-                                    <a href="{{ route('marca.edit', $marca->id)}}">
-                                        <i class="material-icons">edit</i>
-                                    </a>
-                                    <span><a style="cursor: pointer;" onclick="eliminar('{{ $marca->id }}')"><i
-                                                class="material-icons">delete_outline</i></a></span>
-                                </td>
-                                {{-- <td><a href="{{ asset('page-users-view') }}"><i
-                                            class="material-icons">remove_red_eye</i></a></td> --}}
-                            </tr>
-                            @empty
-                            <tr>
-                                <td colspan="8" class="text-center">
-                                    No hay registros para mostrar
-                                </td>
-                            </tr>
-                            @endforelse
-                        </tbody>
-                    </table>
-                </div>
-                <!-- datatable ends -->
-            </div>
-        </div>
-    </div>
-</section>
-<!-- users list ends -->
+@section('additional-components')
+@include('marca.modals.form')
 @endsection
 
-{{-- vendor scripts --}}
-@section('vendor-script')
-<script src="{{ asset('vendors/data-tables/js/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('vendors/data-tables/extensions/responsive/js/dataTables.responsive.min.js') }}"></script>
-@endsection
-
-{{-- page script --}}
-@section('page-script')
-<script src="{{ asset('js/scripts/marca/index,js') }}"></script>
+@section('page-custom-scripts')
 <script>
-    let ruta_index_marca = "{{ route('marca.index') }}";
-    let ruta_eliminar_marca = "{{ route('marca.destroy') }}";
+    //For Table
+    let numberColumns = 5;
+    let searchString = 'Buscar Marca';
+    //For Destroy
+    let key_id ='marca_id';
+    //For Edit
+    let marca_id = null;
 </script>
+<script>
+    let ruta_update_marca = "{{ route('marca.update', 'marca_id' ) }}";
+    let ruta_guardar_marca = "{{ route('marca.store') }}";
+    let ruta_index = "{{ route('marca.index') }}";
+    let ruta_eliminar = "{{ route('marca.destroy') }}";
+</script>
+<script>
+    let nombre_marca = document.getElementById("nombre_marca");
+    let estado = document.getElementById("estado");
+</script>
+<script src="{{ asset('js/scripts/marca/submitForm.js') }}"></script>
+<script src="{{ asset('js/scripts/marca/create.js') }}"></script>
+<script src="{{ asset('js/scripts/marca/edit.js') }}"></script>
 @endsection

@@ -9,9 +9,21 @@ class MarcaController extends Controller
 {
     public function index()
     {
+        $breadcrumbs = [
+            ['link' => 'home', 'name' => 'Home'],
+            ['link' => 'javascript:void(0)', 'name' => 'Marcas'],
+        ];
+        $pageConfigs = [
+            'pageHeader' => true,
+            'isFabButton' => true
+        ];
         $marcas = Marca::where('estado', 1)->get();
 
-        return view('marca.index', compact('marcas'));
+        return view('marca.index', [
+            'marcas' => $marcas,
+            'pageConfigs' => $pageConfigs,
+            'breadcrumbs' => $breadcrumbs
+        ]);
     }
 
     public function create()
@@ -29,8 +41,8 @@ class MarcaController extends Controller
     public function store(Request $request)
     {
         try {
-            if (! empty($request->marca_id)) {
-                return $this->update($request);
+            if (!empty($request->marca_id)) {
+                return $this->update($request, $request->marca_id);
             }
             $marca = new Marca();
             $marca->nombre_marca = $request->nombre_marca;
@@ -43,10 +55,10 @@ class MarcaController extends Controller
         }
     }
 
-    public function update($request)
+    public function update(Request $request, $id)
     {
         try {
-            $marca = Marca::find($request->marca_id);
+            $marca = Marca::find($id);
             $marca->nombre_marca = $request->nombre_marca;
             $marca->estado = $request->estado;
             $marca->save();

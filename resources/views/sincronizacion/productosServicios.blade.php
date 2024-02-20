@@ -1,4 +1,4 @@
-<x-layouts.sincronizacion>
+<x-layouts.sincronizacion2>
     <x-slot name="table_header">
         <tr>
             <th>C&oacute;digo Actividad</th>
@@ -11,4 +11,4 @@
     <x-slot name="accion">
         {{ config('sistema.sincProductosServicios') }}
     </x-slot>
-</x-layouts.sincronizacion>
+</x-layouts.sincronizacion2>

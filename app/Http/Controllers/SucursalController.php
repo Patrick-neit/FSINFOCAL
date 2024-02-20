@@ -24,9 +24,24 @@ class SucursalController extends Controller
 
     public function index()
     {
-        $branches = Sucursal::where('empresa_id', Auth::user()->empresas[0]->id)->get();
+        $breadcrumbs = [
+            ['link' => 'home', 'name' => 'Home'],
+            ['link' => 'javascript:void(0)', 'name' => 'Sucursales'],
+        ];
+        $pageConfigs = [
+            'pageHeader' => true,
+            'isFabButton' => true
+        ];
+        // $branches = Sucursal::where('empresa_id', Auth::user()->empresas[0]->id)->get();
+        $branches = Sucursal::all();
+        $empresas = Empresa::all();
 
-        return view('sucursales.index', compact('branches'));
+        return view('sucursales.index', [
+            'branches' => $branches,
+            'empresas' => $empresas,
+            'pageConfigs' => $pageConfigs,
+            'breadcrumbs' => $breadcrumbs
+        ]);
     }
 
     public function edit($id)
@@ -39,7 +54,8 @@ class SucursalController extends Controller
 
     public function create()
     {
-        $empresas = Empresa::where('id', Auth::user()->empresas[0]->id)->get();
+        // $empresas = Empresa::where('id', Auth::user()->empresas[0]->id)->get();
+        $empresas = Empresa::all();
 
         return view('sucursales.create', compact('empresas'));
     }
@@ -47,8 +63,8 @@ class SucursalController extends Controller
     public function store(Request $request)
     {
         try {
-            if (! empty($request->sucursal_id)) {
-                return $this->update($request);
+            if (!empty($request->sucursal_id)) {
+                return $this->update($request,$request->sucursal_id);
             }
             $branch = new Sucursal();
             $branch->nombre_sucursal = $request->nombre_sucursal;
@@ -79,10 +95,10 @@ class SucursalController extends Controller
         }
     }
 
-    public function update($request)
+    public function update(Request $request, $id)
     {
         try {
-            $branch = Sucursal::find($request->sucursal_id);
+            $branch = Sucursal::find($id);
             $branch->nombre_sucursal = $request->nombre_sucursal;
             $branch->direccion = $request->direccion;
             $branch->codigo_sucursal = $request->codigo_sucursal;

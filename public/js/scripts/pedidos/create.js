@@ -2,241 +2,110 @@ const csrfToken = document.head.querySelector(
     "[name~=csrf-token][content]"
 ).content;
 
-// variable declaration
-var usersTable;
-var usersDataArray = [];
-// datatable initialization
-if ($("#users-list-datatable").length > 0) {
-    usersTable = $("#users-list-datatable").DataTable({
-        responsive: true,
-        columnDefs: [
-            {
-                orderable: false,
-                targets: [0, 8, 9],
-            },
-        ],
-    });
-}
-// on click selected users data from table(page named page-users-list)
-// to store into local storage to get rendered on second page named page-users-view
-$(document).on("click", "#users-list-datatable tr", function () {
-    $(this)
-        .find("td")
-        .each(function () {
-            usersDataArray.push($(this).text().trim());
-        });
+let searchInput = document.getElementById("search_pedido");
+let table_producto = document.getElementById("tableDetalleProducto");
+let pedido_id = document.getElementById("id_pedido");
 
-    localStorage.setItem("usersId", usersDataArray[1]);
-    localStorage.setItem("usersUsername", usersDataArray[2]);
-    localStorage.setItem("usersName", usersDataArray[3]);
-    localStorage.setItem("usersVerified", usersDataArray[5]);
-    localStorage.setItem("usersRole", usersDataArray[6]);
-    localStorage.setItem("usersStatus", usersDataArray[7]);
-});
-// render stored local storage data on page named page-users-view
-if (localStorage.usersId !== undefined) {
-    $(".users-view-id").html(localStorage.getItem("usersId"));
-    $(".users-view-username").html(localStorage.getItem("usersUsername"));
-    $(".users-view-name").html(localStorage.getItem("usersName"));
-    $(".users-view-verified").html(localStorage.getItem("usersVerified"));
-    $(".users-view-role").html(localStorage.getItem("usersRole"));
-    $(".users-view-status").html(localStorage.getItem("usersStatus"));
-    // update badge color on status change
-    if ($(".users-view-status").text() === "Banned") {
-        $(".users-view-status").toggleClass(
-            "badge-light-success badge-light-danger"
-        );
-    }
-    // update badge color on status change
-    if ($(".users-view-status").text() === "Close") {
-        $(".users-view-status").toggleClass(
-            "badge-light-success badge-light-warning"
-        );
-    }
-}
-// page users list verified filter
-$("#users-list-verified").on("change", function () {
-    var usersVerifiedSelect = $("#users-list-verified").val();
-    usersTable.search(usersVerifiedSelect).draw();
-});
-// page users list role filter
-$("#users-list-role").on("change", function () {
-    var usersRoleSelect = $("#users-list-role").val();
-    // console.log(usersRoleSelect);
-    usersTable.search(usersRoleSelect).draw();
-});
-// page users list status filter
-$("#users-list-status").on("change", function () {
-    var usersStatusSelect = $("#users-list-status").val();
-    // console.log(usersStatusSelect);
-    usersTable.search(usersStatusSelect).draw();
-});
-// users language select
-if ($("#users-language-select2").length > 0) {
-    $("#users-language-select2").select2({
-        dropdownAutoWidth: true,
-        width: "100%",
-    });
-}
-// users music select
-if ($("#users-music-select2").length > 0) {
-    $("#users-music-select2").select2({
-        dropdownAutoWidth: true,
-        width: "100%",
-    });
-}
-// users movies select
-if ($("#users-movies-select2").length > 0) {
-    $("#users-movies-select2").select2({
-        dropdownAutoWidth: true,
-        width: "100%",
-    });
-}
+let registrarPedidoButton = document.getElementById("registrarPedidoButton");
+let proveedor_id = document.getElementById("proveedor_id");
+let fecha_pedido = document.getElementById("fecha_pedido");
+let hora_pedido = document.getElementById("hora_pedido");
+let nota = document.getElementById("nota");
+
 $(".select2").select2({
     dropdownAutoWidth: true,
     width: "100%",
 });
 
+
 $(document).ready(function () {
-    /* $(".modal").modal(); */
     $(".timepicker").timepicker();
+    $("textarea#nota").characterCounter();
+    $("#nota").val('');
+    if (pedido) {
+        $("#nota").val(pedido.nota);
+    }
 });
 
-var searchInput = document.getElementById("search_pedido");
-var table_producto = document.getElementById("tableDetalleProducto");
-var pedido_id = document.getElementById("id_pedido");
-function calcularSubTotal(codigo_producto) {
-    let inputPrecioUnitario = document.getElementById(
-        "inputPrecioUnitario" + codigo_producto
-    );
-    let inputCantidad = document.getElementById(
-        "inputCantidad" + codigo_producto
-    );
-    let resultado = inputPrecioUnitario.value * inputCantidad.value;
+searchInput.addEventListener("keypress", function (event) {
+    if (event.key === "Enter") {
+        event.preventDefault();
+    }
+});
 
-    //-------------------------------------
-
-    fetch(ruta_actualizar_cart, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "X-CSRF-Token": csrfToken,
+$(document).ready(function () {
+    $('select[required]').css({
+        display: 'inline',
+        position: 'absolute',
+        float: 'left',
+        padding: 0,
+        margin: 0,
+        border: '1px solid rgba(255,255,255,0)',
+        height: 0,
+        width: 0,
+        top: '2em',
+        left: '3em'
+    });
+    $("#formPedido").validate({
+        errorLabelContainer: "#messageBox",
+        wrapper: "li",
+        rules: {
+            proveedor_id: 'required',
+            fecha_pedido: 'required',
+            hora_pedido: 'required',
+            nota: 'required',
         },
-        body: JSON.stringify({
-            codigo_producto: codigo_producto,
-            cantidad: inputCantidad.value,
-            precio_unitario: inputPrecioUnitario.value,
-            subtotal: resultado,
-        }),
-    })
-        .then((response) => response.json())
-        .then((data) => {
-            if (data.status == 200) {
-                //subtotal de cada producto
-                document.getElementById(
-                    "subtotal" + codigo_producto
-                ).innerHTML = parseFloat(resultado).toFixed(5).toString();
-                document.getElementById("subTotal").innerHTML =
-                    "Bs. " + parseFloat(data.content).toFixed(5).toString();
-                document.getElementById("totalDolar").innerHTML =
-                    "Bs. " +
-                    parseFloat(data.content * 6.96)
-                        .toFixed(5)
-                        .toString();
+        errorClass: 'invalid',
+        validClass: "valid",
+        errorPlacement: function (label, element) {
+            if (element.hasClass('select2 browser-default')) {
+                label.insertAfter(element.next('.select2-container')).addClass('mt-2 text-danger');
+                select2label = label
             } else {
-                M.toast({
-                    html: "Algo salio Mal!",
-                    classes: "rounded",
-                    displayLength: 2000,
-                });
+                label.addClass('mt-2 text-danger');
+                label.insertAfter(element);
             }
-        });
-
-    //-----------------------------------
-}
-function cargarProducto() {
-    fetch(ruta_obtener_producto, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "X-CSRF-Token": csrfToken,
         },
-        body: JSON.stringify({
-            search: searchInput.value,
-        }),
-    })
-        .then((response) => response.json())
-        .then((data) => {
-            if (data.status == 200) {
-                if (data.content.bandera == 1) {
-                    let row = table_producto.insertRow(-1);
-                    row.id = data.content.codigo_producto;
-                    let c1 = row.insertCell(0);
-                    let c2 = row.insertCell(1);
-                    let c3 = row.insertCell(2);
-                    let c4 = row.insertCell(3);
-                    let c5 = row.insertCell(4);
-                    let c6 = row.insertCell(5);
-                    let c7 = row.insertCell(6);
-
-                    var inputCantidad = document.createElement("input");
-                    var inputPrecioUnitario = document.createElement("input");
-
-                    inputCantidad.id =
-                        "inputCantidad" + data.content.codigo_producto;
-                    inputCantidad.value = "1.00000";
-                    inputCantidad.type = "number";
-                    inputCantidad.min = "0.00001";
-                    inputCantidad.step = "0.00001";
-                    inputCantidad.onchange = function () {
-                        calcularSubTotal(data.content.codigo_producto);
-                    };
-
-                    inputPrecioUnitario.id =
-                        "inputPrecioUnitario" + data.content.codigo_producto;
-                    inputPrecioUnitario.type = "number";
-                    inputPrecioUnitario.min = "0.00001";
-                    inputPrecioUnitario.step = "0.00001";
-                    inputPrecioUnitario.value =
-                        data.content.detalle_producto.precio_compra;
-                    inputPrecioUnitario.onchange = function () {
-                        calcularSubTotal(data.content.codigo_producto);
-                    };
-
-                    c1.innerText = data.content.codigo_producto;
-                    c2.innerText = data.content.nombre_producto;
-                    c3.innerText = data.content.unidad_medida_id;
-                    c4.appendChild(inputCantidad);
-                    c5.appendChild(inputPrecioUnitario);
-                    c6.innerHTML =
-                        "<span id='subtotal" +
-                        data.content.codigo_producto +
-                        "'>" +
-                        parseFloat(
-                            data.content.detalle_producto.precio_compra * 1
-                        )
-                            .toFixed(5)
-                            .toString() +
-                        "</span>";
-                    c7.innerHTML =
-                        "<i id class='material-icons prefix' onclick='deleteRow(" +
-                        data.content.codigo_producto +
-                        ")'>delete</i>";
-                    //insertando datos al subtotal y total
-                    calcularSubTotal(data.content.codigo_producto);
-                }
-            } else {
-                M.toast({
-                    html: "Algo salio Mal!",
-                    classes: "rounded",
-                    displayLength: 2000,
+        submitHandler: function (form) {
+            fetch(ruta_guardar_pedido, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRF-Token": csrfToken,
+                },
+                body: JSON.stringify({
+                    proveedor_id: proveedor_id.value,
+                    fecha_pedido: fecha_pedido.value,
+                    hora_pedido: hora_pedido.value,
+                    nota: nota.value,
+                    pedido_id: pedido_id.value,
+                }),
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    if (data.status == 200) {
+                        M.toast({
+                            html: data.description,
+                            classes: "rounded",
+                            displayLength: 2000,
+                            completeCallback: function () {
+                                window.location.href = ruta_index_pedido;
+                            },
+                        });
+                    } else {
+                        M.toast({
+                            html: "Algo salio Mal!",
+                            classes: "rounded",
+                            displayLength: 3000,
+                            classes: "blue lighten-1",
+                        });
+                    }
                 });
-            }
-        });
-}
-//TODO: SEGUIR CON LOFICA PERO ADEMAS AÑADIR LA ACTUALIZACION Y REMOCION DE L ITEM
+        }
+    });
+})
+
 function cambiarTabla(item_id) {
-    /* table_producto.innerHTML = ""; */
     var tableRows = table_producto.getElementsByTagName("tr");
     var rowCount = tableRows.length;
 
@@ -263,66 +132,19 @@ function cambiarTabla(item_id) {
                     document.getElementById("totalDolar").innerHTML =
                         "Bs. 0.00000";
                 } else {
-                    for (let i = 0; i < claves.length; i++) {
-                        let clave = claves[i];
-
+                    for (const element of claves) {
+                        let clave = element;
                         let dataObject = data.content[clave].options;
-                        let row = table_producto.insertRow(-1);
-                        row.id = dataObject.codigo_producto;
-                        let c1 = row.insertCell(0);
-                        let c2 = row.insertCell(1);
-                        let c3 = row.insertCell(2);
-                        let c4 = row.insertCell(3);
-                        let c5 = row.insertCell(4);
-                        let c6 = row.insertCell(5);
-                        let c7 = row.insertCell(6);
-
-                        var inputCantidad = document.createElement("input");
-                        var inputPrecioUnitario =
-                            document.createElement("input");
-
-                        inputCantidad.id = "inputCantidad" + dataObject.id;
-                        inputCantidad.value = dataObject.qty;
-                        inputCantidad.type = "number";
-                        inputCantidad.min = "0.00001";
-                        inputCantidad.step = "0.00001";
-                        inputCantidad.onchange = function () {
-                            calcularSubTotal(dataObject.id);
-                        };
-
-                        inputPrecioUnitario.id =
-                            "inputPrecioUnitario" + dataObject.id;
-                        inputPrecioUnitario.type = "number";
-                        inputPrecioUnitario.min = "0.00001";
-                        inputPrecioUnitario.step = "0.00001";
-                        inputPrecioUnitario.value = parseFloat(
-                            dataObject.price
-                        ).toFixed(5);
-                        inputPrecioUnitario.onchange = function () {
-                            calcularSubTotal(dataObject.id);
-                        };
-
-                        c1.innerText = dataObject.id;
-                        c2.innerText = dataObject.name;
-                        c3.innerText = dataObject.unidad_medida_literal;
-                        c4.appendChild(inputCantidad);
-                        c5.appendChild(inputPrecioUnitario);
-                        c6.innerHTML =
-                            "<span id='subtotal" +
-                            dataObject.id +
-                            "'>" +
-                            parseFloat(dataObject.price * 1)
-                                .toFixed(5)
-                                .toString() +
-                            "</span>";
-
-                        c7.innerHTML =
-                            "<a id='" +
-                            dataObject.id +
-                            "' name='" +
-                            dataObject.id +
-                            "' class='waves-effect waves-light btn' onclick='cambiarTabla(this.name)'><i class='material-icons prefix'>delete</i></a>";
-                        calcularSubTotal(dataObject.id);
+                        let objetoProducto = {
+                            codigo_producto: dataObject.id,
+                            nombre_producto: dataObject.name,
+                            qty: dataObject.qty,
+                            unidad_medida_id: dataObject.unidad_medida_literal,
+                            detalle_producto: {
+                                precio_compra: dataObject.price
+                            }
+                        }
+                        addRowInTable(objetoProducto)
                     }
                 }
             } else {
@@ -335,62 +157,153 @@ function cambiarTabla(item_id) {
         });
 }
 
-function deleteRow(posicion) {
-    var table = document.getElementById("tableDetalleProducto");
-    var row = document.getElementById(posicion);
-    table.deleteRow(row.rowIndex + 1);
-}
 
-searchInput.addEventListener("keypress", function (event) {
-    if (event.key === "Enter") {
-        event.preventDefault();
-    }
-});
-
-let registrarPedidoButton = document.getElementById("registrarPedidoButton");
-let proveedor_id = document.getElementById("proveedor_id");
-let fecha_pedido = document.getElementById("fecha_pedido");
-let hora_pedido = document.getElementById("hora_pedido");
-let nota = document.getElementById("nota");
-
-registrarPedidoButton.addEventListener("click", function (event) {
-    event.preventDefault();
-
-    fetch(ruta_guardar_pedido, {
+function eliminarItem(codigo_producto) {
+    fetch(ruta_remove_item_cart, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
             "X-CSRF-Token": csrfToken,
         },
         body: JSON.stringify({
-            proveedor_id: proveedor_id.value,
-            fecha_pedido: fecha_pedido.value,
-            hora_pedido: hora_pedido.value,
-            nota: nota.value,
-            pedido_id: pedido_id.value,
+            codigo_producto: codigo_producto,
         }),
     })
         .then((response) => response.json())
         .then((data) => {
             if (data.status == 200) {
-                M.toast({
-                    html: data.description,
-                    classes: "rounded",
-                    displayLength: 2000,
-                    completeCallback: function () {
-                        window.location.href = ruta_index_pedido;
-                    },
-                });
+                document.getElementById("subTotal").innerHTML =
+                    "Bs. " + parseFloat(data.content).toFixed(5).toString();
+                document.getElementById("totalDolar").innerHTML =
+                    "Bs. " +
+                    parseFloat(data.content * 6.96)
+                        .toFixed(5)
+                        .toString();
+            }
+        });
+}
+
+function calcularSubTotal(codigo_producto) {
+    let inputPrecioUnitario = document.getElementById(`inputPrecioUnitario${codigo_producto}`);
+    let inputCantidad = document.getElementById(`inputCantidad${codigo_producto}`);
+    let resultado = inputPrecioUnitario.value * inputCantidad.value;
+
+    fetch(ruta_actualizar_cart, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-Token": csrfToken,
+        },
+        body: JSON.stringify({
+            codigo_producto: codigo_producto,
+            cantidad: inputCantidad.value,
+            precio_unitario: inputPrecioUnitario.value,
+            subtotal: resultado,
+        }),
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data)
+            if (data.status == 200) {
+                document.getElementById("subTotal").innerHTML =
+                    "Bs. " + parseFloat(data.content).toFixed(5).toString();
+                document.getElementById("totalDolar").innerHTML =
+                    "Bs. " +
+                    parseFloat(data.content * 6.96)
+                        .toFixed(5)
+                        .toString();
             } else {
                 M.toast({
                     html: "Algo salio Mal!",
                     classes: "rounded",
-                    displayLength: 3000,
-                    classes: "blue lighten-1",
+                    displayLength: 2000,
                 });
             }
         });
-});
-$(document).ready(function () {
-    $(".datepicker").datepicker();
-});
+}
+
+function cargarProducto() {
+    fetch(ruta_obtener_producto, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-Token": csrfToken,
+        },
+        body: JSON.stringify({
+            search: searchInput.value,
+        }),
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            if (data.status == 200) {
+                if (data.content.bandera == 1) {
+                    addRowInTable(data.content)
+                }
+            } else {
+                M.toast({
+                    html: "Algo salio Mal!",
+                    classes: "rounded",
+                    displayLength: 2000,
+                });
+            }
+        });
+}
+
+function deleteRowCustom(codigo_producto) {
+    console.log(codigo_producto)
+    let row = document.getElementById(codigo_producto);
+    eliminarItem(codigo_producto)
+    table_producto.deleteRow(row.rowIndex);
+}
+
+function addRowInTable(producto) {
+    let row = table_producto.insertRow(-1);
+    row.id = producto.codigo_producto;
+    let c1 = row.insertCell(0);
+    let c2 = row.insertCell(1);
+    let c3 = row.insertCell(2);
+    let c4 = row.insertCell(3);
+    let c5 = row.insertCell(4);
+    let c6 = row.insertCell(5);
+    let c7 = row.insertCell(6);
+
+    let inputCantidad = document.createElement("input");
+    let inputPrecioUnitario = document.createElement("input");
+
+    inputCantidad.id = "inputCantidad" + producto.codigo_producto;
+    inputCantidad.value = producto.qty ?? '1.00000';
+    inputCantidad.type = "number";
+    inputCantidad.min = "0.00001";
+    inputCantidad.step = "0.00001";
+    inputCantidad.onchange = function () {
+        calcularSubTotal(producto.codigo_producto);
+    };
+
+    inputPrecioUnitario.id =
+        "inputPrecioUnitario" + producto.codigo_producto;
+    inputPrecioUnitario.type = "number";
+    inputPrecioUnitario.min = "0.00001";
+    inputPrecioUnitario.step = "0.00001";
+    inputPrecioUnitario.value = parseFloat(
+        producto.detalle_producto.precio_compra
+    ).toFixed(5);
+    inputPrecioUnitario.onchange = function () {
+        calcularSubTotal(producto.codigo_producto);
+    };
+
+    c1.innerText = producto.codigo_producto;
+    c2.innerText = producto.nombre_producto;
+    c3.innerText = producto.unidad_medida_id;
+    c4.appendChild(inputCantidad);
+    c5.appendChild(inputPrecioUnitario);
+    c6.innerHTML =
+        "<span id='subtotal" +
+        producto.codigo_producto +
+        "'>" +
+        parseFloat(producto.detalle_producto.precio_compra * 1)
+            .toFixed(5)
+            .toString() +
+        "</span>";
+    c7.innerHTML = `<button type='button' class='btn btn-floating red' onclick='deleteRowCustom(${JSON.stringify(producto.codigo_producto)})'><i id class='material-icons'>delete</i></button>`;
+    calcularSubTotal(producto.codigo_producto);
+}

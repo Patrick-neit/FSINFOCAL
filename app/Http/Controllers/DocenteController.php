@@ -12,7 +12,8 @@ class DocenteController extends Controller
 {
     public function index()
     {
-        $docentes = Docente::where('empresa_id', Auth::user()->empresas[0]->id)->get();
+        $docentes = Docente::all();
+        // $docentes = Docente::where('empresa_id', Auth::user()->empresas[0]->id)->get();
 
         return view('docentes.index', compact('docentes'));
     }

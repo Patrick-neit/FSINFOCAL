@@ -1,4 +1,4 @@
-<x-layouts.sincronizacion>
+<x-layouts.sincronizacion2>
     <x-slot name="table_header">
         <tr>
             <th>Fecha y Hora</th>
@@ -9,4 +9,4 @@
     <x-slot name="accion">
         {{ config('sistema.sincFechaHora') }}
     </x-slot>
-</x-layouts.sincronizacion>
+</x-layouts.sincronizacion2>

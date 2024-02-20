@@ -14,8 +14,19 @@ class CategoriaController extends Controller
      */
     public function index()
     {
+        $breadcrumbs = [
+            ['link' => 'home', 'name' => 'Home'],
+            ['link' => 'javascript:void(0)', 'name' => 'Categorias'],
+        ];
+        $pageConfigs = [
+            'pageHeader' => true,
+            'isFabButton' => true
+        ];
+        $categorias = Categoria::all();
         return view('categoria.index', [
-            'categorias' => Categoria::all(),
+            'categorias' => $categorias,
+            'pageConfigs' => $pageConfigs,
+            'breadcrumbs' => $breadcrumbs
         ]);
     }
 
@@ -37,7 +48,7 @@ class CategoriaController extends Controller
     public function store(Request $request)
     {
         try {
-            if (! empty($request->categoria_id)) {
+            if (!empty($request->categoria_id)) {
                 return $this->update($request);
             }
             $categoria = new Categoria();
@@ -84,7 +95,7 @@ class CategoriaController extends Controller
      * @param  \App\Models\Categoria  $categoria
      * @return \Illuminate\Http\Response
      */
-    public function update($request)
+    public function update(Request $request)
     {
         try {
             $categoria = Categoria::find($request->categoria_id);

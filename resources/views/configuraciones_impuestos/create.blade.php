@@ -72,7 +72,6 @@
                                         <label for="codigo_sistema">Codigo Sistema</label>
                                         <small class="errorTxt2"></small>
                                     </div>
-
                                 </div>
                             </div>
 

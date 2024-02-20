@@ -2,149 +2,7 @@ const csrfToken = document.head.querySelector(
     "[name~=csrf-token][content]"
 ).content;
 
-// variable declaration
-var usersTable;
-var usersDataArray = [];
-// datatable initialization
-if ($("#users-list-datatable").length > 0) {
-    usersTable = $("#users-list-datatable").DataTable({
-        responsive: true,
-        columnDefs: [
-            {
-                orderable: false,
-                targets: [0, 8, 9],
-            },
-        ],
-    });
-}
-// on click selected users data from table(page named page-users-list)
-// to store into local storage to get rendered on second page named page-users-view
-$(document).on("click", "#users-list-datatable tr", function () {
-    $(this)
-        .find("td")
-        .each(function () {
-            usersDataArray.push($(this).text().trim());
-        });
-
-    localStorage.setItem("usersId", usersDataArray[1]);
-    localStorage.setItem("usersUsername", usersDataArray[2]);
-    localStorage.setItem("usersName", usersDataArray[3]);
-    localStorage.setItem("usersVerified", usersDataArray[5]);
-    localStorage.setItem("usersRole", usersDataArray[6]);
-    localStorage.setItem("usersStatus", usersDataArray[7]);
-});
-// render stored local storage data on page named page-users-view
-if (localStorage.usersId !== undefined) {
-    $(".users-view-id").html(localStorage.getItem("usersId"));
-    $(".users-view-username").html(localStorage.getItem("usersUsername"));
-    $(".users-view-name").html(localStorage.getItem("usersName"));
-    $(".users-view-verified").html(localStorage.getItem("usersVerified"));
-    $(".users-view-role").html(localStorage.getItem("usersRole"));
-    $(".users-view-status").html(localStorage.getItem("usersStatus"));
-    // update badge color on status change
-    if ($(".users-view-status").text() === "Banned") {
-        $(".users-view-status").toggleClass(
-            "badge-light-success badge-light-danger"
-        );
-    }
-    // update badge color on status change
-    if ($(".users-view-status").text() === "Close") {
-        $(".users-view-status").toggleClass(
-            "badge-light-success badge-light-warning"
-        );
-    }
-}
-// page users list verified filter
-$("#users-list-verified").on("change", function () {
-    var usersVerifiedSelect = $("#users-list-verified").val();
-    usersTable.search(usersVerifiedSelect).draw();
-});
-// page users list role filter
-$("#users-list-role").on("change", function () {
-    var usersRoleSelect = $("#users-list-role").val();
-    // console.log(usersRoleSelect);
-    usersTable.search(usersRoleSelect).draw();
-});
-// page users list status filter
-$("#users-list-status").on("change", function () {
-    var usersStatusSelect = $("#users-list-status").val();
-    // console.log(usersStatusSelect);
-    usersTable.search(usersStatusSelect).draw();
-});
-// users language select
-if ($("#users-language-select2").length > 0) {
-    $("#users-language-select2").select2({
-        dropdownAutoWidth: true,
-        width: "100%",
-    });
-}
-// users music select
-if ($("#users-music-select2").length > 0) {
-    $("#users-music-select2").select2({
-        dropdownAutoWidth: true,
-        width: "100%",
-    });
-}
-// users movies select
-if ($("#users-movies-select2").length > 0) {
-    $("#users-movies-select2").select2({
-        dropdownAutoWidth: true,
-        width: "100%",
-    });
-}
-
-$(".select2").select2({
-    dropdownAutoWidth: true,
-    width: "100%",
-});
-
-// Input, Select, Textarea validations except submit button validation initialization
-/* if ($(".users-edit").length > 0) {
-      $("#accountForm, #infotabForm").validate({
-        rules: {
-          username: {
-            required: true,
-            minlength: 5
-          },
-          name: {
-            required: true
-          },
-          email: {
-            required: true
-          },
-          datepicker: {
-            required: true
-          },
-          address: {
-            required: true
-          }
-        },
-        errorElement: 'div'
-      });
-      $("#infotabForm").validate({
-        rules: {
-          datepicker: {
-            required: true
-          },
-          address: {
-            required: true
-          }
-        },
-        errorElement: 'div'
-      });
-    } */
-
-$(".select2").select2({
-    dropdownAutoWidth: true,
-    width: "100%",
-});
-
-let registrarProductoButton = document.getElementById(
-    "registrarProductoButton"
-);
-
 let dosificacion = document.getElementById("dosificacion");
-console.log(dosificacion.value);
 let codigo_producto_servicio = document.getElementById(
     "codigo_producto_servicio"
 );
@@ -176,83 +34,135 @@ let precio_paquete = document.getElementById("precio_paquete");
 let precio_dolar = document.getElementById("precio_dolar");
 let producto_id = document.getElementById("id_producto");
 
-registrarProductoButton.addEventListener("click", function (event) {
-    event.preventDefault();
-
-    fetch(ruta_guardar_producto, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "X-CSRF-Token": csrfToken,
+$(document).ready(function () {
+    $('select[required]').css({
+        display: 'inline',
+        position: 'absolute',
+        float: 'left',
+        padding: 0,
+        margin: 0,
+        border: '1px solid rgba(255,255,255,0)',
+        height: 0,
+        width: 0,
+        top: '2em',
+        left: '3em'
+    });
+    $("#formProducto").validate({
+        errorLabelContainer: "#messageBox",
+        wrapper: "li",
+        rules: {
+            dosificacion: 'required',
+            unidad_medida: 'required',
+            marca_id: 'required',
+            categoria: 'required',
+            tipo_producto: 'required',
+            sub_familia: 'required',
+            codigo_producto: 'required',
+            nombre_producto: 'required',
+            homologacion: 'required',
+            modelo: 'required',
+            numero_serie: 'required',
+            numero_imei: 'required',
+            peso_unitario: 'required',
+            codigo_barra: 'required',
+            caracteristica: 'required',
+            stock_minimo: 'required',
+            stock_actual: 'required',
+            almacen_id: 'required',
+            estado: 'required',
+            precio_compra: 'required',
+            precio_unitario: 'required',
+            precio_unitario2: 'required',
+            precio_unitario3: 'required',
+            precio_unitario4: 'required',
+            precio_paquete: 'required',
+            precio_dolar: 'required',
         },
-        body: JSON.stringify({
-            dosificacion: dosificacion.value,
-            unidad_medida: unidad_medida.value,
-            marca_id: marca_id.value,
-            categoria: categoria.value,
-            tipo_producto: tipo_producto.value,
-            sub_familia: sub_familia.value,
-            codigo_producto: codigo_producto.value,
-            nombre_producto: nombre_producto.value,
-            homologacion: homologacion.value,
-            modelo: modelo.value,
-            numero_serie: numero_serie.value,
-            numero_imei: numero_imei.value,
-            peso_unitario: peso_unitario.value,
-            codigo_barra: codigo_barra.value,
-            caracteristica: caracteristica.value,
-            stock_minimo: stock_minimo.value,
-            stock_actual: stock_actual.value,
-            almacen_id: almacen_id.value,
-            estado: estado.value,
-
-            precio_compra: precio_compra.value,
-            precio_unitario: precio_unitarioo.value,
-            precio_unitario2: precio_unitario2.value,
-            precio_unitario3: precio_unitario3.value,
-            precio_unitario4: precio_unitario4.value,
-            precio_paquete: precio_paquete.value,
-            precio_dolar: precio_dolar.value,
-
-            producto_id: producto_id.value,
-        }),
-    })
-        .then((response) => response.json())
-        .then((data) => {
-            if (data.status == 200) {
-                M.toast({
-                    html: data.description,
-                    classes: "rounded",
-                    displayLength: 2000,
-                    completeCallback: function () {
-                        window.location.href = ruta_index_producto;
-                    },
-                });
+        errorClass: 'invalid',
+        validClass: "valid",
+        errorPlacement: function (label, element) {
+            if (element.hasClass('select2 browser-default')) {
+                label.insertAfter(element.next('.select2-container')).addClass('mt-2 text-danger');
+                select2label = label
             } else {
-                if (data.status == 422) {
-                    data.content.forEach((contenido) =>
-                        M.toast({
-                            html: contenido,
-                            classes: "rounded",
-                            displayLength: 3000,
-                            classes: "red lighten-1",
-                        })
-                    );
-                } else {
-                    M.toast({
-                        html: "Algo salio Mal!",
-                        classes: "rounded",
-                        displayLength: 3000,
-                        classes: "blue lighten-1",
-                    });
-                }
+                label.addClass('mt-2 text-danger');
+                label.insertAfter(element);
             }
-        });
-});
-$(".select2").select2({
-    dropdownAutoWidth: true,
-    width: "100%",
-});
+        },
+        submitHandler: function (form) {
+            fetch(!producto_id.value ? ruta_guardar_producto : ruta_update_producto, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRF-Token": csrfToken,
+                },
+                body: JSON.stringify({
+                    dosificacion: dosificacion.value,
+                    unidad_medida: unidad_medida.value,
+                    marca_id: marca_id.value,
+                    categoria: categoria.value,
+                    tipo_producto: tipo_producto.value,
+                    sub_familia: sub_familia.value,
+                    codigo_producto: codigo_producto.value,
+                    nombre_producto: nombre_producto.value,
+                    homologacion: homologacion.value ?? 1,
+                    modelo: modelo.value,
+                    numero_serie: numero_serie.value,
+                    numero_imei: numero_imei.value,
+                    peso_unitario: peso_unitario.value,
+                    codigo_barra: codigo_barra.value,
+                    caracteristica: caracteristica.value,
+                    stock_minimo: stock_minimo.value,
+                    stock_actual: stock_actual.value,
+                    almacen_id: almacen_id.value,
+                    estado: estado.value,
+
+                    precio_compra: precio_compra.value,
+                    precio_unitario: precio_unitarioo.value,
+                    precio_unitario2: precio_unitario2.value,
+                    precio_unitario3: precio_unitario3.value,
+                    precio_unitario4: precio_unitario4.value,
+                    precio_paquete: precio_paquete.value,
+                    precio_dolar: precio_dolar.value,
+                    producto_id: producto_id.value,
+                }),
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    if (data.status == 200) {
+                        M.toast({
+                            html: data.description,
+                            classes: "rounded",
+                            displayLength: 2000,
+                            completeCallback: function () {
+                                window.location.href = ruta_index_producto;
+                            },
+                        });
+                    } else {
+                        if (data.status == 422) {
+                            data.content.forEach((contenido) =>
+                                M.toast({
+                                    html: contenido,
+                                    classes: "rounded",
+                                    displayLength: 3000,
+                                    classes: "red lighten-1",
+                                })
+                            );
+                        } else {
+                            M.toast({
+                                html: "Algo salio Mal!",
+                                classes: "rounded",
+                                displayLength: 3000,
+                                classes: "blue lighten-1",
+                            });
+                        }
+                    }
+                });
+        }
+    });
+
+})
+
 function cargarActividad() {
     console.log(dosificacion.value);
     let homologacion_select = document.getElementById("homologacion");
@@ -294,3 +204,8 @@ function cargarActividad() {
             }
         });
 }
+
+$(".select2").select2({
+    dropdownAutoWidth: true,
+    width: '100%',
+});

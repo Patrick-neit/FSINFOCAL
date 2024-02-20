@@ -12,9 +12,23 @@ class ConfiguracionImpuestoController extends Controller
 {
     public function index()
     {
-        $taxesConfigurations = ConfiguracionImpuesto::where('empresa_id', Auth::user()->empresas[0]->id)->get();
-
-        return view('configuraciones_impuestos.index', compact('taxesConfigurations'));
+        $breadcrumbs = [
+            ['link' => 'home', 'name' => 'Home'],
+            ['link' => 'javascript:void(0)', 'name' => 'Configuraciones de Impuestos'],
+        ];
+        $pageConfigs = [
+            'pageHeader' => true,
+            'isFabButton' => true
+        ];
+        // $taxesConfigurations = ConfiguracionImpuesto::where('empresa_id', Auth::user()->empresas[0]->id)->get();
+        $taxesConfigurations = ConfiguracionImpuesto::all();
+        $enterprises = Empresa::all();
+        return view('configuraciones_impuestos.index', [
+            'taxesConfigurations' => $taxesConfigurations,
+            'enterprises' => $enterprises,
+            'pageConfigs' => $pageConfigs,
+            'breadcrumbs' => $breadcrumbs
+        ]);
     }
 
     public function create()
@@ -35,8 +49,8 @@ class ConfiguracionImpuestoController extends Controller
     public function store(StoreConfImpRequest $request)
     {
         try {
-            if (! empty($request->id_conf)) {
-                return $this->update($request);
+            if (!empty($request->id_conf)) {
+                return $this->update($request, $request->id_config);
             }
             $taxesConfiguration = new ConfiguracionImpuesto();
             $taxesConfiguration->nombre_sistema = $request->nombre_sistema;
@@ -60,10 +74,10 @@ class ConfiguracionImpuestoController extends Controller
         }
     }
 
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
         try {
-            $taxesConfiguration = ConfiguracionImpuesto::find($request->id_conf);
+            $taxesConfiguration = ConfiguracionImpuesto::find($id);
             $taxesConfiguration->nombre_sistema = $request->nombre_sistema;
             $taxesConfiguration->ambiente = $request->ambiente;
             $taxesConfiguration->modalidad = $request->modalidad;

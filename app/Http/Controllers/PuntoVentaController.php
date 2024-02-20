@@ -31,9 +31,25 @@ class PuntoVentaController extends Controller
 
     public function index()
     {
+        $breadcrumbs = [
+            ['link' => 'home', 'name' => 'Home'],
+            ['link' => 'javascript:void(0)', 'name' => 'Puntos de Ventas'],
+        ];
+        $pageConfigs = [
+            'pageHeader' => true,
+            'isFabButton' => true
+        ];
         $puntosVentas = PuntoVenta::where('empresa_id', Auth::user()->empresas[0]->id)->get();
+        $sucursales = Sucursal::where('empresa_id', Auth::user()->empresas[0]->id)->get();
+        $tipoPuntosVentas = ImpuestoTipoPuntoVenta::all();
 
-        return view('puntos_ventas.index', compact('puntosVentas'));
+        return view('puntos_ventas.index', [
+            'puntosVentas' => $puntosVentas,
+            'sucursales' => $sucursales,
+            'tipoPuntosVentas' => $tipoPuntosVentas,
+            'pageConfigs' => $pageConfigs,
+            'breadcrumbs' => $breadcrumbs
+        ]);
     }
 
     public function create()
@@ -103,15 +119,14 @@ class PuntoVentaController extends Controller
                     if ($resRegistroPV->content->mensajesList[0]->codigo != 980 || $resRegistroPV->content->transaccion != true) {
                         return responseJson('Algo salio mal', $resRegistroPV->content->mensajesList[0]->descripcion, 500);
                     }
-
                 }
             }
 
             DB::beginTransaction();
             $registrarPuntoVenta = new PuntoVenta();
             $registrarPuntoVenta->nombre_punto_venta = $request->nombre_punto_venta;
-            $registrarPuntoVenta->tipo_punto_venta = ! isset($request->tipo_punto_venta) ? 0 : $request->tipo_punto_venta;
-            $registrarPuntoVenta->codigo_punto_venta = ! isset($request->tipo_punto_venta) ? 0 : $resRegistroPV->content->codigoPuntoVenta; //todo
+            $registrarPuntoVenta->tipo_punto_venta = !isset($request->tipo_punto_venta) ? 0 : $request->tipo_punto_venta;
+            $registrarPuntoVenta->codigo_punto_venta = !isset($request->tipo_punto_venta) ? 0 : $resRegistroPV->content->codigoPuntoVenta; //todo
             $registrarPuntoVenta->descripcion_punto_venta = $request->descripcion_punto_venta;
 
             $registrarPuntoVenta->sucursal_id = $request->sucursal_id;

@@ -166,7 +166,8 @@
                   class="language-markup">class="active"</code>
                 to the label.
                 <br />You can also call the function <code class="language-javascript">M.updateTextFields();</code>
-                to reinitialize all the Materialize labels on the page if you are dynamically adding inputs.</p>
+                to reinitialize all the Materialize labels on the page if you are dynamically adding inputs.
+              </p>
             </div>
             <div class="col s12">
               <div class="input-field col s6">
@@ -220,7 +221,8 @@
         </div>
         <div id="view-icon-prefixes">
           <p>You can add an icon prefix to make the form input label even more clear. Just add an icon with the class
-            <code class="language-markup">prefix</code> before the input and label.</p>
+            <code class="language-markup">prefix</code> before the input and label.
+          </p>
           <br>
           <div class="row">
             <form class="col s12">
@@ -404,7 +406,8 @@
         </div>
         <div id="view-icon-prefixes-two">
           <p>You can add an icon prefix to make the form input label even more clear. Just add an icon with the class
-            <code class="language-markup">prefix</code> before the input and label.</p>
+            <code class="language-markup">prefix</code> before the input and label.
+          </p>
           <br>
           <div class="row">
             <form class="col s12">
@@ -460,7 +463,8 @@
           <p> Select allows user input through specified options. Make sure you wrap it in a <code
               class="language-markup">.input-field</code>
             for proper alignment with other text fields. Remember that this is a jQuery plugin so make sure you
-            <a href="#select-initialization">initialize</a> this in your document ready. </p>
+            <a href="#select-initialization">initialize</a> this in your document ready.
+          </p>
           <div class="row">
             <div class="input-field col s12">
               <select>
@@ -676,7 +680,8 @@
             <code class="language-markup">for</code> attribute is necessary to bind our custom radio button with the
             input. Add the input's <code class="language-markup">id</code> as the value of the <code
               class="language-markup">for</code>
-            attribute of the label.</p>
+            attribute of the label.
+          </p>
           <p>Add radio buttons to a group by adding the name attribute along with the same corresponding value for
             each of the radio buttons in the group. Create disabled radio buttons by adding the disabled attribute as
             shown below.</p>
@@ -1091,7 +1096,8 @@
           <p>Add a range slider for values with a wide range. This one is set to be a number between 0 and 100. We
             have two different types of sliders. nouiSlider is a 3rd party plugin which we've modified. To use the
             noUiSlider, you will have to manually link the <code class="language-markup">nouislider.css</code> and
-            <code class="language-markup">nouislider.js</code> files located in the extras folder.</p>
+            <code class="language-markup">nouislider.js</code> files located in the extras folder.
+          </p>
           <h4 class="header">noUiSlider</h4>
           <p>See noUiSlider's official documentation <a href="https://refreshless.com/nouislider/">here</a> to see a
             variety of slider options</p>
@@ -1431,5 +1437,6 @@ $(document).ready(function(){
 
 {{-- page script --}}
 @section('page-script')
+
 <script src="{{asset('js/scripts/form-elements.js')}}"></script>
 @endsection

@@ -23,9 +23,10 @@ class UserController extends Controller
             $user->email = $request->email;
             $user->password = Hash::make($request->password);
             $user->ci = $request->ci;
-            $user->fecha_nacimiento = Carbon::parse($request->fecha_nacimiento)->format('Y-m-d'); //$request->fecha_nacimiento;
+            // $user->fecha_nacimiento = Carbon::parse($request->fecha_nacimiento)->format('Y-m-d'); //$request->fecha_nacimiento;
+            $user->fecha_nacimiento = Carbon::createFromFormat('d/m/Y', $request->fecha_nacimiento)->format('Y-m-d'); //$request->fecha_nacimiento;
             $user->departamento_id = $request->departamento_id;
-            $user->fotografia = '/storage/'.$path;
+            $user->fotografia = '/storage/' . $path;
             //$user->estado = $request->estado;
             $user->save();
             if ($user->save()) {
@@ -52,8 +53,8 @@ class UserController extends Controller
             $user->password = empty($request->password) ? Hash::make($request->password) : $user->password;
             $user->ci = $request->ci;
             $user->fecha_nacimiento = Carbon::parse($request->fecha_nacimiento)->format('Y-m-d'); //$request->fecha_nacimiento;
-            $user->departamento_id = $request->departamento_id;
-            $user->fotografia = $request->hasFile('avatar') ? '/storage/'.$path : $user->fotografia;
+            // $user->departamento_id = $request->departamento_id;
+            $user->fotografia = $request->hasFile('avatar') ? '/storage/' . $path : $user->fotografia;
             //$user->estado = $request->estado;
             $user->save();
             if ($user->save()) {
@@ -108,10 +109,21 @@ class UserController extends Controller
 
     public function index()
     {
-        //Obtenemos todos los usuarios que no están baneados
+        $breadcrumbs = [
+            ['link' => 'home', 'name' => 'Home'],
+            ['link' => 'javascript:void(0)', 'name' => 'Usuarios'],
+        ];
+        $pageConfigs = [
+            'pageHeader' => true,
+            'isFabButton' => true
+        ];
         $users = User::withoutBanned()->get();
 
-        return view('users.index', compact('users'));
+        return view('users.index', [
+            'users' => $users,
+            'pageConfigs' => $pageConfigs,
+            'breadcrumbs' => $breadcrumbs
+        ]);
     }
 
     public function asignarEmpresaUser($id)
