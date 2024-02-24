@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class CatalogoPrecioProducto extends Model
 {
     use HasFactory;
+
     protected $table = 'catalogos_precios_productos';
+
     protected $fillable =
     [
         'tipo_precio_a',
@@ -32,7 +34,8 @@ class CatalogoPrecioProducto extends Model
         return $this->belongsTo(Cliente::class);
     }
 
-    public function cabecera_producto(){
+    public function cabecera_producto()
+    {
         return $this->hasMany(CabeceraProducto::class);
     }
 }

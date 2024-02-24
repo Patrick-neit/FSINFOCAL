@@ -1,10 +1,9 @@
 <?php
 
 use App\Models\Binnacle;
-use App\Models\ClienteTipoPrecio;
-use App\Models\PuntoVenta;
-use App\Models\CatalogoPrecioProducto;
 use App\Models\CabeceraProducto;
+use App\Models\CatalogoPrecioProducto;
+use App\Models\PuntoVenta;
 
 function responseJson($description, $content, $status)
 {
@@ -55,7 +54,7 @@ function selectTipoPrecio($value, $cliente_id)
 {
     $productos = CabeceraProducto::select('id')->get();
 
-    foreach ($productos as $producto){
+    foreach ($productos as $producto) {
         $tipo_precio = new CatalogoPrecioProducto();
         switch ($value) {
             case 1:

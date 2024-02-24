@@ -1,10 +1,11 @@
 <?php
+
 namespace App\Services;
 
 use Illuminate\Support\Facades\Http;
 
-class ImpuestoVerificarNitService{
-
+class ImpuestoVerificarNitService
+{
     public $config;
 
     public function __construct()
@@ -21,13 +22,13 @@ class ImpuestoVerificarNitService{
             ->post(
                 config('sistema.url_api').'api/verificarNit',
                 [
-                    'codigoAmbiente'=> $this->config->configService->codigoAmbiente ,
-                    'codigoModalidad'=> $this->config->configService->codigoModalidad ,
-                    'codigoSistema'=> $this->config->configService->codigoSistema ,
+                    'codigoAmbiente' => $this->config->configService->codigoAmbiente,
+                    'codigoModalidad' => $this->config->configService->codigoModalidad,
+                    'codigoSistema' => $this->config->configService->codigoSistema,
                     'codigoSucursal' => 0,
-                    'nit' =>  $this->config->configService->nit,
-                    'cuis'=> "FA11812C",
-                    'nitParaVerificacion'=> $clienteNit
+                    'nit' => $this->config->configService->nit,
+                    'cuis' => 'FA11812C',
+                    'nitParaVerificacion' => $clienteNit,
                 ]
             );
 

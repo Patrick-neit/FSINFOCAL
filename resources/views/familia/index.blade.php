@@ -1,6 +1,6 @@
 @extends('layouts.page')
 
-@section('title', 'Familias')
+@section('title', 'Familias2')
 
 @section('create-action-content')
 <a href="#modalCrearFamilia" id="crearFamilia"

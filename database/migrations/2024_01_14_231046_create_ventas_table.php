@@ -18,12 +18,12 @@ return new class extends Migration
             $table->date('fecha_venta');
             $table->time('hora_venta');
             $table->integer('numero_factura');
-            $table->decimal('total',18,4)->nullable();
-            $table->decimal('descuento',18,4)->nullable();
-            $table->decimal('monto_gifcard',18,4)->nullable();
-            $table->decimal('total_venta',18,4)->nullable();
+            $table->decimal('total', 18, 4)->nullable();
+            $table->decimal('descuento', 18, 4)->nullable();
+            $table->decimal('monto_gifcard', 18, 4)->nullable();
+            $table->decimal('total_venta', 18, 4)->nullable();
             $table->string('cuf_emision')->nullable();
-            $table->char('estado_emision')->default("R");
+            $table->char('estado_emision')->default('R');
             $table->boolean('estado_anulacion');
             $table->boolean('estado_reversion')->default(1);
             $table->unsignedBigInteger('cufd_id');

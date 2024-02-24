@@ -1,22 +1,22 @@
 <?php
 
 use App\Http\Controllers\AdvanceUiController;
+use App\Http\Controllers\AlmacenController;
 use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\BasicTableController;
 use App\Http\Controllers\BasicUiController;
 use App\Http\Controllers\CardController;
+use App\Http\Controllers\CatalogoPrecioProductoController;
 use App\Http\Controllers\CatalogosController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ChartController;
 use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\ComprasController;
 use App\Http\Controllers\CssController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DataTableController;
 use App\Http\Controllers\DosificacionEmpresaController;
-use App\Http\Controllers\AlmacenController;
-use App\Http\Controllers\CatalogoPrecioProductoController;
-use App\Http\Controllers\ComprasController;
 use App\Http\Controllers\EjemploController;
 use App\Http\Controllers\ExtraComponentsController;
 use App\Http\Controllers\FamiliaController;
@@ -33,10 +33,9 @@ use App\Http\Controllers\PuntoVentaController;
 use App\Http\Controllers\SubFamiliaController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserProfileController;
+use App\Http\Controllers\VentasController;
 use Illuminate\Support\Facades\Route;
 use LukePOLO\LaraCart\Facades\LaraCart;
-use App\Http\Controllers\VentasController;
-use LukePOLO\LaraCart\LaraCartServiceProvider;
 
 /*
 |--------------------------------------------------------------------------
@@ -341,9 +340,9 @@ Route::group([
 });
 
 Route::group([
-                 'prefix' => 'ventas',
-                 'controller' => VentasController::class,
-             ], function () {
+    'prefix' => 'ventas',
+    'controller' => VentasController::class,
+], function () {
     Route::get('index', 'index')->name('ventas.index');
     Route::get('create', 'create')->name('categoria.create');
     Route::get('/edit/{id}', 'edit')->name('categoria.edit');
@@ -446,7 +445,7 @@ Route::group([
 
 Route::group([
     'prefix' => 'almacenes',
-    'controller' =>  AlmacenController::class,
+    'controller' => AlmacenController::class,
 ], function () {
     Route::get('index', 'index')->name('almacenes.index');
     Route::get('create', 'create')->name('almacenes.create');
@@ -456,7 +455,7 @@ Route::group([
 });
 Route::group([
     'prefix' => 'compras',
-    'controller' => ComprasController::class
+    'controller' => ComprasController::class,
 ], function () {
     Route::get('/aprobar/pedido/index/{pedido}', 'compras_index')->name('compras.aprobar_index');
     Route::post('/aprobar/pedido', 'aprobar_pedido')->name('compras.aprobar_pedido');
@@ -464,7 +463,7 @@ Route::group([
 
 Route::group([
     'prefix' => 'catalogos_productos',
-    'controller' => CatalogoPrecioProductoController::class
+    'controller' => CatalogoPrecioProductoController::class,
 ], function () {
     Route::get('index', 'index')->name('catalogos_productos.index');
     Route::get('create', 'create')->name('catalogos_productos.create');

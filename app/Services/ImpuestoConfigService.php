@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Models\ConfiguracionImpuesto;
-use Illuminate\Support\Facades\Auth;
 
 class ImpuestoConfigService
 {
@@ -13,7 +12,7 @@ class ImpuestoConfigService
 
     public function __construct()
     {
-        $this->configImpuesto = ConfiguracionImpuesto::where('empresa_id', 15 /*Auth::user()->empresas[0]->id */)
+        $this->configImpuesto = ConfiguracionImpuesto::where('empresa_id', 1)
             ->first(); //Todo
 
         $this->configService = json_decode(json_encode([

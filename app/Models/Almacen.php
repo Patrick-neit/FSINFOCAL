@@ -10,13 +10,15 @@ class Almacen extends Model
 {
     use HasFactory;
     use SoftDeletes;
+
     protected $table = 'almacenes';
+
     protected $fillable =
     [
         'nombre',
         'capacidad_almacen',
         'encargado_id',
-        'sucursal_id'
+        'sucursal_id',
     ];
 
     public function encargado()

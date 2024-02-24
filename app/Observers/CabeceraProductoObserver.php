@@ -9,7 +9,6 @@ class CabeceraProductoObserver
     /**
      * Handle the CabeceraProducto "created" event.
      *
-     * @param  \App\Models\CabeceraProducto  $CabeceraProducto
      * @return void
      */
     public function created(CabeceraProducto $CabeceraProducto)
@@ -20,7 +19,6 @@ class CabeceraProductoObserver
     /**
      * Handle the CabeceraProducto "updated" event.
      *
-     * @param  \App\Models\CabeceraProducto  $CabeceraProducto
      * @return void
      */
     public function updated(CabeceraProducto $CabeceraProducto)
@@ -31,7 +29,6 @@ class CabeceraProductoObserver
     /**
      * Handle the CabeceraProducto "deleted" event.
      *
-     * @param  \App\Models\CabeceraProducto  $CabeceraProducto
      * @return void
      */
     public function deleted(CabeceraProducto $CabeceraProducto)
@@ -42,7 +39,6 @@ class CabeceraProductoObserver
     /**
      * Handle the CabeceraProducto "restored" event.
      *
-     * @param  \App\Models\CabeceraProducto  $CabeceraProducto
      * @return void
      */
     public function restored(CabeceraProducto $CabeceraProducto)
@@ -53,7 +49,6 @@ class CabeceraProductoObserver
     /**
      * Handle the CabeceraProducto "force deleted" event.
      *
-     * @param  \App\Models\CabeceraProducto  $CabeceraProducto
      * @return void
      */
     public function forceDeleted(CabeceraProducto $CabeceraProducto)

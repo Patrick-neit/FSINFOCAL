@@ -37,7 +37,7 @@ class PuntoVentaController extends Controller
         ];
         $pageConfigs = [
             'pageHeader' => true,
-            'isFabButton' => true
+            'isFabButton' => true,
         ];
         $puntosVentas = PuntoVenta::where('empresa_id', Auth::user()->empresas[0]->id)->get();
         $sucursales = Sucursal::where('empresa_id', Auth::user()->empresas[0]->id)->get();
@@ -48,7 +48,7 @@ class PuntoVentaController extends Controller
             'sucursales' => $sucursales,
             'tipoPuntosVentas' => $tipoPuntosVentas,
             'pageConfigs' => $pageConfigs,
-            'breadcrumbs' => $breadcrumbs
+            'breadcrumbs' => $breadcrumbs,
         ]);
     }
 
@@ -125,8 +125,8 @@ class PuntoVentaController extends Controller
             DB::beginTransaction();
             $registrarPuntoVenta = new PuntoVenta();
             $registrarPuntoVenta->nombre_punto_venta = $request->nombre_punto_venta;
-            $registrarPuntoVenta->tipo_punto_venta = !isset($request->tipo_punto_venta) ? 0 : $request->tipo_punto_venta;
-            $registrarPuntoVenta->codigo_punto_venta = !isset($request->tipo_punto_venta) ? 0 : $resRegistroPV->content->codigoPuntoVenta; //todo
+            $registrarPuntoVenta->tipo_punto_venta = ! isset($request->tipo_punto_venta) ? 0 : $request->tipo_punto_venta;
+            $registrarPuntoVenta->codigo_punto_venta = ! isset($request->tipo_punto_venta) ? 0 : $resRegistroPV->content->codigoPuntoVenta; //todo
             $registrarPuntoVenta->descripcion_punto_venta = $request->descripcion_punto_venta;
 
             $registrarPuntoVenta->sucursal_id = $request->sucursal_id;

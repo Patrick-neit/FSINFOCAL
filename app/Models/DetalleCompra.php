@@ -18,7 +18,7 @@ class DetalleCompra extends Model
         'cantidad',
         'precio_unitario',
         'sub_total',
-        'fecha_vencimiento'
+        'fecha_vencimiento',
     ];
 
     public function cabecera_compra()

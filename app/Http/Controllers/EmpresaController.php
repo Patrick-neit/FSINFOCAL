@@ -17,7 +17,7 @@ class EmpresaController extends Controller
         ];
         $pageConfigs = [
             'pageHeader' => true,
-            'isFabButton' => true
+            'isFabButton' => true,
         ];
         /* $empresas = Empresa::where('id', Auth::user()->empresas[0]->id)->get(); */
         $empresas = Empresa::all();
@@ -25,7 +25,7 @@ class EmpresaController extends Controller
         return view('empresas.index', [
             'empresas' => $empresas,
             'pageConfigs' => $pageConfigs,
-            'breadcrumbs' => $breadcrumbs
+            'breadcrumbs' => $breadcrumbs,
         ]);
     }
 
@@ -43,11 +43,11 @@ class EmpresaController extends Controller
 
     public function store(Request $request)
     {
-        if (!empty($request->id_empresa)) {
+        if (! empty($request->id_empresa)) {
             return $this->update($request, $request->id_empresa);
         }
         if ($request->hasFile('logo_empresa')) {
-            $path = Storage::disk('public')->put($request->nro_nit_empresa . '/logo', $request->file('logo_empresa'));
+            $path = Storage::disk('public')->put($request->nro_nit_empresa.'/logo', $request->file('logo_empresa'));
         }
         $enterprise = new Empresa();
         $enterprise->nombre_empresa = $request->nombre_empresa;
@@ -55,7 +55,7 @@ class EmpresaController extends Controller
         $enterprise->direccion = $request->direccion;
         $enterprise->telefono = $request->telefono;
         $enterprise->correo = $request->correo;
-        $enterprise->logo = '/storage/' . $path;
+        $enterprise->logo = '/storage/'.$path;
         $enterprise->representante_legal = $request->representante_legal;
         if ($enterprise->save()) {
             return responseJson('Registrado Exitosamente', $enterprise, 200);
@@ -97,7 +97,7 @@ class EmpresaController extends Controller
         try {
             if ($request->hasFile('logo_empresa')) {
 
-                $path = Storage::disk('public')->put($request->nro_nit_empresa . '/logo', $request->file('logo_empresa'));
+                $path = Storage::disk('public')->put($request->nro_nit_empresa.'/logo', $request->file('logo_empresa'));
             }
             $enterprise = Empresa::find($id);
             $enterprise->nombre_empresa = $request->nombre_empresa;
@@ -105,7 +105,7 @@ class EmpresaController extends Controller
             $enterprise->direccion = $request->direccion;
             $enterprise->telefono = $request->telefono;
             $enterprise->correo = $request->correo;
-            $enterprise->logo = $request->hasFile('logo_empresa') ? '/storage/' . $path : $enterprise->logo;
+            $enterprise->logo = $request->hasFile('logo_empresa') ? '/storage/'.$path : $enterprise->logo;
             $enterprise->representante_legal = $request->representante_legal;
             $enterprise->save();
             if ($enterprise->save()) {

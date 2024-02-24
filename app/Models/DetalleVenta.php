@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class DetalleVenta extends Model
 {
     use HasFactory;
+
     protected $table = 'detalles_ventas';
+
     protected $fillable =
     [
         'descripcion',
@@ -17,14 +19,16 @@ class DetalleVenta extends Model
         'descuento_item',
         'subtotal',
         'producto_id',
-        'venta_id'
+        'venta_id',
     ];
 
-    public function producto(){
+    public function producto()
+    {
         return $this->belongsTo(CabeceraProducto::class);
     }
 
-    public function venta(){
+    public function venta()
+    {
         return $this->belongsTo(Venta::class);
     }
 }

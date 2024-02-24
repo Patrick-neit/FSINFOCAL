@@ -40,7 +40,7 @@ class CatalogosController extends Controller
         ];
         $pageConfigs = [
             'pageHeader' => true,
-            'isFabButton' => true
+            'isFabButton' => true,
         ];
         $motivoAnulaciones = ImpuestoMotivoAnulacion::all();
         $impuestosFechaHora = ImpuestoFechaHora::all();
@@ -60,6 +60,7 @@ class CatalogosController extends Controller
         $unidadMedida = ImpuestoUnidadMedida::all();
         $paises = ImpuestoListadoPais::all();
         $tipoHabitacion = ImpuestoTipoHabitacion::all();
+
         return view('sincronizacion.index', [
             'impuestosFechaHora' => $impuestosFechaHora,
             'motivoAnulaciones' => $motivoAnulaciones,

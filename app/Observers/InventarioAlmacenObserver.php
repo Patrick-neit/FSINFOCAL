@@ -9,7 +9,6 @@ class InventarioAlmacenObserver
     /**
      * Handle the InventarioAlmacen "created" event.
      *
-     * @param  \App\Models\InventarioAlmacen  $inventarioAlmacen
      * @return void
      */
     public function created(InventarioAlmacen $inventarioAlmacen)
@@ -20,7 +19,6 @@ class InventarioAlmacenObserver
     /**
      * Handle the InventarioAlmacen "updated" event.
      *
-     * @param  \App\Models\InventarioAlmacen  $inventarioAlmacen
      * @return void
      */
     public function updated(InventarioAlmacen $inventarioAlmacen)
@@ -31,7 +29,6 @@ class InventarioAlmacenObserver
     /**
      * Handle the InventarioAlmacen "deleted" event.
      *
-     * @param  \App\Models\InventarioAlmacen  $inventarioAlmacen
      * @return void
      */
     public function deleted(InventarioAlmacen $inventarioAlmacen)
@@ -42,7 +39,6 @@ class InventarioAlmacenObserver
     /**
      * Handle the InventarioAlmacen "restored" event.
      *
-     * @param  \App\Models\InventarioAlmacen  $inventarioAlmacen
      * @return void
      */
     public function restored(InventarioAlmacen $inventarioAlmacen)
@@ -53,7 +49,6 @@ class InventarioAlmacenObserver
     /**
      * Handle the InventarioAlmacen "force deleted" event.
      *
-     * @param  \App\Models\InventarioAlmacen  $inventarioAlmacen
      * @return void
      */
     public function forceDeleted(InventarioAlmacen $inventarioAlmacen)

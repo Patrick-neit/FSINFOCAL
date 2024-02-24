@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Marca;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class MarcaSeeder extends Seeder
@@ -17,12 +16,12 @@ class MarcaSeeder extends Seeder
     {
         Marca::create([
             'nombre_marca' => 'ACME',
-            'estado' => 1
+            'estado' => 1,
         ]);
 
         Marca::create([
             'nombre_marca' => 'DIGICORP',
-            'estado' => 1
+            'estado' => 1,
         ]);
     }
 }

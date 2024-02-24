@@ -15,6 +15,6 @@ class InventarioAlmacen extends Model
     public $fillable = [
         'almacen_id',
         'producto_id',
-        'stock_actual'
+        'stock_actual',
     ];
 }

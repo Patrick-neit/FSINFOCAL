@@ -22,14 +22,15 @@ class ProveedorController extends Controller
         ];
         $pageConfigs = [
             'pageHeader' => true,
-            'isFabButton' => true
+            'isFabButton' => true,
         ];
+
         return view('proveedor.index', [
             'proveedores' => Proveedor::with('sucursal')->get(),
             'sucursales' => Sucursal::all(),
             'tipoDocumentos' => ImpuestoDocumentoIdentidad::all(),
             'pageConfigs' => $pageConfigs,
-            'breadcrumbs' => $breadcrumbs
+            'breadcrumbs' => $breadcrumbs,
         ]);
     }
 
@@ -53,7 +54,7 @@ class ProveedorController extends Controller
      */
     public function store(Request $request)
     {
-        if (!empty($request->proveedor_id)) {
+        if (! empty($request->proveedor_id)) {
             return $this->update($request);
         }
         $proveedor = new Proveedor();
@@ -100,7 +101,6 @@ class ProveedorController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Proveedor  $proveedor
      * @return \Illuminate\Http\Response
      */

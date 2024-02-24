@@ -22,7 +22,7 @@ class CabeceraCompra extends Model
         'user_id',
         'metodo_pago_id',
         'nota',
-        'lote'
+        'lote',
     ];
 
     public function compra_detalles()

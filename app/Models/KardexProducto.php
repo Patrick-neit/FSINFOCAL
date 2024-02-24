@@ -28,6 +28,6 @@ class KardexProducto extends Model
         'promedio',
         'costo_total_saldo',
         'utilidad',
-        'usuario_id'
+        'usuario_id',
     ];
 }

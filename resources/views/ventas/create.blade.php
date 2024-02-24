@@ -2,7 +2,7 @@
 @extends('layouts.contentLayoutMaster')
 
 {{-- page title --}}
-@section('title','Gestion de Ventas')
+@section('title',$breadcrumbs[2]['name'])
 
 {{-- vendor styles --}}
 @section('vendor-style')
@@ -20,86 +20,92 @@
 <!-- users edit start -->
 <div class="section users-edit">
     <div class="card">
-        <div class="card-content">
-            <!-- <div class="card-body"> -->
-            <ul class="tabs mb-2 row">
-                <li class="tab">
-                    <a class="display-flex align-items-center active" id="account-tab" href="#account">
-                        <i class="material-icons mr-1">add_shopping_cart</i><span>Ventas</span>
-                    </a>
-                </li>
-            </ul>
-            <div class="divider mb-3"></div>
-            @csrfs
-            <div class="row">
-                <div class="col s12 m8 l6 input-field">
-                    <select class="select2 browser-default" name="cliente_id" id="cliente_id" onchange="getDataCliente()">
-                        <option selected value="x">Seleccione Cliente</option>
-                        @forelse ($clientes as $cliente)
-                        <option value="{{ $cliente->id }}">
-                            {{ $cliente->nombre_cliente }}</option>
-                        @empty
-                        <option value="">No hay opciones</option>
-                        @endforelse
-                    </select>
-                    <a class="waves-effect waves-light btn disabled" id="nit_cliente_visual">NIT: 12470538</a>
-                    <a class="waves-effect waves-light btn disabled" id="correo_cliente_visual" >Correo: patricio@rda-consult.com</a>
-                </div>
-                <div class="col s12 m8 l3 input-field">
-                    <select class="select2 browser-default" name="tipo_moneda" id="tipo_moneda_id">
-                        <option selected value="" disabled>Seleccione Moneda</option>
-                        @forelse ($tipo_moneda as $moneda)
-                        <option value="{{ $moneda->codigo_clasificador }}">
-                            {{ $moneda->descripcion }}</option>
-                        @empty
-                        <option value="">No hay opciones</option>
-                        @endforelse
-                    </select>
-                </div>
-                <div class="col s12 m8 l3 input-field">
-                    <select class="select2 browser-default" name="tipo_pago" id="tipo_pago_id" onchange="getTipoPagoInputs(this)">
-                        <option selected value="" disabled>Seleccione Tipo Pago</option>
-                        @forelse ($tipo_pago as $pago)
-                        <option value="{{ $pago->codigo_clasificador }}">
-                            {{ $pago->descripcion }}</option>
-                        @empty
-                        <option value="">No hay opciones</option>
-                        @endforelse
-                    </select>
-                </div>
-            </div>
-            <div class="row">
-                <div id="numero-tarjeta-input">
-                    <div class="input-field col s12 m2 offset-m8 l2">
-                        <h6>Numero de tarjeta:</h6>
+        <form id="formVenta">
+            <div class="card-content">
+                <h4 class="card-title">Datos Generales</h4>
+                <div class="divider mb-1 mt-1"></div>
+                <div class="row">
+                    <div class="col s12 m8 l6 input-field">
+                        <select class="select2 browser-default" name="cliente_id" id="cliente_id"
+                            onchange="getDataCliente()">
+                            <option selected value="x">Seleccione Cliente</option>
+                            @forelse ($clientes as $cliente)
+                            <option value="{{ $cliente->id }}">
+                                {{ $cliente->nombre_cliente }}</option>
+                            @empty
+                            <option value="">No hay opciones</option>
+                            @endforelse
+                        </select>
+                        <a class="waves-effect waves-light btn disabled" id="nit_cliente_visual">NIT: 12470538</a>
+                        <a class="waves-effect waves-light btn disabled" id="correo_cliente_visual">Correo:
+                            patricio@rda-consultores.com</a>
                     </div>
-                    <div class="input-field col s12 m2 offset-m8 l1">
-                        <input name="tarjeta_numero_1" type="number">
+                    <div class="col s12 m8 l3 input-field">
+                        <select class="select2 browser-default" name="tipo_moneda" id="tipo_moneda_id">
+                            <option selected value="" disabled>Seleccione Moneda</option>
+                            @forelse ($tipo_moneda as $moneda)
+                            <option value="{{ $moneda->codigo_clasificador }}">
+                                {{ $moneda->descripcion }}</option>
+                            @empty
+                            <option value="">No hay opciones</option>
+                            @endforelse
+                        </select>
                     </div>
-                    <div class="input-field col s12 m2 offset-m8 l1">
-                        <input name="tarjeta_numero_2" type="number">
-                    </div>
-                    <div class="input-field col s12 m2 offset-m8 l1">
-                        <input name="tarjeta_numero_3" type="number">
-                    </div>
-                    <div class="input-field col s12 m2 offset-m8 l1">
-                        <input name="tarjeta_numero_4" type="number">
+                    <div class="col s12 m8 l3 input-field">
+                        <select class="select2 browser-default" name="tipo_pago" id="tipo_pago_id"
+                            onchange="getTipoPagoInputs(this)">
+                            <option selected value="" disabled>Seleccione Tipo Pago</option>
+                            @forelse ($tipo_pago as $pago)
+                            <option value="{{ $pago->codigo_clasificador }}">
+                                {{ $pago->descripcion }}</option>
+                            @empty
+                            <option value="">No hay opciones</option>
+                            @endforelse
+                        </select>
                     </div>
                 </div>
+                <br>
+                <div class="row">
+                    <div id="numero-tarjeta-input">
+                        <div class="input-field col s12 m2 offset-m8 l2">
+                            <h6>Numero de tarjeta:</h6>
+                        </div>
+                        <div class="input-field col s12 m2 offset-m8 l1">
+                            <input name="tarjeta_numero_1" type="number">
+                        </div>
+                        <div class="input-field col s12 m2 offset-m8 l1">
+                            <input name="tarjeta_numero_2" type="number">
+                        </div>
+                        <div class="input-field col s12 m2 offset-m8 l1">
+                            <input name="tarjeta_numero_3" type="number">
+                        </div>
+                        <div class="input-field col s12 m2 offset-m8 l1">
+                            <input name="tarjeta_numero_4" type="number">
+                        </div>
+                    </div>
 
-                <div class="input-field col s12 m4 offset-m8 l4 offset-l2">
-                    <select class="select2 browser-default" name="search_pedido" id="search_pedido"
-                        onchange="cargarProducto()">
-                        <option selected value="" disabled>Buscar Producto</option>
-                        @forelse ($cabecera_productos as $cabecera_proveedor)
-                        <option value="{{ $cabecera_proveedor->id }}">{{ $cabecera_proveedor->nombre_producto }}
-                        </option>
-                        @empty
-                        <option value="">No hay opciones</option>
-                        @endforelse
-                    </select>
+                    <div class="input-field col s12 m4 offset-m8 l4 offset-l2">
+                        <select class="select2 browser-default" name="search_pedido" id="search_pedido"
+                            onchange="cargarProducto()">
+                            <option selected value="" disabled>Buscar Producto</option>
+                            @forelse ($cabecera_productos as $cabecera_proveedor)
+                            <option value="{{ $cabecera_proveedor->id }}">{{ $cabecera_proveedor->nombre_producto }}
+                            </option>
+                            @empty
+                            <option value="">No hay opciones</option>
+                            @endforelse
+                        </select>
+                    </div>
                 </div>
+                <h4 class="card-title">Detalle del Pedido</h4>
+                <div class="divider mb-1 mt-1"></div>
             </div>
+        </form>
+    </div>
+    <div class="card">
+        <div class="card-content">
+            @csrf
+
             {{-- <div id="modal1" class="modal modal-fixed-footer">
                 <div class="modal-content">
                     <h4>Modal Header</h4>
@@ -142,8 +148,9 @@
                                     step="0.00001" onchange='calcularSubTotal(this.name)'>
                             </td>
 
-                            <td><input id="inputDescuento{{ $item->id }}" name="{{ $item->id }}" value="{{ $item->desc }}"
-                                type="number" min="0.00000" step="0.00001" onchange="calcularSubTotal(this.name);">
+                            <td><input id="inputDescuento{{ $item->id }}" name="{{ $item->id }}"
+                                    value="{{ $item->desc }}" type="number" min="0.00000" step="0.00001"
+                                    onchange="calcularSubTotal(this.name);">
                             </td>
                             <td>
                                 <span id="subtotal{{ $item->id }}" name="{{ $item->id }}">
@@ -245,4 +252,3 @@
     /* let ruta_actualizar_cart = "{{ route('update.product.cart') }}" */
 </script>
 @endsection
-

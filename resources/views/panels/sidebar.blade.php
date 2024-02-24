@@ -504,6 +504,12 @@
     "i18n" => "Proveedores",
     "name" => "Proveedores",
     "slug" => "proveedores"
+    ),
+    array(
+    "url" => trim( parse_url(route('ventas.index'), PHP_URL_PATH) ,'/'),
+    "i18n" => "Ventas",
+    "name" => "Ventas",
+    "slug" => "Ventas"
     )
     )
     ),

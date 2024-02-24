@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\CabeceraProducto;
 use App\Models\CatalogoPrecioProducto;
 use App\Models\Cliente;
-use App\Models\ClienteTipoPrecio;
 use DB;
 use Illuminate\Http\Request;
 
@@ -14,13 +13,14 @@ class CatalogoPrecioProductoController extends Controller
     public function tipo_precio_index()
     {
         return view('catalogos_productos.tipo_precio_index', [
-            'clientes' => Cliente::where('estado', 1)->get()
+            'clientes' => Cliente::where('estado', 1)->get(),
         ]);
     }
 
     public function tipo_precio_create()
     {
         $clientes = Cliente::where('estado', 1)->get();
+
         return view('catalogos_productos.tipo_precio_create', compact('clientes'));
     }
 
@@ -35,24 +35,26 @@ class CatalogoPrecioProductoController extends Controller
             $cliente = Cliente::find($request->cliente_id);
             foreach ($request->productos as $producto) {
                 $catalogo = CatalogoPrecioProducto::where('cliente_id', $request->cliente_id)
-                    ->where('producto_id', $producto["producto_id"])
+                    ->where('producto_id', $producto['producto_id'])
                     ->first();
 
                 $catalogo->update([
-                    'tipo_precio_a' => $producto["precio_a"],
-                    'tipo_precio_b' => $producto["precio_b"],
-                    'tipo_precio_c' => $producto["precio_c"],
-                    'tipo_precio_d' => $producto["precio_d"],
-                    'tipo_precio_e' => $producto["precio_e"],
-                    'tipo_precio_f' => $producto["precio_f"],
-                    'tipo_precio_g' => $producto["precio_g"],
+                    'tipo_precio_a' => $producto['precio_a'],
+                    'tipo_precio_b' => $producto['precio_b'],
+                    'tipo_precio_c' => $producto['precio_c'],
+                    'tipo_precio_d' => $producto['precio_d'],
+                    'tipo_precio_e' => $producto['precio_e'],
+                    'tipo_precio_f' => $producto['precio_f'],
+                    'tipo_precio_g' => $producto['precio_g'],
                 ]);
             }
             $cliente->tipo_precio = $request->tipos_precios;
             $cliente->save();
+
             return responseJson('Actualizado', $cliente, 200);
         } catch (\Exception $e) {
             DB::rollBack();
+
             return responseJson('Server Error', [
                 'message' => $e->getMessage(),
             ], 500);
@@ -72,6 +74,7 @@ class CatalogoPrecioProductoController extends Controller
     {
         $clientes = Cliente::all();
         $productos = CabeceraProducto::all();
+
         return view('catalogos_productos.create', compact('clientes', 'productos'));
     }
 
@@ -94,14 +97,17 @@ class CatalogoPrecioProductoController extends Controller
                 $catalogo_precio->save();
             }
             DB::commit();
+
             return responseJson('Catalogo Precio Aasignado', $catalogo_precio, 200);
         } catch (\Exception $e) {
             DB::rollBack();
+
             return responseJson('Server Error', [
                 'message' => $e->getMessage(),
             ], 500);
         }
     }
+
     public function updateClientePrecio(Request $request)
     {
         try {

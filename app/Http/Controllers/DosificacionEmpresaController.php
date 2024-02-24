@@ -23,26 +23,27 @@ class DosificacionEmpresaController extends Controller
         ];
         $pageConfigs = [
             'pageHeader' => true,
-            'isFabButton' => true
+            'isFabButton' => true,
         ];
         // $dosificacionesEmpresas = DosificacionEmpresa::where('empresa_id', Auth::user()->empresas[0]->id)->get();
         $dosificacionesEmpresas = DosificacionEmpresa::with([
             'detalles_dosificaciones_empresas' => [
                 'documento_sector',
                 'tipo_factura_documento_sector',
-                'dosificacion_empresa.empresa'
-            ]
+                'dosificacion_empresa.empresa',
+            ],
         ])->get();
         $empresa = Empresa::where('id', Auth::user()->empresas[0]->id)->first();
         $documentoSectores = ImpuestoTipoDocumentoSector::all();
         $tiposFacturas = ImpuestoTipoFactura::all();
+
         return view('dosificaciones_empresas.index', [
             'dosificacionesEmpresas' => $dosificacionesEmpresas,
             'empresa' => $empresa,
             'documentoSectores' => $documentoSectores,
             'tiposFacturas' => $tiposFacturas,
             'pageConfigs' => $pageConfigs,
-            'breadcrumbs' => $breadcrumbs
+            'breadcrumbs' => $breadcrumbs,
         ]);
     }
 
@@ -51,7 +52,6 @@ class DosificacionEmpresaController extends Controller
         $empresa = Empresa::where('id', Auth::user()->empresas[0]->id)->first();
         $documentoSectores = ImpuestoTipoDocumentoSector::all();
         $tiposFacturas = ImpuestoTipoFactura::all();
-
 
         return view('dosificaciones_empresas.create', compact('empresa', 'documentoSectores', 'tiposFacturas'));
     }
@@ -110,11 +110,11 @@ class DosificacionEmpresaController extends Controller
             $tipoFacturaID = $request->tipo_factura_id;
             $tipoDocumentoSector = ImpuestoTipoDocumentoSector::where('codigo_clasificador', $documentoSectorID)->first();
             //TODO hacer select el tipoFactura
-            $tipoFacturaDocumentoSector =  ImpuestoTipoFactura::where('codigo_clasificador', $tipoFacturaID)->first();
+            $tipoFacturaDocumentoSector = ImpuestoTipoFactura::where('codigo_clasificador', $tipoFacturaID)->first();
 
             $documentoSector = ImpuestoDocumentoSector::where('codigo_documento_sector', $documentoSectorID)->first();
 
-            if ($tipoDocumentoSector == null  || $documentoSector == null) {
+            if ($tipoDocumentoSector == null || $documentoSector == null) {
                 return responseJson('No se pudo Obtener Informacion Impuesto', null, 400);
             }
 
@@ -130,7 +130,7 @@ class DosificacionEmpresaController extends Controller
 
             session()->get('dosificaciones_sucursales_detalle');
             $verificarDSAgregado = $this->verificarDocumentoSectorAgregado($documentoSectorID);
-            if (!$verificarDSAgregado) { //? False = No existe ese DS en la session
+            if (! $verificarDSAgregado) { //? False = No existe ese DS en la session
                 session()->push('dosificaciones_sucursales_detalle', $dataDocumentoSector);
 
                 return responseJson('Data DS Encountered', session()->get('dosificaciones_sucursales_detalle'), 200);
@@ -157,7 +157,7 @@ class DosificacionEmpresaController extends Controller
 
     public function verificarDocumentoSectorAgregado($documentoSectorID)
     {
-        if (!empty(session()->get('dosificaciones_sucursales_detalle'))) {
+        if (! empty(session()->get('dosificaciones_sucursales_detalle'))) {
             foreach (session('dosificaciones_sucursales_detalle') as $key => $value) {
                 if ($value['codigo_clasificador_ds'] == $documentoSectorID) {
                     return true;

@@ -9,7 +9,6 @@ class DetalleProductoObserver
     /**
      * Handle the DetalleProducto "created" event.
      *
-     * @param  \App\Models\DetalleProducto  $detalleProducto
      * @return void
      */
     public function created(DetalleProducto $detalleProducto)
@@ -20,7 +19,6 @@ class DetalleProductoObserver
     /**
      * Handle the DetalleProducto "updated" event.
      *
-     * @param  \App\Models\DetalleProducto  $detalleProducto
      * @return void
      */
     public function updated(DetalleProducto $detalleProducto)
@@ -31,7 +29,6 @@ class DetalleProductoObserver
     /**
      * Handle the DetalleProducto "deleted" event.
      *
-     * @param  \App\Models\DetalleProducto  $detalleProducto
      * @return void
      */
     public function deleted(DetalleProducto $detalleProducto)
@@ -42,7 +39,6 @@ class DetalleProductoObserver
     /**
      * Handle the DetalleProducto "restored" event.
      *
-     * @param  \App\Models\DetalleProducto  $detalleProducto
      * @return void
      */
     public function restored(DetalleProducto $detalleProducto)
@@ -53,7 +49,6 @@ class DetalleProductoObserver
     /**
      * Handle the DetalleProducto "force deleted" event.
      *
-     * @param  \App\Models\DetalleProducto  $detalleProducto
      * @return void
      */
     public function forceDeleted(DetalleProducto $detalleProducto)

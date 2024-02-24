@@ -20,14 +20,14 @@ class FamiliaController extends Controller
         ];
         $pageConfigs = [
             'pageHeader' => true,
-            'isFabButton' => true
+            'isFabButton' => true,
         ];
         $familias = Familia::all();
 
         return view('familia.index', [
             'familias' => $familias,
             'pageConfigs' => $pageConfigs,
-            'breadcrumbs' => $breadcrumbs
+            'breadcrumbs' => $breadcrumbs,
         ]);
     }
 
@@ -44,7 +44,7 @@ class FamiliaController extends Controller
     public function store(Request $request)
     {
         try {
-            if (!empty($request->familia_id)) {
+            if (! empty($request->familia_id)) {
                 return $this->update($request);
             }
             $familia = new Familia();
@@ -74,7 +74,6 @@ class FamiliaController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Familia  $familia
      * @return \Illuminate\Http\Response
      */

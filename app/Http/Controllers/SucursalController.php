@@ -30,7 +30,7 @@ class SucursalController extends Controller
         ];
         $pageConfigs = [
             'pageHeader' => true,
-            'isFabButton' => true
+            'isFabButton' => true,
         ];
         // $branches = Sucursal::where('empresa_id', Auth::user()->empresas[0]->id)->get();
         $branches = Sucursal::all();
@@ -40,7 +40,7 @@ class SucursalController extends Controller
             'branches' => $branches,
             'empresas' => $empresas,
             'pageConfigs' => $pageConfigs,
-            'breadcrumbs' => $breadcrumbs
+            'breadcrumbs' => $breadcrumbs,
         ]);
     }
 
@@ -63,8 +63,8 @@ class SucursalController extends Controller
     public function store(Request $request)
     {
         try {
-            if (!empty($request->sucursal_id)) {
-                return $this->update($request,$request->sucursal_id);
+            if (! empty($request->sucursal_id)) {
+                return $this->update($request, $request->sucursal_id);
             }
             $branch = new Sucursal();
             $branch->nombre_sucursal = $request->nombre_sucursal;

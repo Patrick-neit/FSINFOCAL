@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class ClienteTipoPrecio extends Model
 {
     use HasFactory;
+
     protected $table = 'clientes_tipos_precios';
+
     protected $fillable =
     [
         'tipo_precio_a',
@@ -20,6 +22,7 @@ class ClienteTipoPrecio extends Model
         'tipo_precio_g',
         'cliente_id',
     ];
+
     public function cliente()
     {
         return $this->belongsTo(Cliente::class);

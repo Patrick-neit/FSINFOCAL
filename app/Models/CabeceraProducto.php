@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class CabeceraProducto extends Model
 {
@@ -31,7 +31,7 @@ class CabeceraProducto extends Model
         'caracteristicas',
         'stock_minimo',
         'stock_actual',
-        'estado'
+        'estado',
     ];
 
     protected function estado(): Attribute
@@ -56,7 +56,8 @@ class CabeceraProducto extends Model
         return $this->belongsToMany(Almacen::class, 'inventario_almacenes', 'producto_id', 'almacen_id');
     }
 
-    public function catalogos_precios_productos(){
+    public function catalogos_precios_productos()
+    {
         return $this->belongsTo(CatalogoPrecioProducto::class);
     }
 

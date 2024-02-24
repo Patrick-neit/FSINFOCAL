@@ -21,15 +21,16 @@ class SubFamiliaController extends Controller
         ];
         $pageConfigs = [
             'pageHeader' => true,
-            'isFabButton' => true
+            'isFabButton' => true,
         ];
         $familias = Familia::all();
         $sub_familias = SubFamilia::all();
+
         return view('sub_familia.index', [
             'sub_familias' => $sub_familias,
             'familias' => $familias,
             'pageConfigs' => $pageConfigs,
-            'breadcrumbs' => $breadcrumbs
+            'breadcrumbs' => $breadcrumbs,
         ]);
     }
 
@@ -53,7 +54,7 @@ class SubFamiliaController extends Controller
     public function store(Request $request)
     {
         try {
-            if (!empty($request->sub_familia_id)) {
+            if (! empty($request->sub_familia_id)) {
                 return $this->update($request);
             }
             $subFamilia = new SubFamilia();
@@ -95,7 +96,6 @@ class SubFamiliaController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\SubFamilia  $subFamilia
      * @return \Illuminate\Http\Response
      */

@@ -14,7 +14,6 @@ use App\Models\ImpuestoUnidadMedida;
 use App\Models\InventarioAlmacen;
 use App\Models\KardexProducto;
 use App\Models\Marca;
-use App\Models\Pedido;
 use App\Models\SubFamilia;
 use Carbon\Carbon;
 use DB;
@@ -36,8 +35,9 @@ class ProductoController extends Controller
         ];
         $pageConfigs = [
             'pageHeader' => true,
-            'isFabButton' => true
+            'isFabButton' => true,
         ];
+
         return view('productos.index', [
             'pageConfigs' => $pageConfigs,
             'breadcrumbs' => $breadcrumbs,
@@ -59,8 +59,9 @@ class ProductoController extends Controller
         ];
         $pageConfigs = [
             'pageHeader' => true,
-            'isFabButton' => true
+            'isFabButton' => true,
         ];
+
         return view('productos.create', [
             'pageConfigs' => $pageConfigs,
             'breadcrumbs' => $breadcrumbs,
@@ -71,7 +72,7 @@ class ProductoController extends Controller
             'marcas' => Marca::all(),
             'categorias' => Categoria::all(),
             'sub_familias' => SubFamilia::all(),
-            'produto_servicios' => ImpuestoProductoServicio::all()
+            'produto_servicios' => ImpuestoProductoServicio::all(),
         ]);
     }
 
@@ -84,7 +85,7 @@ class ProductoController extends Controller
     public function store(CabeceraProductoStoreRequest $request)
     {
         /* try { */
-        if (!empty($request->producto_id)) {
+        if (! empty($request->producto_id)) {
             return $this->update($request);
         }
 
@@ -94,16 +95,16 @@ class ProductoController extends Controller
         $kardexProducto = new KardexProducto();
 
         //aign valores de productos
-        $cabeceraProducto->codigo_actividad =  $request->dosificacion;
+        $cabeceraProducto->codigo_actividad = $request->dosificacion;
 
         $cabeceraProducto->unidad_medida_id = $request->unidad_medida;
         $cabeceraProducto->marca_id = $request->marca_id;
         $cabeceraProducto->categoria_id = $request->categoria;
-        $cabeceraProducto->tipo_id =  $request->tipo_producto;
-        $cabeceraProducto->sub_familia_id =  $request->sub_familia;
-        $cabeceraProducto->codigo_producto =  $request->codigo_producto;
+        $cabeceraProducto->tipo_id = $request->tipo_producto;
+        $cabeceraProducto->sub_familia_id = $request->sub_familia;
+        $cabeceraProducto->codigo_producto = $request->codigo_producto;
         $cabeceraProducto->nombre_producto = $request->nombre_producto;
-        $cabeceraProducto->codigo_producto_impuestos =  $request->homologacion;
+        $cabeceraProducto->codigo_producto_impuestos = $request->homologacion;
         $cabeceraProducto->modelo = $request->modelo;
         $cabeceraProducto->numero_serie = $request->numero_serie;
         $cabeceraProducto->numero_imei = $request->numero_imei;
@@ -152,6 +153,7 @@ class ProductoController extends Controller
             $kardexProducto->save();
         }
         DB::commit();
+
         return responseJson('Producto Guardado.', $cabeceraProducto, 200);
         /* } catch (\Exception $e) {
             DB::rollBack();
@@ -184,7 +186,7 @@ class ProductoController extends Controller
         ];
         $pageConfigs = [
             'pageHeader' => true,
-            'isFabButton' => true
+            'isFabButton' => true,
         ];
 
         return view('productos.create', [
@@ -199,14 +201,13 @@ class ProductoController extends Controller
             'marcas' => Marca::all(),
             'categorias' => Categoria::all(),
             'sub_familias' => SubFamilia::all(),
-            'produto_servicios' => ImpuestoProductoServicio::all()
+            'produto_servicios' => ImpuestoProductoServicio::all(),
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -247,6 +248,7 @@ class ProductoController extends Controller
             $detalleProducto->precio_paquete = $request->precio_paquete;
             $detalleProducto->precio_venta_dolar = $request->precio_dolar;
             $detalleProducto->save();
+
             return responseJson('Producto Actualizado.', $cabeceraProducto, 200);
         } catch (\Exception $e) {
             return responseJson('Server Error', [
@@ -286,7 +288,7 @@ class ProductoController extends Controller
     {
         $impuestoProductosServicios = ImpuestoProductoServicio::where('codigo_actividad', $request->dosificacion_id)->get();
 
-        if (!isset($impuestoProductosServicios)) {
+        if (! isset($impuestoProductosServicios)) {
             return responseJson('Fallo al obtener Productos Servicios', $impuestoProductosServicios, 400);
         }
 
@@ -334,12 +336,11 @@ class ProductoController extends Controller
 
         $productoFound->bandera = 0;
 
-
         if (isset($productoFound) && LaraCart::find(['id' => $productoFound->codigo_producto]) == null) {
             LaraCart::add(
                 $productoFound->codigo_producto,
                 $productoFound->nombre_producto,
-                "1.00000",
+                '1.00000',
                 $productoFound->detalle_producto->precio_compra,
                 [
                     'subtotal' => $productoFound->detalle_producto->precio_compra * 1,

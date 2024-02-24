@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\CabeceraProducto;
 use App\Models\DetallePedido;
 use App\Models\ImpuestoUnidadMedida;
 use App\Models\Pedido;
 use App\Models\Proveedor;
 use Auth;
-use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use LukePOLO\LaraCart\Facades\LaraCart;
 
@@ -29,14 +28,15 @@ class PedidoController extends Controller
         ];
         $pageConfigs = [
             'pageHeader' => true,
-            'isFabButton' => true
+            'isFabButton' => true,
         ];
+
         return view('pedidos.index', [
             'pedidos' => Pedido::with('detalle_pedido')->get(),
             'proveedores' => Proveedor::all(),
             'cabecera_productos' => CabeceraProducto::all(),
             'pageConfigs' => $pageConfigs,
-            'breadcrumbs' => $breadcrumbs
+            'breadcrumbs' => $breadcrumbs,
         ]);
     }
 
@@ -54,25 +54,25 @@ class PedidoController extends Controller
         ];
         $pageConfigs = [
             'pageHeader' => true,
-            'isFabButton' => true
+            'isFabButton' => true,
         ];
+
         return view('pedidos.create', [
             'proveedores' => Proveedor::all(),
             'cabecera_productos' => CabeceraProducto::all(),
             'pageConfigs' => $pageConfigs,
-            'breadcrumbs' => $breadcrumbs
+            'breadcrumbs' => $breadcrumbs,
         ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        if (!empty($request->pedido_id)) {
+        if (! empty($request->pedido_id)) {
             return $this->update($request);
         }
         $pedido = new Pedido();
@@ -96,6 +96,7 @@ class PedidoController extends Controller
             $detalle_pedido->save();
         }
         LaraCart::destroyCart();
+
         return responseJson('Guardado', $pedido, 200);
     }
 
@@ -124,7 +125,7 @@ class PedidoController extends Controller
         ];
         $pageConfigs = [
             'pageHeader' => true,
-            'isFabButton' => true
+            'isFabButton' => true,
         ];
         $pedido = Pedido::find($id)->load('detalle_pedido', 'detalle_pedido.producto', 'detalle_pedido.producto.detalle_producto');
 
@@ -169,7 +170,7 @@ class PedidoController extends Controller
             'hora' => Carbon::createFromDate($request->hora)->format('H:m:s'),
             'proveedor_id' => $request->proveedor_id,
             'usuario_id' => auth()->user()->id,
-            'total' => number_format((float)\LukePOLO\LaraCart\Facades\LaraCart::subTotal(false), 5, '.', '')
+            'total' => number_format((float) \LukePOLO\LaraCart\Facades\LaraCart::subTotal(false), 5, '.', ''),
         ]);
 
         $copia_detalle = $pedido->detalle_pedido;
@@ -187,7 +188,7 @@ class PedidoController extends Controller
 
                     $detalle_pedido = DetallePedido::where([
                         'producto_id' => $producto->id,
-                        'pedido_id' => $pedido->id
+                        'pedido_id' => $pedido->id,
                     ])->first();
 
                     if (empty($detalle_pedido)) {
@@ -217,7 +218,7 @@ class PedidoController extends Controller
 
                 $detalle = DetallePedido::where([
                     'producto_id' => $producto->id,
-                    'pedido_id' => $pedido->id
+                    'pedido_id' => $pedido->id,
                 ])->first();
 
                 if (empty($detalle)) {
@@ -240,6 +241,7 @@ class PedidoController extends Controller
             }
         }
         LaraCart::destroyCart();
+
         return responseJson('Actualizado', $pedido, 200);
     }
 

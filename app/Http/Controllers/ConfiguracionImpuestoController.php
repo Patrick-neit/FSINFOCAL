@@ -18,16 +18,17 @@ class ConfiguracionImpuestoController extends Controller
         ];
         $pageConfigs = [
             'pageHeader' => true,
-            'isFabButton' => true
+            'isFabButton' => true,
         ];
         // $taxesConfigurations = ConfiguracionImpuesto::where('empresa_id', Auth::user()->empresas[0]->id)->get();
         $taxesConfigurations = ConfiguracionImpuesto::all();
         $enterprises = Empresa::all();
+
         return view('configuraciones_impuestos.index', [
             'taxesConfigurations' => $taxesConfigurations,
             'enterprises' => $enterprises,
             'pageConfigs' => $pageConfigs,
-            'breadcrumbs' => $breadcrumbs
+            'breadcrumbs' => $breadcrumbs,
         ]);
     }
 
@@ -49,7 +50,7 @@ class ConfiguracionImpuestoController extends Controller
     public function store(StoreConfImpRequest $request)
     {
         try {
-            if (!empty($request->id_conf)) {
+            if (! empty($request->id_conf)) {
                 return $this->update($request, $request->id_config);
             }
             $taxesConfiguration = new ConfiguracionImpuesto();

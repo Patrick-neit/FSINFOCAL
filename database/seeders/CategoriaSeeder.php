@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Categoria;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class CategoriaSeeder extends Seeder
@@ -17,12 +16,12 @@ class CategoriaSeeder extends Seeder
     {
         Categoria::create([
             'nombre_categoria' => 'LATAS',
-            'estado' => 1
+            'estado' => 1,
         ]);
 
         Categoria::create([
             'nombre_categoria' => 'BOLSAS',
-            'estado' => 1
+            'estado' => 1,
         ]);
     }
 }

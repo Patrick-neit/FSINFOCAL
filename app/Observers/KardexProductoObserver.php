@@ -9,7 +9,6 @@ class KardexProductoObserver
     /**
      * Handle the KardexProducto "created" event.
      *
-     * @param  \App\Models\KardexProducto  $kardexProducto
      * @return void
      */
     public function created(KardexProducto $kardexProducto)
@@ -20,7 +19,6 @@ class KardexProductoObserver
     /**
      * Handle the KardexProducto "updated" event.
      *
-     * @param  \App\Models\KardexProducto  $kardexProducto
      * @return void
      */
     public function updated(KardexProducto $kardexProducto)
@@ -31,7 +29,6 @@ class KardexProductoObserver
     /**
      * Handle the KardexProducto "deleted" event.
      *
-     * @param  \App\Models\KardexProducto  $kardexProducto
      * @return void
      */
     public function deleted(KardexProducto $kardexProducto)
@@ -42,7 +39,6 @@ class KardexProductoObserver
     /**
      * Handle the KardexProducto "restored" event.
      *
-     * @param  \App\Models\KardexProducto  $kardexProducto
      * @return void
      */
     public function restored(KardexProducto $kardexProducto)
@@ -53,7 +49,6 @@ class KardexProductoObserver
     /**
      * Handle the KardexProducto "force deleted" event.
      *
-     * @param  \App\Models\KardexProducto  $kardexProducto
      * @return void
      */
     public function forceDeleted(KardexProducto $kardexProducto)

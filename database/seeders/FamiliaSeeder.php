@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Familia;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class FamiliaSeeder extends Seeder
@@ -17,12 +16,12 @@ class FamiliaSeeder extends Seeder
     {
         Familia::create([
             'nombre_familia' => 'Yogurt',
-            'estado' => 1
+            'estado' => 1,
         ]);
 
         Familia::create([
             'nombre_familia' => 'Leches',
-            'estado' => 1
+            'estado' => 1,
         ]);
     }
 }

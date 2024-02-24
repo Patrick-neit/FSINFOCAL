@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cliente;
-use App\Models\ClienteTipoPrecio;
 use App\Models\ImpuestoDocumentoIdentidad;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 use DB;
+use Illuminate\Http\Request;
 
 class ClienteController extends Controller
 {
@@ -24,13 +23,14 @@ class ClienteController extends Controller
         ];
         $pageConfigs = [
             'pageHeader' => true,
-            'isFabButton' => true
+            'isFabButton' => true,
         ];
+
         return view('cliente.index', [
             'clientes' => Cliente::all(),
             'documentos' => ImpuestoDocumentoIdentidad::all(),
             'pageConfigs' => $pageConfigs,
-            'breadcrumbs' => $breadcrumbs
+            'breadcrumbs' => $breadcrumbs,
         ]);
     }
 
@@ -54,7 +54,7 @@ class ClienteController extends Controller
     public function store(Request $request)
     {
         try {
-            if (!empty($request->cliente_id)) {
+            if (! empty($request->cliente_id)) {
                 return $this->update($request);
             }
             DB::beginTransaction();
@@ -76,10 +76,12 @@ class ClienteController extends Controller
 
                 selectTipoPrecio($request->tipos_precios, $cliente->id);
                 DB::commit();
+
                 return responseJson('Cliente Guardado', $cliente, 200);
             }
         } catch (\Exception $e) {
             DB::rollBack();
+
             return responseJson('Server Error', [
                 'message' => $e->getMessage(),
                 'code' => $e->getCode(),
@@ -114,7 +116,6 @@ class ClienteController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Cliente  $cliente
      * @return \Illuminate\Http\Response
      */

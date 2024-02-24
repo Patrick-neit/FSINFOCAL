@@ -18,19 +18,21 @@ class AlmacenController extends Controller
         ];
         $pageConfigs = [
             'pageHeader' => true,
-            'isFabButton' => true
+            'isFabButton' => true,
         ];
         $almacenes = Almacen::all();
         $encargados = User::all();
         $sucursales = Sucursal::all();
+
         return view('almacenes.index', [
             'almacenes' => $almacenes,
             'encargados' => $encargados,
             'sucursales' => $sucursales,
             'pageConfigs' => $pageConfigs,
-            'breadcrumbs' => $breadcrumbs
+            'breadcrumbs' => $breadcrumbs,
         ]);
     }
+
     public function create()
     {
         $empresaUserLog = Auth::user()->empresas()->first();
@@ -39,6 +41,7 @@ class AlmacenController extends Controller
         // })->get();
         $encargados = User::all();
         $sucursales = Sucursal::where('empresa_id', $empresaUserLog->id)->get();
+
         return view('almacenes.create', compact('sucursales', 'encargados'));
     }
 
@@ -54,6 +57,7 @@ class AlmacenController extends Controller
             if ($almacen->save()) {
                 return responseJson('Almacen Guardado Exitosamente', $almacen, 200);
             }
+
             return responseJson('Algo salio Mal', $almacen, 400);
         } catch (\Exception $e) {
             return responseJson('Server Error', [

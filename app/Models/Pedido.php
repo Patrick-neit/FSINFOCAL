@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class Pedido extends Model
 {
@@ -20,7 +20,7 @@ class Pedido extends Model
         'aprobado',
         'usuario_id',
         'total',
-        'nota'
+        'nota',
     ];
 
     protected function aprobado(): Attribute

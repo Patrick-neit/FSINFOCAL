@@ -20,7 +20,7 @@ class DetalleProducto extends Model
         'precio_unitario3',
         'precio_unitario4',
         'precio_paquete',
-        'precio_venta_dolar'
+        'precio_venta_dolar',
     ];
 
     public function cabecera_producto()

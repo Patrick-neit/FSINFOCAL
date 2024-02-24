@@ -15,14 +15,14 @@ class MarcaController extends Controller
         ];
         $pageConfigs = [
             'pageHeader' => true,
-            'isFabButton' => true
+            'isFabButton' => true,
         ];
         $marcas = Marca::where('estado', 1)->get();
 
         return view('marca.index', [
             'marcas' => $marcas,
             'pageConfigs' => $pageConfigs,
-            'breadcrumbs' => $breadcrumbs
+            'breadcrumbs' => $breadcrumbs,
         ]);
     }
 
@@ -41,7 +41,7 @@ class MarcaController extends Controller
     public function store(Request $request)
     {
         try {
-            if (!empty($request->marca_id)) {
+            if (! empty($request->marca_id)) {
                 return $this->update($request, $request->marca_id);
             }
             $marca = new Marca();

@@ -20,13 +20,14 @@ class CategoriaController extends Controller
         ];
         $pageConfigs = [
             'pageHeader' => true,
-            'isFabButton' => true
+            'isFabButton' => true,
         ];
         $categorias = Categoria::all();
+
         return view('categoria.index', [
             'categorias' => $categorias,
             'pageConfigs' => $pageConfigs,
-            'breadcrumbs' => $breadcrumbs
+            'breadcrumbs' => $breadcrumbs,
         ]);
     }
 
@@ -48,7 +49,7 @@ class CategoriaController extends Controller
     public function store(Request $request)
     {
         try {
-            if (!empty($request->categoria_id)) {
+            if (! empty($request->categoria_id)) {
                 return $this->update($request);
             }
             $categoria = new Categoria();
@@ -91,7 +92,6 @@ class CategoriaController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Categoria  $categoria
      * @return \Illuminate\Http\Response
      */

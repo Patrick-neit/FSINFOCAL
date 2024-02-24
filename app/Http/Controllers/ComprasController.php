@@ -3,14 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\CabeceraCompra;
-use App\Models\DetalleCompra;
 use App\Models\DetallePedido;
 use App\Models\ImpuestoMetodoPago;
 use App\Models\KardexProducto;
 use App\Models\Pedido;
 use App\Models\Proveedor;
-use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 class ComprasController extends Controller
 {
@@ -24,6 +23,7 @@ class ComprasController extends Controller
             'detalle_pedido' => DetallePedido::with('producto', 'pedido')->where('pedido_id', $pedido->id)->get(),
         ]);
     }
+
     public function aprobar_pedido(Request $request)
     {
         $pedido = Pedido::find($request->pedido_id);
@@ -37,7 +37,7 @@ class ComprasController extends Controller
             'user_id' => auth()->user()->id,
             'metodo_pago_id' => $request->metodo_pago,
             'nota' => $pedido->nota,
-            'lote' => $request->lote
+            'lote' => $request->lote,
         ]);
         $detalle_pedido = DetallePedido::where('pedido_id', $pedido->id)->get();
         $i = 0;
@@ -48,7 +48,7 @@ class ComprasController extends Controller
                 'cantidad' => $detalle->cantidad,
                 'precio_unitario' => $detalle->precio_unitario,
                 'sub_total' => $detalle->sub_total,
-                'fecha_vencimiento' => Carbon::createFromDate($request->productos[$i]["fecha_vencimiento"])->format('Y-m-d'),
+                'fecha_vencimiento' => Carbon::createFromDate($request->productos[$i]['fecha_vencimiento'])->format('Y-m-d'),
             ]);
             $kardex_nuevo = new KardexProducto();
             $kardex_producto = KardexProducto::where('producto_id', $detalle->producto_id)->latest()->first();
@@ -73,7 +73,7 @@ class ComprasController extends Controller
             $i++;
         }
         $pedido->update([
-            'aprobado' => 1
+            'aprobado' => 1,
         ]);
 
         return responseJson('Aprobado', $cabecera_compra, 200);

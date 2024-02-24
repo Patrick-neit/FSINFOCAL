@@ -26,7 +26,7 @@ class UserController extends Controller
             // $user->fecha_nacimiento = Carbon::parse($request->fecha_nacimiento)->format('Y-m-d'); //$request->fecha_nacimiento;
             $user->fecha_nacimiento = Carbon::createFromFormat('d/m/Y', $request->fecha_nacimiento)->format('Y-m-d'); //$request->fecha_nacimiento;
             $user->departamento_id = $request->departamento_id;
-            $user->fotografia = '/storage/' . $path;
+            $user->fotografia = '/storage/'.$path;
             //$user->estado = $request->estado;
             $user->save();
             if ($user->save()) {
@@ -54,7 +54,7 @@ class UserController extends Controller
             $user->ci = $request->ci;
             $user->fecha_nacimiento = Carbon::parse($request->fecha_nacimiento)->format('Y-m-d'); //$request->fecha_nacimiento;
             // $user->departamento_id = $request->departamento_id;
-            $user->fotografia = $request->hasFile('avatar') ? '/storage/' . $path : $user->fotografia;
+            $user->fotografia = $request->hasFile('avatar') ? '/storage/'.$path : $user->fotografia;
             //$user->estado = $request->estado;
             $user->save();
             if ($user->save()) {
@@ -115,14 +115,14 @@ class UserController extends Controller
         ];
         $pageConfigs = [
             'pageHeader' => true,
-            'isFabButton' => true
+            'isFabButton' => true,
         ];
         $users = User::withoutBanned()->get();
 
         return view('users.index', [
             'users' => $users,
             'pageConfigs' => $pageConfigs,
-            'breadcrumbs' => $breadcrumbs
+            'breadcrumbs' => $breadcrumbs,
         ]);
     }
 
