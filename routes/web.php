@@ -344,10 +344,10 @@ Route::group([
     'controller' => VentasController::class,
 ], function () {
     Route::get('index', 'index')->name('ventas.index');
-    Route::get('create', 'create')->name('categoria.create');
-    Route::get('/edit/{id}', 'edit')->name('categoria.edit');
-    Route::post('store', 'store')->name('categoria.store');
-    Route::delete('destroy', 'destroy')->name('categoria.destroy');
+    Route::get('create', 'create')->name('ventas.create');
+    Route::get('/edit/{id}', 'edit')->name('ventas.edit');
+    Route::post('store', 'store')->name('ventas.store');
+    Route::delete('destroy', 'destroy')->name('ventas.destroy');
 
     Route::post('getDataCliente', 'getDataCliente')->name('ventas.getDataCliente');
 });
@@ -408,6 +408,7 @@ Route::group(
         'controller' => ProductoController::class,
     ],
     function () {
+        Route::get('/get_sub_total_cart', 'getSubTotalCart')->name('producto.get.subtotalcart');
         Route::get('index', 'index')->name('producto.index');
         Route::post('producto/get/name', 'getProductoNombre')->name('producto.get.name');
         Route::post('producto/destroyProducto', 'destroyProducto')->name('producto.destroyProducto');

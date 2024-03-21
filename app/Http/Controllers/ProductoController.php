@@ -18,15 +18,23 @@ use App\Models\SubFamilia;
 use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;
+use LukePOLO\LaraCart\Contracts\CouponContract;
 use LukePOLO\LaraCart\Facades\LaraCart;
+use LukePOLO\LaraCart\Coupons\Fixed;
+use LukePOLO\LaraCart\Traits\CouponTrait;
 
 class ProductoController extends Controller
 {
+    use CouponTrait;
+    private $descuento;
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+    /* public function __construct() {
+        $this->descuento = new CouponTrait();
+    } */
     public function index()
     {
         $breadcrumbs = [
@@ -297,17 +305,21 @@ class ProductoController extends Controller
 
     public function updateProductCart(Request $request)
     {
+
         $product = LaraCart::find(['id' => $request->codigo_producto]);
+
 
         if (LaraCart::find(['id' => $request->codigo_producto]) == null) {
             return responseJson('No se encontro el producto', $product, 400);
         }
 
-        $product->qty = $request->cantidad;
-        $product->price = $request->precio_unitario;
-        $product->subtotal = $request->subtotal;
-
-        return responseJson('Producto', LaraCart::subTotal(false), 200);
+        LaraCart::updateItem($product->getHash(), 'qty', (int)$request->cantidad);
+        LaraCart::updateItem($product->getHash(), 'price', $request->precio_unitario);
+        LaraCart::updateItem($product->getHash(), 'descuento_item', $request->descuento);
+        LaraCart::updateItem($product->getHash(), 'subtotal', $request->subtotal);
+        LaraCart::setAttribute('subTotal',array_sum(collect(Laracart::getItems())->pluck('subtotal')->toArray()));
+        //dd(LaraCart::getItems());
+        return responseJson('Producto', array_sum(collect(Laracart::getItems())->pluck('subtotal')->toArray()), 200);
     }
 
     public function getAllDetalle()
@@ -330,6 +342,7 @@ class ProductoController extends Controller
 
     public function getProductoNombre(Request $request)
     {
+        //dd($request->all());
         $productoFound = CabeceraProducto::find($request->search)->load('detalle_producto');
 
         $productoFound->unidad_medida_id = ImpuestoUnidadMedida::where('codigo_clasificador', $productoFound->unidad_medida_id)->first()->descripcion;
@@ -337,12 +350,14 @@ class ProductoController extends Controller
         $productoFound->bandera = 0;
 
         if (isset($productoFound) && LaraCart::find(['id' => $productoFound->codigo_producto]) == null) {
+            //dd($productoFound);
             LaraCart::add(
                 $productoFound->codigo_producto,
                 $productoFound->nombre_producto,
-                '1.00000',
+                $request->cantidad ?? 1,
                 $productoFound->detalle_producto->precio_compra,
                 [
+                    'descuento_item' => isset($request->descuento) ? $request->descuento : 0,
                     'subtotal' => $productoFound->detalle_producto->precio_compra * 1,
                     'unidad_medida_literal' => $productoFound->unidad_medida_id,
                 ],
@@ -350,9 +365,18 @@ class ProductoController extends Controller
                 false
             );
             $productoFound->bandera = 1;
+
+            return responseJson('Producto', $productoFound, 200);
+        } else {
+            return responseJson('No se encontro el producto', [], 400);
         }
 
-        return responseJson('Producto', $productoFound, 200);
+    }
+
+    public function getSubTotalCart() {
+         $subTotal = number_format((float) array_sum(collect(\LukePOLO\LaraCart\Facades\LaraCart::getItems())->pluck('subtotal')->toArray()), 5, '.', '');
+
+         return responseJson('Subtotal', $subTotal, 200);
     }
 
     public function destroyProducto(Request $request)

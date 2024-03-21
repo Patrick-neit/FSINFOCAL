@@ -15,16 +15,18 @@ return new class extends Migration
     {
         Schema::create('detalles_ventas', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('producto_id');
+            $table->unsignedBigInteger('venta_id');
+            $table->string('actividad_economica');
             $table->string('descripcion');
             $table->decimal('cantidad', 18, 4);
             $table->decimal('precio', 18, 4);
             $table->decimal('descuento_item', 18, 4);
             $table->decimal('subtotal', 18, 4);
-
-            $table->unsignedBigInteger('producto_id');
-            $table->unsignedBigInteger('venta_id');
-
+            $table->integer('codigo_habitacion')->nullable();
+            $table->json('data_json')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

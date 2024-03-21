@@ -100,16 +100,6 @@
                     </select>
                 </div>
             </div>
-            {{-- <div id="modal1" class="modal modal-fixed-footer">
-                <div class="modal-content">
-                    <h4>Modal Header</h4>
-                    <p>A bunch of text</p>
-                </div>
-                <div class="modal-footer">
-                    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cerrar</a>
-                    <a class="waves-effect waves-green btn-flat" onclick="cambiarTabla()">Agree</a>
-                </div>
-            </div> --}}
             <div class="row">
                 <table id="tableDetalleProducto" class="striped centered">
                     <thead>
