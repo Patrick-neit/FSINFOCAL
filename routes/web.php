@@ -21,6 +21,7 @@ use App\Http\Controllers\EjemploController;
 use App\Http\Controllers\ExtraComponentsController;
 use App\Http\Controllers\FamiliaController;
 use App\Http\Controllers\FormController;
+use App\Http\Controllers\ImpuestoCufdController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\MarcaController;
 use App\Http\Controllers\MediaController;
@@ -476,3 +477,5 @@ Route::group([
     Route::post('store', 'store')->name('catalogos_productos.store');
     Route::delete('destroy', 'destroy')->name('catalogos_productos.destroy');
 });
+
+Route::get('testing_url', [ImpuestoCufdController::class, 'getCufdExperimentalAuth']);

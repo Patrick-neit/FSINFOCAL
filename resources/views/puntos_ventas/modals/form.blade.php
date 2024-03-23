@@ -14,8 +14,8 @@
                     <select name="sucursal_id" id="sucursal_id" required>
                         <option value="" required disabled selected>Escoga una opcion</option>
                         @foreach ($sucursales as $sucursal)
-                        <option value="{{ $sucursal->id }}">{{ $sucursal->nombre_sucursal }}
-                        </option>
+                            <option value="{{ $sucursal->id }}">{{ $sucursal->nombre_sucursal }}
+                            </option>
                         @endforeach
                     </select>
                     <label for="sucursal_id">Asociar Sucursal</label>
@@ -30,9 +30,10 @@
                 <div class="input-field col m6 s12">
                     <select id="tipo_punto_venta" name="tipo_punto_venta" required>
                         <option value="" required disabled selected>Escoga una opcion</option>
+                        <option value="0" required>No corresponde</option>
                         @foreach ($tipoPuntosVentas as $puntoVenta)
-                        <option value="{{ $puntoVenta->codigo_clasificador }}">{{
-                            $puntoVenta->descripcion }}</option>
+                            <option value="{{ $puntoVenta->codigo_clasificador }}">{{ $puntoVenta->descripcion }}
+                            </option>
                         @endforeach
                     </select>
                     <label for="tipo_punto_venta"> Tipo Punto Venta</label>

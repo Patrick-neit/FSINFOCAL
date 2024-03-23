@@ -14,6 +14,19 @@ function responseJson($description, $content, $status)
     ], $status);
 }
 
+function authApiService()
+{
+     $response = Http::post(
+                config('sistema.url_auth_api'),
+                [
+                    'email' => config('sistema.email_api'),
+                    'password' => config('sistema.password_api'),
+                ]
+            );
+
+        return $response->object();
+}
+
 function verificarSiPuntoVenta($empresaID)
 {
     $puntoVentaUsuario = PuntoVenta::where('empresa_id', $empresaID)

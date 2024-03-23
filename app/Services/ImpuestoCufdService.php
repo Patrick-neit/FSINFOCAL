@@ -14,22 +14,17 @@ class ImpuestoCufdService
         $this->config = new ImpuestoConfigService();
     }
 
+
     public function obtenerCufdImpuestos($dataService, $resCodigoCuis)
     {
         $sucursal = Sucursal::find($dataService->sucursal_id);
-        $response = Http::withHeaders([
-            'apikey' => $this->config->configService->token_sistema,
-        ])
+        $response = Http::withToken(authApiService()->access_token)
             ->post(
-                config('sistema.url_api').'api/cufd',
+                config('sistema.url_api').'cufd',
                 [
-                    'codigoAmbiente' => $this->config->configService->codigoAmbiente,
-                    'codigoSistema' => $this->config->configService->codigoSistema,
-                    'nit' => $this->config->configService->nit,
-                    'codigoModalidad' => $this->config->configService->codigoModalidad,
                     'cuis' => $resCodigoCuis,
                     'codigoSucursal' => $sucursal->codigo_sucursal,
-                    'codigoPuntoVenta' => ! isset($dataService->tipo_punto_venta) ? 0 : $dataService->tipo_punto_venta,
+                    'codigoPuntoVenta' => !isset($dataService->tipo_punto_venta) ? 0 : $dataService->tipo_punto_venta,
                 ]
             );
 

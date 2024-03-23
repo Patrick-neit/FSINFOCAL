@@ -2,6 +2,7 @@
 
 return [
     'url_api' => env('URL_API_SERVICES'),
+    'url_auth_api'=> env('URL_API_SERVICES').'auth/login',
     'sincFechaHora' => env('SINCRONIZAR_FECHA_HORA'),
     'sincTiposFactura' => env('SINCRONIZAR_TIPOS_FACTURA'),
     'sincMensajesServicios' => env('SINCRONIZAR_MENSAJES_SERVICIOS'),
@@ -20,4 +21,6 @@ return [
     'sincMotivoAnulacion' => env('SINCRONIZAR_MOTIVO_ANULACION'),
     'sincTipoDocumentoSector' => env('SINCRONIZAR_TIPO_DOCUMENTO_SECTOR'),
     'sincActividadesDocumentoSector' => env('SINCRONIZAR_ACTIVIDADES_DOCUMENTO_SECTOR'),
+    'email_api' => env('API_AUTH_EMAIL'),
+    'password_api' => env('API_AUTH_PASSWORD'),
 ];
